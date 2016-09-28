@@ -7,9 +7,8 @@
     <link rel="stylesheet" href="/bower/angular-material/angular-material.css">
     <link rel="stylesheet" href="/bower/orpha.css">
 </head>
-<body ng-app="orpha">
+<body ng-app="orpha" ui-view layout="row">
 
-<ui-view ></ui-view>
 
 <script src="/bower/angular/angular.js"></script>
 <script src="/bower/angular-ui-router/release/angular-ui-router.js"></script>

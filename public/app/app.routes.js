@@ -7,25 +7,22 @@ angular.module('orpha.routes', [])
 
         $urlRouterProvider.otherwise('/orpha/dashboard');
 
-        $stateProvider.state('app',{
-            abstract:true,
-            template: '<ui-view></ui-view>'
-        })
-        .state('app.login',{
+    $stateProvider
+        .state('login',{
             url: '/login',
             templateUrl: '../app/components/login/login-tpl.html'
         })
-        .state('app.orpha',{
+        .state('orpha',{
             abstract:true,
             url: '/orpha',
             controller:'orphaCtrl',
             templateUrl: '../app/components/orpha/orpha-tpl.html'
         })
-        .state('app.orpha.dashboard',{
+        .state('orpha.dashboard',{
             url: '/dashboard',
             templateUrl: '../app/components/dashboard/dashboard-tpl.html'
         })
-        .state('app.orpha.users',{
+        .state('orpha.users',{
             url: '/users',
             templateUrl: '../app/components/users/users-tpl.html'
         });
