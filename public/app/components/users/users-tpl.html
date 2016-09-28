@@ -14,14 +14,17 @@
 
         <md-card style="max-height: 55px; margin: 0;" >
             <md-input-container md-no-float style="margin: 0;" layout-margin>
-                <input type="text" placeholder="Pesquisar" >
+                <input type="text" placeholder="Pesquisar" ng-model="search">
                 <md-icon class="material-icons" style="display:inline-block;">search</md-icon>
             </md-input-container>
         </md-card>
 
         <md-list layout-margin >
             <md-header class="md-no-sticky" >Todos Usuários</md-header>
-            <md-list-item class="md-2-line" ng-click="true" ng-repeat="item in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]">
+            <md-list-item
+                    class="md-2-line"
+                    ng-click="true"
+                    ng-repeat="item in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] | filter:search">
                 <img ng-src="../assets/profile/no-img.jpg" class="md-avatar" alt="../assets/profile/no-img.jpg" />
                 <div class="md-list-item-text">
                     <h3>Gabrie L</h3>
