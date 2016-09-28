@@ -10,12 +10,12 @@ angular.module('orpha.components')
         $scope.menus = [
             {
                 nome: 'Dashboard',
-                state: 'app.orpha.dashboard',
+                state: 'orpha.dashboard',
                 icon: 'dashboard'
             },
             {
                 nome: 'Usuários',
-                state: 'app.orpha.users',
+                state: 'orpha.users',
                 icon: 'person_identify'
             },
         ];
@@ -23,6 +23,7 @@ angular.module('orpha.components')
         $scope.toggle = function () {
             $mdSidenav('left').toggle();
         };
+        
     }
 ])
 .directive('orphaUserCard', function () {
@@ -39,8 +40,20 @@ angular.module('orpha.components')
             profileClick: '&'
         },
         controller: function ($scope) {
-            $scope.background = $scope.background || 'indigo-200';
+            $scope.background = $scope.background || 'default-primary-200';
             $scope.avatar = $scope.avatar || '../assets/profile/no-img.jpg';
         }
     }
+})
+.config(function ($mdThemingProvider) {
+    $mdThemingProvider.theme('default')
+        .primaryPalette('blue-grey', {
+            'default': '400',
+            'hue-1': '100',
+            'hue-2': '600',
+            'hue-3': 'A100'
+        })
+        .accentPalette('pink', {
+            'default': '200'
+        });
 });
