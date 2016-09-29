@@ -7,7 +7,7 @@
                 <span>Usuários</span>
             </h2>
             <span flex="90"></span>
-            <md-button class="md-icon-button md-raised md-accent" ng-disabled="loading" ng-click="refresh()">
+            <md-button class="md-icon-button md-raised md-accent" ng-disabled="loading" ng-click="getAllUsers()">
                 <md-icon class="material-icons">refresh</md-icon>
                 <md-tooltip md-direction="left">
                     Atualizar
@@ -34,7 +34,7 @@
 
             <md-list-item
                     class="md-2-line"
-                    ng-click="true"
+                    ng-click="showUser(user)"
                     ng-repeat="user in users | filter:search">
                 <img image="{{user.avatar}}" image-holder="../assets/profile/no-img.jpg" image-loading="../assets/profile/loading.gif" class="md-avatar" alt="{{user.avatar || '../assets/profile/no-img.jpg'}}" />
                 <div class="md-list-item-text">
@@ -64,7 +64,7 @@
 </md-card>
 
 <div layout="column" class="fab-panel" >
-    <md-button class="md-fab" aria-label="Action" >
+    <md-button class="md-fab" aria-label="Action" ng-click="createUser()">
         <md-icon class="material-icons">add</md-icon>
         <md-tooltip md-direction="left">
             Novo usuário

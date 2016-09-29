@@ -6,15 +6,19 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,500,700" rel="stylesheet">
     <link rel="stylesheet" href="/bower/angular-material/angular-material.css">
+
+
     <link rel="stylesheet" href="/bower/orpha.css">
 </head>
-<body ng-app="orpha" ui-view layout="row">
+<body ng-app="orpha" >
 
+<ui-view layout="row" layout-fill></ui-view>
 
 <script src="/bower/angular/angular.js"></script>
 <script src="/bower/angular-resource/angular-resource.js"></script>
 <script src="/bower/angular-ui-router/release/angular-ui-router.js"></script>
 <script src="/bower/angular-aria/angular-aria.js"></script>
+<script src="/bower/angular-messages/angular-messages.js"></script>
 <script src="/bower/angular-animate/angular-animate.js"></script>
 <script src="/bower/angular-material/angular-material.js"></script>
 <script src="/bower/angular-image-fallback/angular.img-fallback.js"></script>

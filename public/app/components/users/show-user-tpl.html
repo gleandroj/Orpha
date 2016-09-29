@@ -1,0 +1,27 @@
+<md-dialog aria-label="User" >
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Visualizar Usuário</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="hide()">
+                    <md-icon class="material-icons" >close</md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content flex >
+            <md-card  layout-fill>
+                <md-card-header  >
+                    <md-card-avatar >
+                        <img class="md-user-avatar" image="{{user.avatar}}" image-holder="../assets/profile/no-img.jpg" image-loading="../assets/profile/loading.gif">
+                    </md-card-avatar>
+                </md-card-header>
+                <md-divider></md-divider>
+                <md-card-content layout="column">
+                    <div><span class="md-subhead">Nome: </span><span class="md-body-2">{{user.name}}</span></div>
+                    <div><span class="md-subhead">Email: </span><span class="md-body-2">{{user.email}}</span></div>
+                    <div><span class="md-subhead">Telefone: </span><span class="md-body-2">{{user.phone}}</span></div>
+                    <div><span class="md-subhead">Perfil: </span><span class="md-body-2">Not-Implemented</span></div>
+                </md-card-content>
+            </md-card>
+        </md-dialog-content>
+</md-dialog>

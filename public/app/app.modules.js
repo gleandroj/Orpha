@@ -5,8 +5,9 @@
 
 angular.module('orpha', [
     'ui.router',
-    'ngMaterial',
+    'ngMessages',
     'ngResource',
+    'ngMaterial',
     'angularImgFallback',
     'orpha.components',
     'orpha.routes',
