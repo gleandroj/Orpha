@@ -27,6 +27,7 @@ a.md-button:not([disabled]).md-focused, .md-button:not([disabled]).md-focused {
 .md-sidenav-left{
     max-width: 260px;
 }
+
 /*
 .site-content-toolbar {
     background: #f6f6f6 !important;
@@ -76,4 +77,16 @@ a.md-button:not([disabled]).md-focused, .md-button:not([disabled]).md-focused {
     100% {
         transform: scale(1);
     }
+}
+
+@keyframes colors {
+    0% { stroke: #4285F4; }
+    25% { stroke: #DE3E35; }
+    50% { stroke: #F7C223; }
+    75% { stroke: #1B9A59; }
+    100% { stroke: #4285F4; }
+}
+
+.random-color.md-progress-circular path{
+    animation: colors 1s ease-in-out infinite;
 }
