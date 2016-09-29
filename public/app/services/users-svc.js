@@ -5,5 +5,7 @@
 angular.module('orpha.services')
 
 .factory('UserService', ['$resource', function($resource) {
-    return $resource('/api/users/:id');
+    var users = $resource('/api/users/:id', null, { 'update': { method:'PUT' } });
+
+    return users;
 }]);

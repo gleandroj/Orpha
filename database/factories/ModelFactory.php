@@ -17,7 +17,26 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
+        'phone' => $faker->phoneNumber,
         'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
+    ];
+});
+
+
+$factory->define(App\Role::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->name,
+        'slug' => $faker->unique()->slug,
+        'description' => $faker->text
+    ];
+});
+
+$factory->define(App\Permission::class, function (Faker\Generator $faker) {
+
+    return [
+        'name' => $faker->name,
+        'slug' => $faker->unique()->slug,
+        'description' => $faker->text
     ];
 });
