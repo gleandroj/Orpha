@@ -1,0 +1,48 @@
+<md-sidenav
+        md-colors="{background: 'default-primary'}"
+        class="md-sidenav-left"
+        md-component-id="left"
+        md-is-locked-open="$mdMedia('gt-sm')">
+    <header class="nav-header">
+        <md-toolbar>
+            <div class="md-toolbar-tools " >
+                <md-button class="md-icon-button" ng-click="toggle()" hide-gt-sm>
+                    <md-icon aria-label="Menu" class="material-icons">menu</md-icon>
+                </md-button>
+                <div layout="column">
+                    <span class="md-title">Orpha</span>
+                    <span class="md-caption">Sistema de Gestão de Orfanatos</span>
+                </div>
+            </div>
+            <md-divider></md-divider>
+            <orpha-user-card name="Gabriel L" description="Diretor" show-actions="true" logout-click="" profile-click=""></orpha-user-card>
+        </md-toolbar>
+    </header>
+
+    <md-divider></md-divider>
+    <md-content layout-padding  md-colors="{background: 'default-primary'}">
+        <ul class="side-menu">
+            <li ng-repeat="menu in menus" ui-sref="{{menu.state}}" ui-sref-active="active" ng-click="toggle()">
+                <md-button >
+                    <md-icon class="material-icons" style="color: white;" ng-if="menu.icon">{{menu.icon}}</md-icon>
+                    {{menu.nome}}
+                </md-button>
+            </li>
+        </ul>
+    </md-content>
+</md-sidenav>
+<div layout="column" flex>
+    <md-toolbar
+            md-colors="{background: 'default-primary'}"
+            class="site-content-toolbar"
+            layout="row"
+            md-whiteframe="4">
+        <div class="md-toolbar-tools">
+            <md-button class="md-icon-button" ng-click="toggle()" hide-gt-sm>
+                <md-icon aria-label="Menu" style="color: black;" class="material-icons">menu</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-content ui-view class="main-content" >
+    </md-content>
+</div>

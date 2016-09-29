@@ -1,0 +1,24 @@
+{
+  "name": "orpha",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Gabriel <gabrielleandrojunior@live.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/gleandroj/Orpha",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/bower",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-material": "^1.1.1",
+    "angular-ui-router": "^0.3.1",
+    "angular-resource": "^1.5.8"
+  }
+}

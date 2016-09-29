@@ -1,0 +1,31 @@
+<md-card >
+    <md-card-header md-colors="::{backgroundColor: '{{background}}'}">
+        <md-card-avatar >
+            <img class="md-user-avatar" ng-src="{{avatar}}">
+        </md-card-avatar>
+        <md-card-header-text>
+            <span class="md-title">{{name}}</span>
+            <span class="md-subhead">{{description}}</span>
+        </md-card-header-text>
+        <md-menu ng-show="showActions"  >
+            <md-button ng-show="showActions" class="md-icon-button launch md-accent" aria-label="icon" ng-click="$mdOpenMenu($event)">
+                <md-icon class="material-icons">keyboard_arrow_down</md-icon>
+            </md-button>
+            <md-menu-content width="2" md-position-mode="target-right target">
+                <md-menu-item >
+                    <md-button class="md-default-theme md-ink-ripple" type="button" role="perfil" ng-click="profileClick()">
+                        <md-icon class="material-icons" aria-hidden="true">person</md-icon>
+                        Perfil
+                    </md-button>
+                </md-menu-item>
+                <md-divider></md-divider>
+                <md-menu-item >
+                    <md-button class="md-default-theme md-ink-ripple" type="button" role="logout" ng-click="logoutClick()">
+                        <md-icon class="material-icons" aria-hidden="true">exit_to_app</md-icon>
+                        Sair
+                    </md-button>
+                </md-menu-item>
+            </md-menu-content>
+        </md-menu>
+    </md-card-header>
+</md-card>
