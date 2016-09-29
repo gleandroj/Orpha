@@ -24,6 +24,7 @@ angular.module('orpha.routes', [])
         })
         .state('orpha.users',{
             url: '/users',
+            controller:'userCtrl',
             templateUrl: '../app/components/users/users-tpl.html'
         });
     });
