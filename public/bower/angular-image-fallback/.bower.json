@@ -1,0 +1,31 @@
+{
+  "name": "angular-image-fallback",
+  "version": "0.0.1",
+  "description": "Utility to work with loading images and handling image error, has image-holder to handle errors in image loading and image-loading for images loading placeholders.",
+  "main": "angular.img-fallback.js",
+  "keywords": [
+    "angularjs",
+    "images",
+    "error handling"
+  ],
+  "authors": [
+    "Alvaro Joao <alvaro@silvino.me>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/alvarojoao/angular-image-fallback",
+  "ignore": [
+    "angular.img-fallback.js",
+    "example.html",
+    "README.md"
+  ],
+  "_release": "0.0.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.0.1",
+    "commit": "4a73fa7d6ce9f627f6a266c7ffa002d767e8dcac"
+  },
+  "_source": "https://github.com/alvarojoao/angular-image-fallback.git",
+  "_target": "^0.0.1",
+  "_originalSource": "angular-image-fallback",
+  "_direct": true
+}

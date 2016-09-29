@@ -17,6 +17,7 @@
 <script src="/bower/angular-aria/angular-aria.js"></script>
 <script src="/bower/angular-animate/angular-animate.js"></script>
 <script src="/bower/angular-material/angular-material.js"></script>
+<script src="/bower/angular-image-fallback/angular.img-fallback.js"></script>
 
 <script src="/app/app.modules.js"></script>
 <script src="/app/app.routes.js"></script>

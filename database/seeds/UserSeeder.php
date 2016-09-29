@@ -11,8 +11,8 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\User::class, 5)->create()->each(function($u) {
-            $u->roles()->save(factory(App\Role::class)->make());
-        });
+        factory(App\User::class, 5)->create();
+        $adm = App\User::create(['name' => 'Admin', 'email' => 'admin@orpha.com.br', 'password' => Hash::make('123321'), 'phone' => '+5562994372288']);
+        $adm->roles()->attach(App\Role::find(1));
     }
 }

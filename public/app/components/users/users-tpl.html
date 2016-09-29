@@ -7,6 +7,12 @@
                 <span>Usuários</span>
             </h2>
             <span flex="90"></span>
+            <md-button class="md-icon-button md-raised md-accent" ng-disabled="loading" ng-click="refresh()">
+                <md-icon class="material-icons">refresh</md-icon>
+                <md-tooltip md-direction="left">
+                    Atualizar
+                </md-tooltip>
+            </md-button>
         </div>
     </md-toolbar >
 
@@ -21,23 +27,21 @@
 
         <md-list layout-margin >
             <md-header class="md-no-sticky" >Todos Usuários</md-header>
+
+            <div ng-show="loading" layout="row" layout-sm="column" layout-align="center center">
+                <md-progress-circular md-indetermied class="md-accent" md-diameter="96"></md-progress-circular>
+            </div>
+
             <md-list-item
                     class="md-2-line"
                     ng-click="true"
-                    ng-repeat="item in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] | filter:search">
-                <img ng-src="../assets/profile/no-img.jpg" class="md-avatar" alt="../assets/profile/no-img.jpg" />
+                    ng-repeat="user in users | filter:search">
+                <img image="{{user.avatar}}" image-holder="../assets/profile/no-img.jpg" image-loading="../assets/profile/loading.gif" class="md-avatar" alt="{{user.avatar || '../assets/profile/no-img.jpg'}}" />
                 <div class="md-list-item-text">
-                    <h3>Gabrie L</h3>
-                    <p>Diretor</p>
+                    <h3>{{user.name}}</h3>
+                    <p>{{user.email}}</p>
+                    <p>{{user.phone}}</p>
                 </div>
-                <!--
-                md-colors="{background: 'default-warn-100'}"
-                <md-button class="md-icon-button  md-secondary md-raised md-primary">
-                    <md-icon class="material-icons">person</md-icon>
-                    <md-tooltip md-direction="left">
-                        Visualizar usuário
-                    </md-tooltip>
-                </md-button>-->
                 <md-button class="md-icon-button  md-secondary md-raised md-primary">
                     <md-icon class="material-icons">create</md-icon>
                     <md-tooltip md-direction="left">
