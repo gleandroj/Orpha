@@ -41,7 +41,7 @@ angular.module('orpha.components')
         },
         controller: function ($scope) {
             $scope.background = $scope.background || 'default-primary-200';
-            $scope.avatar = $scope.avatar || '../assets/profile/no-img.jpg';
+            $scope.avatar = $scope.avatar || '../assets/profile/ic_account_circle_white_48dp_2x.png';
         }
     }
 })

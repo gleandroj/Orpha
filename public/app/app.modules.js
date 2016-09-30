@@ -8,7 +8,6 @@ angular.module('orpha', [
     'ngMessages',
     'ngResource',
     'ngMaterial',
-    'angularImgFallback',
     'orpha.components',
     'orpha.routes',
     'orpha.services'

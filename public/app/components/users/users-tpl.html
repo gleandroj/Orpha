@@ -6,7 +6,7 @@
                 <md-icon class="material-icons">person</md-icon>
                 <span>Usuários</span>
             </h2>
-            <span flex="90"></span>
+            <span flex></span>
             <md-button class="md-icon-button md-raised md-accent" ng-disabled="loading" ng-click="getAllUsers()">
                 <md-icon class="material-icons">refresh</md-icon>
                 <md-tooltip md-direction="left">
@@ -33,27 +33,36 @@
             </div>
 
             <md-list-item
-                    class="md-2-line"
+                    class="md-2-line md-with-secondary"
                     ng-click="showUser(user)"
-                    ng-repeat="user in users | filter:search">
-                <img image="{{user.avatar}}" image-holder="../assets/profile/no-img.jpg" image-loading="../assets/profile/loading.gif" class="md-avatar" alt="{{user.avatar || '../assets/profile/no-img.jpg'}}" />
-                <div class="md-list-item-text">
-                    <h3>{{user.name}}</h3>
-                    <p>{{user.email}}</p>
-                    <p>{{user.phone}}</p>
+                    ng-repeat="user in users | filter:search"
+                    ng-init="user.showImage = false"
+                    layout="row">
+
+                <md-icon hide-sm  hide-xs ng-if="!user.avatar || !user.showImage" class="material-icons md-avatar" style="font-size: 48px;">account_circle</md-icon>
+                <img hide-sm hide-xs ng-show="user.avatar && user.showImage" ng-src="{{user.avatar}}" height="100px" class="md-avatar" alt="{{user.avatar}}" on-image on-image-loaded="user.showImage = true" on-image-error="user.showImage = false" />
+
+                <div class="md-list-item-text" layout="column" >
+                    <h3 >{{user.name}}</h3>
+                    <p class="truncate truncate-max-width">{{user.email}}</p>
+                    <p >{{user.phone}}</p>
                 </div>
-                <md-button class="md-icon-button  md-secondary md-raised md-primary">
-                    <md-icon class="material-icons">create</md-icon>
-                    <md-tooltip md-direction="left">
-                        Alterar usuário
-                    </md-tooltip>
-                </md-button>
-                <md-button class="md-icon-button  md-secondary md-raised md-warn md-hue-2">
-                    <md-icon class="material-icons">delete</md-icon>
-                    <md-tooltip md-direction="left">
-                        Inativar usuário
-                    </md-tooltip>
-                </md-button>
+
+                <div class="md-secondary">
+                    <md-button class="md-icon-button  md-secondary md-raised md-primary">
+                        <md-icon class="material-icons">create</md-icon>
+                        <md-tooltip md-direction="left">
+                            Alterar usuário
+                        </md-tooltip>
+                    </md-button>
+                    <md-button class="md-icon-button  md-secondary md-raised md-warn md-hue-2">
+                        <md-icon class="material-icons">delete</md-icon>
+                        <md-tooltip md-direction="left">
+                            Inativar usuário
+                        </md-tooltip>
+                    </md-button>
+                </div>
+
             </md-list-item>
 
             <md-divider ></md-divider>
