@@ -33,7 +33,6 @@ angular.module('orpha.components')
         $scope.createUser = function (user) {
             $mdDialog.show({
                 controller: function ($scope, $mdDialog, locals) {
-                    console.log($scope);
                     $scope.title = 'Inserir Usuário';
                     $scope.user = locals.user;
                     $scope.hide = function() {
@@ -43,6 +42,7 @@ angular.module('orpha.components')
                 parent: angular.element(document.body),
                 templateUrl: '../app/components/users/user-form-tpl.html',
                 clickOutsideToClose:true,
+                fullscreen:true,
                 locals:{
                     user: {}
                 }
@@ -50,4 +50,25 @@ angular.module('orpha.components')
         };
 
         $scope.getAllUsers();
-    }]);
+    }])
+    .directive("checkEmail", function($q, $http) {
+        return {
+            restrict: "A",
+            require: "ngModel",
+            link: function(scope, element, attributes, ngModel) {
+                scope.checkEmailError = 'checkEmailError';
+                ngModel.$asyncValidators.checkEmail = function(modelValue) {
+                    var defer = $q.defer();
+                    $http.post('/api/users/checkEmail', {email:modelValue})
+                        .success(function (data) {
+                            defer.resolve();
+                        })
+                        .error(function (error) {
+                            scope.checkEmailError = error['email'][0];
+                            defer.reject();
+                        });
+                    return defer.promise;
+                }
+            }
+        };
+    });

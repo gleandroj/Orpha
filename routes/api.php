@@ -19,3 +19,4 @@ Route::get('/user', function (Request $request) {
 
 
 Route::resource('/users', 'UserController');
+Route::post('/users/checkEmail', 'UserController@checkEmail');

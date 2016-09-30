@@ -40,7 +40,8 @@ interface UserService
     /**
      * @param $id
      * @param array $data
-     * @return bool
+     * @return mixed
      */
     public function update($id, array $data);
+    
 }

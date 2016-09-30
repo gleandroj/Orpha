@@ -8,6 +8,8 @@
 
 namespace App\Services;
 
+use Validator;
+
 
 class UserService implements \App\Contracts\UserService
 {

@@ -98,4 +98,17 @@ class UserController extends Controller
     {
         return $this->userService->delete($id);
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function checkEmail(Request $request)
+    {
+        \Validator::make($request->all(), [
+            'email' => 'required|unique:users,email'
+        ])->validate();
+    }
 }
