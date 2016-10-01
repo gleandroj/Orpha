@@ -20,7 +20,7 @@
 
         <md-card style="max-height: 55px; margin: 0;" >
             <md-input-container md-no-float style="margin: 0;" layout-margin>
-                <input type="text" placeholder="Pesquisar" ng-model="search">
+                <input type="text" placeholder="Pesquisar" ng-model="search" max-length="50">
                 <md-icon class="material-icons" style="display:inline-block;">search</md-icon>
             </md-input-container>
         </md-card>
@@ -35,7 +35,7 @@
             <md-list-item
                     class="md-2-line md-with-secondary"
                     ng-click="showUser(user)"
-                    ng-repeat="user in users | filter:search"
+                    ng-repeat="user in users | filter:search | orderBy: 'name'"
                     ng-init="user.showImage = false"
                     layout="row">
 
@@ -100,6 +100,5 @@
             Inativar usuário
         </md-tooltip>
     </md-button>
-
 -->
 </div>

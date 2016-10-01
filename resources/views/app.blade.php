@@ -12,7 +12,6 @@
 </head>
 <body ng-app="orpha" >
 
-
 <ui-view layout="row" layout-fill></ui-view>
 
 <script src="/bower/angular/angular.js"></script>
@@ -26,6 +25,7 @@
 <script src="/app/app.modules.js"></script>
 <script src="/app/app.routes.js"></script>
 
+<script src="/app/services/messages-svc.js"></script>
 <script src="/app/services/users-svc.js"></script>
 
 <script src="/app/components/orpha/orpha-cmp.js"></script>

@@ -39,6 +39,13 @@ input[type=file].input-file {
     display: none;
 }
 
+.custom-error{
+    font-size: 12px;
+    line-height: 14px;
+    overflow: hidden;
+    color: rgb(221,44,0);
+}
+
 .custom-avatar{
     -webkit-box-flex: 0;
     -webkit-flex: none;
@@ -113,6 +120,14 @@ input[type=file].input-file {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+@media screen and (min-width: 960px){
+    .form-wrap{
+        -webkit-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    }
 }
 
 @media screen and (max-width: 600px) {

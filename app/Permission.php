@@ -18,8 +18,8 @@ class Permission extends Model
         'name', 'slug', 'description'
     ];
 
-    public function roles()
+    public function users()
     {
-        return $this->belongsToMany(Role::class);
+        return $this->belongsToMany(User::class);
     }
 }

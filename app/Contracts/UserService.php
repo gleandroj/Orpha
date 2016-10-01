@@ -43,5 +43,11 @@ interface UserService
      * @return mixed
      */
     public function update($id, array $data);
-    
+
+
+    /**
+     * @param array $data
+     * @return mixed
+     */
+    public function checkEmail(array $data);
 }

@@ -19,4 +19,9 @@ Route::get('/user', function (Request $request) {
 
 
 Route::resource('/users', 'UserController');
+
 Route::post('/users/checkEmail', 'UserController@checkEmail');
+
+Route::get('/permissions', function (){
+    return \App\Permission::all();
+});

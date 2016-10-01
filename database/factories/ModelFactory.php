@@ -24,15 +24,6 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     ];
 });
 
-
-$factory->define(App\Role::class, function (Faker\Generator $faker) {
-    return [
-        'name' => $faker->name,
-        'slug' => $faker->unique()->slug,
-        'description' => $faker->text
-    ];
-});
-
 $factory->define(App\Permission::class, function (Faker\Generator $faker) {
 
     return [

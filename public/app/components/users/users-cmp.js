@@ -38,50 +38,102 @@ angular.module('orpha.components')
                 clickOutsideToClose:true,
                 fullscreen:true,
                 locals:{
-                    user: {}
+                    title:'Inserir Usuário'
                 }
+            }).then(function (user) {
+                $scope.users.push(user);
             });
         };
 
         $scope.getAllUsers();
     }])
-    .controller('userFormCtrl', ['$scope', 'UserService', '$mdDialog', 'locals', function ($scope, UserService, $mdDialog, locals) {
-        $scope.title = 'Inserir Usuário';
+    .controller('userFormCtrl', ['$scope', '$http', '$filter', 'UserService', '$mdDialog', 'MessagesService', 'locals', function ($scope, $http, $filter, UserService, $mdDialog, MessagesService, locals) {
+        $scope.title = locals.title || 'Formulário';
         $scope.user = locals.user || {};
+        $scope.user.permissions = [];
+        $scope.permissions = [];
+        $scope.searchText = null;
         $scope.loading = false;
+
+        $http.get('/api/permissions').success(function (permissions) {
+            $scope.permissions = permissions;
+        });
+
+        $scope.getPermissions = function (text) {
+            return $filter('filter')($scope.permissions, text);
+        };
 
         $scope.submit = function () {
             $scope.loading = true;
             $scope.user = new UserService($scope.user);
             $scope.user.$save(function (user) {
-                console.log(user);
+                $scope.loading = false;
+                $mdDialog.hide(user);
+                MessagesService.showToatsMessage('MSG5');
             }, function (error) {
-                console.log(error);
+                $scope.loading = false;
+                angular.forEach(error.data, function (value, key) {
+                    $scope.userForm[key].customError = value.join(', ');
+                    $scope.userForm[key].$validate();
+                });
             })
         };
 
-        $scope.hide = function() {
-            $mdDialog.hide();
+        $scope.cancel = function() {
+            $mdDialog.cancel();
         };
     }])
-    .directive("checkEmail", function($q, $http) {
+    .directive("customError", function($q, $timeout) {
         return {
             restrict: "A",
             require: "ngModel",
             link: function(scope, element, attributes, ngModel) {
-                scope.checkEmailError = 'checkEmailError';
+
+                var reset = function () {
+                    if(ngModel.customError != null){
+                        ngModel.customError = null;
+                        ngModel.$validate();
+                    }
+                };
+
+                ngModel.$validators.customError = function(modelValue) {
+                    return ngModel.customError == null;
+                };
+                scope.$watch(function () {
+                    return ngModel.customError;
+                }, function () {
+                    /*$timeout(function () {
+                        reset();
+                    }, 20000);*/
+                });
+                element.bind('change', function () {
+                    reset();
+                });
+
+            }
+        };
+    })
+    .directive("checkEmail", function($q, $http) {
+        return {
+            restrict: "A",
+            priority:100,
+            require: "ngModel",
+            link: function(scope, element, attributes, ngModel) {
+                ngModel.checkEmailError = 'check-email-error';
                 ngModel.$asyncValidators.checkEmail = function(modelValue) {
-                    var defer = $q.defer();
-                    $http.post('/api/users/checkEmail', {email:modelValue})
-                        .success(function (data) {
-                            defer.resolve();
-                        })
-                        .error(function (error) {
-                            scope.checkEmailError = error['email'][0];
-                            defer.reject();
-                        });
-                    return defer.promise;
-                }
+                    if(modelValue != null){
+                        var defer = $q.defer();
+                        $http.post('/api/users/checkEmail', {email:modelValue})
+                            .success(function (data) {
+                                defer.resolve();
+                            })
+                            .error(function (error) {
+                                ngModel.checkEmailError = error['email'][0];
+                                defer.reject();
+                            });
+                        return defer.promise;
+                    }
+                };
             }
         };
     })
@@ -123,11 +175,29 @@ angular.module('orpha.components')
             }
         };
     })
-    .directive("readToBase64", function($q, $timeout) {
+    .directive("checkImage", function($q, $timeout) {
         return {
             restrict: "A",
             require: "ngModel",
+            scope:{
+                model: '=ngModel'
+            },
             link: function (scope, iElement, iAttrs, ngModel) {
+                var regex = new RegExp(/^(data:image\/(jpeg|png|jpg|gif|bmp);base64)/);
+                ngModel.$validators.checkImage = function (modelValue) {
+                    return regex.test(modelValue) || modelValue == null || modelValue == "";
+                };
+
+                scope.$watch(function () {
+                    return ngModel.$modelValue;
+                }, function(newValue) {
+                    if(ngModel.$invalid){
+                        $timeout(function () {
+                            scope.model = "";
+                            scope.$apply();
+                        }, 1500);
+                    }
+                });
 
                 var readFile = function(file) {
                     var deferred = $q.defer();
@@ -146,11 +216,10 @@ angular.module('orpha.components')
 
                 iElement.on('change', function(e) {
                     readFile(e.target.files[0]).then(function (data) {
+
                         $timeout(function () {
-                            scope.$apply(function(){
-                                ngModel.$setViewValue(data);
-                                ngModel.$pending = null;
-                            });
+                            scope.model = data;
+                            scope.$apply();
                         }, 0);
 
                     });

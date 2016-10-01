@@ -107,8 +107,6 @@ class UserController extends Controller
      */
     public function checkEmail(Request $request)
     {
-        \Validator::make($request->all(), [
-            'email' => 'required|unique:users,email'
-        ])->validate();
+        return $this->userService->checkEmail($request->all());
     }
 }
