@@ -8,7 +8,6 @@
 
 namespace App\Services;
 
-use Hash;
 use Image;
 use Validator;
 
@@ -33,7 +32,7 @@ class UserService implements \App\Contracts\UserService
      */
     public function getAll()
     {
-        return $this->userRepository->getAll();
+        return $this->userRepository->getAll()->load('permissions');
     }
 
     /**
@@ -44,7 +43,7 @@ class UserService implements \App\Contracts\UserService
      */
     public function getById($id)
     {
-        return $this->userRepository->getById($id);
+        return $this->userRepository->getById($id)->load('permissions');
     }
 
     /**
@@ -61,17 +60,32 @@ class UserService implements \App\Contracts\UserService
             'email' => 'required|email|max:40|unique:users,email',
             'phone' => ['required','max:20', 'regex:/^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/'],
             'password' => 'required|confirmed|min:8|max:14',
-            'permissions.*.id' => 'required|exists:permissons,id',
-            'avatar' => ['regex:/^(data:image\/(jpeg|png|jpg|gif|bmp);base64)/'],
+            'permissions.*.id' => 'required|exists:permissions,id',
+            'avatar' => 'avatar',
         ])->validate();
 
         if($data->has('avatar')){
             $data['avatar'] = $this->uploadBase64Img($data['avatar']);
         }
 
-        $data['password'] = Hash::make($data['password']);
+        $data['password'] = bcrypt($data['password']);
 
-        return $this->userRepository->create($data->all());
+        $user = $this->userRepository->create($data->all());
+
+        if($user){
+
+            $permissions = collect($data->get('permissions'));
+
+            $permissions = $permissions->map(function ($item, $key){
+                return $item['id'];
+            });
+
+            $user->permissions()->sync(collect($permissions)->all());
+
+            return $user->load('permissions');
+        }
+
+
     }
 
     /**
@@ -91,9 +105,51 @@ class UserService implements \App\Contracts\UserService
      */
     public function update($id, array $data)
     {
-        return $this->userRepository->update($id, $data);
+        $data = collect($data);
+        $data->put('id', $id);
+
+        Validator($data->all(), [
+            'id' => 'required|exists:users,id',
+            'name' => 'required|max:50',
+            'email' => 'required|email|max:40|unique:users,email,'.$id,
+            'phone' => ['required','max:20', 'regex:/^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/'],
+            'password' => 'confirmed|min:8|max:14',
+            'permissions.*.id' => 'required|exists:permissions,id',
+            'avatar' => 'avatar',
+        ])->validate();
+
+        if($data->has('avatar')
+            && $data->get('avatar') != null
+            && $this->getById($id)->avatar != $data->get('avatar')){
+            $data['avatar'] = $this->uploadBase64Img($data['avatar']);
+        }
+
+        if($data->has('password')){
+            $data['password'] = bcrypt($data['password']);
+        }
+
+        $user = $this->userRepository->update($id, $data->all());
+
+        if($user){
+
+            $permissions = collect($data->get('permissions'));
+
+            $permissions = $permissions->map(function ($item, $key){
+                return $item['id'];
+            });
+
+            $user->permissions()->sync(collect($permissions)->all());
+
+            return $user->load('permissions');
+        }
+
+
     }
 
+    /**
+     * @param $base64
+     * @return string
+     */
     private function uploadBase64Img($base64){
         $image = Image::make($base64);
 
@@ -104,6 +160,9 @@ class UserService implements \App\Contracts\UserService
         return $file_name;
     }
 
+    /**
+     * @return string
+     */
     private function newGuid() {
         $s = strtoupper(md5(uniqid(rand(),true)));
         $guidText =

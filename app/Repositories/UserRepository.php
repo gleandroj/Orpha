@@ -16,4 +16,14 @@ class UserRepository extends AbstractRepository implements \App\Contracts\UserRe
     {
         parent::__construct($model);
     }
+
+    public function getAll()
+    {
+        return $this->model->withTrashed()->get();
+    }
+
+    public function getById($id)
+    {
+        return $this->model->withTrashed()->where('id', $id)->first();
+    }
 }

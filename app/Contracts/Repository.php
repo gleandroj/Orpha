@@ -40,7 +40,7 @@ interface Repository
     /**
      * @param $id
      * @param array $data
-     * @return bool
+     * @return \Illuminate\Database\Eloquent\Model
      */
     public function update($id, array $data);
 }

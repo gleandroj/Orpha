@@ -26,16 +26,19 @@
         </md-card>
 
         <md-list layout-margin >
-            <md-header class="md-no-sticky" >Todos Usuários</md-header>
+            <md-header ng-show="!loading" class="md-no-sticky" >Usuários Ativos</md-header>
 
             <div ng-show="loading" layout="row" layout-sm="column" layout-align="center center">
                 <md-progress-circular md-indetermied class="md-accent" md-diameter="96"></md-progress-circular>
+            </div>
+            <div ng-show="(users | filter :{deleted_at:'!'}).length == 0 && !loading" layout="column" layout-sm="column" layout-align="center center">
+                <h3 class="md-headline">{{'MSG1' | messageBind}}</h3>
             </div>
 
             <md-list-item
                     class="md-2-line md-with-secondary"
                     ng-click="showUser(user)"
-                    ng-repeat="user in users | filter:search | orderBy: 'name'"
+                    ng-repeat="user in users | filter:search | filter:{deleted_at: '!'} | orderBy: 'name'"
                     ng-init="user.showImage = false"
                     layout="row">
 
@@ -49,7 +52,7 @@
                 </div>
 
                 <div class="md-secondary">
-                    <md-button class="md-icon-button  md-secondary md-raised md-primary">
+                    <md-button ng-click="editUser(user)" class="md-icon-button  md-secondary md-raised md-primary">
                         <md-icon class="material-icons">create</md-icon>
                         <md-tooltip md-direction="left">
                             Alterar usuário
@@ -65,9 +68,50 @@
 
             </md-list-item>
 
-            <md-divider ></md-divider>
-        </md-list>
+            <md-divider ng-show="!loading" ></md-divider>
 
+            <md-header ng-show="!loading" class="md-no-sticky" >Usuários Inativos</md-header>
+
+            <div ng-show="(users | filter :{deleted_at:'!!'}).length == 0 && !loading" layout="column" layout-sm="column" layout-align="center center">
+                <h3 class="md-headline">{{'MSG1' | messageBind}}</h3>
+            </div>
+
+            <md-list-item
+                    md-colors="{{user.deleted_at ? {background: 'default-warn-200-0.5'} : null}}"
+                    class="md-2-line md-with-secondary"
+                    ng-click="showUser(user)"
+                    ng-repeat="user in users | filter:search | filter:{deleted_at: '!!'} | orderBy: 'name'"
+                    ng-init="user.showImage = false"
+                    layout="row">
+
+                <md-icon hide-sm  hide-xs ng-if="!user.avatar || !user.showImage" class="material-icons md-avatar" style="font-size: 48px;">account_circle</md-icon>
+                <img hide-sm hide-xs ng-show="user.avatar && user.showImage" ng-src="{{user.avatar || '//:0' }}" height="100px" class="md-avatar" alt="{{user.avatar}}" on-image on-image-loaded="user.showImage = true" on-image-error="user.showImage = false" />
+
+                <div class="md-list-item-text" layout="column" >
+                    <h3 >{{user.name}}</h3>
+                    <p class="truncate truncate-max-width">{{user.email}}</p>
+                    <p >{{user.phone}}</p>
+                </div>
+
+                <div class="md-secondary">
+                    <md-button ng-click="editUser(user)" class="md-icon-button  md-secondary md-raised md-primary">
+                        <md-icon class="material-icons">create</md-icon>
+                        <md-tooltip md-direction="left">
+                            Alterar usuário
+                        </md-tooltip>
+                    </md-button>
+                    <md-button class="md-icon-button  md-secondary md-raised md-accent md-hue-2">
+                        <md-icon class="material-icons">check</md-icon>
+                        <md-tooltip md-direction="left">
+                            Ativar usuário
+                        </md-tooltip>
+                    </md-button>
+                </div>
+
+            </md-list-item>
+
+            <md-divider ng-show="!loading" ></md-divider>
+        </md-list>
     </md-card-content>
 
 </md-card>

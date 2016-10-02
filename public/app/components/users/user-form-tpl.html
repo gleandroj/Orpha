@@ -18,11 +18,11 @@
 
             <div flex="100">
 
-                <md-card flex flex-gt-sm="100" layout="row" md-whiteframe="3" layout-align="start center" layout-wrap>
-                    <span layout-padding></span>
-                    <img class="md-avatar custom-avatar" ng-src="{{user.avatar || '../assets/profile/ic_account_circle_black_48dp_2x.png'}}"/>
+                <div flex flex-gt-sm="100" layout="row" md-whiteframe="1" layout-align="center center" layout-wrap>
+                    <span layout-padding flex></span>
 
-                    <md-card-actions flex>
+                    <img class="md-avatar custom-avatar" ng-src="{{user.avatar || '../assets/profile/ic_account_circle_black_48dp_2x.png'}}"/>
+                    <div ng-if="!readonly" flex>
                         <input
                                 flex
                                 class="ng-hide"
@@ -33,24 +33,25 @@
                                 ng-model="user.avatar"
                                 custom-error
                                 check-image
-                                ng-disabled="loading"/>
-                        <label flex for="avatar" class="md-button md-raised md-accent" ng-disabled="loading">
+                                ng-disabled="loading || readonly"/>
+                        <label flex for="avatar" class="md-button md-raised md-accent" ng-disabled="loading || readonly">
                             <md-icon class="material-icons">add_a_photo</md-icon>
                             <md-tooltip md-direction="right">Selecionar avatar</md-tooltip>
                         </label>
-                    </md-card-actions>
+                    </div>
 
+                    <span flex></span>
                     <span flex="100"></span>
                     <div layout-padding class="custom-error" ng-if="userForm.avatar.$error.customError">{{userForm.avatar.customError}}</div>
                     <div layout-padding class="custom-error" ng-if="userForm.avatar.$error.checkImage">{{'MSG10' | messageBind:'Avatar'}}</div>
                     <div class="md-errors-spacer"></div>
-                </md-card>
+                </div>
 
                 <md-input-container flex-gt-lg class="md-block">
                     <label>Nome</label>
                     <md-icon class="material-icons">person</md-icon>
 
-                    <input name="name" ng-model="user.name" type="text" custom-error required ng-disabled="loading" md-maxlength="50" >
+                    <input name="name" ng-model="user.name" type="text" custom-error required ng-disabled="loading || readonly" md-maxlength="50" >
 
                     <div ng-messages="userForm.name.$error"
                          multiple>
@@ -65,7 +66,7 @@
                         <md-icon class="material-icons" ng-if="!userForm.email.$pending">email</md-icon>
                         <md-icon ><md-progress-circular md-mode="indeterminate" ng-if="userForm.email.$pending" md-diameter="25"></md-progress-circular></md-icon>
 
-                        <input name="email" type="email" flex required md-maxlength="50" check-email custom-error ng-model="user.email"  ng-disabled="loading">
+                        <input name="email" type="email" flex required md-maxlength="50" check-email="!readonly && !editMode" custom-error ng-model="user.email"  ng-disabled="loading || readonly">
 
                         <div ng-messages="userForm.email.$error">
                             <div ng-messages-include="../app/components/messages/messages-tpl.html"></div>
@@ -73,7 +74,9 @@
                             <div ng-message="customError">{{userForm.email.customError}}</div>
                         </div>
                     </md-input-container>
+
                     <div flex="5" hide-xs hide-sm></div>
+
                     <md-input-container flex-gt-sm class="md-block"  >
                         <label>Telefone</label>
                         <md-icon class="material-icons">phone</md-icon>
@@ -84,7 +87,7 @@
                                 ng-model="user.phone"
                                 custom-error
                                 md-maxlength="20"
-                                ng-disabled="loading"
+                                ng-disabled="loading || readonly"
                                 ng-pattern="/^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/"
                                 required>
 
@@ -96,11 +99,11 @@
                     </md-input-container>
                 </div>
 
-                <div layout-gt-lg="row">
+                <div layout-gt-lg="row" ng-if="!readonly">
                     <md-input-container flex-gt-sm class="md-block"  >
                         <label>Senha</label>
                         <md-icon class="material-icons">lock</md-icon>
-                        <input name="password" ng-model="user.password" custom-error type="password" ng-minlength="8" md-maxlength="14" required check-match="user.password_confirmation" ng-disabled="loading">
+                        <input name="password" ng-model="user.password" custom-error type="password" ng-minlength="8" md-maxlength="14" ng-required="!editMode" check-match="user.password_confirmation" ng-disabled="loading || readonly">
 
                         <div ng-messages="userForm.password.$error" >
                             <div ng-message="md-maxlength, minlength">{{ 'MSG13' | messageBind}}</div>
@@ -109,12 +112,14 @@
                             <div ng-message="customError">{{userForm.password.customError}}</div>
                         </div>
                     </md-input-container>
+
                     <div flex="5" hide-xs hide-sm></div>
+
                     <md-input-container flex-gt-sm class="md-block"  >
                         <label>Confirmação de senha</label>
                         <md-icon class="material-icons">lock</md-icon>
 
-                        <input name="password_confirmation" custom-error ng-model="user.password_confirmation" type="password" ng-minlength="8" md-maxlength="14"  required ng-disabled="loading">
+                        <input name="password_confirmation" custom-error ng-model="user.password_confirmation" type="password" ng-minlength="8" md-maxlength="14"  ng-required="!editMode" ng-disabled="loading || readonly">
 
                         <div ng-messages="userForm.password_confirmation.$error">
                             <div ng-messages-include="../app/components/messages/messages-tpl.html"></div>
@@ -127,15 +132,19 @@
                     <h3 style="margin: 0px;" class="md-title"><md-icon class="mateiral-icons">security</md-icon> Permissões</h3>
 
                     <md-chips
+                            md-on-add="addChip($chip)"
+                            md-on-remove="removeChip($chip)"
                             name="permissions"
                             ng-model="user.permissions"
-                            readonly="loading"
-                            md-removable="true"
+                            readonly="loading || readonly"
+                            md-removable="!readonly && !loading"
                             secondary-placeholder="+Permissão"
-                            md-require-match >
+                            md-require-match>
                         <md-autocomplete
+                                 ng-if="!loading && !readonly"
+                                 ng-disabled="loading || readonly"
                                  md-search-text="searchText"
-                                 md-items="item in getPermissions(searchText)"
+                                 md-items="item in filterPermissions(searchText)"
                                  placeholder="Pesquisar..."
                                  md-item-text="item.name">
                             <md-item-template>
@@ -162,12 +171,12 @@
 
         </md-dialog-content>
 
-        <md-dialog-actions layout="row">
+        <md-dialog-actions ng-if="!readonly" layout="row">
             <span flex></span>
             <md-button class="md-primary md-raised" type="submit" ng-disabled="userForm.$invalid || userForm.email.$pending || loading" >
                 Salvar
             </md-button>
-            <md-button class="md-warn md-raised" ng-click="cancel()" ng-disabled="loading">
+            <md-button class="md-warn md-raised" ng-click="cancel()" ng-disabled="loading || readonly">
                 Cancelar
             </md-button>
         </md-dialog-actions>

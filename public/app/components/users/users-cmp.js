@@ -2,7 +2,7 @@
  * Created by FG0003 on 29/09/2016.
  */
 angular.module('orpha.components')
-    .controller('userCtrl', ['$scope', 'UserService', '$mdDialog', function ($scope, UserService, $mdDialog) {
+    .controller('userCtrl', ['$scope', '$timeout', 'UserService', '$filter', '$mdDialog', 'MessagesService', function ($scope, $timeout, UserService, $filter, $mdDialog, MessagesService) {
         $scope.users = [];
 
         $scope.getAllUsers = function () {
@@ -15,6 +15,7 @@ angular.module('orpha.components')
         };
 
         $scope.showUser = function (user) {
+            /*
             $mdDialog.show({
                 controller: function ($scope, $mdDialog, locals) {
                     $scope.user = locals.user;
@@ -27,7 +28,20 @@ angular.module('orpha.components')
                 locals:{
                     user: user
                 }
+            });*/
+            $mdDialog.show({
+                controller: 'userFormCtrl',
+                parent: angular.element(document.body),
+                templateUrl: '../app/components/users/user-form-tpl.html',
+                clickOutsideToClose:true,
+                fullscreen:true,
+                locals:{
+                    title:'Visualizar Usuário',
+                    user:user,
+                    readonly:true
+                }
             });
+
         };
 
         $scope.createUser = function (user) {
@@ -42,46 +56,130 @@ angular.module('orpha.components')
                 }
             }).then(function (user) {
                 $scope.users.push(user);
+                MessagesService.showToatsMessage('MSG5');
+            });
+        };
+
+        $scope.editUser = function (user, oldScope) {
+
+            var _locals = { title:'Editar Usuário', user:user, editMode:true, editUser:$scope.editUser, oldScope:oldScope};
+
+            var options = {
+                controller: 'userFormCtrl',
+                parent: angular.element(document.body),
+                templateUrl: '../app/components/users/user-form-tpl.html',
+                clickOutsideToClose:true,
+                fullscreen:true,
+                locals: _locals
+            };
+
+            $mdDialog.show(options).then(function (updatedUser) {
+                 angular.forEach(updatedUser, function (value, key) {
+                     $timeout(function () {
+                        $scope.$apply(function () {
+                            user[key] = value;
+                        });
+                     }, 0);
+                 });
+                MessagesService.showToatsMessage('MSG7');
             });
         };
 
         $scope.getAllUsers();
     }])
     .controller('userFormCtrl', ['$scope', '$http', '$filter', 'UserService', '$mdDialog', 'MessagesService', 'locals', function ($scope, $http, $filter, UserService, $mdDialog, MessagesService, locals) {
-        $scope.title = locals.title || 'Formulário';
-        $scope.user = locals.user || {};
-        $scope.user.permissions = [];
-        $scope.permissions = [];
-        $scope.searchText = null;
-        $scope.loading = false;
+        if(locals.oldScope){
+            $scope.title = locals.oldScope.title;
+            $scope.editMode = locals.oldScope.editMode;
+            $scope.readonly = locals.oldScope.readonly;
+            $scope.editUser = locals.oldScope.editUser;
+            $scope.user = locals.oldScope.user;
+            $scope.user.permissions = locals.oldScope.user.permissions;
+            $scope.permissions = locals.oldScope.permissions;
+            $scope.searchText = locals.oldScope.searchText;
+            $scope.subimited = locals.oldScope.subimited;
+            $scope.loading = locals.oldScope.loading;
+        }else{
+            $scope.title = locals.title || 'Formulário';
+            $scope.editMode = locals.editMode || false;
+            $scope.readonly = locals.readonly || false;
+            $scope.editUser = locals.editUser || function () {};
+            $scope.user = {}; if(locals.user) angular.copy(locals.user, $scope.user);
+            $scope.user.permissions = $scope.user.permissions || [];
+            $scope.permissions = [];
+            $scope.searchText = null;
+            $scope.subimited = false;
+            $scope.loading = false;
 
-        $http.get('/api/permissions').success(function (permissions) {
-            $scope.permissions = permissions;
-        });
+            $scope.getPermissions = function () {
 
-        $scope.getPermissions = function (text) {
-            return $filter('filter')($scope.permissions, text);
+            };
+
+            $http.get('/api/permissions')
+                .success(function (permissions) {
+                    $scope.permissions = permissions;
+                });
+        }
+
+        var setFormError = function (errors) {
+            angular.forEach(errors, function (value, key) {
+                $scope.userForm[key].customError = value.join(', ');
+                $scope.userForm[key].$validate();
+            });
         };
 
-        $scope.submit = function () {
+        var saveUser = function () {
             $scope.loading = true;
             $scope.user = new UserService($scope.user);
             $scope.user.$save(function (user) {
                 $scope.loading = false;
                 $mdDialog.hide(user);
-                MessagesService.showToatsMessage('MSG5');
-            }, function (error) {
+            }, function (errors) {
                 $scope.loading = false;
-                angular.forEach(error.data, function (value, key) {
-                    $scope.userForm[key].customError = value.join(', ');
-                    $scope.userForm[key].$validate();
-                });
-            })
+                setFormError(errors);
+            });
+        };
+
+        var updateUser = function () {
+            $scope.loading = true;
+            $scope.user = new UserService($scope.user);
+            $scope.user
+                .$update({id:$scope.user.id},
+                    function (user) {
+                        $scope.loading = false;
+                        $mdDialog.hide(user);
+                    },
+                    function (errors) {
+                        $scope.loading = false;
+                        setFormError(errors);
+                    });
+        };
+
+        $scope.filterPermissions = function (text) {
+            return $filter('filter')($scope.permissions, text);
+        };
+
+        $scope.submit = function () {
+            if($scope.editMode)
+                MessagesService
+                    .showConfirmDialog('MSG6')
+                    .then(function () {
+                        $scope.subimited = true;
+                        $scope.editUser(null, $scope);
+                    }, function () {
+                        $scope.editUser(null, $scope);
+                    });
+            else
+                saveUser();
         };
 
         $scope.cancel = function() {
             $mdDialog.cancel();
         };
+
+        if($scope.subimited){
+            updateUser();
+        }
     }])
     .directive("customError", function($q, $timeout) {
         return {
@@ -118,22 +216,28 @@ angular.module('orpha.components')
             restrict: "A",
             priority:100,
             require: "ngModel",
+            scope:{
+                checkEmail: "=checkEmail"
+            },
             link: function(scope, element, attributes, ngModel) {
-                ngModel.checkEmailError = 'check-email-error';
-                ngModel.$asyncValidators.checkEmail = function(modelValue) {
-                    if(modelValue != null){
-                        var defer = $q.defer();
-                        $http.post('/api/users/checkEmail', {email:modelValue})
-                            .success(function (data) {
-                                defer.resolve();
-                            })
-                            .error(function (error) {
-                                ngModel.checkEmailError = error['email'][0];
-                                defer.reject();
-                            });
-                        return defer.promise;
-                    }
-                };
+
+                if(scope.checkEmail){
+                    ngModel.checkEmailError = 'check-email-error';
+                    ngModel.$asyncValidators.checkEmail = function(modelValue) {
+                        if(modelValue != null){
+                            var defer = $q.defer();
+                            $http.post('/api/users/checkEmail', {email:modelValue})
+                                .success(function (data) {
+                                    defer.resolve();
+                                })
+                                .error(function (error) {
+                                    ngModel.checkEmailError = error['email'][0];
+                                    defer.reject();
+                                });
+                            return defer.promise;
+                        }
+                    };
+                }
             }
         };
     })
@@ -147,11 +251,15 @@ angular.module('orpha.components')
             link: function(scope, element, attributes, ngModel) {
 
                 scope.$watch('checkMatch', function () {
-                    ngModel.$validate()
+                    ngModel.$validate();
                 });
 
                 ngModel.$validators.checkMatch = function(modelValue) {
-                    return modelValue === scope.checkMatch;
+                    if((modelValue == null && scope.checkMatch == null ) || (modelValue == "" && scope.checkMatch == "")){
+                        return true;
+                    }
+                    else
+                        return modelValue === scope.checkMatch;
                 }
             }
         };
@@ -183,9 +291,11 @@ angular.module('orpha.components')
                 model: '=ngModel'
             },
             link: function (scope, iElement, iAttrs, ngModel) {
-                var regex = new RegExp(/^(data:image\/(jpeg|png|jpg|gif|bmp);base64)/);
+                var b64regex = new RegExp(/^(data:image\/(jpeg|png|jpg|gif|bmp);base64)/);
+                var urlRegex = new RegExp(/(http(s?):)|([\/|.|\w|\s])*\.(?:jpg|gif|png)/);
+
                 ngModel.$validators.checkImage = function (modelValue) {
-                    return regex.test(modelValue) || modelValue == null || modelValue == "";
+                    return b64regex.test(modelValue) || urlRegex.test(modelValue) || modelValue == null || modelValue == "";
                 };
 
                 scope.$watch(function () {

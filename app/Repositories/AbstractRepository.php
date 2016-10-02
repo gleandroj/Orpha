@@ -71,10 +71,16 @@ class AbstractRepository implements Repository
     /**
      * @param $id
      * @param array $data
-     * @return bool
+     * @return \Illuminate\Database\Eloquent\Model
      */
     public function update($id, array $data)
     {
-        return $this->getById($id)->update($data);
+        $user = $this->getById($id);
+        if($user->update($data)){
+            return $user->fresh();
+        }
+        else{
+            return null;
+        }
     }
 }

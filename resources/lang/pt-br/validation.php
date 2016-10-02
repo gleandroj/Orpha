@@ -96,8 +96,8 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'avatar' => [
+            'avatar' => 'Formato do avatar inválido.',
         ],
     ],
 
