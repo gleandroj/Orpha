@@ -14,13 +14,20 @@ angular.module('orpha.services')
             return msg[msgId] || msgId;
         };
 
-        this.showToatsMessage = function (msgId) {
+        this.showToatsMessage = function (msgId, time) {
+            var time = time || 4000;
+
+            if(this.getMessage)
+                var msg = this.getMessage(msgId);
+            else
+                var msg = msgId;
+
             $mdToast.show(
                 $mdToast.simple()
-                    .textContent(this.getMessage(msgId))
+                    .textContent(msg)
                     .position('top right')
                     .toastClass('toast-margin')
-                    .hideDelay(4000)
+                    .hideDelay(time)
             );
         };
 

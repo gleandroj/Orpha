@@ -17,11 +17,8 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:api');
 
-
-Route::resource('/users', 'UserController');
-
+Route::resource('/users', 'UserController', ['except' => ['create', 'edit']]);
+Route::get('/users/restore/{user}', 'UserController@restore');
 Route::post('/users/checkEmail', 'UserController@checkEmail');
+Route::resource('/permissions', 'PermissionController', ['only' => ['index']]);
 
-Route::get('/permissions', function (){
-    return \App\Permission::all();
-});

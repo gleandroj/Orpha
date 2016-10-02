@@ -32,6 +32,7 @@
                                 accept="image/*"
                                 ng-model="user.avatar"
                                 custom-error
+                                set-touched="{{editMode}}"
                                 check-image
                                 ng-disabled="loading || readonly"/>
                         <label flex for="avatar" class="md-button md-raised md-accent" ng-disabled="loading || readonly">
@@ -51,7 +52,15 @@
                     <label>Nome</label>
                     <md-icon class="material-icons">person</md-icon>
 
-                    <input name="name" ng-model="user.name" type="text" custom-error required ng-disabled="loading || readonly" md-maxlength="50" >
+                    <input
+                            name="name"
+                            ng-model="user.name"
+                            type="text"
+                            custom-error
+                            set-touched="{{editMode}}"
+                            required
+                            md-maxlength="50"
+                            ng-disabled="loading || readonly" >
 
                     <div ng-messages="userForm.name.$error"
                          multiple>
@@ -66,7 +75,17 @@
                         <md-icon class="material-icons" ng-if="!userForm.email.$pending">email</md-icon>
                         <md-icon ><md-progress-circular md-mode="indeterminate" ng-if="userForm.email.$pending" md-diameter="25"></md-progress-circular></md-icon>
 
-                        <input name="email" type="email" flex required md-maxlength="50" check-email="!readonly && !editMode" custom-error ng-model="user.email"  ng-disabled="loading || readonly">
+                        <input
+                                name="email"
+                                type="email"
+                                flex
+                                required
+                                md-maxlength="50"
+                                check-email="!readonly && !editMode"
+                                custom-error
+                                set-touched="{{editMode}}"
+                                ng-model="user.email"
+                                ng-disabled="loading || readonly">
 
                         <div ng-messages="userForm.email.$error">
                             <div ng-messages-include="../app/components/messages/messages-tpl.html"></div>
@@ -86,6 +105,7 @@
                                 type="tel"
                                 ng-model="user.phone"
                                 custom-error
+                                set-touched="{{editMode}}"
                                 md-maxlength="20"
                                 ng-disabled="loading || readonly"
                                 ng-pattern="/^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/"
@@ -103,7 +123,17 @@
                     <md-input-container flex-gt-sm class="md-block"  >
                         <label>Senha</label>
                         <md-icon class="material-icons">lock</md-icon>
-                        <input name="password" ng-model="user.password" custom-error type="password" ng-minlength="8" md-maxlength="14" ng-required="!editMode" check-match="user.password_confirmation" ng-disabled="loading || readonly">
+                        <input
+                                name="password"
+                                ng-model="user.password"
+                                custom-error
+                                set-touched="{{editMode}}"
+                                type="password"
+                                ng-minlength="8"
+                                md-maxlength="14"
+                                ng-required="!editMode"
+                                check-match="user.password_confirmation"
+                                ng-disabled="loading || readonly">
 
                         <div ng-messages="userForm.password.$error" >
                             <div ng-message="md-maxlength, minlength">{{ 'MSG13' | messageBind}}</div>
@@ -119,7 +149,16 @@
                         <label>Confirmação de senha</label>
                         <md-icon class="material-icons">lock</md-icon>
 
-                        <input name="password_confirmation" custom-error ng-model="user.password_confirmation" type="password" ng-minlength="8" md-maxlength="14"  ng-required="!editMode" ng-disabled="loading || readonly">
+                        <input
+                                name="password_confirmation"
+                                custom-error
+                                set-touched="{{editMode}}"
+                                ng-model="user.password_confirmation"
+                                type="password"
+                                ng-minlength="8"
+                                md-maxlength="14"
+                                ng-required="!editMode"
+                                ng-disabled="loading || readonly">
 
                         <div ng-messages="userForm.password_confirmation.$error">
                             <div ng-messages-include="../app/components/messages/messages-tpl.html"></div>
@@ -132,14 +171,12 @@
                     <h3 style="margin: 0px;" class="md-title"><md-icon class="mateiral-icons">security</md-icon> Permissões</h3>
 
                     <md-chips
-                            md-on-add="addChip($chip)"
-                            md-on-remove="removeChip($chip)"
                             name="permissions"
                             ng-model="user.permissions"
                             readonly="loading || readonly"
                             md-removable="!readonly && !loading"
                             secondary-placeholder="+Permissão"
-                            md-require-match>
+                            md-require-match="true">
                         <md-autocomplete
                                  ng-if="!loading && !readonly"
                                  ng-disabled="loading || readonly"
@@ -165,8 +202,10 @@
                             <div ng-message="required">Você <b>precisa</b> selecionar no minímo uma permissão.</div>
                         </div>
                     </md-chips>
+
                     <md-divider></md-divider>
                 </div>
+
             </div>
 
         </md-dialog-content>

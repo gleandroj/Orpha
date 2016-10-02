@@ -36,7 +36,7 @@ return [
     'digits_between'       => 'The :attribute must be between :min and :max digits.',
     'dimensions'           => 'The :attribute has invalid image dimensions.',
     'distinct'             => 'The :attribute field has a duplicate value.',
-    'email'                => ':attribute inválido.',
+    'email'                => trans('messages.MSG10'),
     'exists'               => 'The selected :attribute is invalid.',
     'file'                 => 'The :attribute must be a file.',
     'filled'               => 'The :attribute field is required.',
@@ -63,8 +63,8 @@ return [
     'not_in'               => 'The selected :attribute is invalid.',
     'numeric'              => 'The :attribute must be a number.',
     'present'              => 'The :attribute field must be present.',
-    'regex'                => 'Formato do :attribute inválido.',
-    'required'             => 'Preencha este campo.',
+    'regex'                => 'Formato do '.trans('messages.MSG10'),
+    'required'             => trans('messages.MSG2'),
     'required_if'          => 'The :attribute field is required when :other is :value.',
     'required_unless'      => 'The :attribute field is required unless :other is in :values.',
     'required_with'        => 'The :attribute field is required when :values is present.',
@@ -80,7 +80,7 @@ return [
     ],
     'string'               => 'The :attribute must be a string.',
     'timezone'             => 'The :attribute must be a valid zone.',
-    'unique'               => ':attribute já cadastrado no sistema.',
+    'unique'               => trans('messages.MSG3'),
     'uploaded'             => 'The :attribute failed to upload.',
     'url'                  => 'The :attribute format is invalid.',
 
@@ -97,7 +97,7 @@ return [
 
     'custom' => [
         'avatar' => [
-            'avatar' => 'Formato do avatar inválido.',
+            'avatar' => 'Formato do '.trans('messages.MSG10', ['attribute' => 'avatar']),
         ],
     ],
 

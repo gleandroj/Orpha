@@ -32,18 +32,24 @@ interface UserService
 
     /**
      * @param $id
-     * @return bool|null
+     * @param array $data
+     * @return mixed
+     */
+    public function update($id, array $data);
+
+    /**
+     * @param $id
+     * @return \App\User
      * @throws \Exception
      */
     public function delete($id);
 
     /**
      * @param $id
-     * @param array $data
-     * @return mixed
+     * @return \App\User
+     * @throws \Exception
      */
-    public function update($id, array $data);
-
+    public function restore($id);
 
     /**
      * @param array $data

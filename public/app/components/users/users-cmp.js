@@ -45,6 +45,12 @@ angular.module('orpha.components')
         };
 
         $scope.createUser = function (user) {
+
+            var pushUser = function (newUser) {
+                $scope.users.push(newUser);
+                MessagesService.showToatsMessage('MSG5');
+            };
+
             $mdDialog.show({
                 controller: 'userFormCtrl',
                 parent: angular.element(document.body),
@@ -54,41 +60,75 @@ angular.module('orpha.components')
                 locals:{
                     title:'Inserir Usuário'
                 }
-            }).then(function (user) {
-                $scope.users.push(user);
-                MessagesService.showToatsMessage('MSG5');
+            }).then(pushUser,
+            function (error) {
+                if(error) MessagesService.showToatsMessage(error);
             });
         };
 
         $scope.editUser = function (user, oldScope) {
-
-            var _locals = { title:'Editar Usuário', user:user, editMode:true, editUser:$scope.editUser, oldScope:oldScope};
-
             var options = {
                 controller: 'userFormCtrl',
                 parent: angular.element(document.body),
                 templateUrl: '../app/components/users/user-form-tpl.html',
                 clickOutsideToClose:true,
                 fullscreen:true,
-                locals: _locals
+                locals: {
+                    title:'Editar Usuário',
+                    user:user,
+                    editMode:true,
+                    editUser:$scope.editUser,
+                    oldScope:oldScope
+                }
             };
 
             $mdDialog.show(options).then(function (updatedUser) {
-                 angular.forEach(updatedUser, function (value, key) {
-                     $timeout(function () {
+                angular.forEach(updatedUser, function (value, key) {
+                    $timeout(function () {
                         $scope.$apply(function () {
                             user[key] = value;
                         });
-                     }, 0);
-                 });
+                    }, 0);
+                });
                 MessagesService.showToatsMessage('MSG7');
+            }, function (error) {
+                if(error) MessagesService.showToatsMessage(error);
             });
+        };
+
+        $scope.deleteUser = function (user) {
+            user.$delete({id:user.id}, function (deletedUser) {
+                angular.forEach(deletedUser, function (value, key) {
+                    $timeout(function () {
+                        $scope.$apply(function () {
+                            user[key] = value;
+                        });
+                    }, 0);
+                });
+            }, function (error) {
+                if(error) MessagesService.showToatsMessage(error);
+            });
+        };
+
+        $scope.restoreUser = function (user) {
+            user.$restore(user.id, function (restoredUser) {
+                    angular.forEach(restoredUser, function (value, key) {
+                        $timeout(function () {
+                            $scope.$apply(function () {
+                                user[key] = value;
+                            });
+                        }, 0);
+                    });
+            }, function (error) {
+                    if(error) MessagesService.showToatsMessage(error);
+                });
         };
 
         $scope.getAllUsers();
     }])
-    .controller('userFormCtrl', ['$scope', '$http', '$filter', 'UserService', '$mdDialog', 'MessagesService', 'locals', function ($scope, $http, $filter, UserService, $mdDialog, MessagesService, locals) {
-        if(locals.oldScope){
+    .controller('userFormCtrl', ['$scope', '$timeout', '$http', '$filter', 'UserService', '$mdDialog', 'MessagesService', 'locals', function ($scope, $timeout, $http, $filter, UserService, $mdDialog, MessagesService, locals) {
+        if(locals.oldScope)
+        {
             $scope.title = locals.oldScope.title;
             $scope.editMode = locals.oldScope.editMode;
             $scope.readonly = locals.oldScope.readonly;
@@ -99,7 +139,9 @@ angular.module('orpha.components')
             $scope.searchText = locals.oldScope.searchText;
             $scope.subimited = locals.oldScope.subimited;
             $scope.loading = locals.oldScope.loading;
-        }else{
+        }
+        else
+        {
             $scope.title = locals.title || 'Formulário';
             $scope.editMode = locals.editMode || false;
             $scope.readonly = locals.readonly || false;
@@ -111,10 +153,6 @@ angular.module('orpha.components')
             $scope.subimited = false;
             $scope.loading = false;
 
-            $scope.getPermissions = function () {
-
-            };
-
             $http.get('/api/permissions')
                 .success(function (permissions) {
                     $scope.permissions = permissions;
@@ -123,26 +161,34 @@ angular.module('orpha.components')
 
         var setFormError = function (errors) {
             angular.forEach(errors, function (value, key) {
-                $scope.userForm[key].customError = value.join(', ');
-                $scope.userForm[key].$validate();
+                if($scope.userForm[key]){
+                    $timeout(function () {
+                        $scope.userForm[key].customError =  value.length ? value.join(', ') : value;
+                        $scope.userForm[key].$validate();
+                    }, 0);
+                }
             });
         };
 
         var saveUser = function () {
-            $scope.loading = true;
             $scope.user = new UserService($scope.user);
+            $scope.loading = true;
             $scope.user.$save(function (user) {
                 $scope.loading = false;
                 $mdDialog.hide(user);
             }, function (errors) {
                 $scope.loading = false;
-                setFormError(errors);
+                if(errors.status == 422){
+                    setFormError(errors.data);
+                }else if(errors.status == 500){
+                    $mdDialog.cancel(errors.data.error);
+                }
             });
         };
 
         var updateUser = function () {
-            $scope.loading = true;
             $scope.user = new UserService($scope.user);
+            $scope.loading = true;
             $scope.user
                 .$update({id:$scope.user.id},
                     function (user) {
@@ -151,7 +197,11 @@ angular.module('orpha.components')
                     },
                     function (errors) {
                         $scope.loading = false;
-                        setFormError(errors);
+                        if(errors.status == 422){
+                            setFormError(errors.data);
+                        }else if(errors.status == 500){
+                            $mdDialog.cancel(errors.data.error);
+                        }
                     });
         };
 
@@ -165,9 +215,9 @@ angular.module('orpha.components')
                     .showConfirmDialog('MSG6')
                     .then(function () {
                         $scope.subimited = true;
-                        $scope.editUser(null, $scope);
+                        $scope.editUser(locals.user, $scope);
                     }, function () {
-                        $scope.editUser(null, $scope);
+                        $scope.editUser(locals.user, $scope);
                     });
             else
                 saveUser();
@@ -177,15 +227,20 @@ angular.module('orpha.components')
             $mdDialog.cancel();
         };
 
-        if($scope.subimited){
-            updateUser();
-        }
+        if($scope.subimited) updateUser();
     }])
     .directive("customError", function($q, $timeout) {
         return {
             restrict: "A",
             require: "ngModel",
             link: function(scope, element, attributes, ngModel) {
+                if(attributes.setTouched == "true"){
+                    $timeout(function () {
+                        scope.$apply(function () {
+                            ngModel.$setTouched();
+                        });
+                    }, 0);
+                }
 
                 var reset = function () {
                     if(ngModel.customError != null){
@@ -197,14 +252,7 @@ angular.module('orpha.components')
                 ngModel.$validators.customError = function(modelValue) {
                     return ngModel.customError == null;
                 };
-                scope.$watch(function () {
-                    return ngModel.customError;
-                }, function () {
-                    /*$timeout(function () {
-                        reset();
-                    }, 20000);*/
-                });
-                element.bind('change', function () {
+                element.bind('focus', function () {
                     reset();
                 });
 

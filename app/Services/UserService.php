@@ -88,15 +88,6 @@ class UserService implements \App\Contracts\UserService
 
     }
 
-    /**
-     * @param $id
-     * @return bool|null
-     * @throws \Exception
-     */
-    public function delete($id)
-    {
-        return $this->userRepository->delete($id);
-    }
 
     /**
      * @param $id
@@ -144,6 +135,26 @@ class UserService implements \App\Contracts\UserService
         }
 
 
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Database\Eloquent\Model
+     * @throws \Exception
+     */
+    public function delete($id)
+    {
+        return $this->userRepository->delete($id);
+    }
+
+    /**
+     * @param $id
+     * @return \App\User
+     * @throws \Exception
+     */
+    public function restore($id)
+    {
+        return $this->userRepository->restore($id);
     }
 
     /**

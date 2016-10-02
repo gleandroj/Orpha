@@ -26,16 +26,9 @@ interface Repository
 
     /**
      * @param array $data
-     * @return \Illuminate\Database\Eloquent\Model
+     * @return $data
      */
     public function create(array $data);
-
-    /**
-     * @param $id
-     * @return bool|null
-     * @throws \Exception
-     */
-    public function delete($id);
 
     /**
      * @param $id
@@ -43,4 +36,16 @@ interface Repository
      * @return \Illuminate\Database\Eloquent\Model
      */
     public function update($id, array $data);
+
+    /**
+     * @param $id
+     * @return \Illuminate\Database\Eloquent\Model
+     */
+    public function delete($id);
+
+    /**
+     * @param $id
+     * @return \Illuminate\Database\Eloquent\Model
+     */
+    public function restore($id);
 }
