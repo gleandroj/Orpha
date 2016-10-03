@@ -6,4 +6,5 @@
 .env
 Homestead.json
 Homestead.yaml
-*.xml
+/*.xm/
+/_windows
