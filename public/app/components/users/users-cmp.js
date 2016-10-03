@@ -13,7 +13,7 @@ angular.module('orpha.components')
                 $scope.loading = false;
             }, function (error) {
                 $scope.loading = false;
-                if(error) MessagesService.showToatsMessage(error);
+                if(error && error.error) MessagesService.showToatsMessage(error.error);
             });
         };
 
