@@ -11,6 +11,9 @@ angular.module('orpha.components')
             UserService.query(function (data) {
                 $scope.users = data;
                 $scope.loading = false;
+            }, function (error) {
+                $scope.loading = false;
+                if(error) MessagesService.showToatsMessage(error);
             });
         };
 
@@ -92,7 +95,6 @@ angular.module('orpha.components')
                 });
                 MessagesService.showToatsMessage('MSG7');
             }, function (error) {
-                console.log(error);
                 if(error) MessagesService.showToatsMessage(error);
             });
         };
