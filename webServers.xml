@@ -1,0 +1,14 @@
+<application>
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="4fa14095-2cfb-4f8b-9114-55314c3be23c" name="Footbet" url="http://footbet.dnasoft.com.br">
+        <fileTransfer host="dnasoft.com.br" port="22" rootFolder="/home/dnasoft" accessType="SFTP" username="dnasoft">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</application>
