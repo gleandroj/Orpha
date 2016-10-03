@@ -11,9 +11,10 @@ angular.module('orpha.components')
             UserService.query(function (data) {
                 $scope.users = data;
                 $scope.loading = false;
-            }, function (error) {
+            }, function (data) {
+                console.log(data);
                 $scope.loading = false;
-                if(error && error.error) MessagesService.showToatsMessage(error.error);
+                if(data && data['data']['error']) MessagesService.showToatsMessage(data['data']['error']);
             });
         };
 
