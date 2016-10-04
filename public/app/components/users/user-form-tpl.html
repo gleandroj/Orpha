@@ -178,6 +178,7 @@
                             secondary-placeholder="+Permissão"
                             md-require-match="true">
                         <md-autocomplete
+                                 md-min-length="0"
                                  ng-if="!loading && !readonly"
                                  ng-disabled="loading || readonly"
                                  md-search-text="searchText"
