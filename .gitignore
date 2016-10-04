@@ -8,3 +8,4 @@ Homestead.yaml
 /*.xm/
 /_windows
 /.env
+/composer.lock
