@@ -3,8 +3,9 @@
 /public/assets
 /vendor
 /.idea
-.env
 Homestead.json
 Homestead.yaml
 /*.xm/
 /_windows
+/.env
+/composer.lock
