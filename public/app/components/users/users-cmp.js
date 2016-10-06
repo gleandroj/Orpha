@@ -5,6 +5,8 @@ angular.module('orpha.components')
     .controller('userCtrl', ['$scope', '$timeout', 'UserService', '$filter', '$mdDialog', 'MessagesService', function ($scope, $timeout, UserService, $filter, $mdDialog, MessagesService) {
         $scope.users = [];
 
+        $scope.search = '';
+
         $scope.getAllUsers = function () {
             $scope.users = [];
             $scope.loading = true;
@@ -14,25 +16,11 @@ angular.module('orpha.components')
             }, function (data) {
                 console.log(data);
                 $scope.loading = false;
-                if(data && data['data']['error']) MessagesService.showToatsMessage(data['data']['error']);
+                if(data && data['data']['error']) MessagesService.showErrorMessage(data['data']['error']);
             });
         };
 
         $scope.showUser = function (user) {
-            /*
-            $mdDialog.show({
-                controller: function ($scope, $mdDialog, locals) {
-                    $scope.user = locals.user;
-                    $scope.hide = function() {
-                        $mdDialog.hide();
-                    };
-                },
-                templateUrl: '../app/components/users/show-user-tpl.html',
-                clickOutsideToClose:true,
-                locals:{
-                    user: user
-                }
-            });*/
             $mdDialog.show({
                 controller: 'userFormCtrl',
                 parent: angular.element(document.body),
@@ -52,7 +40,7 @@ angular.module('orpha.components')
 
             var pushUser = function (newUser) {
                 $scope.users.push(newUser);
-                MessagesService.showToatsMessage('MSG5');
+                MessagesService.showSuccessMessage('MSG5');
             };
 
             $mdDialog.show({
@@ -65,8 +53,8 @@ angular.module('orpha.components')
                     title:'Inserir Usuário'
                 }
             }).then(pushUser,
-            function (error) {
-                if(error) MessagesService.showToatsMessage(error);
+            function (data) {
+                if(data && data['data']['error']) MessagesService.showErrorMessage(data['data']['error']);
             });
         };
 
@@ -94,9 +82,9 @@ angular.module('orpha.components')
                         });
                     }, 0);
                 });
-                MessagesService.showToatsMessage('MSG7');
-            }, function (error) {
-                if(error) MessagesService.showToatsMessage(error);
+                MessagesService.showSuccessMessage('MSG7');
+            }, function (data) {
+                if(data && data['data']['error']) MessagesService.showErrorMessage(data['data']['error']);
             });
         };
 
@@ -109,8 +97,8 @@ angular.module('orpha.components')
                         });
                     }, 0);
                 });
-            }, function (error) {
-                if(error) MessagesService.showToatsMessage(error);
+            }, function (data) {
+                if(data && data['data']['error']) MessagesService.showErrorMessage(data['data']['error']);
             });
         };
 
@@ -123,9 +111,9 @@ angular.module('orpha.components')
                             });
                         }, 0);
                     });
-            }, function (error) {
-                    if(error) MessagesService.showToatsMessage(error);
-                });
+            }, function (data) {
+                if(data && data['error']) MessagesService.showErrorMessage(data['error']);
+            });
         };
 
         $scope.getAllUsers();

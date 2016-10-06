@@ -37,14 +37,14 @@
                                 ng-disabled="loading || readonly"/>
                         <label flex for="avatar" class="md-button md-raised md-accent" ng-disabled="loading || readonly">
                             <md-icon class="material-icons">add_a_photo</md-icon>
-                            <md-tooltip md-direction="right">Selecionar avatar</md-tooltip>
+                            <md-tooltip md-direction="right">Selecionar Imagem</md-tooltip>
                         </label>
                     </div>
 
                     <span flex></span>
                     <span flex="100"></span>
                     <div layout-padding class="custom-error" ng-if="userForm.avatar.$error.customError">{{userForm.avatar.customError}}</div>
-                    <div layout-padding class="custom-error" ng-if="userForm.avatar.$error.checkImage">{{'MSG10' | messageBind:'Avatar'}}</div>
+                    <div layout-padding class="custom-error" ng-if="userForm.avatar.$error.checkImage">{{'MSG10' | messageBind:'Formato'}}</div>
                     <div class="md-errors-spacer"></div>
                 </div>
 
@@ -113,6 +113,7 @@
 
                         <div ng-messages="userForm.phone.$error"
                              multiple>
+                            <div ng-message="pattern">{{'MSG10' | messageBind:'Telefone'}}</div>
                             <div ng-messages-include="../app/components/messages/messages-tpl.html"></div>
                             <div ng-message="customError">{{userForm.phone.customError}}</div>
                         </div>
@@ -161,8 +162,10 @@
                                 ng-disabled="loading || readonly">
 
                         <div ng-messages="userForm.password_confirmation.$error">
+                            <div ng-message="md-maxlength, minlength">{{ 'MSG13' | messageBind}}</div>
+                            <div ng-message="checkMatch">{{'MSG9' | messageBind:'As senhas informadas' }}</div>
                             <div ng-messages-include="../app/components/messages/messages-tpl.html"></div>
-                            <div ng-message="customError">{{userForm.password_confirmation.customError}}</div>
+                            <div ng-message="customError">{{userForm.password.customError}}</div>
                         </div>
                     </md-input-container>
                 </div>
