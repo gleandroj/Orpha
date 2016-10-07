@@ -31,12 +31,14 @@
                 <md-progress-circular md-indetermied class="md-accent" md-diameter="96"></md-progress-circular>
             </div>
 
+            <!--Messages-->
             <div ng-show="(users | filter :{deleted_at:'!'} | filter: search).length == 0 && !loading  && search != ''" layout="column" layout-sm="column" layout-align="center center">
                 <h3 class="md-headline">{{'MSG8' | messageBind}}</h3>
             </div>
             <div ng-show="(users | filter :{deleted_at:'!'}).length == 0 && !loading  && search == ''" layout="column" layout-sm="column" layout-align="center center">
                 <h3 class="md-headline">{{'MSG1' | messageBind}}</h3>
             </div>
+
 
             <md-list-item
                     class="md-2-line md-with-secondary"
@@ -75,12 +77,14 @@
 
             <md-header ng-show="!loading" class="md-no-sticky" >Usuários Inativos</md-header>
 
+            <!--Messages-->
             <div ng-show="(users | filter :{deleted_at:'!!'} | filter: search).length == 0 && !loading  && search != ''" layout="column" layout-sm="column" layout-align="center center">
                 <h3 class="md-headline">{{'MSG8' | messageBind}}</h3>
             </div>
             <div ng-show="(users | filter :{deleted_at:'!!'}).length == 0 && !loading  && search == ''" layout="column" layout-sm="column" layout-align="center center">
                 <h3 class="md-headline">{{'MSG1' | messageBind}}</h3>
             </div>
+
 
             <md-list-item
                     md-colors="{{user.deleted_at ? {background: 'default-warn-200-0.5'} : null}}"
