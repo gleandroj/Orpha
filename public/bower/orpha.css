@@ -22,7 +22,6 @@ a.md-button:not([disabled]).md-focused, .md-button:not([disabled]).md-focused {
     background-color: rgba(158,158,158,0.4);
 }
 
-
 .md-sidenav-left{
     max-width: 260px;
 }
@@ -71,6 +70,15 @@ input[type=file].input-file {
     height: 100%;
 }
 
+md-toast.md-error-toast-theme div.md-toast-content{
+    color: white !important;
+    background-color: #E53935 !important;
+}
+
+md-toast.md-success-toast-theme div.md-toast-content{
+    color: black     !important;
+    background-color: #00E676 !important;
+}
 
 .fab-panel{
     position: fixed; bottom: 30px; right: 30px;

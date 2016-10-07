@@ -132,6 +132,7 @@ class AbstractRepository implements Repository
     /**
      * @param $id
      * @return \Illuminate\Database\Eloquent\Model
+     * @throws ApiException
      */
     public function restore($id)
     {

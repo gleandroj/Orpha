@@ -78,13 +78,13 @@ angular.module('orpha.components')
 })
 .config(function ($mdThemingProvider) {
     $mdThemingProvider.theme('default')
-        .primaryPalette('blue-grey', {
-            'default': '400',
+        .primaryPalette('indigo', {
+            'default': '200',
             'hue-1': '100',
-            'hue-2': '600',
-            'hue-3': 'A100'
+            'hue-2': '100',
+            'hue-3': '100'
         })
-        .accentPalette('pink', {
-            'default': '200'
+        .accentPalette('green', {
+            'default': '300'
         });
 });

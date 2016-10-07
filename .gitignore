@@ -5,7 +5,9 @@
 /.idea
 Homestead.json
 Homestead.yaml
-/*.xm/
+/*.xml/
 /_windows
 /.env
 /composer.lock
+*.xml
+.env
