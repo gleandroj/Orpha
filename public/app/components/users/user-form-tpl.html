@@ -59,12 +59,16 @@
                             custom-error
                             set-touched="{{editMode}}"
                             required
+                            mask="*"
+                            repeat="50"
+                            validate="false"
+                            limit="true"
                             md-maxlength="50"
                             ng-disabled="loading || readonly" >
 
                     <div ng-messages="userForm.name.$error"
                          multiple>
-                        <div ng-messages-include="../app/components/messages/messages-tpl.html"></div>
+                        <div ng-messages-include="app/components/messages/messages-tpl.html"></div>
                         <div ng-message="customError">{{userForm.name.customError}}</div>
                     </div>
                 </md-input-container>
@@ -82,13 +86,17 @@
                                 required
                                 md-maxlength="50"
                                 check-email="!readonly && !editMode"
+                                mask="*"
+                                repeat="50"
+                                validate="false"
+                                limit="true"
                                 custom-error
                                 set-touched="{{editMode}}"
                                 ng-model="user.email"
                                 ng-disabled="loading || readonly">
 
                         <div ng-messages="userForm.email.$error">
-                            <div ng-messages-include="../app/components/messages/messages-tpl.html"></div>
+                            <div ng-messages-include="app/components/messages/messages-tpl.html"></div>
                             <div ng-message="checkEmail">{{userForm.email.checkEmailError}}</div>
                             <div ng-message="customError">{{userForm.email.customError}}</div>
                         </div>
@@ -107,14 +115,16 @@
                                 custom-error
                                 set-touched="{{editMode}}"
                                 md-maxlength="20"
+                                mask="(99) 9?9999-9999"
+                                restrict="reject"
+                                clean="true"
                                 ng-disabled="loading || readonly"
-                                ng-pattern="/^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/"
                                 required>
 
                         <div ng-messages="userForm.phone.$error"
                              multiple>
-                            <div ng-message="pattern">{{'MSG10' | messageBind:'Telefone'}}</div>
-                            <div ng-messages-include="../app/components/messages/messages-tpl.html"></div>
+                            <div ng-message="mask">{{'MSG10' | messageBind:'Telefone'}}</div>
+                            <div ng-messages-include="app/components/messages/messages-tpl.html"></div>
                             <div ng-message="customError">{{userForm.phone.customError}}</div>
                         </div>
                     </md-input-container>
@@ -132,6 +142,10 @@
                                 type="password"
                                 ng-minlength="8"
                                 md-maxlength="14"
+                                mask="*"
+                                repeat="14"
+                                validate="false"
+                                limit="true"
                                 ng-required="!editMode"
                                 check-match="user.password_confirmation"
                                 ng-disabled="loading || readonly">
@@ -139,7 +153,7 @@
                         <div ng-messages="userForm.password.$error" >
                             <div ng-message="md-maxlength, minlength">{{ 'MSG13' | messageBind}}</div>
                             <div ng-message="checkMatch">{{'MSG9' | messageBind:'As senhas informadas' }}</div>
-                            <div ng-messages-include="../app/components/messages/messages-tpl.html"></div>
+                            <div ng-messages-include="app/components/messages/messages-tpl.html"></div>
                             <div ng-message="customError">{{userForm.password.customError}}</div>
                         </div>
                     </md-input-container>
@@ -158,13 +172,17 @@
                                 type="password"
                                 ng-minlength="8"
                                 md-maxlength="14"
+                                mask="*"
+                                repeat="14"
+                                validate="false"
+                                limit="true"
                                 ng-required="!editMode"
                                 ng-disabled="loading || readonly">
 
                         <div ng-messages="userForm.password_confirmation.$error">
                             <div ng-message="md-maxlength, minlength">{{ 'MSG13' | messageBind}}</div>
                             <div ng-message="checkMatch">{{'MSG9' | messageBind:'As senhas informadas' }}</div>
-                            <div ng-messages-include="../app/components/messages/messages-tpl.html"></div>
+                            <div ng-messages-include="app/components/messages/messages-tpl.html"></div>
                             <div ng-message="customError">{{userForm.password.customError}}</div>
                         </div>
                     </md-input-container>

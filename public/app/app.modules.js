@@ -4,15 +4,13 @@
 
 
 angular.module('orpha', [
-    'ui.router',
-    'ngMessages',
-    'ngResource',
-    'ngMaterial',
+    'orpha.config',
+    'orpha.services',
     'orpha.components',
-    'orpha.routes',
-    'orpha.services'
+    'orpha.routes'
 ]);
 
-angular.module('orpha.routes', []);
-angular.module('orpha.components', []);
-angular.module('orpha.services', []);
+angular.module('orpha.routes', ['ui.router']);
+angular.module('orpha.components', ['ngMaterial', 'ui.router', 'ngMessages', 'ngMask']);
+angular.module('orpha.services', ['ngResource', 'ngMaterial']);
+angular.module('orpha.config', ['ngMaterial']);

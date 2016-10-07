@@ -50,8 +50,8 @@
                 <md-icon hide-sm  hide-xs ng-if="!user.avatar || !user.showImage" class="material-icons md-avatar" style="font-size: 48px;">account_circle</md-icon>
                 <img hide-sm hide-xs ng-show="user.avatar && user.showImage" ng-src="{{user.avatar}}" height="100px" class="md-avatar" alt="{{user.avatar}}" on-image on-image-loaded="user.showImage = true" on-image-error="user.showImage = false" />
 
-                <div class="md-list-item-text" layout="column" >
-                    <h3 >{{user.name}}</h3>
+                <div class="md-list-item-text " layout="column" layout-align="start start" >
+                    <h3 class="truncate truncate-max-width">{{user.name}}</h3>
                     <p class="truncate truncate-max-width">{{user.email}}</p>
                     <p >{{user.phone}}</p>
                 </div>
@@ -97,8 +97,8 @@
                 <md-icon hide-sm  hide-xs ng-if="!user.avatar || !user.showImage" class="material-icons md-avatar" style="font-size: 48px;">account_circle</md-icon>
                 <img hide-sm hide-xs ng-show="user.avatar && user.showImage" ng-src="{{user.avatar || '//:0' }}" height="100px" class="md-avatar" alt="{{user.avatar}}" on-image on-image-loaded="user.showImage = true" on-image-error="user.showImage = false" />
 
-                <div class="md-list-item-text" layout="column" >
-                    <h3 >{{user.name}}</h3>
+                <div class="md-list-item-text" layout="column" layout-align="start start">
+                    <h3 class="truncate  truncate-max-width" >{{user.name}}</h3>
                     <p class="truncate truncate-max-width">{{user.email}}</p>
                     <p >{{user.phone}}</p>
                 </div>

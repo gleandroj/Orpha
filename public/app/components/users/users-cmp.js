@@ -253,7 +253,7 @@ angular.module('orpha.components')
             }
         };
     })
-    .directive("checkEmail", function($q, $http) {
+    .directive("checkEmail", function($q, $http, $timeout) {
         return {
             restrict: "A",
             priority:100,
@@ -262,12 +262,18 @@ angular.module('orpha.components')
                 checkEmail: "=checkEmail"
             },
             link: function(scope, element, attributes, ngModel) {
+                var allowValidate = false;
+                element.on('blur', function () {
+                    allowValidate = true;
+                    ngModel.$validate();
+                    allowValidate = false;
+                });
 
                 if(scope.checkEmail){
                     ngModel.checkEmailError = 'check-email-error';
                     ngModel.$asyncValidators.checkEmail = function(modelValue) {
-                        if(modelValue != null){
-                            var defer = $q.defer();
+                        var defer = $q.defer();
+                        if(modelValue != null && allowValidate){
                             $http.post('/api/users/checkEmail', {email:modelValue})
                                 .success(function (data) {
                                     defer.resolve();
@@ -276,8 +282,10 @@ angular.module('orpha.components')
                                     ngModel.checkEmailError = error['email'][0];
                                     defer.reject();
                                 });
-                            return defer.promise;
+                        }else{
+                            defer.resolve();
                         }
+                        return defer.promise;
                     };
                 }
             }

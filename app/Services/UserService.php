@@ -39,7 +39,7 @@ class UserService implements \App\Contracts\UserService
      * The attributes that should be hidden for arrays.
      *
      * @param $id
-     * @return \App\User
+     * @return \App\User|\Illuminate\Database\Eloquent\Model
      */
     public function getById($id)
     {

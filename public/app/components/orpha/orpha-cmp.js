@@ -40,7 +40,6 @@ angular.module('orpha.components')
             profileClick: '&'
         },
         controller: function ($scope) {
-            $scope.background = $scope.background || 'default-primary-200';
             $scope.avatar = $scope.avatar || '../assets/profile/ic_account_circle_white_48dp_2x.png';
         }
     }
@@ -75,16 +74,4 @@ angular.module('orpha.components')
 
         return msgService;
     };
-})
-.config(function ($mdThemingProvider) {
-    $mdThemingProvider.theme('default')
-        .primaryPalette('indigo', {
-            'default': '200',
-            'hue-1': '100',
-            'hue-2': '100',
-            'hue-3': '100'
-        })
-        .accentPalette('green', {
-            'default': '300'
-        });
 });

@@ -21,8 +21,10 @@
 <script src="/bower/angular-messages/angular-messages.js"></script>
 <script src="/bower/angular-animate/angular-animate.js"></script>
 <script src="/bower/angular-material/angular-material.js"></script>
+<script src="/bower/ngMask/dist/ngMask.js"></script>
 
 <script src="/app/app.modules.js"></script>
+<script src="/app/app.config.js"></script>
 <script src="/app/app.routes.js"></script>
 
 <script src="/app/services/messages-svc.js"></script>
