@@ -62,7 +62,7 @@ angular.module('orpha.services')
             var roles = [];
 
             if(self.isAuthenticated()){
-                roles = self.getCurrentUser().permissions;
+                roles = currentUser.permissions;
             }
             else{
                 return false;
