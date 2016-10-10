@@ -228,6 +228,7 @@ angular.module('orpha.services')
         }
     }])
     .service("AuthStateService", ["$rootScope", "$location", "$window", "AuthEvents", "$state", "AuthService", "$log", function ($rootScope, $location, $window, AuthEvents, $state, AuthService, $log){
+        var self = this;
         var back = {};
         var Auth = AuthService;
 
