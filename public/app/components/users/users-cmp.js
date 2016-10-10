@@ -2,7 +2,7 @@
  * Created by FG0003 on 29/09/2016.
  */
 angular.module('orpha.components')
-    .controller('userCtrl', ['$scope', '$timeout', 'UserService', '$filter', '$mdDialog', 'MessagesService', function ($scope, $timeout, UserService, $filter, $mdDialog, MessagesService) {
+    .controller('userCtrl', ['$scope', '$timeout', 'UserService', '$filter', '$mdDialog', 'MessagesService', 'AuthService', 'AuthStateService', function ($scope, $timeout, UserService, $filter, $mdDialog, MessagesService, AuthService) {
         $scope.users = [];
 
         $scope.search = '';
@@ -21,6 +21,8 @@ angular.module('orpha.components')
         };
 
         $scope.showUser = function (user) {
+            if(!AuthService.isAuthorized('show-user')) return;
+
             $mdDialog.show({
                 controller: 'userFormCtrl',
                 parent: angular.element(document.body),
@@ -33,7 +35,6 @@ angular.module('orpha.components')
                     readonly:true
                 }
             });
-
         };
 
         $scope.createUser = function (user) {
@@ -75,6 +76,9 @@ angular.module('orpha.components')
             };
 
             $mdDialog.show(options).then(function (updatedUser) {
+                if(updatedUser.id === AuthService.getCurrentUser().id){
+                    AuthService.setCurrentUser(updatedUser);
+                }
                 angular.forEach(updatedUser, function (value, key) {
                     $timeout(function () {
                         $scope.$apply(function () {

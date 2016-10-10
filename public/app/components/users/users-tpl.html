@@ -57,13 +57,13 @@
                 </div>
 
                 <div class="md-secondary">
-                    <md-button ng-click="editUser(user)" class="md-icon-button  md-secondary md-raised md-primary">
+                    <md-button ng-click="editUser(user)"  ng-auth="'edit-user'" class="md-icon-button  md-secondary md-raised md-primary">
                         <md-icon class="material-icons">create</md-icon>
                         <md-tooltip md-direction="left">
                             Alterar usuário
                         </md-tooltip>
                     </md-button>
-                    <md-button ng-click="deleteUser(user)" class="md-icon-button  md-secondary md-raised md-warn md-hue-2">
+                    <md-button ng-click="deleteUser(user)"  ng-auth="'delete-user'" class="md-icon-button  md-secondary md-raised md-warn md-hue-2">
                         <md-icon class="material-icons">delete</md-icon>
                         <md-tooltip md-direction="left">
                             Inativar usuário
@@ -104,13 +104,13 @@
                 </div>
 
                 <div class="md-secondary">
-                    <md-button ng-click="editUser(user)" class="md-icon-button  md-secondary md-raised md-primary">
+                    <md-button ng-click="editUser(user)" ng-auth="'edit-user'" class="md-icon-button  md-secondary md-raised md-primary">
                         <md-icon class="material-icons">create</md-icon>
                         <md-tooltip md-direction="left">
                             Alterar usuário
                         </md-tooltip>
                     </md-button>
-                    <md-button ng-click="restoreUser(user)" class="md-icon-button  md-secondary md-raised md-accent md-hue-2">
+                    <md-button ng-click="restoreUser(user)" ng-auth="'active-user'" class="md-icon-button  md-secondary md-raised md-accent md-hue-2">
                         <md-icon class="material-icons">check</md-icon>
                         <md-tooltip md-direction="left">
                             Ativar usuário
@@ -128,7 +128,7 @@
 </md-card>
 
 <div layout="column" class="fab-panel" >
-    <md-button class="md-fab" aria-label="Action" ng-click="createUser()">
+    <md-button class="md-fab" aria-label="Action" ng-click="createUser()" ng-auth="'create-user'">
         <md-icon class="material-icons">add</md-icon>
         <md-tooltip md-direction="left">
             Novo usuário

@@ -99,4 +99,14 @@ class UserController extends Controller
     {
         return $this->userService->checkEmail($request->all());
     }
+
+
+    /**
+     * Return current logged user with permissions
+     * @param Request $request
+     * @return mixed
+     */
+    public function current(Request $request) {
+        return $request->user()->load('permissions');
+    }
 }

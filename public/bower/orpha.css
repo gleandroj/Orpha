@@ -34,6 +34,8 @@ a.md-button:not([disabled]).md-focused, .md-button:not([disabled]).md-focused {
 }
 */
 
+.nra-hide { display: none !important; }
+
 input[type=file].input-file {
     display: none;
 }

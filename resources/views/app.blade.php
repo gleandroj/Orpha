@@ -6,11 +6,9 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,500,700" rel="stylesheet">
     <link rel="stylesheet" href="/bower/angular-material/angular-material.css">
-
-
     <link rel="stylesheet" href="/bower/orpha.css">
 </head>
-<body ng-app="orpha" >
+<body ng-app="orpha">
 
 <ui-view layout="row" layout-fill></ui-view>
 
@@ -29,9 +27,11 @@
 
 <script src="/app/services/messages-svc.js"></script>
 <script src="/app/services/users-svc.js"></script>
+<script src="/app/services/auth-svc.js"></script>
 
 <script src="/app/components/orpha/orpha-cmp.js"></script>
 <script src="/app/components/users/users-cmp.js"></script>
+<script src="/app/components/login/login-cmp.js"></script>
 
 </body>
 </html>

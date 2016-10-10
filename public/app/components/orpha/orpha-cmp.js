@@ -4,8 +4,8 @@
 
 angular.module('orpha.components')
 
-.controller('orphaCtrl', ['$scope', '$state', '$mdSidenav',
-    function ($scope, $state, $mdSidenav) {
+.controller('orphaCtrl', ['$scope', '$state', '$mdSidenav', 'AuthService',
+    function ($scope, $state, $mdSidenav, AuthService) {
 
         $scope.menus = [
             {
@@ -16,6 +16,7 @@ angular.module('orpha.components')
             {
                 nome: 'Usuários',
                 state: 'orpha.users',
+                permission:"list-user",
                 icon: 'person_identify'
             },
         ];
@@ -23,10 +24,14 @@ angular.module('orpha.components')
         $scope.toggle = function () {
             $mdSidenav('left').toggle();
         };
-        
+
+        $scope.logout = function () {
+            AuthService.logout();
+            $state.go("login");
+        };
     }
 ])
-.directive('orphaUserCard', function () {
+.directive('orphaUserCard', function (AuthService) {
     return {
         restrict: 'E',
         templateUrl: '../app/components/orpha/orpha-user-card-tpl.html',
@@ -40,7 +45,12 @@ angular.module('orpha.components')
             profileClick: '&'
         },
         controller: function ($scope) {
-            $scope.avatar = $scope.avatar || '../assets/profile/ic_account_circle_white_48dp_2x.png';
+            $scope.user = AuthService.getCurrentUser();
+            $scope.$watch(function () {
+                return AuthService.getCurrentUser();
+            }, function (newUser) {
+                $scope.user = newUser;
+            });
         }
     }
 })

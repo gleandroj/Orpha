@@ -1,13 +1,14 @@
 <md-card >
-    <md-card-header md-colors="{backgroundColor: 'default-primary-600'}" >
-        <md-card-avatar >
-               <img class="md-user-avatar" ng-src="{{avatar}}">
+    <md-card-header layout="row" md-colors="{backgroundColor: 'default-primary-100'}" >
+        <md-card-avatar>
+               <img class="md-user-avatar" ng-src="{{user.avatar}}">
         </md-card-avatar>
-        <md-card-header-text>
-            <span class="md-title">{{name}}</span>
-            <span class="md-subhead">{{description}}</span>
+        <md-card-header-text flex>
+            <span class="md-title truncate" style="min-width: 120px;">{{user.name}}</span>
+            <span class="md-subhead truncate" style="min-width: 120px;">{{user.email}}</span>
         </md-card-header-text>
-        <md-menu ng-show="showActions"  >
+        <span flex></span>
+        <md-menu ng-show="showActions">
             <md-button ng-show="showActions" class="md-icon-button launch md-accent" aria-label="icon" ng-click="$mdOpenMenu($event)">
                 <md-icon class="material-icons">keyboard_arrow_down</md-icon>
             </md-button>

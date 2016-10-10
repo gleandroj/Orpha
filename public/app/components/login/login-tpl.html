@@ -1,34 +1,35 @@
-<form layout-gt-sm="row" layout-align="center center" flex>
-    <md-content class="md-padding" flex>
-        <md-card flex-gt-sm="50" >
-            <md-card-title>
-                <md-card-title-text>
+<form name="loginForm" flex layout="row" layout-align="center center" md-colors="{backgroundColor:'default-primary'}" novalidate ng-submit="login()" >
+    <md-card  class="md-padding" flex-xs="100" flex-sm="90" flex-md="60" flex-lg="50" flex="30" md-whiteframe="10">
+        <md-progress-linear ng-show="loading"></md-progress-linear>
+        <md-card-title>
+            <md-card-title-text>
                 <span class="md-headline">
                    <md-icon class="material-icons">lock</md-icon> Acessar
                 </span>
-                </md-card-title-text>
-            </md-card-title>
-            <md-card-content>
-                <md-input-container class="md-icon-float md-block">
-                    <!-- Use floating label instead of placeholder -->
-                    <label>Usuário</label>
-                    <md-icon class="material-icons">person</md-icon>
-                    <input ng-model="username" type="text" required>
-                </md-input-container>
-
-                <md-input-container class="md-icon-float md-block">
-                    <label>Senha</label>
-                    <md-icon class="material-icons">lock</md-icon>
-                    <input ng-model="password" type="password"  required>
-                </md-input-container>
-                <md-checkbox class="md-primary" ng-model="remember" aria-label="Lembrar-me">
-                    Lembrar-me
-                </md-checkbox>
-            </md-card-content>
-            <md-divider></md-divider>
-            <md-card-actions layout="row" layout-align="start center">
-                <md-button type="submit" class="md-raised md-primary" >Acessar</md-button>
-            </md-card-actions>
-        </md-card>
-    </md-content>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+            <md-input-container class="md-icon-float md-block">
+                <label>E-mail</label>
+                <md-icon class="material-icons">person</md-icon>
+                <input name="email" ng-model="email" type="email" ng-required="true" ng-disabled="loading">
+                <div ng-messages="loginForm.email.$error">
+                    <div ng-messages-include="app/components/messages/messages-tpl.html"></div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-icon-float md-block">
+                <label>Senha</label>
+                <md-icon class="material-icons">lock</md-icon>
+                <input name="password" ng-model="password" type="password"  ng-required="true" ng-disabled="loading">
+                <div ng-messages="loginForm.password.$error">
+                    <div ng-messages-include="app/components/messages/messages-tpl.html"></div>
+                </div>
+            </md-input-container>
+            <md-button class="md-primary">Esqueci minha senha</md-button>
+        </md-card-content>
+        <md-divider></md-divider>
+        <md-card-actions layout="row" layout-align="start center">
+            <md-button type="submit" class="md-raised md-primary" ng-disabled="loginForm.$invalid || loading">Entrar</md-button>
+        </md-card-actions>
+    </md-card>
 </form>
