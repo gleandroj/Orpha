@@ -14,7 +14,6 @@ angular.module('orpha.components')
                 $scope.users = data;
                 $scope.loading = false;
             }, function (data) {
-                console.log(data);
                 $scope.loading = false;
                 if(data && data['data']['error']) MessagesService.showErrorMessage(data['data']['error']);
             });

@@ -27,7 +27,6 @@ angular.module('orpha.components')
 
         $scope.logout = function () {
             AuthService.logout();
-            $state.go("login");
         };
     }
 ])

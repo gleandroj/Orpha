@@ -9,6 +9,7 @@ angular.module('orpha.services')
         userLogout:"auth.user_logout",
         sessionTimedOut:"auth.session_timed_out"
     })
+
     .factory('PromiseFactory', function($q) {
         return {
             decorate: function(promise) {
@@ -30,22 +31,18 @@ angular.module('orpha.services')
             }
         };
     })
-    .service('AuthService', function($http, $q, AuthEvents, PromiseFactory, $rootScope){
+
+    .service('AuthService', function($http, $q, AuthEvents, PromiseFactory, $rootScope, $interval, SESSION_TTL, OAUTH, ALLOW_STORE_DATE){
         var self = this;
-        var storeDate = true;
-        var oauth = {
-            "client_id": "1",
-            "client_secret": "QEF2iLTFsN7qLzi51aYh7AA0j4Jl8Rw67GlAVN5U",
+        var storeDate = ALLOW_STORE_DATE || true;
+        var oauth = OAUTH || {
+            "client_id": "",
+            "client_secret": "",
             "grant_type":"password"
         };
         var currentUser = localStorage.currentUser ? angular.fromJson(localStorage.currentUser) : null;
-        localStorage.token = localStorage.token || angular.toJson({
-            token_type:"",
-            expires_in:"",
-            access_token:"",
-            refresh_token:""
-        });
-        localStorage.sessionStart = localStorage.sessionStart || angular.toJson(null);
+        var checkSession;
+        var sessionTime = SESSION_TTL || 1000 * 60 * 10;
 
         var getCurrentUser = function () {
             var deferred = PromiseFactory.defer();
@@ -61,7 +58,7 @@ angular.module('orpha.services')
 
             var roles = [];
 
-            if(self.isAuthenticated()){
+            if(self.isAuthenticated() && currentUser){
                 roles = currentUser.permissions;
             }
             else{
@@ -92,11 +89,16 @@ angular.module('orpha.services')
         };
 
         this.getToken = function () {
-            return angular.fromJson(localStorage.token);
+            return angular.fromJson(localStorage.token) || {
+                    token_type:"",
+                    expires_in:"",
+                    access_token:"",
+                    refresh_token:""
+                };
         };
 
-        this.getSessionStart = function () {
-            return angular.fromJson(localStorage.sessionStart);
+        this.setToken = function (token) {
+            localStorage.token = angular.toJson(token);
         };
 
         this.getCurrentUser = function () {
@@ -104,70 +106,111 @@ angular.module('orpha.services')
         };
 
         this.isAuthenticated = function () {
-            return this.getCurrentUser() != {} && this.getSessionStart() != null && this.getToken().access_token != "";
-        };
-
-        this.login = function (username, password) {
-            var deferred = PromiseFactory.defer();
-            $http.post('oauth/token', angular.extend(oauth, {username:username, password:password}))
-                .success(function (data) {
-                    localStorage.token = angular.toJson(angular.copy(data));
-                    localStorage.sessionStart = angular.toJson(new Date());
-                    getCurrentUser().success(function (user) {
-                        self.setCurrentUser(user);
-                        $rootScope.$broadcast(AuthEvents.userLogged);
-                        deferred.resolve(user);
-                    }).error(function (error) {
-                        localStorage.clear();
-                        $rootScope.$broadcast(AuthEvents.userLogout);
-                        deferred.reject(error);
-                    });
-                })
-                .error(function (data) {
-                    localStorage.clear();
-                    $rootScope.$broadcast(AuthEvents.userLogout);
-                    deferred.reject(data);
-                });
-
-            return deferred.promise;
+            try{
+                return this.getCurrentUser() != {} && this.getToken() && this.getToken().access_token != "";
+            }catch (err){
+                self.logout();
+                return false;
+            }
         };
 
         this.logout = function () {
             currentUser = null;
+            self.stopCheckSession();
             localStorage.clear();
             $rootScope.$broadcast(AuthEvents.userLogout);
         };
 
-        this.reconnect = function () {
+        this.login = function (username, password) {
             var deferred = PromiseFactory.defer();
-            $http.post('oauth/token', angular.extend(oauth, {}))
+            $http.post('oauth/token', angular.extend({username:username, password:password}, oauth))
                 .success(function (data) {
-                    localStorage.token = angular.toJson(angular.copy(data));
-                    localStorage.sessionStart = angular.toJson(new Date());
+                    self.startCheckSession();
+                    self.setToken(data);
+                    self.checkSession();
                     getCurrentUser().success(function (user) {
                         self.setCurrentUser(user);
                         $rootScope.$broadcast(AuthEvents.userLogged);
                         deferred.resolve(user);
                     }).error(function (error) {
-                        localStorage.clear();
-                        $rootScope.$broadcast(AuthEvents.userLogout);
+                        self.logout();
                         deferred.reject(error);
                     });
                 })
                 .error(function (data) {
-                    localStorage.clear();
-                    $rootScope.$broadcast(AuthEvents.userLogout);
                     deferred.reject(data);
                 });
+            return deferred.promise;
+        };
+
+        this.reconnect = function () {
+            var deferred = PromiseFactory.defer();
+            var config = angular.extend({refresh_token:this.getToken().refresh_token}, oauth);
+            config.grant_type = "refresh_token";
+            $http.post('oauth/token', config)
+                .success(function (data) {
+                    self.startCheckSession();
+                    self.setToken(data);
+                    getCurrentUser().success(function (user) {
+                        self.setCurrentUser(user);
+                        deferred.resolve(user);
+                    }).error(function (error) {
+                        self.logout();
+                        deferred.reject(error);
+                    });
+                })
+                .error(function (data) {
+                    deferred.reject(data);
+                });
+            return deferred.promise;
+        };
+
+        this.setLastActivity = function (lastActivity) {
+            localStorage.lastAcitivity = angular.toJson(lastActivity);
+        };
+
+        this.getLastActivity = function () {
+            return new Date(angular.fromJson(localStorage.lastAcitivity));
         };
 
         this.setCurrentUser = function (user){
             localStorage.currentUser = angular.toJson(currentUser = user);
         };
 
-        if(!storeDate)
+        this.checkSession = function () {
+            //var r = Math.round((sessionTime - ((new Date()).getTime() - self.getLastActivity().getTime())) / 1000);
+             //console.log("Session remaining: " + r + "s");
+
+            if(self.isAuthenticated() && self.getLastActivity() != null){
+                if(((new Date()).getTime() - self.getLastActivity().getTime()) >= sessionTime){
+                    $rootScope.$broadcast(AuthEvents.sessionTimedOut);
+                }
+            }
+        };
+
+        this.startCheckSession = function () {
+            if(!self.getLastActivity()){
+                self.setLastActivity(new Date());
+            }
+            if(!checkSession){
+                checkSession = $interval(self.checkSession, 1000 * 60);
+            }
+        };
+
+        this.stopCheckSession = function () {
+            $interval.cancel(checkSession);
+        };
+
+        if(!storeDate){
             localStorage.clear();
+        }
+
+        if(self.isAuthenticated()){
+            self.startCheckSession();
+        }
+
     })
+
     .factory('OAuthInterceptor', ['$q', '$injector', '$log', function($q, $injector, $log){
 
         var recoveryRequest = function (config, deferred) {
@@ -189,6 +232,7 @@ angular.module('orpha.services')
             if(Auth.isAuthenticated()){
                 var token = Auth.getToken();
                 if(token){
+                    Auth.setLastActivity(new Date());
                     config.headers.Authorization = token.token_type + " " + token.access_token;
                 }
             }
@@ -200,9 +244,7 @@ angular.module('orpha.services')
             var deferred = $q.defer();
             var Auth = $injector.get('AuthService');
 
-            if((response.config.url.indexOf('oauth/token') === -1) &&
-                ((response.status == 400 || response.status  == 401) &&
-                response.data.error == 'Unauthenticated.')){
+            if((response.config.url.indexOf('oauth/token') === -1) && response.status  == 401){
                 Auth.reconnect()
                     .success(function ()
                     {
@@ -210,15 +252,12 @@ angular.module('orpha.services')
                         recoveryRequest(response.config, deferred);
                     })
                     .error(function () {
-                        deferred.reject(response);
                         Auth.logout();
+                        deferred.reject(response);
                     });
-            }
-            else {
+            }else {
                 deferred.reject(response);
             }
-
-
             return deferred.promise;
         };
 
@@ -227,6 +266,7 @@ angular.module('orpha.services')
             responseError:_responseErrorFn
         }
     }])
+
     .service("AuthStateService", ["$rootScope", "$location", "$window", "AuthEvents", "$state", "AuthService", "$log", function ($rootScope, $location, $window, AuthEvents, $state, AuthService, $log){
         var self = this;
         var back = {};
@@ -235,7 +275,6 @@ angular.module('orpha.services')
         this.onChange = function(event, next, prev){
             var auth = next['authorized'] ? next['authorized'] : [];
             var allowAnonymous = next['allowAnonymous'] ? next['allowAnonymous'] : false;
-
             if(allowAnonymous){
                 return true;
             }
@@ -253,6 +292,7 @@ angular.module('orpha.services')
                 self.deny(back, next);
             }
             else{
+                if(Auth.isAuthenticated()) Auth.setLastActivity(new Date());
                 return true;
             }
         };
@@ -270,6 +310,7 @@ angular.module('orpha.services')
         };
 
     }])
+
     .directive("ngAuth", ["$interval", "AuthService", function ($interval, AuthService){
         return {
             restrict: "A",
@@ -297,9 +338,11 @@ angular.module('orpha.services')
             }
         };
     }])
+
     .config(['$httpProvider', function ($httpProvider) {
         $httpProvider.interceptors.push('OAuthInterceptor');
     }])
+
     .run(['$rootScope', 'AuthStateService', 'AuthEvents',function ($rootScope, AuthStateService, AuthEvents) {
         $rootScope.$on("$stateChangeStart", AuthStateService.onChange);
     }]);

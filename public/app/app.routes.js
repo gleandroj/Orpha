@@ -2,7 +2,7 @@
  * Created by marcosnqs on 27/09/2016.
  */
 
-angular.module('orpha.routes', [])
+angular.module('orpha.routes')
     .config(function ($stateProvider, $urlRouterProvider) {
 
         $urlRouterProvider.otherwise('/login');
@@ -30,4 +30,13 @@ angular.module('orpha.routes', [])
                 controller:'userCtrl',
                 templateUrl: '../app/components/users/users-tpl.html'
             });
+    })
+    .run(function ($rootScope, AuthEvents, $state, AuthService, MessagesService, LOGIN_STATE) {
+        $rootScope.$on(AuthEvents.userLogout, function () {
+            $state.go('login');
+        });
+        $rootScope.$on(AuthEvents.sessionTimedOut, function ()   {
+            AuthService.logout();
+            MessagesService.showErrorMessage("MSG15");
+        });
     });

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Contracts\UserService;
 use App\Http\Requests;
+use App\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -41,6 +42,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorizeForUser($request->user(), 'create', User::class);
         return $this->userService->create($request->all());
     }
 
@@ -64,6 +66,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->authorizeForUser($request->user(), 'update', User::class);
         return $this->userService->update($id, $request->all());
     }
 

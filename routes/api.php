@@ -13,9 +13,14 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/user', 'UserController@current')->middleware('auth:api');
-Route::resource('/users', 'UserController', ['except' => ['create', 'edit']]);
+
 Route::get('/users/restore/{user}', 'UserController@restore');
+
 Route::post('/users/checkEmail', 'UserController@checkEmail');
+
 Route::resource('/permissions', 'PermissionController', ['only' => ['index']]);
 
+Route::group(['middleware' => 'auth:api'], function () {
+    Route::get('/user', 'UserController@current');
+    Route::resource('/users', 'UserController', ['except' => ['create', 'edit']]);
+});

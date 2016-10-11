@@ -11,8 +11,8 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\User::class, 5)->create();
-        $adm = App\User::create(['name' => 'Admin', 'email' => 'admin@orpha.com.br', 'password' => Hash::make('123321'), 'phone' => '+5562994372288']);
+        //factory(App\User::class, 5)->create();
+        $adm = App\User::create(['name' => 'Admin', 'email' => 'admin@orpha.com.br', 'password' => Hash::make('123321'), 'phone' => '62994372288']);
         $adm->permissions()->create(['name' => 'Listar Usuários', 'slug' => 'list-user', 'description' =>  'Permissão de listar usuários no sistema']);
         $adm->permissions()->create(['name' => 'Visualizar Usuário', 'slug' => 'show-user', 'description' =>  'Permissão de visualizar usuários no sistema']);
         $adm->permissions()->create(['name' => 'Cadastrar Usuário', 'slug' => 'create-user', 'description' =>  'Permissão de cadastrar usuários no sistema']);
