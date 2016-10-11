@@ -8,6 +8,7 @@ angular.module('orpha.config')
         "client_secret": "FkHPWSOOI0OJqgCqTXbEHu9tOeifY0azVKatN8B0",
         "grant_type":"password"
     })
+    .value('ALLOW_STORE_DATE', true)
     .config(function ($mdThemingProvider) {
         $mdThemingProvider.theme('default')
             .primaryPalette('blue-grey', {
