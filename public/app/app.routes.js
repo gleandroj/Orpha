@@ -31,7 +31,7 @@ angular.module('orpha.routes')
                 templateUrl: '../app/components/users/users-tpl.html'
             });
     })
-    .run(function ($rootScope, AuthEvents, $state, AuthService, MessagesService, LOGIN_STATE) {
+    .run(function ($rootScope, AuthEvents, $state, AuthService, MessagesService) {
         $rootScope.$on(AuthEvents.userLogout, function () {
             $state.go('login');
         });
