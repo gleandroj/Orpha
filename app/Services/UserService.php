@@ -10,6 +10,7 @@ namespace App\Services;
 
 use App\Mail\PasswordResetMail;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Validation\Rule;
 use Intervention\Image\Facades\Image;
 
 class UserService implements \App\Contracts\UserService
@@ -203,7 +204,14 @@ class UserService implements \App\Contracts\UserService
     public function sendRestEmail(array  $data)
     {
         $validator = validator($data, [
-            'email' => 'required|email|max:50|exists:users,email'
+            'email' => [
+                'required',
+                'email',
+                'max:50',
+                Rule::exists('users')->where(function ($query) use ($data) {
+                    $query->where('email', $data)->where('deleted_at', null);
+                })
+            ]
         ]);
 
         if($validator->fails()){
