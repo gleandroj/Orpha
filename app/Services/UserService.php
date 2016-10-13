@@ -8,6 +8,7 @@
 
 namespace App\Services;
 
+use App\Contracts\UserRepository;
 use App\Mail\PasswordResetMail;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Mail;
@@ -16,15 +17,15 @@ use Intervention\Image\Facades\Image;
 class UserService implements \App\Contracts\UserService
 {
     /**
-     * @var \App\Contracts\UserRepository
+     * @var UserRepository
      */
     private $userRepository;
 
     /**
      * UserService constructor.
-     * @param \App\Contracts\UserRepository $userRepository
+     * @param UserRepository $userRepository
      */
-    public function __construct(\App\Contracts\UserRepository $userRepository)
+    public function __construct(UserRepository $userRepository)
     {
         $this->userRepository = $userRepository;
     }
