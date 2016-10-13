@@ -45,4 +45,13 @@ class UserRepository extends AbstractRepository implements \App\Contracts\UserRe
             throw new ApiException(trans('messages.MSG4'));
         }
     }
+
+    /**
+     * @param $email
+     * @return User
+     */
+    public function findByEmail($email)
+    {
+        return $this->model->where('email', $email)->first();
+    }
 }

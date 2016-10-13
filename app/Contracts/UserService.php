@@ -56,4 +56,11 @@ interface UserService
      * @return mixed
      */
     public function checkEmail(array $data);
+
+
+    /**
+     * @param array $data
+     * @return mixed
+     */
+    public function sendRestEmail(array  $data);
 }

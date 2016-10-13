@@ -53,7 +53,7 @@
                 <div class="md-list-item-text " layout="column" layout-align="start start" >
                     <h3 class="truncate truncate-max-width">{{user.name}}</h3>
                     <p class="truncate truncate-max-width">{{user.email}}</p>
-                    <p >{{user.phone}}</p>
+                    <p ng-model="user.phone" mask="(99) 9?9999-9999" >{{user.phone}}</p>
                 </div>
 
                 <div class="md-secondary">
@@ -100,7 +100,7 @@
                 <div class="md-list-item-text" layout="column" layout-align="start start">
                     <h3 class="truncate  truncate-max-width" >{{user.name}}</h3>
                     <p class="truncate truncate-max-width">{{user.email}}</p>
-                    <p >{{user.phone}}</p>
+                    <p ng-model="user.phone" mask="(99) 9?9999-9999" >{{user.phone}}</p>
                 </div>
 
                 <div class="md-secondary">

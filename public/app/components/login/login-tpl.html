@@ -1,6 +1,5 @@
 <form name="loginForm" flex layout="row" layout-align="center center" md-colors="{backgroundColor:'default-primary'}" novalidate ng-submit="login()" >
     <md-card  class="md-padding" flex-xs="100" flex-sm="90" flex-md="60" flex-lg="50" flex="30" md-whiteframe="10">
-        <md-progress-linear ng-show="loading"></md-progress-linear>
         <md-card-title>
             <md-card-title-text>
                 <span class="md-headline">
@@ -25,8 +24,9 @@
                     <div ng-messages-include="app/components/messages/messages-tpl.html"></div>
                 </div>
             </md-input-container>
-            <md-button class="md-primary">Esqueci minha senha</md-button>
+            <md-button class="md-primary" ui-sref="forgetPassword">Esqueci minha senha</md-button>
         </md-card-content>
+        <md-progress-linear ng-show="loading"></md-progress-linear>
         <md-divider></md-divider>
         <md-card-actions layout="row" layout-align="start center">
             <md-button type="submit" class="md-raised md-primary" ng-disabled="loginForm.$invalid || loading">Entrar</md-button>

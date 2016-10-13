@@ -8,8 +8,9 @@
 
 namespace App\Services;
 
-use Image;
-use Validator;
+use App\Mail\PasswordResetMail;
+use Illuminate\Support\Facades\Mail;
+use Intervention\Image\Facades\Image;
 
 class UserService implements \App\Contracts\UserService
 {
@@ -55,7 +56,7 @@ class UserService implements \App\Contracts\UserService
     {
         $data = collect($data);
 
-        Validator($data->all(), [
+        validator($data->all(), [
             'name' => 'required|max:50',
             'email' => 'required|email|max:40|unique:users,email',
             'phone' => ['required','max:20', 'regex:/^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/'],
@@ -88,7 +89,6 @@ class UserService implements \App\Contracts\UserService
 
     }
 
-
     /**
      * @param $id
      * @param array $data
@@ -99,7 +99,7 @@ class UserService implements \App\Contracts\UserService
         $data = collect($data);
         $data->put('id', $id);
 
-        Validator($data->all(), [
+        validator($data->all(), [
             'id' => 'required|exists:users,id',
             'name' => 'required|max:50',
             'email' => 'required|email|max:40|unique:users,email,'.$id,
@@ -191,8 +191,31 @@ class UserService implements \App\Contracts\UserService
      */
     public function checkEmail(array $data)
     {
-        \Validator::make($data, [
+        \validator::make($data, [
             'email' => 'required|email|unique:users,email'
         ])->validate();
+    }
+
+    /**
+     * @param array $data
+     * @return mixed
+     */
+    public function sendRestEmail(array  $data)
+    {
+        $validator = validator($data, [
+            'email' => 'required|email|max:50|exists:users,email'
+        ]);
+
+        if($validator->fails()){
+            return response()->json(['error' => trans('messages.MSG14')], 422);
+        }
+
+        $user = $this->userRepository->findByEmail($data['email']);
+        $password = str_random(16);
+        $user->password =  bcrypt($password);
+        $user->save();
+        Mail::to($user)->queue(new PasswordResetMail($password));
+
+        return response()->json(['status' => trans('messages.MSG15', ['email' => $user->email])]);
     }
 }

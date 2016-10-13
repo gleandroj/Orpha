@@ -14,5 +14,8 @@ return [
     "MSG10" => ":attribute inválido.",
     "MSG11" => "Limite de caracteres excedido.",
     "MSG12" => "Quantidade de caracteres insuficiente.",
-    "MSG13" => "O campo deve ter no mínimo 8 e no máximo 14 caracteres."
+    "MSG13" => "O campo deve ter no mínimo 8 e no máximo 14 caracteres.",
+
+    "MSG14" => "Não foi possível enviar e-mail, tente novamente!",
+    "MSG15" => "Uma nova senha foi enviada para o e-mail: :email."
 ];

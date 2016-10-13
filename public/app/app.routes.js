@@ -14,6 +14,18 @@ angular.module('orpha.routes')
                 controller:'loginCtrl',
                 templateUrl: '../app/components/login/login-tpl.html'
             })
+            .state('forgetPassword',{
+                url: '/recovery',
+                allowAnonymous:true,
+                controller:'forgetCtrl',
+                templateUrl: '../app/components/login/forget-password-tpl.html'
+            })
+            .state('loginRecovery',{
+                url: '/loginRecovery',
+                allowAnonymous:true,
+                controller:'loginRecoveryCtrl',
+                templateUrl: '../app/components/login/login-tpl.html'
+            })
             .state('orpha',{
                 abstract:true,
                 url: '/orpha',

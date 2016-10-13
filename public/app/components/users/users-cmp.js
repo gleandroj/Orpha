@@ -47,7 +47,7 @@ angular.module('orpha.components')
                 controller: 'userFormCtrl',
                 parent: angular.element(document.body),
                 templateUrl: '../app/components/users/user-form-tpl.html',
-                clickOutsideToClose:true,
+                clickOutsideToClose:false,
                 fullscreen:true,
                 locals:{
                     title:'Inserir Usuário'
@@ -63,7 +63,7 @@ angular.module('orpha.components')
                 controller: 'userFormCtrl',
                 parent: angular.element(document.body),
                 templateUrl: '../app/components/users/user-form-tpl.html',
-                clickOutsideToClose:true,
+                clickOutsideToClose:false,
                 fullscreen:true,
                 locals: {
                     title:'Editar Usuário',
@@ -100,6 +100,11 @@ angular.module('orpha.components')
                         });
                     }, 0);
                 });
+                //Fix bug request loop.
+                if(deletedUser.id == AuthService.getCurrentUser().id){
+                    AuthService.logout();
+                }
+
             }, function (data) {
                 if(data && data['data']['error']) MessagesService.showErrorMessage(data['data']['error']);
             });

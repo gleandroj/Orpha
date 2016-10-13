@@ -14,13 +14,13 @@ use Illuminate\Http\Request;
 */
 
 
-Route::get('/users/restore/{user}', 'UserController@restore');
-
-Route::post('/users/checkEmail', 'UserController@checkEmail');
-
-Route::resource('/permissions', 'PermissionController', ['only' => ['index']]);
 
 Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/user', 'UserController@current');
+    Route::get('/users/restore/{user}', 'UserController@restore');
+    Route::post('/users/checkEmail', 'UserController@checkEmail');
     Route::resource('/users', 'UserController', ['except' => ['create', 'edit']]);
+    Route::resource('/permissions', 'PermissionController', ['only' => ['index']]);
 });
+
+Route::post('/password/email', 'Auth\ResetPasswordController@sendResetEmail');

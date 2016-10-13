@@ -32,7 +32,7 @@ angular.module('orpha.services')
         };
     })
 
-    .service('AuthService', function($http, $q, AuthEvents, PromiseFactory, $rootScope, $interval, SESSION_TTL, OAUTH, ALLOW_STORE_DATE){
+    .service('AuthService', function($http, $q, AuthEvents, PromiseFactory, $rootScope, $interval, UserService, SESSION_TTL, OAUTH, ALLOW_STORE_DATE){
         var self = this;
         var storeDate = ALLOW_STORE_DATE || true;
         var oauth = OAUTH || {
@@ -40,14 +40,14 @@ angular.module('orpha.services')
             "client_secret": "",
             "grant_type":"password"
         };
-        var currentUser = localStorage.currentUser ? angular.fromJson(localStorage.currentUser) : null;
+        var currentUser = localStorage.currentUser ? new UserService(angular.fromJson(localStorage.currentUser)) : null;
         var checkSession;
         var sessionTime = SESSION_TTL || 1000 * 60 * 10;
 
         var getCurrentUser = function () {
             var deferred = PromiseFactory.defer();
             $http.get('api/user')
-                .success(function (data) {deferred.resolve(data);})
+                .success(function (data) {deferred.resolve(new UserService(data));})
                 .error(function (data) {deferred.reject(data);});
             return deferred.promise;
         };
@@ -201,6 +201,18 @@ angular.module('orpha.services')
             $interval.cancel(checkSession);
         };
 
+        this.recoveryPassword = function (email) {
+            var deferred = PromiseFactory.defer();
+            $http.post('api/password/email', {email:email})
+                .success(function (data) {
+                    deferred.resolve(data);
+                })
+                .error(function (data) {
+                    deferred.reject(data);
+                });
+            return deferred.promise;
+        };
+
         if(!storeDate){
             localStorage.clear();
         }
@@ -212,7 +224,6 @@ angular.module('orpha.services')
     })
 
     .factory('OAuthInterceptor', ['$q', '$injector', '$log', function($q, $injector, $log){
-
         var recoveryRequest = function (config, deferred) {
             var $http = $injector.get('$http');
             function successCallback(response){
@@ -220,7 +231,7 @@ angular.module('orpha.services')
                 deferred.resolve(response);
             }
             function errorCallback(response){
-                $log.error('Request Recovered with error.')
+                $log.error('Request Recovered with error.');
                 deferred.reject(response);
             }
             $http(config).then(successCallback, errorCallback);

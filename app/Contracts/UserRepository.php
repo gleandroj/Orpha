@@ -9,7 +9,13 @@
 namespace App\Contracts;
 
 
+use App\User;
+
 interface UserRepository extends Repository
 {
-    
+    /**
+     * @param $email
+     * @return User
+     */
+    public function findByEmail($email);
 }
