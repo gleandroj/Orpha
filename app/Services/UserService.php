@@ -10,7 +10,6 @@ namespace App\Services;
 
 use App\Mail\PasswordResetMail;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Validation\Rule;
 use Intervention\Image\Facades\Image;
 
 class UserService implements \App\Contracts\UserService
@@ -208,7 +207,7 @@ class UserService implements \App\Contracts\UserService
                 'required',
                 'email',
                 'max:50',
-                Rule::exists('users')->where(function ($query) use ($data) {
+                \Rule::exists('users')->where(function ($query) use ($data) {
                     $query->where('email', $data)->where('deleted_at', null);
                 })
             ]
@@ -221,7 +220,7 @@ class UserService implements \App\Contracts\UserService
         if(!$user = $this->userRepository->findByEmail($data['email'])){
             return response()->json(['error' => trans('messages.MSG14')], 422);
         }
-        
+
         $password = str_random(16);
         $user->password =  bcrypt($password);
         $user->save();
