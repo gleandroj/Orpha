@@ -218,7 +218,10 @@ class UserService implements \App\Contracts\UserService
             return response()->json(['error' => trans('messages.MSG14')], 422);
         }
 
-        $user = $this->userRepository->findByEmail($data['email']);
+        if(!$user = $this->userRepository->findByEmail($data['email'])){
+            return response()->json(['error' => trans('messages.MSG14')], 422);
+        }
+        
         $password = str_random(16);
         $user->password =  bcrypt($password);
         $user->save();
