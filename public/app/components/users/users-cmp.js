@@ -4,10 +4,9 @@
 angular.module('orpha.components')
     .controller('userCtrl', ['$scope', '$timeout', 'UserService', '$filter', '$mdDialog', 'MessagesService', 'AuthService', 'AuthStateService', function ($scope, $timeout, UserService, $filter, $mdDialog, MessagesService, AuthService) {
         $scope.users = [];
-
         $scope.search = '';
 
-        $scope.getAllUsers = function () {
+        $scope.refresh = function () {
             $scope.users = [];
             $scope.loading = true;
             UserService.query(function (data) {
@@ -124,7 +123,7 @@ angular.module('orpha.components')
             });
         };
 
-        $scope.getAllUsers();
+        $scope.refresh();
     }])
     .controller('userFormCtrl', ['$scope', '$timeout', '$http', '$filter', 'UserService', '$mdDialog', 'MessagesService', 'locals', function ($scope, $timeout, $http, $filter, UserService, $mdDialog, MessagesService, locals) {
         if(locals.oldScope)
@@ -149,7 +148,7 @@ angular.module('orpha.components')
             $scope.user = {}; if(locals.user) angular.copy(locals.user, $scope.user);
             $scope.user.permissions = $scope.user.permissions || [];
             $scope.permissions = [];
-            $scope.searchText = null;
+            $scope.searchText = '';
             $scope.subimited = false;
             $scope.loading = false;
 
@@ -206,7 +205,12 @@ angular.module('orpha.components')
         };
 
         $scope.filterPermissions = function (text) {
-            return $filter('filter')($scope.permissions, text);
+            return $filter('filter')($scope.permissions, function (permission) {
+                    for(var i = 0 ; i < $scope.user.permissions.length ; i++)
+                        if($scope.user.permissions[i]['slug'] === permission['slug'])
+                            return false;
+                    return $filter('filter')([permission], text).length > 0;
+            });
         };
 
         $scope.submit = function () {

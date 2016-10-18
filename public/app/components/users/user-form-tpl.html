@@ -203,6 +203,7 @@
                                  ng-if="!loading && !readonly"
                                  ng-disabled="loading || readonly"
                                  md-search-text="searchText"
+                                 md-no-cache="true"
                                  md-items="item in filterPermissions(searchText)"
                                  placeholder="Pesquisar..."
                                  md-item-text="item.name">

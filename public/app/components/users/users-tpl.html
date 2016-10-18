@@ -7,7 +7,7 @@
                 <span>Usuários</span>
             </h2>
             <span flex></span>
-            <md-button class="md-icon-button md-raised md-accent" ng-disabled="loading" ng-click="getAllUsers()">
+            <md-button class="md-icon-button md-raised md-accent" ng-disabled="loading" ng-click="refresh()">
                 <md-icon class="material-icons">refresh</md-icon>
                 <md-tooltip md-direction="left">
                     Atualizar
@@ -134,26 +134,4 @@
             Novo usuário
         </md-tooltip>
     </md-button>
-    <!--
-    <md-button class="md-fab" aria-label="Action" >
-        <md-icon class="material-icons">add</md-icon>
-        <md-tooltip md-direction="left">
-            Novo usuário
-        </md-tooltip>
-    </md-button>
-    <md-button class="md-fab md-primary md-hue-2" aria-label="Action" ng-hide="!person.selected">
-        <md-icon class="material-icons">create</md-icon>
-        <md-tooltip md-direction="left">
-            Alterar usuário
-        </md-tooltip>
-    </md-button>
-
-
-    <md-button class="md-fab md-warn md-hue-2" aria-label="Action" ng-hide="!person.selected">
-        <md-icon class="material-icons">delete</md-icon>
-        <md-tooltip md-direction="left">
-            Inativar usuário
-        </md-tooltip>
-    </md-button>
--->
 </div>
