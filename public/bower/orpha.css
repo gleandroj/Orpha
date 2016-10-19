@@ -1,38 +1,22 @@
-.side-menu .md-button {
-    border-radius: 0;
-    color: inherit;
-    cursor: pointer;
-    font-weight: 400;
-    line-height: 40px;
-    margin: 0;
-    max-height: 40px;
-    overflow: hidden;
-    padding: 0px 16px;
-    text-align: left;
-    text-decoration: none;
-    white-space: normal;
-    width: 100%;
-}
-
 a.md-button:not([disabled]).md-focused, .md-button:not([disabled]).md-focused {
     background-color: rgba(158,158,158,0.0);
 }
 
-.side-menu li.active .md-button{
+.menu-button{
+    display: block;
+    width: 100%;
+    padding: 6px;
+    margin: 0;
+    text-align: left;
+}
+
+li.active .menu-button.md-button{
     background-color: rgba(158,158,158,0.4);
 }
 
 .md-sidenav-left{
     max-width: 260px;
 }
-
-/*
-.site-content-toolbar {
-    background: #f6f6f6 !important;
-    color: #202020 !important;
-    z-index: 3;
-}
-*/
 
 .nra-hide { display: none !important; }
 

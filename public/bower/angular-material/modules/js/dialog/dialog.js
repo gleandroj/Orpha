@@ -2,7 +2,7 @@
  * Angular Material Design
  * https://github.com/angular/material
  * @license MIT
- * v1.1.1-master-bee04f3
+ * v1.1.1-master-93f7cb8
  */
 (function( window, angular, undefined ){
 "use strict";
@@ -699,17 +699,21 @@ function MdDialogProvider($$interimElementProvider) {
     function beforeShow(scope, element, options, controller) {
 
       if (controller) {
-        controller.mdHtmlContent = controller.htmlContent || options.htmlContent || '';
-        controller.mdTextContent = controller.textContent || options.textContent ||
+        var mdHtmlContent = controller.htmlContent || options.htmlContent || '';
+        var mdTextContent = controller.textContent || options.textContent ||
             controller.content || options.content || '';
 
-        if (controller.mdHtmlContent && !$injector.has('$sanitize')) {
+        if (mdHtmlContent && !$injector.has('$sanitize')) {
           throw Error('The ngSanitize module must be loaded in order to use htmlContent.');
         }
 
-        if (controller.mdHtmlContent && controller.mdTextContent) {
+        if (mdHtmlContent && mdTextContent) {
           throw Error('md-dialog cannot have both `htmlContent` and `textContent`');
         }
+
+        // Only assign the content if nothing throws, otherwise it'll still be compiled.
+        controller.mdHtmlContent = mdHtmlContent;
+        controller.mdTextContent = mdTextContent;
       }
     }
 
@@ -722,7 +726,7 @@ function MdDialogProvider($$interimElementProvider) {
       // Once a dialog has `ng-cloak` applied on his template the dialog animation will not work properly.
       // This is a very common problem, so we have to notify the developer about this.
       if (dialogElement.hasClass('ng-cloak')) {
-        var message = '$mdDialog: using `<md-dialog ng-cloak >` will affect the dialog opening animations.';
+        var message = '$mdDialog: using `<md-dialog ng-cloak>` will affect the dialog opening animations.';
         $log.warn( message, element[0] );
       }
 
@@ -734,18 +738,8 @@ function MdDialogProvider($$interimElementProvider) {
       return dialogPopIn(element, options)
         .then(function() {
           lockScreenReader(element, options);
-          warnDeprecatedActions();
           focusOnOpen();
         });
-
-      /**
-       * Check to see if they used the deprecated .md-actions class and log a warning
-       */
-      function warnDeprecatedActions() {
-        if (element[0].querySelector('.md-actions')) {
-          $log.warn('Using a class of md-actions is deprecated, please use <md-dialog-actions>.');
-        }
-      }
 
       /**
        * For alerts, focus on content... otherwise focus on
@@ -764,14 +758,7 @@ function MdDialogProvider($$interimElementProvider) {
          * If we find no actions at all, log a warning to the console.
          */
         function findCloseButton() {
-          var closeButton = element[0].querySelector('.dialog-close');
-
-          if (!closeButton) {
-            var actionButtons = element[0].querySelectorAll('.md-actions button, md-dialog-actions button');
-            closeButton = actionButtons[actionButtons.length - 1];
-          }
-
-          return closeButton;
+          return element[0].querySelector('.dialog-close, md-dialog-actions button:last-child');
         }
       }
     }
@@ -1017,7 +1004,7 @@ function MdDialogProvider($$interimElementProvider) {
 
 
         if (options.disableParentScroll) {
-          options.restoreScroll();
+          options.restoreScroll && options.restoreScroll();
           delete options.restoreScroll;
         }
 

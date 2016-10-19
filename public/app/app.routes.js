@@ -41,7 +41,13 @@ angular.module('orpha.routes')
                 authorized:['list-user'],
                 controller:'userCtrl',
                 templateUrl: '../app/components/users/users-tpl.html'
-            });
+            })
+            .state('orpha.criancas',{
+                url: '/criancas',
+                authorized:[],
+                controller:'criancaCtrl',
+                templateUrl: '../app/components/criancas/criancas-tpl.html'
+            })
     })
     .run(function ($rootScope, AuthEvents, $state, AuthService, MessagesService) {
         $rootScope.$on(AuthEvents.userLogout, function () {

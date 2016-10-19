@@ -9,7 +9,7 @@ angular.module('orpha.config')
         "client_secret": "FkHPWSOOI0OJqgCqTXbEHu9tOeifY0azVKatN8B0",
         "grant_type":"password"
     })
-    .config(function ($mdThemingProvider) {
+    .config(function ($mdThemingProvider, $mdDateLocaleProvider) {
         $mdThemingProvider.theme('default')
             .primaryPalette('blue-grey', {
                 'default': '600',
@@ -20,4 +20,17 @@ angular.module('orpha.config')
             .accentPalette('light-blue', {
                 'default': '500'
             });
+
+        $mdDateLocaleProvider.formatDate = function(date) {
+            return moment(date).format('DD/MM/YYYY');
+        };
+        $mdDateLocaleProvider.parseDate = function(dateString) {
+            var m = moment(dateString, 'YYYY-MM-DD HH:mm:ss', true);
+            return m.isValid() ? m.toDate() : new Date(NaN);
+        };
+
+        $mdDateLocaleProvider.months = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+        $mdDateLocaleProvider.shortMonths = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+        $mdDateLocaleProvider.days = ['Dom','Seg','Ter','Qua','Qui','Sex','Sab'];
+        $mdDateLocaleProvider.shortDays = ['D','S','T','Q','Q','S','S'];
     });

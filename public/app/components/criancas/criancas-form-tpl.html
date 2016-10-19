@@ -1,0 +1,78 @@
+<md-dialog aria-label="Crianças Form"  flex="auto" flex-gt-sm="60" flex-gt-md="50">
+
+    <form name="criancaForm" novalidate ng-submit="submit()" >
+
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>{{title}}</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()" ng-disabled="loading">
+                    <md-icon class="material-icons" aria-label="Close dialog">close</md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-progress-linear md-mode="indeterminate" class="md-accent" ng-show="loading"></md-progress-linear>
+
+        <md-dialog-content layout="row" flex layout-padding>
+
+            <div flex="100">
+
+                <md-input-container flex-gt-lg class="md-block">
+                    <label>Nome</label>
+                    <md-icon class="material-icons">person</md-icon>
+
+                    <input
+                            name="nome"
+                            ng-model="crianca.nome"
+                            type="text"
+                            custom-error
+                            set-touched="{{editMode}}"
+                            required
+                            mask="*"
+                            repeat="50"
+                            validate="false"
+                            limit="true"
+                            md-maxlength="50"
+                            ng-disabled="loading || readonly" >
+
+                    <div ng-messages="criancaForm.nome.$error"
+                         multiple>
+                        <div ng-messages-include="app/components/messages/messages-tpl.html"></div>
+                        <div ng-message="customError">{{criancaForm.nome.customError}}</div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container flex-gt-lg class="md-block">
+                    <label>Dt. Nascimento</label>
+                    <md-datepicker
+                            ng-init="crianca.dt_nascimento = (crianca.dt_nascimento | strToDate)"
+                            ng-disabled="readonly || loading"
+                            ng-required="!readonly"
+                            custom-error
+                            set-touched="{{editMode}}"
+                            ng-model="crianca.dt_nascimento"
+                            name="dt_nascimento"></md-datepicker>
+
+                    <div ng-messages="criancaForm.dt_nascimento.$error" multiple>
+                        <div ng-messages-include="app/components/messages/messages-tpl.html"></div>
+                        <div ng-message="customError">{{criancaForm.dt_nascimento.customError}}</div>
+                    </div>
+                </md-input-container>
+            </div>
+
+        </md-dialog-content>
+
+        <md-dialog-actions ng-if="!readonly" layout="row">
+            <span flex></span>
+            <md-button class="md-primary md-raised" type="submit" ng-disabled="criancaForm.$invalid || loading" >
+                Salvar
+            </md-button>
+            <md-button class="md-warn md-raised" ng-click="cancel()" ng-disabled="loading || readonly">
+                Cancelar
+            </md-button>
+        </md-dialog-actions>
+
+    </form>
+
+</md-dialog>

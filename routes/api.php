@@ -21,6 +21,10 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('/users/checkEmail', 'UserController@checkEmail');
     Route::resource('/users', 'UserController', ['except' => ['create', 'edit']]);
     Route::resource('/permissions', 'PermissionController', ['only' => ['index']]);
+
+    Route::get('/criancas/restore/{crianca}', 'CriancaController@restore');
+    Route::resource('/criancas', 'CriancaController', ['except' => ['create', 'edit']]);
 });
+
 
 Route::post('/password/email', 'Auth\ResetPasswordController@sendResetEmail');

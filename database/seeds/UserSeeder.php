@@ -19,5 +19,7 @@ class UserSeeder extends Seeder
         $adm->permissions()->create(['name' => 'Alterar Usuário', 'slug' => 'edit-user', 'description' =>  'Permissão de alterar usuários no sistema']);
         $adm->permissions()->create(['name' => 'Inativar Usuário', 'slug' => 'delete-user', 'description' =>  'Permissão de inativar usuários no sistema']);
         $adm->permissions()->create(['name' => 'Ativar Usuário', 'slug' => 'active-user', 'description' =>  'Permissão de ativar usuários no sistema']);
+
+        //factory(App\Crianca::class, 10)->create();
     }
 }
