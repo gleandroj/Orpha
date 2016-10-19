@@ -18,6 +18,15 @@ class Permission extends Model
         'name', 'slug', 'description'
     ];
 
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'deleted_at'
+    ];
+
     public function users()
     {
         return $this->belongsToMany(User::class);

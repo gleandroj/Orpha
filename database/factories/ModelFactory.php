@@ -32,3 +32,15 @@ $factory->define(App\Permission::class, function (Faker\Generator $faker) {
         'description' => $faker->text
     ];
 });
+
+$factory->define(App\Crianca::class, function (Faker\Generator $faker) {
+    return [
+        'nome' => $faker->name,
+        'dt_nascimento' => $faker->dateTime,
+        'filiacao' => $faker->name,
+        'responsavel' => $faker->name,
+        'grau_parentesco' => $faker->word,
+        'processo' => $faker->word,
+        'comarca' => 'Anápolis-GO'
+    ];
+});

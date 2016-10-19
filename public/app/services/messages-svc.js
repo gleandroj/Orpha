@@ -32,12 +32,27 @@ angular.module('orpha.services')
         };
         
         this.showErrorMessage = function (msgId, time) {
-            var time = time || 4000;
 
-            if(this.getMessage)
-                var msg = this.getMessage(msgId);
-            else
-                var msg = msgId;
+            if(msgId == null) return;
+
+            var time = time || 4000;
+            var msg = '';
+
+            if(typeof msgId === 'string'){
+                if(this.getMessage)
+                    msg = this.getMessage(msgId);
+                else
+                    msg = msgId;
+            }
+            else if(msgId['data'] && typeof msgId['data'] === 'string'){
+                msg = msgId['data'];
+            }
+            else if(msgId['data'] && typeof msgId['data']['error'] === 'string'){
+                msg = msgId['data']['error'];
+            }
+            else if(msgId['error'] && typeof msgId['error'] === 'string'){
+                msg = msgId['error'];
+            }
 
             $mdToast.show(
                 $mdToast.simple()

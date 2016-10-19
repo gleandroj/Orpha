@@ -15,15 +15,15 @@
                 </div>
             </div>
             <md-divider></md-divider>
-            <orpha-user-card name="Gabriel L" description="Diretor" show-actions="true" logout-click="logout()" profile-click=""></orpha-user-card>
+            <orpha-user-card show-actions="true" logout-click="logout()" profile-click=""></orpha-user-card>
         </md-toolbar>
     </header>
 
     <md-divider></md-divider>
     <md-content layout-padding  md-colors="{background: 'default-primary'}">
-        <ul class="side-menu">
+        <ul >
             <li ng-repeat="menu in menus" ui-sref="{{menu.state}}" ui-sref-active="active" ng-click="toggle()" ng-auth="menu.permission">
-                <md-button >
+                <md-button class="menu-button">
                     <md-icon class="material-icons" style="color: white;" ng-if="menu.icon">{{menu.icon}}</md-icon>
                     {{menu.nome}}
                 </md-button>

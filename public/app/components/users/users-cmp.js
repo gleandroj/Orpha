@@ -14,7 +14,7 @@ angular.module('orpha.components')
                 $scope.loading = false;
             }, function (data) {
                 $scope.loading = false;
-                if(data && data['data']['error']) MessagesService.showErrorMessage(data['data']['error']);
+                MessagesService.showErrorMessage(data);
             });
         };
 
@@ -35,7 +35,7 @@ angular.module('orpha.components')
             });
         };
 
-        $scope.createUser = function (user) {
+        $scope.createUser = function () {
 
             var pushUser = function (newUser) {
                 $scope.users.push(newUser);
@@ -51,10 +51,7 @@ angular.module('orpha.components')
                 locals:{
                     title:'Inserir Usuário'
                 }
-            }).then(pushUser,
-            function (data) {
-                if(data && data['data']['error']) MessagesService.showErrorMessage(data['data']['error']);
-            });
+            }).then(pushUser);
         };
 
         $scope.editUser = function (user, oldScope) {
@@ -85,8 +82,6 @@ angular.module('orpha.components')
                     }, 0);
                 });
                 MessagesService.showSuccessMessage('MSG7');
-            }, function (data) {
-                if(data && data['data']['error']) MessagesService.showErrorMessage(data['data']['error']);
             });
         };
 
@@ -105,7 +100,7 @@ angular.module('orpha.components')
                 }
 
             }, function (data) {
-                if(data && data['data']['error']) MessagesService.showErrorMessage(data['data']['error']);
+                MessagesService.showErrorMessage(data);
             });
         };
 
@@ -119,7 +114,7 @@ angular.module('orpha.components')
                         }, 0);
                     });
             }, function (data) {
-                if(data && data['error']) MessagesService.showErrorMessage(data['error']);
+                MessagesService.showErrorMessage(data);
             });
         };
 
@@ -179,8 +174,8 @@ angular.module('orpha.components')
                 $scope.loading = false;
                 if(errors.status == 422){
                     setFormError(errors.data);
-                }else if(errors.status == 500){
-                    $mdDialog.cancel(errors.data.error);
+                }else{
+                    MessagesService.showErrorMessage(errors);
                 }
             });
         };
@@ -198,8 +193,8 @@ angular.module('orpha.components')
                         $scope.loading = false;
                         if(errors.status == 422){
                             setFormError(errors.data);
-                        }else if(errors.status == 500){
-                            $mdDialog.cancel(errors.data.error);
+                        }else{
+                            MessagesService.showErrorMessage(errors);
                         }
                     });
         };
@@ -234,168 +229,4 @@ angular.module('orpha.components')
         };
 
         if($scope.subimited) updateUser();
-    }])
-    .directive("customError", function($q, $timeout) {
-        return {
-            restrict: "A",
-            require: "ngModel",
-            link: function(scope, element, attributes, ngModel) {
-                if(attributes.setTouched == "true"){
-                    $timeout(function () {
-                        scope.$apply(function () {
-                            ngModel.$setTouched();
-                        });
-                    }, 0);
-                }
-
-                var reset = function () {
-                    if(ngModel.customError != null){
-                        ngModel.customError = null;
-                        ngModel.$validate();
-                    }
-                };
-
-                ngModel.$validators.customError = function(modelValue) {
-                    return ngModel.customError == null;
-                };
-                element.bind('focus', function () {
-                    reset();
-                });
-
-            }
-        };
-    })
-    .directive("checkEmail", function($q, $http, $timeout) {
-        return {
-            restrict: "A",
-            priority:100,
-            require: "ngModel",
-            scope:{
-                checkEmail: "=checkEmail"
-            },
-            link: function(scope, element, attributes, ngModel) {
-                var allowValidate = false;
-                element.on('blur', function () {
-                    allowValidate = true;
-                    ngModel.$validate();
-                    allowValidate = false;
-                });
-
-                if(scope.checkEmail){
-                    ngModel.checkEmailError = 'check-email-error';
-                    ngModel.$asyncValidators.checkEmail = function(modelValue) {
-                        var defer = $q.defer();
-                        if(modelValue != null && allowValidate){
-                            $http.post('/api/users/checkEmail', {email:modelValue})
-                                .success(function (data) {
-                                    defer.resolve();
-                                })
-                                .error(function (error) {
-                                    ngModel.checkEmailError = error['email'][0];
-                                    defer.reject();
-                                });
-                        }else{
-                            defer.resolve();
-                        }
-                        return defer.promise;
-                    };
-                }
-            }
-        };
-    })
-    .directive("checkMatch", function($q, $http) {
-        return {
-            restrict: "A",
-            require: "ngModel",
-            scope:{
-                checkMatch:'='
-            },
-            link: function(scope, element, attributes, ngModel) {
-
-                scope.$watch('checkMatch', function () {
-                    ngModel.$validate();
-                });
-
-                ngModel.$validators.checkMatch = function(modelValue) {
-                    if((modelValue == null && scope.checkMatch == null ) || (modelValue == "" && scope.checkMatch == "")){
-                        return true;
-                    }
-                    else
-                        return modelValue === scope.checkMatch;
-                }
-            }
-        };
-    })
-    .directive("onImage", function() {
-        return {
-            restrict: "A",
-            scope:{
-                onImageError:'&',
-                onImageLoaded:'&'
-            },
-            link: function postLink(scope, iElement, iAttrs) {
-
-                iElement.bind('load', function() {
-                    scope.$apply(scope.onImageLoaded());
-                });
-
-                iElement.bind('error', function() {
-                    scope.$apply(scope.onImageError());
-                });
-            }
-        };
-    })
-    .directive("checkImage", function($q, $timeout) {
-        return {
-            restrict: "A",
-            require: "ngModel",
-            scope:{
-                model: '=ngModel'
-            },
-            link: function (scope, iElement, iAttrs, ngModel) {
-                var b64regex = new RegExp(/^(data:image\/(jpeg|png|jpg|gif|bmp);base64)/);
-                var urlRegex = new RegExp(/(http(s?):)|([\/|.|\w|\s])*\.(?:jpg|gif|png)/);
-
-                ngModel.$validators.checkImage = function (modelValue) {
-                    return b64regex.test(modelValue) || urlRegex.test(modelValue) || modelValue == null || modelValue == "";
-                };
-
-                scope.$watch(function () {
-                    return ngModel.$modelValue;
-                }, function(newValue) {
-                    if(ngModel.$invalid){
-                        $timeout(function () {
-                            scope.model = "";
-                            scope.$apply();
-                        }, 1500);
-                    }
-                });
-
-                var readFile = function(file) {
-                    var deferred = $q.defer();
-
-                    var reader = new FileReader();
-                    reader.onload = function(e) {
-                        deferred.resolve(e.target.result);
-                    };
-                    reader.onerror = function(e) {
-                        deferred.reject(e);
-                    };
-
-                    reader.readAsDataURL(file);
-                    return deferred.promise;
-                };
-
-                iElement.on('change', function(e) {
-                    readFile(e.target.files[0]).then(function (data) {
-
-                        $timeout(function () {
-                            scope.model = data;
-                            scope.$apply();
-                        }, 0);
-
-                    });
-                });
-            }
-        };
-    });
+    }]);

@@ -12,6 +12,7 @@
 
 <ui-view layout="row" layout-fill></ui-view>
 
+<script src="/bower/moment/moment.js"></script>
 <script src="/bower/angular/angular.js"></script>
 <script src="/bower/angular-resource/angular-resource.js"></script>
 <script src="/bower/angular-ui-router/release/angular-ui-router.js"></script>
@@ -24,14 +25,17 @@
 <script src="/app/app.modules.js"></script>
 <script src="/app/app.config.js"></script>
 <script src="/app/app.routes.js"></script>
+<script src="/app/app.directives.js"></script>
 
 <script src="/app/services/messages-svc.js"></script>
 <script src="/app/services/users-svc.js"></script>
+<script src="/app/services/criancas-svc.js"></script>
 <script src="/app/services/auth-svc.js"></script>
 
 <script src="/app/components/orpha/orpha-cmp.js"></script>
 <script src="/app/components/users/users-cmp.js"></script>
 <script src="/app/components/login/login-cmp.js"></script>
+<script src="/app/components/criancas/criancas-cmp.js"></script>
 
 </body>
 </html>

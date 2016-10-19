@@ -36,5 +36,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(\App\Contracts\Repository::class, \App\Repositories\AbstractRepository::class);
         $this->app->bind(\App\Contracts\UserRepository::class, \App\Repositories\UserRepository::class);
         $this->app->bind(\App\Contracts\UserService::class, \App\Services\UserService::class);
+        $this->app->bind(\App\Contracts\CriancaRepository::class, \App\Repositories\CriancaRepository::class);
+        $this->app->bind(\App\Contracts\CriancaService::class, \App\Services\CriancaSerivce::class);
     }
 }

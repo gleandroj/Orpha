@@ -19,6 +19,12 @@ angular.module('orpha.components')
                 permission:"list-user",
                 icon: 'person_identify'
             },
+            {
+                nome: 'Criança / Adolescente',
+                state: 'orpha.criancas',
+                permission:"",
+                icon: 'face'
+            }
         ];
 
         $scope.toggle = function () {
@@ -35,10 +41,6 @@ angular.module('orpha.components')
         restrict: 'E',
         templateUrl: '../app/components/orpha/orpha-user-card-tpl.html',
         scope: {
-            name: '@',
-            avatar: '@',
-            description:'@',
-            background: '@',
             showActions: '=',
             logoutClick: '&',
             profileClick: '&'
@@ -52,35 +54,4 @@ angular.module('orpha.components')
             });
         }
     }
-})
-.directive("messageBind", function($q, $timeout, MessagesService) {
-        return {
-            restrict: "EA",
-            tranclude:true,
-            template:'{{message}}',
-            scope:{
-                messageId:'@',
-                attributeName:'@',
-                message:'@'
-            },
-            link: function(scope, element, attributes) {
-                $timeout(function () {
-                    scope.$apply(function () {
-                        scope.message = MessagesService.getMessage(scope.messageId);
-                    });
-                },0);
-            }
-        };
-})
-.filter('messageBind', function(MessagesService, $interpolate) {
-    return function(msgId, attribute) {
-        var msgService = MessagesService.getMessage(msgId);
-
-        if(attribute){
-            var scope = { attributeName:attribute };
-            msgService = $interpolate(msgService)(scope);
-        }
-
-        return msgService;
-    };
 });
