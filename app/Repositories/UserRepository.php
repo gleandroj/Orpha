@@ -20,33 +20,6 @@ class UserRepository extends AbstractRepository implements \App\Contracts\UserRe
     }
 
     /**
-     * @return mixed
-     * @throws ApiException
-     */
-    public function getAll()
-    {
-        try{
-            return $this->model->withTrashed()->get();
-        }catch (\Exception $e){
-            throw new ApiException(trans('messages.MSG4'));
-        }
-    }
-
-    /**
-     * @param $id
-     * @return mixed
-     * @throws ApiException
-     */
-    public function getById($id)
-    {
-        try{
-            return $this->model->withTrashed()->where('id', $id)->first();
-        }catch (\Exception $e){
-            throw new ApiException(trans('messages.MSG4'));
-        }
-    }
-
-    /**
      * @param $email
      * @return User
      */

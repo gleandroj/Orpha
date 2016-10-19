@@ -30,6 +30,15 @@ class User extends Authenticatable
     ];
 
     /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'deleted_at'
+    ];
+
+    /**
      * User permissions
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */

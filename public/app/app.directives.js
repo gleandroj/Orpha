@@ -189,7 +189,21 @@ angular.module('orpha.directives')
     })
 
     /*  Filters  */
-
+    .filter('dateDiff',['$filter',  function($filter) {
+        return function(startDate, finalDate) {
+            if(finalDate == 'now'){
+                finalDate = moment();
+            }else {
+                finalDate = moment(finalDate);
+            }
+            if(startDate == 'now'){
+                startDate = moment();
+            }else {
+                startDate = moment(startDate);
+            }
+            return moment.duration(finalDate.diff(startDate)).years() || $filter('number')(moment.duration(finalDate.diff(startDate)).months() / 12, 2);
+        };
+    }])
     .filter('dateFormat', function() {
         return function(dateString) {
             return moment(dateString).format('DD/MM/YYYY');
@@ -197,8 +211,18 @@ angular.module('orpha.directives')
     })
     .filter('strToDate', function() {
         return function(dateString) {
-            var m = moment(dateString, 'YYYY-MM-DD HH:mm:ss', true);
+            var m = null;
+            if(typeof dateString === 'string')
+                m = moment(dateString, 'YYYY-MM-DD HH:mm:ss', true);
+            if(dateString == null)
+                m = moment();
+
             return m.isValid() ? m.toDate() : new Date(NaN);
+        };
+    })
+    .filter('dateToStr', function () {
+        return function(dateString) {
+            return moment(dateString).format('YYYY-MM-DD HH:mm:ss');
         };
     })
     .filter('messageBind', function(MessagesService, $interpolate) {

@@ -10,7 +10,8 @@ angular.module('orpha.services')
         sessionTimedOut:"auth.session_timed_out"
     })
 
-    .factory('PromiseFactory', function($q) {
+    .factory('PromiseFactory', ['$q',
+        function($q) {
         return {
             decorate: function(promise) {
                 promise.success = function(callback) {
@@ -30,16 +31,17 @@ angular.module('orpha.services')
                 return deferred;
             }
         };
-    })
+    }])
 
-    .service('AuthService', function($http, $q, AuthEvents, PromiseFactory, $rootScope, $interval, UserService, SESSION_TTL, OAUTH, ALLOW_STORE_DATE){
+    .service('AuthService', ['$http', '$q', 'AuthEvents', 'PromiseFactory', '$rootScope', '$interval', 'UserService', 'SESSION_TTL', 'OAUTH', 'ALLOW_STORE_DATE',
+        function($http, $q, AuthEvents, PromiseFactory, $rootScope, $interval, UserService, SESSION_TTL, OAUTH, ALLOW_STORE_DATE){
         var self = this;
         var storeDate = ALLOW_STORE_DATE || true;
         var oauth = OAUTH || {
-            "client_id": "",
-            "client_secret": "",
-            "grant_type":"password"
-        };
+                "client_id": "",
+                "client_secret": "",
+                "grant_type":"password"
+            };
         var currentUser = localStorage.currentUser ? new UserService(angular.fromJson(localStorage.currentUser)) : null;
         var checkSession;
         var sessionTime = SESSION_TTL || 1000 * 60 * 10;
@@ -178,9 +180,6 @@ angular.module('orpha.services')
         };
 
         this.checkSession = function () {
-            //var r = Math.round((sessionTime - ((new Date()).getTime() - self.getLastActivity().getTime())) / 1000);
-             //console.log("Session remaining: " + r + "s");
-
             if(self.isAuthenticated() && self.getLastActivity() != null){
                 if(((new Date()).getTime() - self.getLastActivity().getTime()) >= sessionTime){
                     $rootScope.$broadcast(AuthEvents.sessionTimedOut);
@@ -193,7 +192,7 @@ angular.module('orpha.services')
                 self.setLastActivity(new Date());
             }
             if(!checkSession){
-                checkSession = $interval(self.checkSession, 1000 * 60);
+                checkSession = $interval(self.checkSession, 1000 );
             }
         };
 
@@ -220,8 +219,7 @@ angular.module('orpha.services')
         if(self.isAuthenticated()){
             self.startCheckSession();
         }
-
-    })
+    }])
 
     .factory('OAuthInterceptor', ['$q', '$injector', '$log', function($q, $injector, $log){
         var recoveryRequest = function (config, deferred) {

@@ -14,7 +14,7 @@ angular.module('orpha.components')
                 $scope.loading = false;
             }, function (data) {
                 $scope.loading = false;
-                if(data && data['data']['error']) MessagesService.showErrorMessage(data['data']['error']);
+                MessagesService.showErrorMessage(data);
             });
         };
 
@@ -35,7 +35,7 @@ angular.module('orpha.components')
             });
         };
 
-        $scope.createUser = function (user) {
+        $scope.createUser = function () {
 
             var pushUser = function (newUser) {
                 $scope.users.push(newUser);
@@ -51,10 +51,7 @@ angular.module('orpha.components')
                 locals:{
                     title:'Inserir Usuário'
                 }
-            }).then(pushUser,
-            function (data) {
-                if(data && data['data']['error']) MessagesService.showErrorMessage(data['data']['error']);
-            });
+            }).then(pushUser);
         };
 
         $scope.editUser = function (user, oldScope) {
@@ -85,8 +82,6 @@ angular.module('orpha.components')
                     }, 0);
                 });
                 MessagesService.showSuccessMessage('MSG7');
-            }, function (data) {
-                if(data && data['data']['error']) MessagesService.showErrorMessage(data['data']['error']);
             });
         };
 
@@ -105,7 +100,7 @@ angular.module('orpha.components')
                 }
 
             }, function (data) {
-                if(data && data['data']['error']) MessagesService.showErrorMessage(data['data']['error']);
+                MessagesService.showErrorMessage(data);
             });
         };
 
@@ -119,7 +114,7 @@ angular.module('orpha.components')
                         }, 0);
                     });
             }, function (data) {
-                if(data && data['error']) MessagesService.showErrorMessage(data['error']);
+                MessagesService.showErrorMessage(data);
             });
         };
 
@@ -179,8 +174,8 @@ angular.module('orpha.components')
                 $scope.loading = false;
                 if(errors.status == 422){
                     setFormError(errors.data);
-                }else if(errors.status == 500){
-                    $mdDialog.cancel(errors.data.error);
+                }else{
+                    MessagesService.showErrorMessage(errors);
                 }
             });
         };
@@ -198,8 +193,8 @@ angular.module('orpha.components')
                         $scope.loading = false;
                         if(errors.status == 422){
                             setFormError(errors.data);
-                        }else if(errors.status == 500){
-                            $mdDialog.cancel(errors.data.error);
+                        }else{
+                            MessagesService.showErrorMessage(errors);
                         }
                     });
         };

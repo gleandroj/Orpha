@@ -10,7 +10,7 @@ angular.module('orpha.services')
     criancas.prototype.$restore = function (id, success, error) {
         success = success || function () {};
         error = error || function () {};
-        return $http.get('/api/criancas/restore/'+id).success(function (data) { success(new CriancaService(data)); }).error(error);
+        return $http.get('/api/criancas/restore/'+id).success(function (data) { success(new criancas(data)); }).error(error);
     };
 
     return criancas;

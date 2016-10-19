@@ -21,6 +21,7 @@ class AbstractRepository implements Repository
      * @var \Illuminate\Database\Eloquent\Model
      */
     protected $model;
+
     /**
      * @var UnitOfWork
      */
@@ -38,30 +39,27 @@ class AbstractRepository implements Repository
     }
 
     /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @param $id
-     * @return \Illuminate\Database\Eloquent\Model
-     * @throws ApiException
-     */
-    public function getById($id)
-    {
-        try{
-            return $this->model->find($id);
-        }catch (\Exception $e){
-            throw new ApiException(trans('messages.MSG4'));
-        }
-    }
-
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     * @return mixed
      * @throws ApiException
      */
     public function getAll()
     {
         try{
-            return $this->model->all();
+            return $this->model->withTrashed()->get();
+        }catch (\Exception $e){
+            throw new ApiException(trans('messages.MSG4'));
+        }
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     * @throws ApiException
+     */
+    public function getById($id)
+    {
+        try{
+            return $this->model->withTrashed()->where('id', $id)->first();
         }catch (\Exception $e){
             throw new ApiException(trans('messages.MSG4'));
         }

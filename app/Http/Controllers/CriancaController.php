@@ -48,7 +48,7 @@ class CriancaController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \App\Crianca
      */
     public function show($id)
     {
@@ -71,7 +71,7 @@ class CriancaController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \App\Crianca
      */
     public function destroy($id)
     {
@@ -83,7 +83,7 @@ class CriancaController extends Controller
      * Restore the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \App\Crianca
      */
     public function restore($id)
     {

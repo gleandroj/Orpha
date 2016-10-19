@@ -25,7 +25,8 @@ angular.module('orpha.config')
             return moment(date).format('DD/MM/YYYY');
         };
         $mdDateLocaleProvider.parseDate = function(dateString) {
-            var m = moment(dateString, 'YYYY-MM-DD HH:mm:ss', true);
+            var m = moment(dateString, 'DD/MM/YYYY', true);
+            console.log(m.toDate());
             return m.isValid() ? m.toDate() : new Date(NaN);
         };
 

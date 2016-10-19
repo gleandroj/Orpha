@@ -4,7 +4,7 @@
 
         <md-toolbar>
             <div class="md-toolbar-tools">
-                <h2>{{title}}</h2>
+                <h2>{{title}} {{ user.deleted_at ? '(Inativo)' : ''}}</h2>
                 <span flex></span>
                 <md-button class="md-icon-button" ng-click="cancel()" ng-disabled="loading">
                     <md-icon class="material-icons" aria-label="Close dialog">close</md-icon>

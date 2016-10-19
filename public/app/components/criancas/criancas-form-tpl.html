@@ -4,7 +4,7 @@
 
         <md-toolbar>
             <div class="md-toolbar-tools">
-                <h2>{{title}}</h2>
+                <h2>{{title}} {{ crianca.deleted_at ? '(Inativo)' : ''}}</h2>
                 <span flex></span>
                 <md-button class="md-icon-button" ng-click="cancel()" ng-disabled="loading">
                     <md-icon class="material-icons" aria-label="Close dialog">close</md-icon>
@@ -18,7 +18,7 @@
 
             <div flex="100">
 
-                <md-input-container flex-gt-lg class="md-block">
+                <md-input-container flex class="md-block">
                     <label>Nome</label>
                     <md-icon class="material-icons">person</md-icon>
 
@@ -43,20 +43,170 @@
                     </div>
                 </md-input-container>
 
-                <md-input-container flex-gt-lg class="md-block">
+                <div layout="row" flex layout-wrap>
+
+                <md-input-container style="margin-left: -15px;" flex="auto" class="md-block">
                     <label>Dt. Nascimento</label>
+
                     <md-datepicker
-                            ng-init="crianca.dt_nascimento = (crianca.dt_nascimento | strToDate)"
+                            ng-init="crianca.datepicker = (crianca.dt_nascimento | strToDate)"
                             ng-disabled="readonly || loading"
                             ng-required="!readonly"
                             custom-error
+                            md-open-on-focus
                             set-touched="{{editMode}}"
-                            ng-model="crianca.dt_nascimento"
+                            ng-model="crianca.datepicker"
                             name="dt_nascimento"></md-datepicker>
 
                     <div ng-messages="criancaForm.dt_nascimento.$error" multiple>
+                        <div ng-message="valid">Data inválida.</div>
                         <div ng-messages-include="app/components/messages/messages-tpl.html"></div>
                         <div ng-message="customError">{{criancaForm.dt_nascimento.customError}}</div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container flex class="md-block">
+                    <label>Idade</label>
+
+                    <md-icon class="material-icons" >perm_contact_calendar</md-icon>
+
+                    <input
+                            name="idade"
+                            value="{{ crianca.datepicker | dateDiff:'now' }}"
+                            type="text"
+                            ng-disabled="true" >
+                </md-input-container>
+
+                </div>
+
+                <md-input-container flex class="md-block">
+                    <label>Filiação</label>
+                    <md-icon class="material-icons">wc</md-icon>
+
+                    <input
+                            name="filiacao"
+                            ng-model="crianca.filiacao"
+                            type="text"
+                            custom-error
+                            set-touched="{{editMode}}"
+                            required
+                            mask="*"
+                            repeat="50"
+                            validate="false"
+                            limit="true"
+                            md-maxlength="50"
+                            ng-disabled="loading || readonly" >
+
+                    <div ng-messages="criancaForm.filiacao.$error"
+                         multiple>
+                        <div ng-messages-include="app/components/messages/messages-tpl.html"></div>
+                        <div ng-message="customError">{{criancaForm.nome.customError}}</div>
+                    </div>
+                </md-input-container>
+
+                <div layout-gt-lg="row" flex>
+
+                    <md-input-container flex class="md-block">
+                        <label>Responsável</label>
+                        <md-icon class="material-icons">supervisor_account</md-icon>
+
+                        <input
+                                name="responsavel"
+                                ng-model="crianca.responsavel"
+                                type="text"
+                                custom-error
+                                set-touched="{{editMode}}"
+                                required
+                                mask="*"
+                                repeat="50"
+                                validate="false"
+                                limit="true"
+                                md-maxlength="50"
+                                ng-disabled="loading || readonly" >
+
+                        <div ng-messages="criancaForm.responsavel.$error"
+                             multiple>
+                            <div ng-messages-include="app/components/messages/messages-tpl.html"></div>
+                            <div ng-message="customError">{{criancaForm.nome.customError}}</div>
+                        </div>
+                    </md-input-container>
+
+                    <div flex="5" hide-xs hide-sm></div>
+
+                    <md-input-container flex class="md-block">
+                        <label>Grau de Parentesco</label>
+                        <md-icon class="material-icons"></md-icon>
+
+                        <input
+                                name="grau_parentesco"
+                                ng-model="crianca.grau_parentesco"
+                                type="text"
+                                custom-error
+                                set-touched="{{editMode}}"
+                                required
+                                mask="*"
+                                repeat="50"
+                                validate="false"
+                                limit="true"
+                                md-maxlength="50"
+                                ng-disabled="loading || readonly" >
+
+                        <div ng-messages="criancaForm.grau_parentesco.$error"
+                             multiple>
+                            <div ng-messages-include="app/components/messages/messages-tpl.html"></div>
+                            <div ng-message="customError">{{criancaForm.nome.customError}}</div>
+                        </div>
+                    </md-input-container>
+
+                </div>
+
+                <md-input-container flex class="md-block">
+                    <label>Processo</label>
+                    <md-icon class="material-icons">settings</md-icon>
+
+                    <input
+                            name="processo"
+                            ng-model="crianca.processo"
+                            type="text"
+                            custom-error
+                            set-touched="{{editMode}}"
+                            required
+                            mask="*"
+                            repeat="50"
+                            validate="false"
+                            limit="true"
+                            md-maxlength="50"
+                            ng-disabled="loading || readonly" >
+
+                    <div ng-messages="criancaForm.processo.$error"
+                         multiple>
+                        <div ng-messages-include="app/components/messages/messages-tpl.html"></div>
+                        <div ng-message="customError">{{criancaForm.nome.customError}}</div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container flex class="md-block">
+                    <label>Comarca</label>
+                    <md-icon class="material-icons">place</md-icon>
+
+                    <input
+                            name="comarca"
+                            ng-model="crianca.comarca"
+                            type="text"
+                            custom-error
+                            set-touched="{{editMode}}"
+                            required
+                            mask="*"
+                            repeat="50"
+                            validate="false"
+                            limit="true"
+                            md-maxlength="50"
+                            ng-disabled="loading || readonly" >
+
+                    <div ng-messages="criancaForm.comarca.$error"
+                         multiple>
+                        <div ng-messages-include="app/components/messages/messages-tpl.html"></div>
+                        <div ng-message="customError">{{criancaForm.nome.customError}}</div>
                     </div>
                 </md-input-container>
             </div>

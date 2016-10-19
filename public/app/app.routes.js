@@ -49,12 +49,13 @@ angular.module('orpha.routes')
                 templateUrl: '../app/components/criancas/criancas-tpl.html'
             })
     })
-    .run(function ($rootScope, AuthEvents, $state, AuthService, MessagesService) {
+    .run(function ($rootScope, AuthEvents, $state, AuthService, MessagesService, $mdDialog) {
         $rootScope.$on(AuthEvents.userLogout, function () {
             $state.go('login');
         });
         $rootScope.$on(AuthEvents.sessionTimedOut, function ()   {
             AuthService.logout();
+            $mdDialog.hide();
             MessagesService.showErrorMessage("MSG15");
         });
     });

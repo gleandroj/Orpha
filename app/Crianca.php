@@ -24,7 +24,8 @@ class Crianca extends Model
      * @var array
      */
     protected $dates = [
-        'dt_nascimento'
+        'dt_nascimento',
+        'deleted_at'
     ];
 
 }
