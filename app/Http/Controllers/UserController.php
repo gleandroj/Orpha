@@ -6,6 +6,7 @@ use App\Contracts\UserService;
 use App\Http\Requests;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -20,7 +21,6 @@ class UserController extends Controller
      */
     public function __construct(UserService $userService)
     {
-
         $this->userService = $userService;
     }
 
@@ -31,6 +31,7 @@ class UserController extends Controller
      */
     public function index()
     {
+        $this->authorizeForUser(Auth::user(), 'index', User::class);
         return $this->userService->getAll();
     }
 
@@ -54,6 +55,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
+        $this->authorizeForUser(Auth::user(), 'show', User::class);
         return $this->userService->getById($id);
     }
 
@@ -78,6 +80,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorizeForUser(Auth::user(), 'delete', User::class);
         return $this->userService->delete($id);
     }
 
@@ -89,6 +92,7 @@ class UserController extends Controller
      */
     public function restore($id)
     {
+        $this->authorizeForUser(Auth::user(), 'active', User::class);
         return $this->userService->restore($id);
     }
 

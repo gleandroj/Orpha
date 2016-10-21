@@ -77,6 +77,14 @@ md-toast.md-success-toast-theme div.md-toast-content{
 /* when showing the picture */
 .md-fab.ng-hide-remove      { animation:0.5s show ease; }
 
+md-list-item.active{
+    background-color: rgba(158,158,158,0.2);
+}
+
+.highlight{
+    background-color: #FFEB3B;
+}
+
 @keyframes hide {
     0% {
         transform: scale(1);

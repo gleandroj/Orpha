@@ -12,6 +12,8 @@ namespace App\Services;
 use App\Contracts\CriancaRepository;
 use App\Contracts\CriancaService;
 use App\Contracts\UserService;
+use App\Crianca;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class CriancaSerivce implements CriancaService
 {
@@ -46,7 +48,9 @@ class CriancaSerivce implements CriancaService
      */
     public function getById($id)
     {
-        return $this->criancaRepository->getById($id);
+        if(!$crianca = $this->criancaRepository->getById($id))
+            throw (new ModelNotFoundException())->setModel('criança', $id);
+        return $crianca;
     }
 
     /**
@@ -55,7 +59,19 @@ class CriancaSerivce implements CriancaService
      */
     public function create(array $data)
     {
-        return $this->criancaRepository->create($data);
+        $data = collect($data);
+
+        validator($data->all(), [
+            'nome' => 'required|max:50',
+            'dt_nascimento' => 'required|date',
+            'filiacao' => 'required|max:50',
+            'responsavel' => 'required|max:50',
+            'grau_parentesco' => 'required|max:50',
+            'processo' => 'required|max:20',
+            'comarca' => 'required|max:50'
+        ])->validate();
+
+        return $this->criancaRepository->create($data->all());
     }
 
     /**
@@ -65,7 +81,19 @@ class CriancaSerivce implements CriancaService
      */
     public function update($id, array $data)
     {
-        return $this->criancaRepository->update($id, $data);
+        $data = collect($data);
+
+        validator($data->all(), [
+            'nome' => 'required|max:50',
+            'dt_nascimento' => 'required|date',
+            'filiacao' => 'required|max:50',
+            'responsavel' => 'required|max:50',
+            'grau_parentesco' => 'required|max:50',
+            'processo' => 'required|max:20',
+            'comarca' => 'required|max:50'
+        ])->validate();
+
+        return $this->criancaRepository->update($id, $data->all());
     }
 
     /**

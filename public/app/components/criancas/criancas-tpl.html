@@ -51,7 +51,7 @@
 
                 <!--Infos-->
                 <div class="md-list-item-text " layout="column" layout-align="start start" >
-                    <h3 class="truncate truncate-max-width">{{crianca.nome}}</h3>
+                    <h3 class="truncate truncate-max-width" md-highlight-text="search" md-highlight-flags="ig">{{crianca.nome}}</h3>
                     <!--
                     <p class="truncate truncate-max-width">Dt. Nascimento: {{crianca.dt_nascimento | dateFormat}}</p>
                     <p class="truncate truncate-max-width">Responsável: {{crianca.responsavel}}</p>
@@ -101,7 +101,7 @@
 
                 <!--Infos-->
                 <div class="md-list-item-text " layout="column" layout-align="start start" >
-                    <h3 class="truncate truncate-max-width">{{crianca.nome}}</h3>
+                    <h3 class="truncate truncate-max-width" md-highlight-text="search" md-highlight-flags="ig">{{crianca.nome}}</h3>
                     <!--
                     <p class="truncate truncate-max-width">Dt. Nascimento: {{crianca.dt_nascimento | dateFormat}}</p>
                     <p class="truncate truncate-max-width">Responsável: {{crianca.responsavel}}</p>
@@ -133,7 +133,7 @@
 </md-card>
 
 <div layout="column" class="fab-panel" >
-    <md-button class="md-fab" aria-label="Action" ng-click="createCrianca()" ng-auth="">
+    <md-button id="create" class="md-fab" aria-label="Action" ng-click="createCrianca($event)" ng-auth="">
         <md-icon class="material-icons">add</md-icon>
         <md-tooltip md-direction="left">
             Novo

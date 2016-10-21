@@ -26,5 +26,4 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::resource('/criancas', 'CriancaController', ['except' => ['create', 'edit']]);
 });
 
-
 Route::post('/password/email', 'Auth\ResetPasswordController@sendResetEmail');

@@ -33,8 +33,8 @@ angular.module('orpha.services')
         };
     }])
 
-    .service('AuthService', ['$http', '$q', 'AuthEvents', 'PromiseFactory', '$rootScope', '$interval', 'UserService', 'SESSION_TTL', 'OAUTH', 'ALLOW_STORE_DATE',
-        function($http, $q, AuthEvents, PromiseFactory, $rootScope, $interval, UserService, SESSION_TTL, OAUTH, ALLOW_STORE_DATE){
+    .service('AuthService', ['$http', '$q', '$window', 'AuthEvents', 'PromiseFactory', '$rootScope', '$interval', 'UserService', 'SESSION_TTL', 'OAUTH', 'ALLOW_STORE_DATE',
+        function($http, $q, $window, AuthEvents, PromiseFactory, $rootScope, $interval, UserService, SESSION_TTL, OAUTH, ALLOW_STORE_DATE){
         var self = this;
         var storeDate = ALLOW_STORE_DATE || true;
         var oauth = OAUTH || {
@@ -179,15 +179,21 @@ angular.module('orpha.services')
             localStorage.currentUser = angular.toJson(currentUser = user);
         };
 
+        this.isSessionExpired = function () {
+            if(self.getLastActivity() != null)
+                return ((new Date()).getTime() - self.getLastActivity().getTime()) >= sessionTime;
+            return true;
+        };
+
         this.checkSession = function () {
-            if(self.isAuthenticated() && self.getLastActivity() != null){
-                if(((new Date()).getTime() - self.getLastActivity().getTime()) >= sessionTime){
-                    $rootScope.$broadcast(AuthEvents.sessionTimedOut);
-                }
+            if(self.isAuthenticated() && self.isSessionExpired()){
+                $rootScope.$broadcast(AuthEvents.sessionTimedOut);
+                localStorage.clear();
             }
         };
 
         this.startCheckSession = function () {
+            self.checkSession();
             if(!self.getLastActivity()){
                 self.setLastActivity(new Date());
             }
@@ -237,10 +243,9 @@ angular.module('orpha.services')
 
         var _requestFn = function (config) {
             var Auth = $injector.get('AuthService');
-
             if(Auth.isAuthenticated()){
                 var token = Auth.getToken();
-                if(token){
+                if(token && !Auth.isSessionExpired()){
                     Auth.setLastActivity(new Date());
                     config.headers.Authorization = token.token_type + " " + token.access_token;
                 }

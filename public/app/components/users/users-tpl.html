@@ -50,10 +50,10 @@
                 <md-icon hide-sm  hide-xs ng-if="!user.avatar || !user.showImage" class="material-icons md-avatar" style="font-size: 48px;">account_circle</md-icon>
                 <img hide-sm hide-xs ng-show="user.avatar && user.showImage" ng-src="{{user.avatar}}" height="100px" class="md-avatar" alt="{{user.avatar}}" on-image on-image-loaded="user.showImage = true" on-image-error="user.showImage = false" />
 
-                <div class="md-list-item-text " layout="column" layout-align="start start" >
-                    <h3 class="truncate truncate-max-width">{{user.name}}</h3>
-                    <p class="truncate truncate-max-width">{{user.email}}</p>
-                    <p ng-model="user.phone" mask="(99) 9?9999-9999" >{{user.phone}}</p>
+                <div class="md-list-item-text" layout="column" layout-align="start start">
+                    <h3 class="truncate  truncate-max-width" md-highlight-text="search" md-highlight-flags="ig">{{user.name}}</h3>
+                    <p class="truncate truncate-max-width" md-highlight-text="search" md-highlight-flags="ig">{{user.email}}</p>
+                    <p ng-model="user.phone" mask="(99) 9?9999-9999" md-highlight-text="search" md-highlight-flags="ig">{{user.phone}}</p>
                 </div>
 
                 <div class="md-secondary">
@@ -98,9 +98,9 @@
                 <img hide-sm hide-xs ng-show="user.avatar && user.showImage" ng-src="{{user.avatar || '//:0' }}" height="100px" class="md-avatar" alt="{{user.avatar}}" on-image on-image-loaded="user.showImage = true" on-image-error="user.showImage = false" />
 
                 <div class="md-list-item-text" layout="column" layout-align="start start">
-                    <h3 class="truncate  truncate-max-width" >{{user.name}}</h3>
-                    <p class="truncate truncate-max-width">{{user.email}}</p>
-                    <p ng-model="user.phone" mask="(99) 9?9999-9999" >{{user.phone}}</p>
+                    <h3 class="truncate  truncate-max-width" md-highlight-text="search" md-highlight-flags="ig">{{user.name}}</h3>
+                    <p class="truncate truncate-max-width" md-highlight-text="search" md-highlight-flags="ig">{{user.email}}</p>
+                    <p ng-model="user.phone" mask="(99) 9?9999-9999" md-highlight-text="search" md-highlight-flags="ig">{{user.phone}}</p>
                 </div>
 
                 <div class="md-secondary">
@@ -128,7 +128,7 @@
 </md-card>
 
 <div layout="column" class="fab-panel" >
-    <md-button class="md-fab" aria-label="Action" ng-click="createUser()" ng-auth="'create-user'">
+    <md-button id="create" class="md-fab" aria-label="Action" ng-click="createUser($event)" ng-auth="'create-user'">
         <md-icon class="material-icons">add</md-icon>
         <md-tooltip md-direction="left">
             Novo usuário

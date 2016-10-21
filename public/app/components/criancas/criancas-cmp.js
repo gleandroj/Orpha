@@ -20,7 +20,7 @@ angular.module('orpha.components')
             });
         };
 
-        $scope.createCrianca = function () {
+        $scope.createCrianca = function ($ev) {
 
             var pushCrianca = function (newCrianca) {
                 $scope.criancas.push(newCrianca);
@@ -33,6 +33,8 @@ angular.module('orpha.components')
                 templateUrl: '../app/components/criancas/criancas-form-tpl.html',
                 clickOutsideToClose:false,
                 fullscreen:true,
+                openFrom:$ev.target,
+                closeTo:$ev.target,
                 locals:{
                     title:'Inserir Criança / Adolescente'
                 }
@@ -58,7 +60,6 @@ angular.module('orpha.components')
 
         $scope.editCrianca = function (crianca, oldScope) {
             if(!AuthService.isAuthorized('edit-crianca')) return;
-
             var options = {
                 controller: 'criancaFormCtrl',
                 parent: angular.element(document.body),

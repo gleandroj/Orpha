@@ -35,8 +35,8 @@ angular.module('orpha.components')
             });
         };
 
-        $scope.createUser = function () {
-
+        $scope.createUser = function ($ev) {
+            console.log($ev.target);
             var pushUser = function (newUser) {
                 $scope.users.push(newUser);
                 MessagesService.showSuccessMessage('MSG5');
@@ -48,6 +48,8 @@ angular.module('orpha.components')
                 templateUrl: '../app/components/users/user-form-tpl.html',
                 clickOutsideToClose:false,
                 fullscreen:true,
+                openFrom:'#create',
+                closeTo:'#create',
                 locals:{
                     title:'Inserir Usuário'
                 }

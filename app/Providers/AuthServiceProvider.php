@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Crianca;
+use App\Policies\CriancaPolicy;
 use App\Policies\UserPolicy;
 use App\User;
 use Illuminate\Support\Facades\Gate;
@@ -18,6 +20,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         User::class => UserPolicy::class,
+        Crianca::class => CriancaPolicy::class
     ];
 
     /**

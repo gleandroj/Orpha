@@ -5,7 +5,7 @@ namespace App\Policies;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class UserPolicy
+class CriancaPolicy
 {
     use HandlesAuthorization;
 
@@ -16,7 +16,7 @@ class UserPolicy
      */
     public function show(User $user)
     {
-        return $user->permissions()->where('slug', 'show-user')->count() > 0;
+        return $user->permissions()->where('slug', 'show-crianca')->count() > 0;
     }
 
     /**
@@ -26,7 +26,7 @@ class UserPolicy
      */
     public function index(User $user)
     {
-        return $user->permissions()->where('slug', 'list-user')->count() > 0;
+        return $user->permissions()->where('slug', 'list-crianca')->count() > 0;
     }
 
     /**
@@ -36,7 +36,7 @@ class UserPolicy
      */
     public function create(User $user)
     {
-        return $user->permissions()->where('slug', 'create-user')->count() > 0;
+        return $user->permissions()->where('slug', 'create-crianca')->count() > 0;
     }
 
     /**
@@ -46,7 +46,7 @@ class UserPolicy
      */
     public function update(User $user)
     {
-        return $user->permissions()->where('slug', 'edit-user')->count() > 0;
+        return $user->permissions()->where('slug', 'edit-crianca')->count() > 0;
     }
 
     /**
@@ -56,7 +56,7 @@ class UserPolicy
      */
     public function active(User $user)
     {
-        return $user->permissions()->where('slug', 'active-user')->count() > 0;
+        return $user->permissions()->where('slug', 'active-crianca')->count() > 0;
     }
 
     /**
@@ -66,6 +66,6 @@ class UserPolicy
      */
     public function delete(User $user)
     {
-        return $user->permissions()->where('slug', 'delete-user')->count() > 0;
+        return $user->permissions()->where('slug', 'delete-crianca')->count() > 0;
     }
 }

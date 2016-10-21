@@ -9,7 +9,10 @@
 namespace App\Services;
 
 use App\Contracts\UserRepository;
+use App\Exceptions\ApiException;
 use App\Mail\PasswordResetMail;
+use App\User;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Mail;
 use Intervention\Image\Facades\Image;
@@ -46,13 +49,15 @@ class UserService implements \App\Contracts\UserService
      */
     public function getById($id)
     {
-        return $this->userRepository->getById($id)->load('permissions');
+        if(!$user = $this->userRepository->getById($id))
+            throw (new ModelNotFoundException())->setModel('usuário', $id);
+        return $user->load('permissions');
     }
 
     /**
      * @param array $data
-     * @return \App\User
-     * @throws \Exception
+     * @return mixed
+     * @throws ApiException
      */
     public function create(array $data)
     {
@@ -87,14 +92,16 @@ class UserService implements \App\Contracts\UserService
 
             return $user->load('permissions');
         }
-
-
+        else{
+            throw new ApiException(trans('messages.MSG4'));
+        }
     }
 
     /**
      * @param $id
      * @param array $data
-     * @return bool
+     * @return $this
+     * @throws ApiException
      */
     public function update($id, array $data)
     {
@@ -134,8 +141,9 @@ class UserService implements \App\Contracts\UserService
             $user->permissions()->sync(collect($permissions)->all());
 
             return $user->load('permissions');
+        }else{
+            throw new ApiException(trans('messages.MSG4'));
         }
-
 
     }
 
@@ -223,9 +231,10 @@ class UserService implements \App\Contracts\UserService
             return response()->json(['error' => trans('messages.MSG14')], 422);
         }
 
-        $password = str_random(16);
+        $password = str_random(14);
         $user->password =  bcrypt($password);
         $user->save();
+
         Mail::to($user)->queue(new PasswordResetMail($password));
 
         return response()->json(['status' => trans('messages.MSG15', ['email' => $user->email])]);

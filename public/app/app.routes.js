@@ -51,11 +51,11 @@ angular.module('orpha.routes')
     })
     .run(function ($rootScope, AuthEvents, $state, AuthService, MessagesService, $mdDialog) {
         $rootScope.$on(AuthEvents.userLogout, function () {
+            $mdDialog.hide();
             $state.go('login');
         });
         $rootScope.$on(AuthEvents.sessionTimedOut, function ()   {
             AuthService.logout();
-            $mdDialog.hide();
             MessagesService.showErrorMessage("MSG15");
         });
     });
