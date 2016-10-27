@@ -5,8 +5,8 @@ angular.module('orpha.config')
     .value('SESSION_TTL', 1000 * 60 * 10)
     .value('ALLOW_STORE_DATE', true)
     .value('OAUTH', {
-        "client_id": "2",
-        "client_secret": "FkHPWSOOI0OJqgCqTXbEHu9tOeifY0azVKatN8B0",
+        "client_id": "1",
+        "client_secret": "PpN1bIYB0tJ86TXlkbcEGsmhra4iYrstLTWdvQ3L",
         "grant_type":"password"
     })
     .config(function ($mdThemingProvider, $mdDateLocaleProvider) {

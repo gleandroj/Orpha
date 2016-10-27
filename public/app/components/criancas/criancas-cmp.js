@@ -153,6 +153,7 @@ angular.module('orpha.components')
 
         var saveCrianca = function () {
             $scope.loading = true;
+	    $scope.crianca = new CriancaService($scope.crianca);
             $scope.crianca.$save(function (crianca) {
                 crianca.datepicker = $filter('strToDate')(crianca.dt_nascimento);
                 $scope.loading = false;
