@@ -1,14 +1,14 @@
 import AuthController from './../controllers/AuthController';
-import AuthTemplate from './../pages/auth-layout-tpl.html';
+import AuthTemplate from './../pages/auth-layout.tpl.html';
 
 import LoginController from './../controllers/LoginController';
-import LoginTemplate from './../pages/login-page-tpl.html';
+import LoginTemplate from './../pages/login-page.tpl.html';
 
 import PasswordRecoveryController from './../controllers/PasswordRecoveryController';
-import PasswordRecoveryTemplate from './../pages/password-recovery-tpl.html';
+import PasswordRecoveryTemplate from './../pages/password-recovery.tpl.html';
 
 import PasswordResetController from './../controllers/PasswordResetController';
-import PasswordResetTemplate from './../pages/password-reset-tpl.html';
+import PasswordResetTemplate from './../pages/password-reset.tpl.html';
 
 export default function RouteConfig($stateProvider) {
 

@@ -2,10 +2,12 @@
  * Created by FG0003 on 09/02/2017.
  */
 import FallbackImg from './../../../../img/ic_account_circle_black_48dp_2x.png';
+import UserDialogController from './UserDialogController';
 
 export default class ListController{
 
     constructor(DialogService, OrphaUtilService, UserService, ToastService){
+        this.dialogService = DialogService;
         this.userService = UserService;
         this.toastService = ToastService;
         this.fallbackImg = FallbackImg;
@@ -19,7 +21,17 @@ export default class ListController{
     }
 
     showUser(user){
-
+        this.dialogService.showCustomDialog({
+            controller:UserDialogController,
+            clickOutsideToClose:true,
+            fullscreen:true,
+            templateUrl:'',
+            locals:{
+                title:'Visualizar Usuário',
+                user:user,
+                readOnly:true
+            }
+        })
     }
 
     getAll(){

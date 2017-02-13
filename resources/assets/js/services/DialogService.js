@@ -19,9 +19,13 @@ export default class DialogService{
     pushDialog(options){
 
         options = this.util.extend({
+            bindToController: true,
+            hasBackdrop:true,
+            multiple: true,
             skipHide: true,
             bindToControlle:true,
             controllerAs:'$ctrl',
+            parent: angular.element(document.body),
             locals:{}
         }, options);
 
@@ -34,7 +38,7 @@ export default class DialogService{
     }
 
     showCustomDialog(options){
-        return this.pushDialog(this.util.extend({autoWrap:true,}, options));
+        return this.pushDialog(this.util.extend({autoWrap:true}, options));
     }
 
     showConfirmDialog(options, okCallback, cancelCallback){
