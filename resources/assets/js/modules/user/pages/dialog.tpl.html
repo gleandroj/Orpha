@@ -1,0 +1,41 @@
+
+<md-dialog aria-label="User Form"  flex="auto" flex-gt-sm="60" flex-gt-md="50" layout="column">
+    <ng-form name="form" layout="column" flex="100">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>{{$ctrl.title}} {{ $ctrl.user.deleted_at ? '(Inativo)' : ''}}</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="$ctrl.close()" ng-disabled="$ctrl.loading">
+                    <md-icon class="material-icons" aria-label="Close dialog">close</md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-progress-linear md-mode="indeterminate" class="md-accent" ng-show="$ctrl.loading"></md-progress-linear>
+
+        <md-content flex>
+            <user-form user="$ctrl.user" read-only="$ctrl.readOnly"></user-form>
+        </md-content>
+        <span flex></span>
+        <md-divider></md-divider>
+        <md-dialog-actions ng-if="!$ctrl.readOnly"  layout="row" layout-align="end center">
+            <md-button class="md-accent md-raised" type="submit" ng-disabled="$ctrl.loading">
+                Salvar
+            </md-button>
+            <md-button class="md-warn" ng-click="$ctrl.close()" ng-disabled="$ctrl.loading">
+                Cancelar
+            </md-button>
+        </md-dialog-actions>
+
+        <md-dialog-actions ng-if="$ctrl.readOnly" layout="row" layout-align="end center">
+            <md-button class="md-primary md-raised" ng-if="$ctrl.user.deleted_at == null" ng-disabled="$ctrl.loading">
+                Alterar
+            </md-button>
+            <md-button class="md-primary md-raised" ng-if="$ctrl.user.deleted_at != null" ng-disabled="$ctrl.loading">
+                Ativar
+            </md-button>
+            <md-button ng-click="$ctrl.close()" ng-disabled="$ctrl.loading">
+                Voltar
+            </md-button>
+        </md-dialog-actions>
+    </ng-form>
+</md-dialog>

@@ -3,10 +3,12 @@
  */
 import FallbackImg from './../../../../img/ic_account_circle_black_48dp_2x.png';
 import UserDialogController from './UserDialogController';
+import UserDialogTemplate from './../pages/dialog.tpl.html';
 
 export default class ListController{
 
     constructor(DialogService, OrphaUtilService, UserService, ToastService){
+        this.util = OrphaUtilService;
         this.dialogService = DialogService;
         this.userService = UserService;
         this.toastService = ToastService;
@@ -25,11 +27,11 @@ export default class ListController{
             controller:UserDialogController,
             clickOutsideToClose:true,
             fullscreen:true,
-            templateUrl:'',
+            templateUrl: UserDialogTemplate,
             locals:{
                 title:'Visualizar Usuário',
-                user:user,
-                readOnly:true
+                user:this.util.copy(user),
+                readOnly:false
             }
         })
     }

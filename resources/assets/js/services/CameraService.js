@@ -151,19 +151,31 @@ class CameraController{
 
 
 export default class CameraService{
-    constructor(DialogService, OrphaUtilService){
+    constructor(DialogService, OrphaUtilService, LogService){
+        this.log = LogService;
         this.dialogService = DialogService;
         this.util = OrphaUtilService;
     }
 
     showCamera(options){
         options = options || {};
-        return this.dialogService.showCustomDialog({
+        let defer = this.util.defer();
+        this.log.info("Camera started.");
+        this.dialogService.showCustomDialog({
             controller: CameraController,
             template: camDialogTemplate,
             clickOutsideToClose:false,
             fullscreen: false,
             locals:options
+        }).then((response) => {
+            defer.resolve(response);
+            this.log.info("Camera stopped, reason: save.");
+        }, (err) => {
+            if(err !== 'cancel'){
+                defer.reject(err);
+            }
+            this.log.info("Camera stopped, reason: " + err+".");
         });
+        return defer.promise;
     }
 }

@@ -4,8 +4,13 @@
 
 export default class UserDialogController{
 
-    constructor(){
-        console.log(this);
+    constructor(DialogService){
+        this.dialogService = DialogService;
+        this.loading = false;
+    }
+
+    close(){
+        this.dialogService.cancelDialog({});
     }
 
 }

@@ -48,7 +48,7 @@
     <div ng-if="filteredUsers.length == 0 && $component.search == ''" layout="column" layout-sm="column" layout-align="center center">
         <h3 class="md-headline">{{ 'MSG1' | message }}</h3>
     </div>
-
+    <br/>
     <!--Pagination-->
     <md-pagination is-disabled="$component.disablePagination" current-page="$component.filteredUsersCurrentPage" items-per-page="$component.filteredUsersItemsPerPage" n-items="filteredUsers.length" ></md-pagination>
 

@@ -1,16 +1,18 @@
-<div layout="row" class="md-pagination" layout-align="center center" style="font-size: 12px; color: rgba(0, 0, 0, 0.54);">
+<div layout="row" flex class="md-pagination" layout-align="center center" layout-wrap style="font-size: 12px; color: rgba(0, 0, 0, 0.54);">
 
-    <div class="label" style="margin-right: 10px;">Página:</div>
-    <md-select class="md-page-select" ng-model="$pagination.page" ng-disabled="$pagination.isDisabled" style="margin-right: 10px;" aria-label="selected-page">
-        <md-option ng-repeat="n in [].constructor($pagination.numberOfPages) track by $index" ng-value="$index+1">{{ $index+1 }}</md-option>
-    </md-select>
+    <div layout="row" layout-align="start center">
+        <div class="label" style="margin-right: 10px;">Página:</div>
+        <md-select class="md-page-select" ng-model="$pagination.page" ng-disabled="$pagination.isDisabled" style="margin-right: 10px;" aria-label="selected-page">
+            <md-option ng-repeat="n in [].constructor($pagination.numberOfPages) track by $index" ng-value="$index+1">{{ $index+1 }}</md-option>
+        </md-select>
 
-    <div class="label" style="margin-right: 10px;">Linhas Por Página:</div>
-    <md-select class="md-page-select" ng-model="$pagination.itemsPerPage" ng-disabled="$pagination.isDisabled" style="margin-right: 10px;" aria-label="items-peer-page">
-        <md-option ng-value="5" >5</md-option>
-        <md-option ng-value="10" >10</md-option>
-        <md-option ng-value="20" >20</md-option>
-    </md-select>
+        <div class="label" style="margin-right: 10px;">Linhas Por Página:</div>
+        <md-select class="md-page-select" ng-model="$pagination.itemsPerPage" ng-disabled="$pagination.isDisabled" style="margin-right: 10px;" aria-label="items-peer-page">
+            <md-option ng-value="5" >5</md-option>
+            <md-option ng-value="10" >10</md-option>
+            <md-option ng-value="20" >20</md-option>
+        </md-select>
+    </div>
 
     <div class="buttons" layout="row" layout-align="start center">
         <div class="label" style="margin-right: 10px;">

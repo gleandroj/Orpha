@@ -32,9 +32,8 @@ export default class DialogService{
         var dialog = {
             options: options
         };
-
         this.dialogs.push(dialog);
-        return this._showDialog(dialog.options);
+        return this._showDialog(dialog.options)
     }
 
     showCustomDialog(options){
