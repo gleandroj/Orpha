@@ -33,12 +33,12 @@
             <error-message name="required" message="{{ 'MSG2' | message }}"></error-message>
         </text-input>
 
-        <text-input max-length="14" min-lenght="8" ng-if="!$form.readOnly" name="Senha" type="password" icon="lock" label="Senha" is-disabled="$form.readOnly" is-required="'true'" ng-model="$form.user.password">
+        <text-input max-length="14" min-length="8" ng-if="!$form.readOnly" name="Senha" type="password" icon="lock" label="Senha" is-disabled="$form.readOnly" is-required="$form.isPasswordFieldRequired" ng-model="$form.user.password">
             <error-message name="required" message="{{ 'MSG2' | message }}"></error-message>
-            <error-message name="maxLength" message="{{ 'MSG11' | message:{min:8, max:14} }}"></error-message>
+            <error-message name="minlength" message="{{ 'MSG11' | message:{min:8, max:14} }}"></error-message>
         </text-input>
 
-        <text-input ng-if="!$form.readOnly" name="C_Senha" type="password" icon="lock" label="Confirmação de Senha" is-disabled="$form.readOnly" is-required="'true'" ng-model="$form.user.password_confirmation" match="$form.user.password" check-match="true">
+        <text-input max-length="14" min-length="8" ng-if="!$form.readOnly" name="C_Senha" type="password" icon="lock" label="Confirmação de Senha" is-disabled="$form.readOnly" is-required="$form.isPasswordFieldRequired" ng-model="$form.user.password_confirmation" match="$form.user.password" check-match="true">
             <error-message name="required" message="{{ 'MSG2' | message }}"></error-message>
             <error-message name="match" message="{{ 'MSG9' | message:{attribute:'As senhas'} }}"></error-message>
         </text-input>

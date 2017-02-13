@@ -13,21 +13,22 @@
         <md-progress-linear md-mode="indeterminate" class="md-accent" ng-show="$ctrl.loading"></md-progress-linear>
 
         <md-content flex>
-            <user-form user="$ctrl.user" read-only="$ctrl.readOnly"></user-form>
+            <user-form user="$ctrl.user" read-only="$ctrl.readOnly" is-password-field-required="$ctrl.user.id == null"></user-form>
         </md-content>
+
         <span flex></span>
         <md-divider></md-divider>
         <md-dialog-actions ng-if="!$ctrl.readOnly"  layout="row" layout-align="end center">
-            <md-button class="md-accent md-raised" type="submit" ng-disabled="$ctrl.loading">
+            <md-button class="md-accent md-raised" type="submit" ng-disabled="$ctrl.loading || form.$invalid">
                 Salvar
             </md-button>
-            <md-button class="md-warn" ng-click="$ctrl.close()" ng-disabled="$ctrl.loading">
+            <md-button class="md-warn" ng-click="$ctrl.close()" ng-disabled="$ctrl.loading || form.$invalid">
                 Cancelar
             </md-button>
         </md-dialog-actions>
 
         <md-dialog-actions ng-if="$ctrl.readOnly" layout="row" layout-align="end center">
-            <md-button class="md-primary md-raised" ng-if="$ctrl.user.deleted_at == null" ng-disabled="$ctrl.loading">
+            <md-button ng-click="$ctrl.changeToEditMode()" class="md-primary md-raised" ng-if="$ctrl.user.deleted_at == null" ng-disabled="$ctrl.loading">
                 Alterar
             </md-button>
             <md-button class="md-primary md-raised" ng-if="$ctrl.user.deleted_at != null" ng-disabled="$ctrl.loading">

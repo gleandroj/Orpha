@@ -34,6 +34,7 @@ class TextInputController{
 
         this.util.timeout(()=> {
             self.form = self.scope['_form_'+self.name];
+
             self.model.$validators = self.form[this.name].$validators;
 
             if(self.checkMatch){
@@ -46,6 +47,7 @@ class TextInputController{
             if(self.type != 'text' && self.type != 'email' && self.type != 'password')
                 throw 'O tipo deve ser "text" ou "email" ou "password"';
         }, 1);
+
     }
 
     $onInit(){
@@ -64,7 +66,7 @@ class TextInputController{
     }
 
     checkMatchFn(value1, value2){
-        return ((value1 === null || value1 === "") && (value2 === null || value2 === "")) || (value1 === value2);
+        return ((value1 === null || value1 === "" || value1 === undefined) && (value2 === null || value2 === "" || value2 === undefined)) || (value1 === value2);
     }
 
     validate(){

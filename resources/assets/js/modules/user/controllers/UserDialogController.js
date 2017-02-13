@@ -13,4 +13,8 @@ export default class UserDialogController{
         this.dialogService.cancelDialog({});
     }
 
+    changeToEditMode(){
+        this.readOnly = false;
+    }
+
 }

@@ -15,12 +15,12 @@
                 ng-required="$ctrl.isRequired"
                 ng-disabled="$ctrl.isDisabled"
 
-                ng-minlength="$ctrl.minLength"
-                ng-maxlength="$ctrl.maxLength"
+                ng-minlength="{{ $ctrl.minLength }}"
+                ng-maxlength="{{ $ctrl.maxLength }}"
 
-                md-maxlength="$ctrl.maxLength"
+                md-maxlength="{{ $ctrl.maxLength }}"
 
-                maxlength="{{$ctrl.maxLength }}"
+                maxlength="{{ $ctrl.maxLength }}"
                 ng-focus="$ctrl.isDisabled || $ctrl.model.$setTouched()"
                 ng-click="$ctrl.isDisabled || $ctrl.model.$setTouched()" >
 

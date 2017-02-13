@@ -30,8 +30,8 @@
                 users="$controller.users"
                 filter="{deleted_at: '!'}"
                 on-user-click="$controller.showUser(user)"
-                on-primary-btn-click="$controller.clicked(user, 'edit')"
-                on-secondary-btn-click="$controller.clicked(user, 'delete')"></user-list>
+                on-primary-btn-click="$controller.editUser(user)"
+                on-secondary-btn-click="$controller.removeUser(user)"></user-list>
 
         <user-list
                 ng-show="showInactive"

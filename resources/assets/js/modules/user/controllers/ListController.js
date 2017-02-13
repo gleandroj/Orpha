@@ -23,17 +23,29 @@ export default class ListController{
     }
 
     showUser(user){
+        this.showDialog(user, 'Visualizar Usuário', true);
+    }
+
+    editUser(user){
+        this.showDialog(user, 'Alterar Usuário', false);
+    }
+
+    removeUser(user){
+
+    }
+
+    showDialog(user, title, readOnly){
         this.dialogService.showCustomDialog({
             controller:UserDialogController,
             clickOutsideToClose:true,
             fullscreen:true,
             templateUrl: UserDialogTemplate,
             locals:{
-                title:'Visualizar Usuário',
+                title: title,
                 user:this.util.copy(user),
-                readOnly:false
+                readOnly:readOnly
             }
-        })
+        });
     }
 
     getAll(){
@@ -47,5 +59,4 @@ export default class ListController{
             this.toastService.showError(error['message']);
         });
     }
-
 }
