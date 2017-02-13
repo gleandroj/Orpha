@@ -1,0 +1,29 @@
+{
+  "name": "orpha",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Gabriel <gabrielleandrojunior@live.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/gleandroj/Orpha",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/bower",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-material": "master",
+    "angular-ui-router": "^0.3.1",
+    "angular-resource": "^1.5.8",
+    "ngMask": "angular-mask#^3.1.1",
+    "moment": "^2.15.1",
+    "angular-material-expansion-panel": "^0.7.0",
+    "angular-chart.js": "^1.0.3",
+    "angular-filter": "^0.5.11"
+  }
+}

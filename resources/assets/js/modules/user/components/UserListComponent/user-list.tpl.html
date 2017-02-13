@@ -1,0 +1,55 @@
+<md-list  aria-disabled="true">
+
+    <md-subheader class="md-no-sticky" aria-disabled="true">{{ $component.title }}</md-subheader>
+
+    <!--List of users-->
+    <md-list-item ng-repeat-start="user in (filteredUsers = ($component.users | filter:$component.search | orderBy: 'name' | filter:$component.filter)) | startFrom: (($component.filteredUsersCurrentPage-1)*$component.filteredUsersItemsPerPage) | limitTo: $component.filteredUsersItemsPerPage"
+                  aria-label="user-{{ user.id }}"
+                  class="md-2-line md-with-secondary"
+                  md-colors="{{$component.backgroundColor ? {background: $component.backgroundColor} : null}}"
+                  ng-disabled="$component.isDisabled"
+                  ng-click="$component.onUserClick({user: user})">
+
+        <img hide-sm hide-xs src="{{ user.avatar || $component.fallbackimg }}" class="md-user-avatar" style="margin: 0px 10px 0px 0px;" alt="{{user.avatar}}"/>
+
+        <div class="md-list-item-text" layout="column" layout-align="start start" md-truncate flex>
+            <h3 md-highlight-text="$component.search" md-highlight-flags="ig" >{{ user.name }}</h3>
+            <p md-highlight-text="$component.search" md-highlight-flags="ig">{{ user.email }}</p>
+            <p md-highlight-text="$component.search" md-highlight-flags="ig" ng-model="user.phone" mask="(99) 9?9999-9999" >{{ user.phone }}</p>
+
+        </div>
+
+        <md-button ng-click="$component.onPrimaryBtnClick({user: user})" ng-if="$component.showPrimaryBtn" ng-disabled="$component.primaryBtnDisabled || $component.isDisabled" class="md-icon-button md-secondary md-raised md-primary md-secondary" aria-label="primary-btn">
+            <md-icon class="material-icons">{{ $component.primaryBtnIcon }}</md-icon>
+            <md-tooltip md-direction="left">
+                {{ $component.primaryBtnText }}
+            </md-tooltip>
+        </md-button>
+
+        <md-button ng-click="$component.onSecondaryBtnClick({user: user})" ng-if="$component.showSecondaryBtn" ng-disabled="$component.secondaryBtnDisabled || $component.isDisabled" class="md-icon-button md-secondary md-raised md-warn md-hue-2 md-secondary" aria-label="secondary-btn">
+            <md-icon class="material-icons">{{ $component.secondaryBtnIcon }}</md-icon>
+            <md-tooltip md-direction="left">
+                {{ $component.secondaryBtnText }}
+            </md-tooltip>
+        </md-button>
+
+    </md-list-item>
+
+    <md-divider ng-if="($component.filteredUsersCurrentPage === $component.ceil((filteredUsers.length/$component.filteredUsersItemsPerPage))) ?
+                        (($index+1) % ($component.filteredUsersItemsPerPage - ((($component.ceil((filteredUsers.length/$component.filteredUsersItemsPerPage))) * $component.filteredUsersItemsPerPage) - filteredUsers.length)) != 0 ) :
+                            ((($index+1) % $component.filteredUsersItemsPerPage)  != 0)"
+                ng-repeat-end >
+    </md-divider>
+
+    <!--Messages-->
+    <div ng-if="filteredUsers.length == 0 && $component.search != ''" layout="column" layout-sm="column" layout-align="center center">
+        <h3 class="md-headline">{{ 'MSG8' | message }}</h3>
+    </div>
+    <div ng-if="filteredUsers.length == 0 && $component.search == ''" layout="column" layout-sm="column" layout-align="center center">
+        <h3 class="md-headline">{{ 'MSG1' | message }}</h3>
+    </div>
+
+    <!--Pagination-->
+    <md-pagination is-disabled="$component.disablePagination" current-page="$component.filteredUsersCurrentPage" items-per-page="$component.filteredUsersItemsPerPage" n-items="filteredUsers.length" ></md-pagination>
+
+</md-list>
