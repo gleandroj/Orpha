@@ -10,9 +10,10 @@ import FallbackImg from './../../../../img/ic_account_circle_black_48dp_2x.png';
 
 class TextInputController{
 
-    constructor($scope, OrphaUtilService){
+    constructor($scope, OrphaUtilService, $http){
         this.scope = $scope;
         this.util = OrphaUtilService;
+        this.http = $http;
     }
 
     initialize(){
@@ -23,6 +24,7 @@ class TextInputController{
         this.maxLength = this.maxLength || null;
         this.minlength = this.minlength || 0;
         this.checkMatch = this.checkMatch || false;
+        this.checkEmail = this.checkEmail || false;
         this.match = this.match || null;
         this.name = this.name || 'input_'+Math.random().toString(36).slice(2).substr(0, 5);
         this.label = this.label || '';
@@ -167,6 +169,7 @@ export let TextInputComponent = {
         maxLength: '<',
         minLength: '<',
         checkMatch: '<',
+        checkEmail: '<',
         match: '<',
         name:'@',
         label: '@',

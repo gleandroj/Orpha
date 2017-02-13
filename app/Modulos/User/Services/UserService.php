@@ -14,6 +14,7 @@ use App\Modulos\User\Contracts\UserRepositoryInterface;
 use App\Modulos\User\Contracts\UserServiceInterface;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 use Intervention\Image\Facades\Image;
 
 class UserService implements UserServiceInterface
@@ -155,7 +156,10 @@ class UserService implements UserServiceInterface
     public function checkEmail(array $data)
     {
         \validator::make($data, [
-            'email' => 'required|email|unique:users,email'
+            'email' => [
+                'required',
+                Rule::unique('users')->ignore($data['user_id'], 'id')
+            ]
         ])->validate();
     }
 

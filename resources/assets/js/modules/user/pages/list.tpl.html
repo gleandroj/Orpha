@@ -19,7 +19,9 @@
     <md-card-content layout-padding layout-margin>
 
         <search-input label="Pesquisar" ng-model="$controller.search" max-length="50"></search-input>
+
         <md-checkbox ng-model="showInactive">Mostrar inativos</md-checkbox>
+
         <user-list
                 primary-btn-text="Editar Usuário"
                 secondary-btn-text="Desativar Usuário"
@@ -47,3 +49,12 @@
     </md-card-content>
 
 </md-card>
+
+<div class="fab-panel">
+    <md-button aria-label="create-user" id="create-fab" class="md-fab" aria-label="Action" ng-click="$controller.createUser()">
+        <md-icon aria-label="create-user-icon" class="material-icons">add</md-icon>
+        <md-tooltip md-direction="left">
+            Novo usuário
+        </md-tooltip>
+    </md-button>
+</div>

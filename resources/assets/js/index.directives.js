@@ -2,7 +2,9 @@
  * Created by FG0003 on 27/12/2016.
  */
 
-import { ErrorMessageDirectivie } from './directives/ErrorMessageDirectivie';
+import { ErrorMessageDirective } from './directives/ErrorMessageDirective';
+import { CheckEmailDirective } from './directives/CheckEmailDirective';
 
 angular.module('orpha.directives')
-    .directive(ErrorMessageDirectivie.selector, ErrorMessageDirectivie.fn);
+    .directive(CheckEmailDirective.selector, CheckEmailDirective.fn)
+    .directive(ErrorMessageDirective.selector, ErrorMessageDirective.fn);

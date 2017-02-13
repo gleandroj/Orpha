@@ -7,7 +7,8 @@ import UserDialogTemplate from './../pages/dialog.tpl.html';
 
 export default class ListController{
 
-    constructor(DialogService, OrphaUtilService, UserService, ToastService){
+    constructor(DialogService, OrphaUtilService, AuthService, UserService, ToastService){
+        this.authService = AuthService;
         this.util = OrphaUtilService;
         this.dialogService = DialogService;
         this.userService = UserService;
@@ -27,15 +28,28 @@ export default class ListController{
     }
 
     editUser(user){
-        this.showDialog(user, 'Alterar Usuário', false);
+        this.showDialog(user, 'Alterar Usuário', false)
+        .then((newUser)=> {
+            this.util.extend(user, newUser);
+            if(this.authService.getCurrentUser().id === newUser.id){
+                this.authService.setCurrentUser(newUser);
+            }
+        }, ()=>{});
     }
 
     removeUser(user){
 
     }
 
+    createUser(){
+        this.showDialog({}, 'Inserir Usuário', false)
+            .then((newUser)=> {
+                this.users.push(newUser);
+            }, ()=>{});
+    }
+
     showDialog(user, title, readOnly){
-        this.dialogService.showCustomDialog({
+        return this.dialogService.showCustomDialog({
             controller:UserDialogController,
             clickOutsideToClose:true,
             fullscreen:true,

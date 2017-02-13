@@ -1,5 +1,5 @@
 
-export let ErrorMessageDirectivie = {
+export let ErrorMessageDirective = {
     selector:'errorMessage',
     fn: ()=>{
         return {

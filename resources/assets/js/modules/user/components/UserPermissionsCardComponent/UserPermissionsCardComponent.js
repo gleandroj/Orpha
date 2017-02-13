@@ -16,7 +16,7 @@ class Controller {
 
     $onInit() {
         var self = this;
-        this.model.$render = () => this.value = this.model.$viewValue;
+        this.model.$render = () => this.value = this.model.$viewValue || [];
         this.util.timeout(()=> this.initialize(), 1);
     }
 
@@ -68,7 +68,6 @@ class Controller {
     }
 
     toggleAllPermissions(module) {
-
         var modulePermissions = this.getPermissionByModule(module, this.permissions);
         var userModulePermissions = this.getPermissionByModule(module, this.getUserPermissions());
         if(userModulePermissions.length === modulePermissions.length){
@@ -76,6 +75,7 @@ class Controller {
         }else{
             this.util.forEach(modulePermissions, (item) =>  this.add(item));
         }
+        this.onChange();
     }
 
     togglePermission(item) {
@@ -84,6 +84,7 @@ class Controller {
         }else {
             this.add(item);
         }
+        this.onChange();
     }
 
     exists(item) {

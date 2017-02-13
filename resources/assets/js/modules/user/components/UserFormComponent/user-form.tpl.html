@@ -25,12 +25,16 @@
             <error-message name="required" message="{{ 'MSG2' | message }}"></error-message>
         </text-input>
 
-        <text-input max-length="20" name="Email" icon="email" label="E-mail" is-disabled="$form.readOnly" is-required="'true'" ng-model="$form.user.email">
+        <!-- Check email -->
+        <text-input max-length="20" type="email" name="Email" check-email check="{{ !$form.readOnly }}" user-id="{{ $form.user.id }}" icon="email" label="E-mail" is-disabled="$form.readOnly" is-required="'true'" ng-model="$form.user.email">
             <error-message name="required" message="{{ 'MSG2' | message }}"></error-message>
+            <error-message name="email" message="{{ 'MSG10' | message:{attribute:'E-mail'} }}"></error-message>
+            <error-message name="checkEmail" message="{{ check_email_result }}"></error-message>
         </text-input>
 
-        <text-input max-length="20" name="Telefone" mask="(99) 9?9999-9999" icon="phone" label="Telefone" is-disabled="$form.readOnly" is-required="'true'" ng-model="$form.user.phone">
+        <text-input max-length="20" name="Telefone" mask="(99) 9?9999-9999" restrict="reject" clean="true" icon="phone" label="Telefone" is-disabled="$form.readOnly" is-required="'true'" ng-model="$form.user.phone">
             <error-message name="required" message="{{ 'MSG2' | message }}"></error-message>
+            <error-message name="mask" message="{{ 'MSG10' | message:{attribute:'Telefone'} }}"></error-message>
         </text-input>
 
         <text-input max-length="14" min-length="8" ng-if="!$form.readOnly" name="Senha" type="password" icon="lock" label="Senha" is-disabled="$form.readOnly" is-required="$form.isPasswordFieldRequired" ng-model="$form.user.password">

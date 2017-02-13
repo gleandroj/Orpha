@@ -4,8 +4,9 @@
 
 export default class UserDialogController{
 
-    constructor(DialogService){
+    constructor(DialogService, UserService){
         this.dialogService = DialogService;
+        this.userSerice = UserService;
         this.loading = false;
     }
 
@@ -17,4 +18,12 @@ export default class UserDialogController{
         this.readOnly = false;
     }
 
+    submit(){
+        this.userSerice.save(this.user)
+        .success((newUser) => {
+            this.dialogService.hideDialog(newUser);
+        }).error((err)=>{
+            console.log(err);
+        });
+    }
 }
