@@ -9,7 +9,8 @@ import arrow_last from '../../../../img/icons/navigate-last.svg';
 import Template from './md-pagination.tpl.html';
 
 class PaginationController{
-    constructor(){
+    constructor(OrphaUtilService){
+        this.util = OrphaUtilService;
         this.arrow_before = arrow_before;
         this.arrow_first = arrow_first;
         this.arrow_next = arrow_next;
@@ -27,9 +28,13 @@ class PaginationController{
     }
 
     $onChanges(){
+        if(this.currentPage > this.numberOfPages){
+            this.currentPage = this.numberOfPages;
+        }
     }
 
     $onInit(){
+
     }
 
     get numberOfPages(){

@@ -5,13 +5,14 @@
 
 export let CheckEmailDirective = {
     selector:'checkEmail',
-    fn: ($http, OrphaUtilService)=>{
+    fn: ($http, OrphaUtilService, $q)=>{
         return {
             require:{
                 model:"ngModel"
             },
             link:(scope, element, attrs, $ctrl)=>{
-                let check = function(){return attrs.check === 'true'};
+                let check = function(){ return attrs.check === 'true' && $ctrl.model.$touched && $ctrl.model.$dirty };
+
                 $ctrl.model.$asyncValidators.checkEmail = function (value) {
                     var defer = OrphaUtilService.defer();
 
@@ -23,7 +24,7 @@ export let CheckEmailDirective = {
                                     defer.reject();
                                 });
                     }else{
-                        OrphaUtilService.timeout(() => defer.resolve(), 1);
+                        return $q.resolve(true);
                     }
                     return defer.promise;
                 };

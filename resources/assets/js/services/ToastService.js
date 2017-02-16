@@ -22,6 +22,7 @@ export default class ToastService{
         return toast;
     }
 
+
     show(text, time){
         this._show(this._defaultToast(time)
             .textContent(text));

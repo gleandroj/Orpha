@@ -19,6 +19,7 @@ class Controller {
 
     initialize(){
         this.readOnly = !(this.readOnly === false || this.readOnly === 'false');
+        this.isDisabled = !(this.readOnly === false || this.readOnly === 'false');
         this.isPasswordFieldRequired = !(this.isPasswordFieldRequired === false || this.isPasswordFieldRequired === 'false');
     }
 }
@@ -28,6 +29,7 @@ export let UserFormComponent = {
     bindings: {
         user:'=',
         readOnly: '<',
+        isDisabled: '<',
         isPasswordFieldRequired:'<'
     },
     controller: Controller,

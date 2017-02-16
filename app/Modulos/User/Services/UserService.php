@@ -37,7 +37,13 @@ class UserService implements UserServiceInterface
     public function __construct(UserRepositoryInterface $userRepository)
     {
         $this->userRepository = $userRepository;
-        $this->user = Auth::user();
+    }
+
+    /**
+     * @return User
+     */
+    protected function getCurrentUser(){
+        return Auth::user();
     }
 
     /**
@@ -75,7 +81,7 @@ class UserService implements UserServiceInterface
         }
 
         $data->put('password', bcrypt($data['password']));
-        $data->put('orfanato_id', $this->user->orfanato_id);
+        $data->put('orfanato_id', $this->getCurrentUser()->orfanato_id);
 
         $user = $this->userRepository->create($data->all());
 

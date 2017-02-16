@@ -362,19 +362,27 @@ export function OAuthInterceptor($injector, LogService, OrphaUtilService) {
             Session.touch();
             config.headers.Authorization = token.token_type + " " + token.access_token;
         }
+        //config.timeout = 10000; //Need timeout?
         return config;
     };
 
     const ResponseError = (response) => {
         const Auth = $injector.get('AuthService');
+        const messageService = $injector.get('MessageService');
+
         var deferred = OrphaUtilService.defer();
 
         if ((response.config.url.indexOf('oauth/token') === -1) && response.status == 401) {
             //Try recovery request?
             deferred.reject(response);
-        } else {
+        }else if(response.status === -1){
+            // What do when is timeout?
             deferred.reject(response);
         }
+        else {
+            deferred.reject(response);
+        }
+
         return deferred.promise;
     };
 
