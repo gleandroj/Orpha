@@ -6,7 +6,7 @@ import LogService from './services/LogService';
 import OrphaUtilService from './services/OrphaUtilService';
 import StorageService from './services/StorageService';
 import MessageService from './services/MessageService';
-import DialogService from './services/DialogService';
+import { DialogServiceProvider } from './services/DialogService';
 import ToastService from './services/ToastService';
 import CameraService from './services/CameraService';
 import { SessionService, SessionEvents } from './services/SessionService';
@@ -17,7 +17,7 @@ angular.module('orpha.services')
     .service('OrphaUtilService', OrphaUtilService)
     .service('StorageService', StorageService)
     .service('MessageService', MessageService)
-    .service('DialogService', DialogService)
+    .provider('DialogService', DialogServiceProvider)
     .service('ToastService', ToastService)
     .service('CameraService', CameraService)
     .service('SessionService', SessionService)

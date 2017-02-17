@@ -2,42 +2,64 @@
  * Created by FG0003 on 13/02/2017.
  */
 
-export default class UserDialogController{
+export default class UserDialogController {
 
-    constructor(DialogService, UserService, ToastService, MessageService){
+    constructor(DialogService, UserService, ToastService, MessageService, OrphaUtilService) {
         this.dialogService = DialogService;
         this.userSerice = UserService;
         this.toastService = ToastService;
         this.messageService = MessageService;
+        this.utilService = OrphaUtilService;
         this.loading = false;
     }
 
-    close(){
+    close() {
         this.dialogService.cancelDialog({});
     }
 
-    cancel(){
-        if(this.user.id == '' || this.user.id == null){
+    cancel() {
+        if (this.user.id == '' || this.user.id == null) {
             this.close();
-        }else {
+        } else {
             this.readOnly = true;
         }
     }
 
-    changeToEditMode(){
+    changeToEditMode() {
         this.readOnly = false;
     }
 
-    submit(){
+    submitUser() {
         this.loading = true;
+
         this.userSerice.save(this.user)
-        .success((newUser) => {
-            this.loading = false;
-            this.dialogService.hideDialog(newUser);
-        }).error((err)=>{
+            .success((newUser) => {
+                this.loading = false;
+                this.dialogService.hideDialog(newUser);
+            }).error((err)=> {
             this.loading = false;
             console.log(err);
             this.toastService.showError(err ? err['message'] : this.messageService.get('MSG4'));
         });
+    }
+
+    showConfirmation(okCallback, cancelCallback){
+        this.dialogService
+            .showConfirmDialog({
+                    title: 'Confirmação',
+                    okBtn: 'Sim',
+                    cancelBtn: 'Não',
+                    message: this.messageService.get('MSG6')
+                }).then(okCallback, cancelCallback);
+    }
+
+    submit() {
+        if (this.user.id === null || this.user.id === '') {
+            this.submitUser();
+        } else {
+            this.showConfirmation(()=>{
+                this.submitUser();
+            }, ()=>{});
+        }
     }
 }

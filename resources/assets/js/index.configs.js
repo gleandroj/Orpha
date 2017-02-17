@@ -6,9 +6,11 @@ import MessageServiceConfig from './config/MessageServiceConfig';
 import AuthServiceConfig from './config/AuthServiceConfig';
 import AngularConfig from './config/AngularConfig';
 import RouteAppConfig from './config/RouteAppConfig';
+import DialogServiceConfig from './config/DialogServiceConfig';
 
 angular.module('orpha.config')
         .config(MessageServiceConfig)
         .config(AuthServiceConfig)
         .config(AngularConfig)
-        .config(RouteAppConfig);
+        .config(RouteAppConfig)
+        .config(DialogServiceConfig);
