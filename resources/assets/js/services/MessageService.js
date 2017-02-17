@@ -1,6 +1,6 @@
-/**
- * Created by FG0003 on 27/12/2016.
- */
+export const MessageEvents = {
+    resourcesUpdated: "message:resources-updated"
+};
 
 export default class MessageService{
 
@@ -22,7 +22,7 @@ export default class MessageService{
                 (response) => {
                     this.dictionary = response.data;
                     this.resourceFileLoaded = true;
-                    this.util.broadcast('messageResourcesUpdated');
+                    this.util.broadcast(MessageEvents.resourcesUpdated);
                 },
                 () => {
                     this.log.error("Error on load resource messages file");
@@ -30,7 +30,7 @@ export default class MessageService{
             );
     }
 
-    getMessage(id, attributes){
+    get(id, attributes){
         let result = '';
 
         if (this.dictionary !== null) {

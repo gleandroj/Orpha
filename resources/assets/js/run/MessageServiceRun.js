@@ -1,8 +1,11 @@
+import { MessageEvents } from  './../services/MessageService';
 
 export default function MessageServiceRun(MessageService, OrphaUtilService, $urlRouter, LogService) {
-    OrphaUtilService.on('messageResourcesUpdated', function () {
+
+    OrphaUtilService.on(MessageEvents.resourcesUpdated, function () {
         $urlRouter.sync();
         $urlRouter.listen();
         LogService.info('Messages resources updated.');
     });
+
 }

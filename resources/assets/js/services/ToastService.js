@@ -6,7 +6,7 @@ export default class ToastService{
 
     constructor($mdToast){
         this.toast = $mdToast;
-        this.time = 40000;
+        this.time = 7000;
     }
 
     _show(options){
@@ -14,6 +14,7 @@ export default class ToastService{
     }
 
     _defaultToast(time){
+        console
         let toast = this.toast.simple()
             .highlightAction(true)
             .highlightClass('md-accent')

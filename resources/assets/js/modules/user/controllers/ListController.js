@@ -33,7 +33,7 @@ export default class ListController{
         .error((error) => {
             console.log(error);
             this.loading = false;
-            this.toastService.showError(error ? error['message'] : this.messageService.getMessage('MSG4'));
+            this.toastService.showError(error ? error['message'] : this.messageService.get('MSG4'));
         });
     }
 

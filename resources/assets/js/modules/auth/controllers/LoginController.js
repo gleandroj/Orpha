@@ -23,7 +23,7 @@ export default class LoginController {
                 self.loading = false;
             })
             .error((error) => {
-                self.toast.showError(self.message.getMessage('MSG14'));
+                self.toast.showError(self.message.get('MSG14'));
                 self.loading = false;
             });
     }

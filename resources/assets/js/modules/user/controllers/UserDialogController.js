@@ -37,7 +37,7 @@ export default class UserDialogController{
         }).error((err)=>{
             this.loading = false;
             console.log(err);
-            this.toastService.showError(err ? err['message'] : this.messageService.getMessage('MSG4'));
+            this.toastService.showError(err ? err['message'] : this.messageService.get('MSG4'));
         });
     }
 }

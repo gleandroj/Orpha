@@ -16,6 +16,9 @@ export default function AuthServiceRun(AuthService, DialogService, ToastService,
         }
         if (args.error && args.message)
             LogService.error("Login error: " + args.message);
+        if ($state.current.name === "") {
+            $state.go(AuthService.OAuth['login_route']);
+        }
     });
 
     OrphaUtilService.on(SessionEvents.sessionExpired, (event, args) => {
@@ -25,7 +28,6 @@ export default function AuthServiceRun(AuthService, DialogService, ToastService,
         if ($state.current.name === "") {
             $state.go(AuthService.OAuth['login_route']);
         }
-        ToastService.showError(MessageService.getMessage("MSG15"));
+        ToastService.showError(MessageService.get("MSG15"));
     });
-
 }
