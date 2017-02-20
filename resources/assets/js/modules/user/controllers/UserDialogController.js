@@ -31,26 +31,25 @@ export default class UserDialogController {
 
     submitUser() {
         this.loading = true;
-
         this.userSerice.save(this.user)
             .success((newUser) => {
                 this.loading = false;
                 this.dialogService.hideDialog(newUser);
             }).error((err)=> {
-            this.loading = false;
-            console.log(err);
-            this.toastService.showError(err ? err['message'] : this.messageService.get('MSG4'));
-        });
+                this.loading = false;
+                console.log(err);
+                this.toastService.showError(err ? err['message'] : this.messageService.get('MSG4'));
+            });
     }
 
     showConfirmation(okCallback, cancelCallback){
         this.dialogService
             .showConfirmDialog({
-                    title: 'Confirmação',
-                    okBtn: 'Sim',
-                    cancelBtn: 'Não',
-                    message: this.messageService.get('MSG6')
-                }).then(okCallback, cancelCallback);
+                title: 'Confirmação',
+                okBtn: 'Sim',
+                cancelBtn: 'Não',
+                message: this.messageService.get('MSG6')
+            }).then(okCallback, cancelCallback);
     }
 
     submit() {

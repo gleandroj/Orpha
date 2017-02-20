@@ -28,73 +28,97 @@ class DialogService {
         return this.mdDialog.show(options);
     }
 
-    getLastDialog() {
-        return this.dialogs.length > 0 ? this.dialogs[this.dialogs.length - 1] : null;
-    }
-
     pushDialog(options) {
         var dialog = {
-            show: true,
+            show: false,
             options: null,
-            promisse: null,
+            defer: this.util.defer(),
             element: null,
             scope: null,
             hideCalled: false,
             cancelCalled: false
         };
-        let showingDialog = null;
 
         dialog.options = this.util.extend({
+            clickOutsideToClose: true,
+            fullscreen: true,
             bindToController: true,
             hasBackdrop: true,
             multiple: this.showMultipleDialogs,
-            skipHide: true,
             bindToControlle: true,
+            escapeToClose: true,
             controllerAs: '$ctrl',
             parent: angular.element(document.body),
             locals: {},
             preserveScope: true,
-            onComplete: (scope, element)=> {
-                dialog.scope = scope;
-                dialog.element = element;
-                this.dialogs.push(dialog);
-            },
-            onRemoving: (element, removePromise)=> {
-                if (this.dialogs.indexOf(dialog) > -1 && !(dialog.hideCalled || dialog.cancelCalled) && dialog.show === true) {
-                    this.popDialog();
-                }
-            }
+            onComplete: (scope, element)=> this.onDialogCompleted(dialog, scope, element),
+            onRemoving: (element, removePromise)=> this.onDialogRemoving(dialog, element, removePromise)
         }, options);
 
-        if ((showingDialog = this.getLastDialog()) != null) {
-            showingDialog.show = false;
+        if (this.dialogs.length > 0) {
+            this.dialogs[this.dialogs.length - 1].show = false;
         }
-        dialog.promisse = this._showDialog(dialog.options);
-        return dialog.promisse;
+
+        this.dialogs.push(dialog);
+        this._showDialog(dialog.options).then((response) => this.onDialogHidden(dialog, response), (response)=> this.onDialogCanceled(dialog, response));
+        return dialog.defer.promise;
     }
 
-    restoreDialog(dialog){
-        dialog.show = true;
+    restoreDialog(dialog) {
+        if(dialog.show !== false) return;
+
         dialog.options = {
-            hasBackdrop: true,
-            multiple: this.showMultipleDialogs,
-            skipHide: true,
-            controllerAs: dialog.options.controllerAs,
-            parent: angular.element(document.body),
+            bindToController: true,
             preserveScope: true,
-            onComplete: (scope, element)=> {
-                dialog.scope = scope;
-                dialog.element = element;
-            },
-            onRemoving: (element, removePromise)=> {
-                if (this.dialogs.indexOf(dialog) > -1 && !(dialog.hideCalled || dialog.cancelCalled) && dialog.show === true) {
-                    this.popDialog();
-                }
-            }
+            parent: angular.element(document.body),
+            clickOutsideToClose: dialog.options.clickOutsideToClose,
+            fullscreen: dialog.options.fullscreen,
+            hasBackdrop: dialog.options.hasBackdrop,
+            multiple: this.showMultipleDialogs,
+            escapeToClose: dialog.options.escapeToClose,
+            controllerAs: dialog.options.controllerAs,
+            template: dialog.scope[dialog.options.controllerAs].$$ngTemplate,
+            controller: () => dialog.scope[dialog.options.controllerAs],
+            onComplete: (scope, element)=> this.onDialogCompleted(dialog, scope, element),
+            onRemoving: (element, removePromise)=> this.onDialogRemoving(dialog, element, removePromise)
         };
-        dialog.options.controller = ()=>{ return dialog.scope[dialog.options.controllerAs] };
-        dialog.options.template = dialog.scope[dialog.options.controllerAs].$$ngTemplate;
-        dialog.promise = this._showDialog(dialog.options);
+        this._showDialog(dialog.options).then((response) => this.onDialogHidden(dialog, response), (response)=> this.onDialogCanceled(dialog, response));
+    }
+
+    onDialogRemoving(dialog, element, promise) {
+        if (dialog.show === true) { //(dialog.hideCalled || dialog.cancelCalled) || (dialog.show === true && this.dialogs.length > 0)
+
+            this.dialogs.pop();
+
+            if (this.dialogs.length > 0) {
+                this.restoreDialog(this.dialogs[this.dialogs.length - 1]);
+            }
+        }
+    }
+
+    onDialogCompleted(dialog, scope, element) {
+        dialog.show = true;
+        dialog.scope = scope;
+        dialog.element = element;
+
+       /* if (dialog.options.escapeToClose) {
+            dialog.element.bind('keydown keypress', (event)=> dialog.cancelCalled = dialog.cancelCalled || event.which === 27);
+        }
+        if (dialog.options.clickOutsideToClose) {
+            element.bind('click', (event)=> dialog.cancelCalled = dialog.cancelCalled || (event.target == dialog.element[0]));
+        }*/
+    }
+
+    onDialogHidden(dialog, response) {
+        if (dialog.show === true){
+            dialog.defer.resolve(response);
+        }
+    }
+
+    onDialogCanceled(dialog, response) {
+        if (dialog.show === true){
+            dialog.defer.reject(response);
+        }
     }
 
     showCustomDialog(options) {
@@ -124,35 +148,24 @@ class DialogService {
         return this.pushDialog(alert._options);
     }
 
-    popDialog() {
-        this.dialogs.pop();
-
-        if(this.dialogs.length > 0 && !this.showMultipleDialogs){
-            this.restoreDialog(this.getLastDialog());
-        }
-    }
-
     hideDialog(response) {
         if (this.dialogs.length > 0) {
-            let dialog = this.getLastDialog();
+            let dialog = this.dialogs[this.dialogs.length - 1];
             dialog.hideCalled = true;
-            this.popDialog();
             this.mdDialog.hide(response);
         }
     }
 
     cancelDialog(response) {
         if (this.dialogs.length > 0) {
-            let dialog = this.getLastDialog();
+            let dialog = this.dialogs[this.dialogs.length - 1];
             dialog.cancelCalled = true;
-            this.popDialog();
             this.mdDialog.cancel(response);
         }
     }
 
     clearDialogs() {
         while (this.dialogs.length > 0) {
-            this.popDialog();
             this.cancelDialog();
         }
     }
