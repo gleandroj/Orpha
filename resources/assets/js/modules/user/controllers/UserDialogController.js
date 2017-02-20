@@ -6,7 +6,7 @@ export default class UserDialogController {
 
     constructor(DialogService, UserService, ToastService, MessageService, OrphaUtilService) {
         this.dialogService = DialogService;
-        this.userSerice = UserService;
+        this.userService = UserService;
         this.toastService = ToastService;
         this.messageService = MessageService;
         this.utilService = OrphaUtilService;
@@ -31,7 +31,7 @@ export default class UserDialogController {
 
     submitUser() {
         this.loading = true;
-        this.userSerice.save(this.user)
+        this.userService.save(this.user)
             .success((newUser) => {
                 this.loading = false;
                 this.dialogService.hideDialog(newUser);
@@ -60,5 +60,18 @@ export default class UserDialogController {
                 this.submitUser();
             }, ()=>{});
         }
+    }
+
+    enableUser() {
+        this.loading = true;
+        this.userService.enable(this.user)
+            .then((newUser)=> {
+                this.loading = false;
+                this.dialogService.hideDialog(newUser);
+            }, (err)=> {
+                this.loading = false;
+                console.log(err);
+                this.toastService.showError(err ? err['message'] : this.messageService.get('MSG4'));
+            });
     }
 }

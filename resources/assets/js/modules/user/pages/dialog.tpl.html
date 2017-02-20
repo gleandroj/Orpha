@@ -33,7 +33,7 @@
             <md-button  ng-click="$ctrl.changeToEditMode()" class="md-primary md-raised" ng-if="$ctrl.user.deleted_at == null" ng-disabled="$ctrl.loading">
                 Alterar
             </md-button>
-            <md-button class="md-primary md-raised" ng-if="$ctrl.user.deleted_at != null" ng-disabled="$ctrl.loading">
+            <md-button class="md-primary md-raised" ng-click="$ctrl.enableUser()" ng-if="$ctrl.user.deleted_at != null" ng-disabled="$ctrl.loading">
                 Ativar
             </md-button>
             <md-button ng-click="$ctrl.close()" ng-disabled="$ctrl.loading">
