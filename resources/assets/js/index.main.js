@@ -9,7 +9,7 @@ import 'angular-ui-router';
 import 'angular-messages';
 import 'angular-filter';
 import 'angular-material-expansion-panel';
-import ngMask from 'ng-mask/dist/ngMask.js';
+import 'ng-mask/dist/ngMask.js';
 
 import '!style!css!angular-material/angular-material.css';
 import '!style!css!angular-material-expansion-panel/dist/md-expansion-panel.min.css';
@@ -19,6 +19,7 @@ import '!style!css!sass!./../css/style.scss';
 import AuthModule from './modules/auth/auth.module';
 import OrphaModule from './modules/orpha/orpha.module';
 import UserModule from './modules/user/user.module';
+import CriancaModule from './modules/crianca/crianca.module';
 
 angular.module('orpha.run', ['ngMaterial', 'ui.router']);
 angular.module('orpha.config', ['ngMaterial', 'ui.router']);
@@ -34,7 +35,8 @@ angular.module('orpha.modules', [
     'ngMask',
     AuthModule,
     OrphaModule,
-    UserModule
+    UserModule,
+    CriancaModule
 ]);
 
 angular.module('orpha', [

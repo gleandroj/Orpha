@@ -42,10 +42,10 @@
     </md-divider>
 
     <!--Messages-->
-    <div ng-if="filteredUsers.length == 0 && $component.search != ''" layout="column" layout-sm="column" layout-align="center center">
+    <div ng-if="filteredUsers.length == 0 && ($component.search != '' && $component.search != null)" layout="column" layout-sm="column" layout-align="center center">
         <h3 class="md-headline">{{ 'MSG8' | message }}</h3>
     </div>
-    <div ng-if="filteredUsers.length == 0 && $component.search == ''" layout="column" layout-sm="column" layout-align="center center">
+    <div ng-if="filteredUsers.length == 0 && ($component.search == '' || $component.search == null)" layout="column" layout-sm="column" layout-align="center center">
         <h3 class="md-headline">{{ 'MSG1' | message }}</h3>
     </div>
     <br/>

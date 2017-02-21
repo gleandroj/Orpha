@@ -8,6 +8,7 @@ import UserDialogTemplate from './../pages/dialog.tpl.html';
 export default class ListController {
 
     constructor(DialogService, OrphaUtilService, AuthService, UserService, ToastService, MessageService) {
+        'ngInject'
         this.authService = AuthService;
         this.util = OrphaUtilService;
         this.dialogService = DialogService;
