@@ -11,6 +11,7 @@ export default class UserDialogController {
         this.messageService = MessageService;
         this.utilService = OrphaUtilService;
         this.loading = false;
+        this.serverErrors = [];
     }
 
     close() {
@@ -37,9 +38,15 @@ export default class UserDialogController {
                 this.dialogService.hideDialog(newUser);
             }).error((err)=> {
                 this.loading = false;
-                console.log(err);
-                this.toastService.showError(err ? err['message'] : this.messageService.get('MSG4'));
+                if(err.error === 'validation')
+                    this.showValidationErrors(err.errors);
+                else
+                    this.toastService.showError(err ? err['message'] : this.messageService.get('MSG4'));
             });
+    }
+
+    showValidationErrors(errors){
+        this.toastService.showError(Object.keys(errors).map((key) => errors[key]).join(", "));
     }
 
     showConfirmation(okCallback, cancelCallback){

@@ -1,6 +1,6 @@
 
 <md-dialog aria-label="User Form"  flex="auto" flex-gt-sm="60" flex-gt-md="50" layout="column">
-    <form name="form" layout="column" flex="100" ng-submit="$ctrl.submit()">
+    <form name="userForm" layout="column" flex="100" ng-submit="$ctrl.submit()">
 
         <md-toolbar>
             <div class="md-toolbar-tools">
@@ -14,7 +14,7 @@
         <md-progress-linear md-mode="indeterminate" class="md-accent" ng-show="$ctrl.loading || form.$pending"></md-progress-linear>
 
         <md-content flex>
-            <user-form user="$ctrl.user" read-only="$ctrl.readOnly" is-disabled="$ctrl.readOnly || $ctrl.loading" is-password-field-required="$ctrl.user.id == null || $ctrl.user.id == ''"></user-form>
+            <user-form user="$ctrl.user" errors="$ctrl.serverErrors" read-only="$ctrl.readOnly" is-disabled="$ctrl.readOnly || $ctrl.loading" is-password-field-required="$ctrl.user.id == null || $ctrl.user.id == ''"></user-form>
         </md-content>
 
         <span flex></span>
@@ -40,6 +40,5 @@
                 Voltar
             </md-button>
         </md-dialog-actions>
-
     </form>
 </md-dialog>
