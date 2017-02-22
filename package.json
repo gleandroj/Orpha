@@ -6,6 +6,8 @@
     "postinstall": "gulp default"
   },
   "devDependencies": {
+  },
+  "dependencies": {
     "css-loader": "^0.26.1",
     "file-loader": "^0.9.0",
     "gulp": "^3.9.1",
@@ -16,9 +18,7 @@
     "raw-loader": "^0.5.1",
     "sass-loader": "^4.1.1",
     "style-loader": "^0.13.1",
-    "webpack": "^1.14.0"
-  },
-  "dependencies": {
+    "webpack": "^1.14.0",
     "angular": "^1.6.0",
     "angular-animate": "^1.6.0",
     "angular-aria": "^1.6.0",
