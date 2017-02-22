@@ -1,0 +1,54 @@
+<md-nav-bar
+        flex
+        md-selected-nav-item="$form.selectedPage" nav-bar-aria-label="navigation links">
+
+    <md-nav-item flex="50" md-nav-click="t()" name="dados" layout="column">
+        <md-icon md-colors="{color:$form.selectedPage == 'dados' ? 'default-accent' : 'default-primary'}" class="mateiral-icons">account_circle</md-icon>
+        Dados
+    </md-nav-item>
+
+    <md-nav-item  flex="50" md-nav-click="t()" name="permissoes" layout="column">
+        <md-icon md-colors="{color:$form.selectedPage == 'permissoes' ? 'default-accent' : 'default-primary'}" class="mateiral-icons">security</md-icon>
+        Permissões
+    </md-nav-item>
+
+</md-nav-bar>
+<md-content layout-padding>
+
+    <div ng-show="$form.selectedPage == 'dados'" >
+
+        <file-input name="avatar" preview="true" is-disabled="$form.readOnly || $form.isDisabled" show-buttons="!$form.readOnly" is-required="false" ng-model="$form.user.avatar" >
+            <error-message name="image" message="{{ 'MSG10' | message:{attribute:'Avatar'} }}"></error-message>
+        </file-input>
+
+        <text-input  max-length="50" name="Nome" icon="person" label="Nome" is-disabled="$form.readOnly || $form.isDisabled" is-required="'true'" ng-model="$form.user.name">
+            <error-message name="required" message="{{ 'MSG2' | message }}"></error-message>
+        </text-input>
+
+        <!-- Check email -->
+        <text-input max-length="50" type="email" name="Email" check-email check="{{ !$form.readOnly && !$form.isDisabled }}" user-id="{{ $form.user.id }}" icon="email" label="E-mail" is-disabled="$form.readOnly || $form.isDisabled" is-required="'true'" ng-model="$form.user.email">
+            <error-message name="required" message="{{ 'MSG2' | message }}"></error-message>
+            <error-message name="email" message="{{ 'MSG10' | message:{attribute:'E-mail'} }}"></error-message>
+            <error-message name="checkEmail" message="{{ check_email_result }}"></error-message>
+        </text-input>
+        <text-input max-length="20" name="Telefone" mask="(99) 9?9999-9999" mask-restrict="reject" mask-clean="true" icon="phone" label="Telefone" is-disabled="$form.readOnly || $form.isDisabled" is-required="'true'" ng-model="$form.user.phone">
+            <error-message name="required" message="{{ 'MSG2' | message }}"></error-message>
+            <error-message name="mask" message="{{ 'MSG10' | message:{attribute:'Telefone'} }}"></error-message>
+        </text-input>
+        <text-input max-length="14" min-length="8" ng-if="!$form.readOnly" name="Senha" type="password" icon="lock" label="Senha" is-disabled="$form.readOnly || $form.isDisabled" is-required="$form.isPasswordFieldRequired" ng-model="$form.user.password">
+            <error-message name="required" message="{{ 'MSG2' | message }}"></error-message>
+            <error-message name="minlength" message="{{ 'MSG11' | message:{min:8, max:14} }}"></error-message>
+        </text-input>
+
+        <text-input max-length="14" min-length="8" ng-if="!$form.readOnly" name="C_Senha" type="password" icon="lock" label="Confirmação de Senha" is-disabled="$form.readOnly || $form.isDisabled" is-required="$form.isPasswordFieldRequired" ng-model="$form.user.password_confirmation" match="$form.user.password" check-match="true">
+            <error-message name="required" message="{{ 'MSG2' | message }}"></error-message>
+            <error-message name="match" message="{{ 'MSG9' | message:{attribute:'As senhas'} }}"></error-message>
+        </text-input>
+
+    </div>
+
+    <div ng-show="$form.selectedPage != 'dados'" flex>
+        <user-permissions-card is-disabled="$form.readOnly || $form.isDisabled" ng-model="$form.user.permissions"></user-permissions-card>
+    </div>
+
+</md-content>

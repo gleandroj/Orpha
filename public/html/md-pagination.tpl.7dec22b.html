@@ -1,0 +1,39 @@
+<div layout="row" flex class="md-pagination" layout-align="center center" layout-wrap style="font-size: 12px; color: rgba(0, 0, 0, 0.54);">
+
+    <div layout="row" layout-align="start center">
+        <div class="label" style="margin-right: 10px;">Página:</div>
+        <md-select class="md-page-select" ng-model="$pagination.page" ng-disabled="$pagination.isDisabled" style="margin-right: 10px;" aria-label="selected-page">
+            <md-option ng-repeat="n in [].constructor($pagination.numberOfPages) track by $index" ng-value="$index+1">{{ $index+1 }}</md-option>
+        </md-select>
+
+        <div class="label" style="margin-right: 10px;">Linhas Por Página:</div>
+        <md-select class="md-page-select" ng-model="$pagination.itemsPerPage" ng-change="$pagination.page = 1" ng-disabled="$pagination.isDisabled" style="margin-right: 10px;" aria-label="items-peer-page">
+            <md-option ng-value="5" >5</md-option>
+            <md-option ng-value="10" >10</md-option>
+            <md-option ng-value="20" >20</md-option>
+        </md-select>
+    </div>
+
+    <div class="buttons" layout="row" layout-align="start center">
+        <div class="label" style="margin-right: 10px;">
+            {{ ($pagination.page * $pagination.itemsPerPage) - $pagination.itemsPerPage + 1 }} - {{ $pagination.page == $pagination.numberOfPages ? $pagination.nItems :  $pagination.page*$pagination.itemsPerPage }} de {{ $pagination.nItems }}
+        </div>
+
+        <md-button class="md-icon-button" style="margin: 0px;"  aria-label="first" aria-disabled="false" ng-disabled="$pagination.page == 1 || $pagination.isDisabled" ng-click="$pagination.page = 1">
+            <md-icon md-svg-src="{{ $pagination.arrow_first }}" aria-hidden="true"> </md-icon>
+        </md-button>
+
+        <md-button class="md-icon-button" style="margin: 0px;" aria-label="preview" aria-disabled="false" ng-disabled="$pagination.page == 1 || $pagination.isDisabled" ng-click="$pagination.page = $pagination.page-1">
+            <md-icon md-svg-src="{{ $pagination.arrow_before }}" aria-hidden="true"> </md-icon>
+        </md-button>
+
+        <md-button class="md-icon-button" style="margin: 0px;" aria-label="next" aria-disabled="false" ng-disabled="$pagination.page == $pagination.numberOfPages || $pagination.isDisabled" ng-click="$pagination.page = $pagination.page+1">
+            <md-icon md-svg-src="{{ $pagination.arrow_next }}" aria-hidden="true"> </md-icon>
+
+        </md-button>
+
+        <md-button class="md-icon-button" style="margin: 0px;" aria-label="last" aria-disabled="false" ng-disabled="$pagination.page == $pagination.numberOfPages || $pagination.isDisabled" ng-click="$pagination.page = $pagination.numberOfPages">
+            <md-icon md-svg-src="{{ $pagination.arrow_last }}" aria-hidden="true"> </md-icon>
+        </md-button>
+    </div>
+</div>
