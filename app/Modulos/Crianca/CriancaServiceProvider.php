@@ -53,7 +53,7 @@ class CriancaServiceProvider extends ServiceProvider
             'namespace' => 'App\Modulos\Crianca',
             'prefix' => 'api',
         ], function ($router) {
-            require './routes/api.php';//app_path('modulos/crianca/routes/api.php');
+            require __DIR__.'/routes/api.php';//app_path('modulos/crianca/routes/api.php');
         });
     }
 }
