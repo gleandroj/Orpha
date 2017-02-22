@@ -53,7 +53,7 @@ class UserServiceProvider extends ServiceProvider
             'namespace' => 'App\Modulos\User',
             'prefix' => 'api',
         ], function ($router) {
-            require base_path('\app\modulos\user\routes\api.php');
+            require base_path('/app/modulos/user/routes/api.php');
         });
     }
 }

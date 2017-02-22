@@ -46,7 +46,7 @@ class AuthServiceProvider extends ServiceProvider
             'namespace' => 'App\Modulos\Auth',
             'prefix' => 'api',
         ], function ($router) {
-            require base_path('\app\modulos\auth\routes\api.php');
+            require base_path('/app/modulos/auth/routes/api.php');
         });
     }
 }
