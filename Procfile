@@ -1,1 +1,2 @@
-vendor/bin/heroku-php-apache2 public
+web: sh app_boot.sh
+worker: php artisan queue:listen
