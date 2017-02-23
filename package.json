@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "dev": "webpack -p --progress --hide-modules --config=webpack.config.js",
+    "dev": "webpack --progress --hide-modules --config=webpack.config.js",
     "watch": "npm run dev -- -w",
     "watch-poll": "npm run dev -- -w --watch-poll",
     "hot": "node webpack-dev-server --inline --hot --config=webpack.config.js",
