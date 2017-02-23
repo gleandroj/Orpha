@@ -56,5 +56,5 @@ export let MdPaginationComponent = {
     },
     controller:PaginationController,
     controllerAs:'$pagination',
-    templateUrl: Template
+    template: Template
 };

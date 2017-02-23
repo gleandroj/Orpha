@@ -16,18 +16,18 @@ export default function RouteConfig($stateProvider, $urlRouterProvider) {
             url: '/user',
             controller: UserController,
             controllerAs: '$controller',
-            templateUrl: LayoutTemplate
+            template: LayoutTemplate
         })
         .state('user.profile', {
             url: '/profile',
             controller: ProfileController,
             controllerAs: '$controller',
-            templateUrl: ProfileTemplate
+            template: ProfileTemplate
         })
         .state('user.list', {
             url: '/list',
             controller: ListController,
             controllerAs: '$controller',
-            templateUrl: ListTemplate
+            template: ListTemplate
         });
 }

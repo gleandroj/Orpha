@@ -27,5 +27,5 @@ export let SimpleUserCardComponent = {
     },
     controller: Controller,
     controllerAs: '$ctrl',
-    templateUrl: Template
+    template: Template
 };

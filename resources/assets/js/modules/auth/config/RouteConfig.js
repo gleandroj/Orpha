@@ -17,7 +17,7 @@ export default function RouteConfig($stateProvider) {
         .state('auth', {
             url: '/auth',
             abstract: true,
-            templateUrl: AuthTemplate,
+            template: AuthTemplate,
             controller: AuthController,
             allowAnonymous:true
         })
@@ -25,14 +25,14 @@ export default function RouteConfig($stateProvider) {
             url: '/login',
             controller: LoginController,
             controllerAs: '$ctrl',
-            templateUrl: LoginTemplate,
+            template: LoginTemplate,
             allowAnonymous:true
         })
         .state('auth.password', {
             url: '/password',
             controller: PasswordRecoveryController,
             controllerAs: '$ctrl',
-            templateUrl: PasswordRecoveryTemplate,
+            template: PasswordRecoveryTemplate,
             allowAnonymous:true
         })
         .state('auth.password_reset', {
@@ -55,7 +55,7 @@ export default function RouteConfig($stateProvider) {
             },
             controller: PasswordResetController,
             controllerAs: '$ctrl',
-            templateUrl: PasswordResetTemplate,
+            template: PasswordResetTemplate,
             allowAnonymous:true
         });
 }

@@ -233,7 +233,7 @@ export let TextInputComponent = {
     },
     controller:TextInputController,
     controllerAs:'$ctrl',
-    templateUrl: TextInputTemplate,
+    template: TextInputTemplate,
     transclude:true
 };
 
@@ -253,7 +253,7 @@ export let NumberInputComponent = {
     },
     controller:TextInputController,
     controllerAs:'$ctrl',
-    templateUrl: NumberInputTemplate,
+    template: NumberInputTemplate,
     transclude:true
 };
 
@@ -271,7 +271,7 @@ export let FileInputComponent = {
     },
     controller: FileInputController,
     controllerAs:'$ctrl',
-    templateUrl: FileInputTemplate,
+    template: FileInputTemplate,
     transclude:true
 };
 
@@ -290,6 +290,6 @@ export let SearchInputComponent = {
     },
     controller:SearchInputController,
     controllerAs:'$ctrl',
-    templateUrl: SearchInputTemplate,
+    template: SearchInputTemplate,
     transclude:true
 };

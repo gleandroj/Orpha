@@ -11,10 +11,10 @@ import 'angular-filter';
 import 'angular-material-expansion-panel';
 import 'ng-mask/dist/ngMask.js';
 
-import '!style!css!angular-material/angular-material.css';
-import '!style!css!angular-material-expansion-panel/dist/md-expansion-panel.min.css';
-import '!style!css!sass!./../css/animations.scss';
-import '!style!css!sass!./../css/style.scss';
+import 'angular-material/angular-material.css';
+import 'angular-material-expansion-panel/dist/md-expansion-panel.min.css';
+//import './../css/animations.scss';
+//import './../css/style.scss';
 
 import AuthModule from './modules/auth/auth.module';
 import OrphaModule from './modules/orpha/orpha.module';

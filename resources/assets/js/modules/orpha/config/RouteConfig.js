@@ -9,7 +9,7 @@ export default function RouteConfig($stateProvider, $urlRouterProvider) {
             url: '/orpha',
             controller: OrphaController,
             controllerAs: '$ctrl',
-            templateUrl: OrphaTemplate
+            template: OrphaTemplate
         });
 
 }

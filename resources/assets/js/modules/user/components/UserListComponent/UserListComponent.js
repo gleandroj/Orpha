@@ -85,5 +85,5 @@ export let UserListComponent = {
     },
     controller: Controller,
     controllerAs: '$component',
-    templateUrl: Template
+    template: Template
 };

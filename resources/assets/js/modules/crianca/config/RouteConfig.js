@@ -14,12 +14,12 @@ export default function RouteConfig($stateProvider, $urlRouterProvider) {
             url: '/crianca',
             controller: CriancaController,
             controllerAs: '$controller',
-            templateUrl: LayoutTemplate
+            template: LayoutTemplate
         })
         .state('crianca.list', {
             url: '/crianca',
             controller: ListController,
             controllerAs: '$controller',
-            templateUrl: ListTemplate
+            template: ListTemplate
         })
 }

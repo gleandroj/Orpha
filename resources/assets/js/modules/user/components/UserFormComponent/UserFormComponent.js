@@ -35,5 +35,5 @@ export let UserFormComponent = {
     },
     controller: Controller,
     controllerAs: '$form',
-    templateUrl: Template
+    template: Template
 };

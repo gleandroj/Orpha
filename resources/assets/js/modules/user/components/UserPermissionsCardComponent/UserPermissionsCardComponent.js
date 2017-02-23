@@ -126,5 +126,5 @@ export let UserPermissionsCardComponent = {
     },
     controller: Controller,
     controllerAs: '$component',
-    templateUrl: Template
+    template: Template
 };
