@@ -10,6 +10,8 @@ let checkSessionInterval = null;
 export class SessionService {
 
     constructor(OrphaUtilService, StorageService, LogService) {
+        'ngInject'
+
         this.util = OrphaUtilService;
         this.storage = StorageService;
         this.log = LogService;

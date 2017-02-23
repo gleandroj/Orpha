@@ -32,6 +32,8 @@ var camDialogTemplate =
 class CameraController{
 
     constructor(DialogService, OrphaUtilService, LogService, $window, locals){
+        'ngInject'
+
         this.window = $window;
         this.dialog = DialogService;
         this.util = OrphaUtilService;
@@ -149,9 +151,10 @@ class CameraController{
     }
 }
 
-
 export default class CameraService{
     constructor(DialogService, OrphaUtilService, LogService){
+        'ngInject'
+
         this.log = LogService;
         this.dialogService = DialogService;
         this.util = OrphaUtilService;

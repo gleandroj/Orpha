@@ -6,6 +6,7 @@
 export let CheckEmailDirective = {
     selector:'checkEmail',
     fn: ($http, OrphaUtilService, $q)=>{
+        'ngInject'
         return {
             require:{
                 model:"ngModel"

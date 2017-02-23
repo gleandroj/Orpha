@@ -5,6 +5,8 @@
 export default class ToastService{
 
     constructor($mdToast){
+        'ngInject'
+
         this.toast = $mdToast;
         this.time = 7000;
     }
@@ -14,7 +16,6 @@ export default class ToastService{
     }
 
     _defaultToast(time){
-        console
         let toast = this.toast.simple()
             .highlightAction(true)
             .highlightClass('md-accent')

@@ -2,7 +2,7 @@
  * Created by FG0003 on 20/02/2017.
  */
 export default function DateConfig($mdDateLocaleProvider) {
-
+    'ngInject'
     /*$mdDateLocaleProvider.formatDate = function(date) {
         return moment(date).format('DD/MM/YYYY');
     };

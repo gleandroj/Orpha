@@ -2,6 +2,7 @@
  * Created by FG0003 on 20/02/2017.
  */
 export default function ThemeConfig($mdThemingProvider, $mdDateLocaleProvider) {
+    'ngInject'
 
     $mdThemingProvider.definePalette('orphaPrimaryPalette', {
         '50': '#6da7e0',

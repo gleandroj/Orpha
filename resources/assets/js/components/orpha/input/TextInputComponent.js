@@ -11,6 +11,7 @@ import FallbackImg from './../../../../img/ic_account_circle_black_48dp_2x.png';
 class TextInputController{
 
     constructor($scope, OrphaUtilService, $http){
+        'ngInject'
         this.scope = $scope;
         this.util = OrphaUtilService;
         this.http = $http;
@@ -80,6 +81,7 @@ class TextInputController{
 class FileInputController{
 
     constructor($scope, OrphaUtilService, CameraService){
+        'ngInject'
         this.scope = $scope;
         this.util = OrphaUtilService;
         this.cameraService = CameraService;
@@ -158,6 +160,59 @@ class FileInputController{
     }
 }
 
+class SearchInputController{
+
+    constructor($scope, OrphaUtilService){
+        'ngInject'
+        this.scope = $scope;
+        this.util = OrphaUtilService;
+    }
+
+    initialize(){
+        let self = this;
+
+        this.isDisabled = this.isDisabled || false;
+        this.isRequired = this.isRequired || false;
+        this.maxLength = this.maxLength || null;
+        this.minlength = this.minlength || 0;
+        this.name = this.name || 'input_'+Math.random().toString(36).slice(2).substr(0, 5);
+        this.label = this.label || '';
+        this.icon = this.icon || null;
+
+        this.util.timeout(()=> {
+            self.form = self.scope['_form_'+self.name];
+            self.model.$validators = self.form[this.name].$validators;
+
+            self.validate();
+        }, 1);
+    }
+
+    $onInit(){
+        var self = this;
+        this.model.$render = () => this.value = this.model.$viewValue;
+        this.util.timeout(()=> this.initialize(), 0);
+    }
+
+    $onChange(){
+        this.validate();
+    }
+
+    clean(){
+        this.value = '';
+        this.onChange();
+    }
+
+    onChange(){
+        this.model.$setViewValue(this.value);
+        this.validate();
+    }
+
+    validate(){
+        this.model.$validate();
+        this.form[this.name].$validate();
+    }
+}
+
 export let TextInputComponent = {
     selector:'textInput',
     require: {
@@ -219,58 +274,6 @@ export let FileInputComponent = {
     templateUrl: FileInputTemplate,
     transclude:true
 };
-
-class SearchInputController{
-
-    constructor($scope, OrphaUtilService){
-        this.scope = $scope;
-        this.util = OrphaUtilService;
-    }
-
-    initialize(){
-        let self = this;
-
-        this.isDisabled = this.isDisabled || false;
-        this.isRequired = this.isRequired || false;
-        this.maxLength = this.maxLength || null;
-        this.minlength = this.minlength || 0;
-        this.name = this.name || 'input_'+Math.random().toString(36).slice(2).substr(0, 5);
-        this.label = this.label || '';
-        this.icon = this.icon || null;
-
-        this.util.timeout(()=> {
-            self.form = self.scope['_form_'+self.name];
-            self.model.$validators = self.form[this.name].$validators;
-
-            self.validate();
-        }, 1);
-    }
-
-    $onInit(){
-        var self = this;
-        this.model.$render = () => this.value = this.model.$viewValue;
-        this.util.timeout(()=> this.initialize(), 0);
-    }
-
-    $onChange(){
-        this.validate();
-    }
-
-    clean(){
-        this.value = '';
-        this.onChange();
-    }
-
-    onChange(){
-        this.model.$setViewValue(this.value);
-        this.validate();
-    }
-
-    validate(){
-        this.model.$validate();
-        this.form[this.name].$validate();
-    }
-}
 
 export let SearchInputComponent = {
     selector:'searchInput',
