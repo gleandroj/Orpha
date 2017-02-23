@@ -5,7 +5,8 @@
     "watch": "npm run dev -- -w",
     "watch-poll": "npm run dev -- -w --watch-poll",
     "hot": "node node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=webpack.config.js",
-    "production": "npm run dev -- -p"
+    "production": "npm run dev -- -p",
+    "postinstall": "npm run production"
   },
   "devDependencies": {
     "laravel-mix": "^0.8.1"
