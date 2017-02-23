@@ -21,8 +21,6 @@ import OrphaModule from './modules/orpha/orpha.module';
 import UserModule from './modules/user/user.module';
 import CriancaModule from './modules/crianca/crianca.module';
 
-console.log('Teste');
-
 angular.module('orpha.run', ['ngMaterial', 'ui.router']);
 angular.module('orpha.config', ['ngMaterial', 'ui.router']);
 angular.module('orpha.filters', []);
