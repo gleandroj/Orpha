@@ -59,3 +59,4 @@ export default function RouteConfig($stateProvider) {
             allowAnonymous:true
         });*/
 }
+RouteConfig.$inject = ['$stateProvider'];
