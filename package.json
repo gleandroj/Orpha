@@ -1,10 +1,10 @@
 {
   "private": true,
   "scripts": {
-    "dev": "node node_modules/webpack/bin/webpack.js --progress --hide-modules --config=webpack.config.js",
+    "dev": "webpack -p --progress --hide-modules --config=webpack.config.js",
     "watch": "npm run dev -- -w",
     "watch-poll": "npm run dev -- -w --watch-poll",
-    "hot": "node node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=webpack.config.js",
+    "hot": "node webpack-dev-server --inline --hot --config=webpack.config.js",
     "production": "npm run dev -- -p",
     "postinstall": "npm run production"
   },
