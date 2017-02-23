@@ -5,6 +5,7 @@ import Fallbackimg from './../../../../../img/ic_account_circle_black_48dp_2x.pn
 
 class Controller {
     constructor(AuthService, OrphaUtilService) {
+        'ngInject'
         this.fallbackimg = Fallbackimg;
         this.auth = AuthService
         OrphaUtilService.on(AuthEvents.currentUserUpdated, (event, args) => this.user = args.user);

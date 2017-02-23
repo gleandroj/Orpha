@@ -5,6 +5,7 @@
 export default class UserService{
 
     constructor($http, OrphaUtilService){
+        'ngInject'
         this._util = OrphaUtilService;
         this._url = "/api/users";
         this._http = $http;

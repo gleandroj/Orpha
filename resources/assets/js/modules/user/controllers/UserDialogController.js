@@ -5,6 +5,7 @@
 export default class UserDialogController {
 
     constructor(DialogService, UserService, ToastService, MessageService, OrphaUtilService) {
+        'ngInject'
         this.dialogService = DialogService;
         this.userService = UserService;
         this.toastService = ToastService;

@@ -5,6 +5,7 @@
 export default class CriancaService{
 
     constructor($http, OrphaUtilService) {
+        'ngInject'
         this._util = OrphaUtilService;
         this._url = "/api/criancas";
         this._http = $http;

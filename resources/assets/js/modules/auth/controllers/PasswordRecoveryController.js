@@ -2,6 +2,7 @@
 export default class PasswordRecoveryController {
 
     constructor(AuthService, ToastService, $state) {
+        'ngInject'
         this.route = $state;
         this.auth = AuthService;
         this.toast = ToastService;

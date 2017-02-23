@@ -3,6 +3,7 @@ import passwordDialogTemplate from './../pages/pw-dialog.tpl.html';
 export default class ProfileController{
 
     constructor(AuthService, UserService, DialogService, ToastService, MessageService){
+        'ngInject'
         this.user = AuthService.getCurrentUser();
         this.userService = UserService;
         this.selectedPage = 'dados';
