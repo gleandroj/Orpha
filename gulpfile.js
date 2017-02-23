@@ -15,7 +15,7 @@ require('laravel-elixir-browsersync-official');
  |
  */
 
-elixir((mix) => {
+elixir(function(mix){
     mix.webpack('index.js');
     mix.browserSync({
         proxy: 'orpha.dev:8000'
