@@ -20,3 +20,5 @@ export default function RouteAppConfig($urlRouterProvider) {
         }
     });
 }
+
+RouteAppConfig.$inject = ['$urlRouterProvider'];

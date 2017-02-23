@@ -65,3 +65,5 @@ export default function ThemeConfig($mdThemingProvider, $mdDateLocaleProvider) {
         .accentPalette('orphaAccentPallet', {'default':'500'})
         .backgroundPalette('grey');
 }
+
+ThemeConfig.$inject = ['$mdThemingProvider', '$mdDateLocaleProvider'];

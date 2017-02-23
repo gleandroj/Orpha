@@ -16,3 +16,5 @@ export default function DateConfig($mdDateLocaleProvider) {
     $mdDateLocaleProvider.days = ['Dom','Seg','Ter','Qua','Qui','Sex','Sab'];
     $mdDateLocaleProvider.shortDays = ['D','S','T','Q','Q','S','S'];
 }
+
+DateConfig.$inject = ['$mdDateLocaleProvider'];

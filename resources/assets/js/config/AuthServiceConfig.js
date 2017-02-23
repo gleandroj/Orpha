@@ -20,3 +20,5 @@ export default function AuthServiceConfig(AuthServiceProvider, $httpProvider) {
 
     $httpProvider.interceptors.push(OAuthInterceptor);
 }
+
+AuthServiceConfig.$inject = ['AuthServiceProvider', '$httpProvider'];
