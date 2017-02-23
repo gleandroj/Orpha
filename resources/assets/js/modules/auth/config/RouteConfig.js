@@ -12,7 +12,7 @@ import PasswordResetTemplate from './../pages/password-reset.tpl.html';
 
 export default function RouteConfig($stateProvider) {
     'ngInject'
-    /*
+
     $stateProvider
         .state('auth', {
             url: '/auth',
@@ -57,6 +57,7 @@ export default function RouteConfig($stateProvider) {
             controllerAs: '$ctrl',
             template: PasswordResetTemplate,
             allowAnonymous:true
-        });*/
+        });
 }
+
 RouteConfig.$inject = ['$stateProvider'];
