@@ -13,6 +13,6 @@
 
         <ui-view></ui-view>
 
-        <script src="{{ mix('js/index.js') }}"></script>
+        <script src="{{ mix('js/app.js') }}"></script>
     </body>
 </html>
