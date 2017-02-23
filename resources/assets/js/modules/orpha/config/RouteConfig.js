@@ -13,3 +13,5 @@ export default function RouteConfig($stateProvider, $urlRouterProvider) {
         });
 
 }
+
+RouteConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
