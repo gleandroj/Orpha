@@ -13,9 +13,9 @@ module.exports = {
                 include: path.join(__dirname, 'resources/assets'),
                 exclude: /node_modules/,
                 loader: 'babel-loader',
-                query: {
-                    presets: ['es2015']
-                }
+                presets: ['es2015'],
+                plugins: ['transform-runtime']
+
             },
             {
                 test: /\.css$/,
