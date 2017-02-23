@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Intervention\Image\Facades\Image;
+use League\Flysystem\Exception;
 
 class UserService implements UserServiceInterface
 {
@@ -107,6 +108,7 @@ class UserService implements UserServiceInterface
      */
     public function update($id, array $data)
     {
+
         $data = collect($data);
 
         if($data->has('avatar') && $data->get('avatar') != null && $this->getById($id)->avatar != $data->get('avatar')){
@@ -174,9 +176,10 @@ class UserService implements UserServiceInterface
      * @return string
      */
     private function uploadBase64Img($base64){
+
         $image = Image::make($base64);
 
-        $file_name = '/assets/profile/'.$this->newGuid().'.png';
+        $file_name = '\images\profile\\'.$this->newGuid().'.jpg';
 
         $image->save(public_path().$file_name);
 

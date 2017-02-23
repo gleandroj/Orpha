@@ -94,7 +94,7 @@ export default class ListController {
     showDialog(user, title, readOnly) {
         return this.dialogService.showCustomDialog({
             controller: UserDialogController,
-            templateUrl: UserDialogTemplate,
+            template: UserDialogTemplate,
             locals: {
                 title: title,
                 user: this.util.copy(user),

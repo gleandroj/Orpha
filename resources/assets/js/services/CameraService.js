@@ -3,35 +3,36 @@
  */
 
 var camDialogTemplate =
-    '<md-dialog aria-label="Camera Dialog" layout="column">'+
-    '	<md-toolbar>'+
-    '		<div class="md-toolbar-tools">'+
-    '			<h2>{{$ctrl.title}}</h2>'+
-    '			<span flex></span>'+
-    '			<md-button class="md-icon-button" ng-click="$ctrl.cancel()">'+
-    '				<md-icon class="material-icons" aria-label="Close dialog">close</md-icon>'+
-    '			</md-button>'+
-    '		</div>'+
-    '	</md-toolbar>'+
+    '<md-dialog aria-label="Camera Dialog" layout="column">' +
+    '	<md-toolbar>' +
+    '		<div class="md-toolbar-tools">' +
+    '			<h2>{{$ctrl.title}}</h2>' +
+    '			<span flex></span>' +
+    '			<md-button class="md-icon-button" ng-click="$ctrl.cancel()">' +
+    '				<md-icon class="material-icons" aria-label="Close dialog">close</md-icon>' +
+    '			</md-button>' +
+    '		</div>' +
+    '	</md-toolbar>' +
     '   <div id="camera-root" layout="column" flex layout-align="start center">' +
-    '       <video ng-show="!$ctrl.captured" id="camera-video" autoplay="true" ></video>' +
-    '       <canvas ng-show="$ctrl.captured" id="camera-canvas" width="{{$ctrl.dimensions.width + \'px\'}}" height="{{$ctrl.dimensions.height + \'px\'}}"></canvas>' +
-    '   </div>'+
-    '	<md-divider></md-divider>'+
-    '	<md-dialog-actions ng-if="!$ctrl.captured" layout="row" layout-align="end center" >'+
-    '		<md-button class="md-raised md-accent" ng-click="$ctrl.takeSnapshot()"  md-auto-focus><md-icon class="material-icons">photo_camera</md-icon><md-tooltip md-direction="top">Capturar</md-tooltip></md-button>'+
-    '		<md-button class="md-warn" ng-click="$ctrl.cancel()">Cancelar</md-button>'+
-    '	</md-dialog-actions>'+
-    '	<md-dialog-actions ng-if="$ctrl.captured" layout="row" layout-align="end center" >'+
-    '		<md-button class="md-raised md-accent" ng-click="$ctrl.salvar()" md-auto-focus>Salvar</md-button>'+
-    '		<md-button class="md-warn" ng-click="$ctrl.voltar()">Voltar</md-button>'+
-    '	</md-dialog-actions>'+
+    '       <video ng-show="!$ctrl.captured && !$ctrl.error" id="camera-video" autoplay="true" ></video>' +
+    '       <canvas ng-show="$ctrl.captured && !$ctrl.error" id="camera-canvas" width="{{$ctrl.dimensions.width + \'px\'}}" height="{{$ctrl.dimensions.height + \'px\'}}"></canvas>' +
+    '       <div ng-show="$ctrl.error" layout="column" ng-style="{width:$ctrl.dimensions.width + \'px\', height:$ctrl.dimensions.height + \'px\'}" layout-align="center center"><md-icon class="material-icons" style="font-size: 40px;">sentiment_very_dissatisfied</md-icon><p class="md-title" style="text-align: center;">{{ $ctrl.message }}</p></div>' +
+    '   </div>' +
+    '	<md-divider></md-divider>' +
+    '	<md-dialog-actions ng-if="!$ctrl.captured" layout="row" layout-align="end center" >' +
+    '		<md-button class="md-raised md-accent" ng-disabled="$ctrl.error" ng-click="$ctrl.takeSnapshot()"  md-auto-focus><md-icon class="material-icons">photo_camera</md-icon><md-tooltip md-direction="top">Capturar</md-tooltip></md-button>' +
+    '		<md-button class="md-warn" ng-click="$ctrl.cancel()">Cancelar</md-button>' +
+    '	</md-dialog-actions>' +
+    '	<md-dialog-actions ng-if="$ctrl.captured" layout="row" layout-align="end center" >' +
+    '		<md-button class="md-raised md-accent" ng-click="$ctrl.salvar()" md-auto-focus>Salvar</md-button>' +
+    '		<md-button class="md-warn" ng-click="$ctrl.voltar()">Voltar</md-button>' +
+    '	</md-dialog-actions>' +
     '</md-dialog>';
 
 
-class CameraController{
+class CameraController {
 
-    constructor(DialogService, OrphaUtilService, LogService, $window, locals){
+    constructor(DialogService, OrphaUtilService, LogService, $window, locals) {
         'ngInject'
 
         this.window = $window;
@@ -42,8 +43,8 @@ class CameraController{
         this.captured = false;
         this.snapshot = '';
         this.dimensions = {
-            height:locals.height || 0,
-            width:locals.width || 0
+            height: locals.height || 0,
+            width: locals.width || 0
         };
         this.loading = true;
 
@@ -51,11 +52,11 @@ class CameraController{
 
         this.elements = {
             root: null,
-            video:null,
-            canvas:null
+            video: null,
+            canvas: null
         };
 
-        this.util.timeout(()=>{
+        this.util.timeout(()=> {
             this.initialize();
         }, 0);
     }
@@ -74,28 +75,28 @@ class CameraController{
 
     takeSnapshot() {
         var ctx = this.elements.canvas.getContext('2d');
-        this.util.timeout(()=>{
+        this.util.timeout(()=> {
             ctx.drawImage(this.elements.video, 0, 0, this.elements.video.videoWidth, this.elements.video.videoHeight);
             this.snapshot = this.elements.canvas.toDataURL();
             this.captured = true;
         }, 0);
     }
 
-    initialize(){
+    initialize() {
         this._findElements();
         let self = this;
 
-        if(this.dimensions.width == 0){
+        if (this.dimensions.width == 0) {
             this.dimensions.width = this.elements.root.parentElement.clientWidth;
         }
 
-        if(this.dimensions.height == 0 ){
+        if (this.dimensions.height == 0) {
             this.dimensions.height = this.elements.root.parentElement.clientHeight;
         }
 
         if (!this.hasUserMedia()) return this.cancel();
 
-        let onSuccess = (stream)=>{
+        let onSuccess = (stream)=> {
             self.videoStream = stream;
             if (navigator.mozGetUserMedia) {
                 self.elements.video.mozSrcObject = self.videoStream;
@@ -103,8 +104,8 @@ class CameraController{
                 let vendorURL = window.URL || window.webkitURL;
                 self.elements.video.src = vendorURL.createObjectURL(self.videoStream);
             }
-            self.elements.video.addEventListener('loadeddata', ()=>{
-                self.util.timeout(()=>{
+            self.elements.video.addEventListener('loadeddata', ()=> {
+                self.util.timeout(()=> {
                     self.dimensions.height = self.elements.video.videoHeight; //Real Height
                     self.dimensions.width = self.elements.video.videoWidth; //Real Width
                     self.loading = false;
@@ -112,11 +113,15 @@ class CameraController{
             });
         };
 
-        var onFailure = function(err) {
-            self.log.error(err);
+        var onFailure = function (err) {
+            self.log.error(err.message);
+            if (err.name == 'PermissionDeniedError') {
+                self.error = true;
+                self.message = err.message;
+            }
         };
 
-        this.util.timeout(function() {
+        this.util.timeout(function () {
             navigator.getUserMedia({
                 video: {
                     mandatory: {
@@ -129,30 +134,34 @@ class CameraController{
         }, 0);
     }
 
-    _findElements(){
+    _findElements() {
         this.elements.root = this.util.element(document.getElementById('camera-root'))[0];
         this.elements.video = this.util.element(this.elements.root.firstElementChild)[0];
         this.elements.canvas = this.util.element(this.elements.root.lastElementChild)[0];
     }
 
-    salvar(){
-        this.videoStream.getVideoTracks()[0].stop();
+    salvar() {
+        if (this.videoStream != null) {
+            this.videoStream.getVideoTracks()[0].stop();
+        }
         this.dialog.hideDialog(this.snapshot);
     }
 
-    voltar(){
+    voltar() {
         this.captured = false;
         this.snapshot = '';
     }
 
-    cancel(){
-        this.videoStream.getVideoTracks()[0].stop();
+    cancel() {
+        if (this.videoStream != null) {
+            this.videoStream.getVideoTracks()[0].stop();
+        }
         this.dialog.cancelDialog('cancel');
     }
 }
 
-export default class CameraService{
-    constructor(DialogService, OrphaUtilService, LogService){
+export default class CameraService {
+    constructor(DialogService, OrphaUtilService, LogService) {
         'ngInject'
 
         this.log = LogService;
@@ -160,24 +169,24 @@ export default class CameraService{
         this.util = OrphaUtilService;
     }
 
-    showCamera(options){
+    showCamera(options) {
         options = options || {};
         let defer = this.util.defer();
         this.log.info("Camera started.");
         this.dialogService.showCustomDialog({
             controller: CameraController,
             template: camDialogTemplate,
-            clickOutsideToClose:false,
+            clickOutsideToClose: false,
             fullscreen: false,
-            locals:options
+            locals: options
         }).then((response) => {
             defer.resolve(response);
             this.log.info("Camera stopped, reason: save.");
         }, (err) => {
-            if(err !== 'cancel'){
+            if (err !== 'cancel') {
                 defer.reject(err);
             }
-            this.log.info("Camera stopped, reason: " + err+".");
+            this.log.info("Camera stopped, reason: " + err + ".");
         });
         return defer.promise;
     }

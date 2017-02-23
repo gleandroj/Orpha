@@ -10,7 +10,7 @@
                   ng-disabled="$component.isDisabled"
                   ng-click="$component.onUserClick({user: user})">
 
-        <img hide-sm hide-xs src="{{ user.avatar || $component.fallbackimg }}" class="md-user-avatar" style="margin: 0px 10px 0px 0px;" alt="{{user.avatar}}"/>
+        <img hide-sm hide-xs ng-src="{{ user.avatar  || $component.fallbackimg }}" class="md-user-avatar" style="margin: 0px 10px 0px 0px;" alt="{{user.avatar}}"/>
 
         <div class="md-list-item-text" layout="column" layout-align="start start" md-truncate flex>
             <h3 md-highlight-text="$component.search" md-highlight-flags="ig" >{{ user.name }}</h3>

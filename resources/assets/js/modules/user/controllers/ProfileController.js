@@ -16,8 +16,8 @@ export default class ProfileController{
     showPasswordDialog(){
         this.dialog.showCustomDialog({
             controller: () => this,
-            templateUrl: passwordDialogTemplate
-        });
+            template: passwordDialogTemplate
+        }).then(()=>{}, ()=>{});
     }
 
     submitPassword(){
