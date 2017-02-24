@@ -20,6 +20,7 @@ export default class PasswordRecoveryController {
                 self.route.go('auth.login');
             })
             .error((response) => {
+
                 self.toast.showError(response.message);
                 self.loading = false;
             })

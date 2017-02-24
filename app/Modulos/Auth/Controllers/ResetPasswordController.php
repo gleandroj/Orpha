@@ -3,6 +3,7 @@
 namespace App\Modulos\Auth\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rule;
 use App\Exceptions\ApiException;
 use App\Http\Controllers\Controller;
@@ -32,6 +33,17 @@ class ResetPasswordController extends Controller
      */
     public function sendResetLinkEmail(Request $request)
     {
+
+        $this->apiValidate($request, $this->rules($request), [trans('messages.MSG12')]);
+
+        $response = $this->broker()->sendResetLink(
+            $request->only('email')
+        );
+
+        return $response == Password::RESET_LINK_SENT
+            ? $this->sendResetLinkResponse($response, $request->only('email'))
+            : $this->sendResetLinkFailedResponse($request, $response);
+        /*
         try{
             $this->apiValidate($request, $this->getRoles($request), [trans('messages.MSG12')]);
 
@@ -45,9 +57,11 @@ class ResetPasswordController extends Controller
 
             throw new ApiException(trans($response));
 
-        }catch (\Exception $e){
-            throw new ApiException(trans('messages.MSG12'));
         }
+        catch (\Exception $e){
+            Log::error($e->getMessage());
+            throw new ApiException(trans('messages.MSG12'));
+        }*/
     }
 
     /**
@@ -94,7 +108,7 @@ class ResetPasswordController extends Controller
      * @param $request
      * @return array
      */
-    protected function getRoles($request)
+    protected function rules($request)
     {
         return [
             'email' => [
@@ -114,5 +128,15 @@ class ResetPasswordController extends Controller
     protected function broker()
     {
         return Password::broker();
+    }
+
+    private function sendResetLinkResponse($response, $email)
+    {
+        return ['status' => trans($response, $email)];
+    }
+
+    private function sendResetLinkFailedResponse($request, $response)
+    {
+        return (new ApiException(trans($response), ApiException::unknown, 404))->getHttpResponse();
     }
 }

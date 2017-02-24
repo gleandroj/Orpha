@@ -14,9 +14,10 @@ var camDialogTemplate =
     '		</div>' +
     '	</md-toolbar>' +
     '   <div id="camera-root" layout="column" flex layout-align="start center">' +
-    '       <video ng-show="!$ctrl.captured && !$ctrl.error" id="camera-video" autoplay="true" ></video>' +
-    '       <canvas ng-show="$ctrl.captured && !$ctrl.error" id="camera-canvas" width="{{$ctrl.dimensions.width + \'px\'}}" height="{{$ctrl.dimensions.height + \'px\'}}"></canvas>' +
-    '       <div ng-show="$ctrl.error" layout="column" ng-style="{width:$ctrl.dimensions.width + \'px\', height:$ctrl.dimensions.height + \'px\'}" layout-align="center center"><md-icon class="material-icons" style="font-size: 40px;">sentiment_very_dissatisfied</md-icon><p class="md-title" style="text-align: center;">{{ $ctrl.message }}</p></div>' +
+    '       <video ng-show="!$ctrl.captured && !$ctrl.error && !$ctrl.loading" id="camera-video" autoplay="true" ></video>' +
+    '       <canvas ng-show="$ctrl.captured && !$ctrl.error && !$ctrl.loading" id="camera-canvas" width="{{$ctrl.dimensions.width + \'px\'}}" height="{{$ctrl.dimensions.height + \'px\'}}"></canvas>' +
+    '       <div ng-show="$ctrl.error && !$ctrl.loading" layout="column" ng-style="{width:$ctrl.dimensions.width + \'px\', height:$ctrl.dimensions.height + \'px\'}" layout-align="center center"><md-icon class="material-icons" style="font-size: 40px;">sentiment_very_dissatisfied</md-icon><p class="md-title" style="text-align: center;">{{ $ctrl.message }}</p></div>' +
+    '       <div ng-show="$ctrl.loading" layout="row" layout-sm="column" ng-style="{width:$ctrl.dimensions.width + \'px\', height:$ctrl.dimensions.height + \'px\'}" layout-align="center center"><md-progress-circular md-indetermied class="md-accent" md-diameter="96"></md-progress-circular></div>' +
     '   </div>' +
     '	<md-divider></md-divider>' +
     '	<md-dialog-actions ng-if="!$ctrl.captured" layout="row" layout-align="end center" >' +
@@ -46,7 +47,7 @@ class CameraController {
             width: locals.width || 0
         };
         this.loading = true;
-
+        this.error = false;
         this.videoStream = null;
 
         this.elements = {
@@ -73,6 +74,7 @@ class CameraController {
     }
 
     takeSnapshot() {
+
         var ctx = this.elements.canvas.getContext('2d');
         this.util.timeout(()=> {
             ctx.drawImage(this.elements.video, 0, 0, this.elements.video.videoWidth, this.elements.video.videoHeight);
@@ -118,6 +120,7 @@ class CameraController {
                 self.error = true;
                 self.message = err.message;
             }
+            self.loading = false;
         };
 
         this.util.timeout(function () {
@@ -140,7 +143,7 @@ class CameraController {
     }
 
     salvar() {
-        if (this.videoStream != null) {
+        if (!this.error) {
             this.videoStream.getVideoTracks()[0].stop();
         }
         this.dialog.hideDialog(this.snapshot);
@@ -152,7 +155,7 @@ class CameraController {
     }
 
     cancel() {
-        if (this.videoStream != null) {
+        if (!this.error) {
             this.videoStream.getVideoTracks()[0].stop();
         }
         this.dialog.cancelDialog('cancel');
