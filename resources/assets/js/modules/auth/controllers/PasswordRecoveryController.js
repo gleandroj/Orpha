@@ -20,7 +20,7 @@ export default class PasswordRecoveryController {
                 self.route.go('auth.login');
             })
             .error((response) => {
-                let msg = response.error == 'validation' ? response.errors[response.errors.keys()[0]] : response.message;
+                let msg = response.error == 'validation' ? response.errors[0] : response.message;
                 self.toast.showError(msg);
                 self.loading = false;
             })
