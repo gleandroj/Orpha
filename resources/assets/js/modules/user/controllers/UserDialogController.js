@@ -84,4 +84,4 @@ export default class UserDialogController {
     }
 }
 
-UserDialogController.$injector = ['DialogService', 'UserService', 'ToastService', 'MessageService', 'OrphaUtilService'];
+UserDialogController.$inject = ['DialogService', 'UserService', 'ToastService', 'MessageService', 'OrphaUtilService'];
