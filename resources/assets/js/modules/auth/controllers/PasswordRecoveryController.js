@@ -21,7 +21,7 @@ export default class PasswordRecoveryController {
             })
             .error((response) => {
                 console.log(response.errors);
-                let msg = response.error == 'validation' ? response.errors[0]['email'] : response.message;
+                let msg = response.error == 'validation' ? response.errors['email'] : response.message;
                 self.toast.showError(msg);
                 self.loading = false;
             })
