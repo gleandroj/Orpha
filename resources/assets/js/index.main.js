@@ -27,6 +27,7 @@ angular.module('orpha.filters', []);
 angular.module('orpha.services', ['ngMaterial']);
 angular.module('orpha.components', ['ngMaterial', 'ngMessages', 'orpha.filters']);
 angular.module('orpha.directives', ['ngMaterial', 'ngMessages']);
+
 angular.module('orpha.modules', [
     'material.components.expansionPanels',
     'angular.filter',

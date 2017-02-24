@@ -7,4 +7,4 @@ import AuthServiceRun from './run/AuthServiceRun';
 
 angular.module('orpha')
     .run(MessageServiceRun)
-    .run(AuthServiceRun);
+    //.run(AuthServiceRun);

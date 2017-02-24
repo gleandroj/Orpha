@@ -5,7 +5,7 @@
 export default class LogService{
 
     constructor($log){
-        'ngInject';
+
         this.log = $log;
     }
 
@@ -18,3 +18,5 @@ export default class LogService{
     }
 
 }
+
+LogService.$inject = ['$log'];

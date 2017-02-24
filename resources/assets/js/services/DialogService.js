@@ -8,10 +8,12 @@ export function DialogServiceProvider() {
     this.showMultipleDialogs = function (allow) {
         _showMultipleDialogs = allow;
     };
-    this.$get = (OrphaUtilService, LogService, $mdDialog) => {
-        'ngInject';
+
+    this.$get = ['OrphaUtilService', 'LogService', '$mdDialog', (OrphaUtilService, LogService, $mdDialog) => {
+
         return new DialogService(OrphaUtilService, LogService, $mdDialog, _showMultipleDialogs);
-    };
+
+    }];
 }
 
 class DialogService {

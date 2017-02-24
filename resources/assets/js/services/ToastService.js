@@ -5,8 +5,6 @@
 export default class ToastService{
 
     constructor($mdToast){
-        'ngInject'
-
         this.toast = $mdToast;
         this.time = 7000;
     }
@@ -55,3 +53,5 @@ export default class ToastService{
     }
 
 }
+
+ToastService.$inject = ['$mdToast'];

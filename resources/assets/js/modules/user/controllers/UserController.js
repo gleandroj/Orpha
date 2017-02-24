@@ -5,7 +5,9 @@
 export default class UserController{
 
     constructor($state){
-        'ngInject'
+
         this.title = $state.current.title || 'Usuários';
     }
 }
+
+UserController.$inject = ['$state'];

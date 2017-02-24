@@ -5,8 +5,8 @@
 
 export let CheckEmailDirective = {
     selector:'checkEmail',
-    fn: ($http, OrphaUtilService, $q)=>{
-        'ngInject'
+    fn: ['$http', 'OrphaUtilService', '$q', ($http, OrphaUtilService, $q)=>{
+
         return {
             require:{
                 model:"ngModel"
@@ -31,5 +31,5 @@ export let CheckEmailDirective = {
                 };
             }
         }
-    }
+    }]
 };

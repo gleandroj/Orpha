@@ -1,8 +1,10 @@
 /**
  * Created by FG0003 on 20/02/2017.
  */
+DateConfig.$inject = ['$mdDateLocaleProvider'];
+
 export default function DateConfig($mdDateLocaleProvider) {
-    'ngInject'
+
     /*$mdDateLocaleProvider.formatDate = function(date) {
         return moment(date).format('DD/MM/YYYY');
     };
@@ -16,5 +18,3 @@ export default function DateConfig($mdDateLocaleProvider) {
     $mdDateLocaleProvider.days = ['Dom','Seg','Ter','Qua','Qui','Sex','Sab'];
     $mdDateLocaleProvider.shortDays = ['D','S','T','Q','Q','S','S'];
 }
-
-DateConfig.$inject = ['$mdDateLocaleProvider'];

@@ -1,7 +1,8 @@
 import { OAuthInterceptor } from './../services/AuthService';
 
+AuthServiceConfig.$inject = ['AuthServiceProvider', '$httpProvider'];
+
 export default function AuthServiceConfig(AuthServiceProvider, $httpProvider) {
-    'ngInject';
 
     AuthServiceProvider.setSessionTTL(1000 * 60 * 10);
 
@@ -20,5 +21,3 @@ export default function AuthServiceConfig(AuthServiceProvider, $httpProvider) {
 
     $httpProvider.interceptors.push(OAuthInterceptor);
 }
-
-AuthServiceConfig.$inject = ['AuthServiceProvider', '$httpProvider'];

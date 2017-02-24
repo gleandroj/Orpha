@@ -6,8 +6,9 @@ import ProfileTemplate from './../pages/profile.tpl.html';
 import LayoutTemplate from './../pages/layout.tpl.html';
 import ListTemplate from './../pages/list.tpl.html';
 
+RouteConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
+
 export default function RouteConfig($stateProvider, $urlRouterProvider) {
-    'ngInject';
 
     $stateProvider
         .state('user', {
@@ -31,5 +32,3 @@ export default function RouteConfig($stateProvider, $urlRouterProvider) {
             template: ListTemplate
         });
 }
-
-RouteConfig.$inject = ['$stateProvider', '$urlRouterProvider'];

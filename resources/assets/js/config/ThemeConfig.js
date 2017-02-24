@@ -1,8 +1,9 @@
 /**
  * Created by FG0003 on 20/02/2017.
  */
-export default function ThemeConfig($mdThemingProvider, $mdDateLocaleProvider) {
-    'ngInject'
+ThemeConfig.$inject = ['$mdThemingProvider'];
+
+export default function ThemeConfig($mdThemingProvider) {
 
     $mdThemingProvider.definePalette('orphaPrimaryPalette', {
         '50': '#6da7e0',
@@ -65,5 +66,3 @@ export default function ThemeConfig($mdThemingProvider, $mdDateLocaleProvider) {
         .accentPalette('orphaAccentPallet', {'default':'500'})
         .backgroundPalette('grey');
 }
-
-ThemeConfig.$inject = ['$mdThemingProvider', '$mdDateLocaleProvider'];

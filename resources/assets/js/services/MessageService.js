@@ -5,7 +5,7 @@ export const MessageEvents = {
 export default class MessageService{
 
     constructor($http, OrphaUtilService, LogService){
-        'ngInject';
+
         this.http = $http;
         this.util = OrphaUtilService;
         this.log = LogService;
@@ -49,3 +49,5 @@ export default class MessageService{
     }
 
 }
+
+MessageService.$inject = ['$http', 'OrphaUtilService', 'LogService'];

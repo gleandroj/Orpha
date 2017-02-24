@@ -2,7 +2,7 @@
 export default class OrphaController {
 
     constructor($mdSidenav, $state, AuthService, OrphaUtilService) {
-        'ngInject';
+
         this.auth = AuthService;
         this.state = $state;
         this.util = OrphaUtilService;
@@ -38,3 +38,5 @@ export default class OrphaController {
         //this.state.go('auth.login');
     }
 }
+
+OrphaController.$inject = ['$mdSidenav', '$state', 'AuthService', 'OrphaUtilService'];

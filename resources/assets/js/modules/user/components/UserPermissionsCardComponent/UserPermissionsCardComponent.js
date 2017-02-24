@@ -7,7 +7,7 @@ import Template from './user-permissions.tpl.html';
 class Controller {
 
     constructor(AuthService, DialogService, OrphaUtilService, $filter) {
-        'ngInject'
+
         this.auth = AuthService;
         this.util = OrphaUtilService;
         this.dialog = DialogService;
@@ -114,6 +114,8 @@ class Controller {
         });
     }
 }
+
+Controller.$inject = ['AuthService', 'DialogService', 'OrphaUtilService', '$filter'];
 
 export let UserPermissionsCardComponent = {
     selector: 'userPermissionsCard',

@@ -1,7 +1,8 @@
 import { MessageEvents } from  './../services/MessageService';
 
+MessageServiceRun.$inject = ['MessageService', 'OrphaUtilService', '$urlRouter', 'LogService'];
+
 export default function MessageServiceRun(MessageService, OrphaUtilService, $urlRouter, LogService) {
-    'ngInject'
 
     OrphaUtilService.on(MessageEvents.resourcesUpdated, function () {
         $urlRouter.sync();

@@ -4,8 +4,10 @@
  * Redirect user to the correct route when him types a wrong URL
  */
 
+RouteAppConfig.$inject = ['$urlRouterProvider'];
+
 export default function RouteAppConfig($urlRouterProvider) {
-    'ngInject';
+
     //$urlRouterProvider.otherwise('/orpha');
     let defaultRoute = 'user.profile';
 
@@ -20,5 +22,3 @@ export default function RouteAppConfig($urlRouterProvider) {
         }
     });
 }
-
-RouteAppConfig.$inject = ['$urlRouterProvider'];

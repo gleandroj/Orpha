@@ -11,7 +11,6 @@ import PasswordResetController from './../controllers/PasswordResetController';
 import PasswordResetTemplate from './../pages/password-reset.tpl.html';
 
 export default function RouteConfig($stateProvider) {
-    'ngInject'
 
     $stateProvider
         .state('auth', {

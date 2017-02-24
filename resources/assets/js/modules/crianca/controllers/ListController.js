@@ -8,7 +8,7 @@ import FallbackImg from './../../../../img/ic_account_circle_black_48dp_2x.png';
 export default class ListController {
 
     constructor(DialogService, OrphaUtilService, AuthService, CriancaService, ToastService, MessageService) {
-        'ngInject'
+
         this.authService = AuthService;
         this.util = OrphaUtilService;
         this.dialogService = DialogService;
@@ -87,3 +87,5 @@ export default class ListController {
          });*/
     }
 }
+
+ListController.$inject = ['DialogService', 'OrphaUtilService', 'AuthService', 'CriancaService', 'ToastService', 'MessageService'];

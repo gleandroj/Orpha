@@ -27,11 +27,12 @@ export function AuthServiceProvider() {
         _oauth = OAuth;
     };
 
-    this.$get = ($http, OrphaUtilService, SessionService, StorageService, LogService, $state) => {
-        'ngInject';
+    this.$get = ['$http', 'OrphaUtilService', 'SessionService', 'StorageService', 'LogService', '$state' ,($http, OrphaUtilService, SessionService, StorageService, LogService, $state) => {
+
         SessionService.setSessionTTL(_sessionTime);
         return new AuthService($http, OrphaUtilService, SessionService, StorageService, LogService, $state, _oauth);
-    };
+
+    }];
 }
 
 class AuthUser{
@@ -351,7 +352,6 @@ class AuthService {
 }
 
 export function OAuthInterceptor($injector, LogService, OrphaUtilService) {
-    'ngInject';
 
     const Request = (config) => {
         const Auth = $injector.get('AuthService');
@@ -391,3 +391,5 @@ export function OAuthInterceptor($injector, LogService, OrphaUtilService) {
         responseError: ResponseError
     }
 }
+
+OAuthInterceptor.$inject = ['$injector', 'LogService', 'OrphaUtilService'];

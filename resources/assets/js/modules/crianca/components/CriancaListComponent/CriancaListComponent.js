@@ -8,7 +8,7 @@ import Fallbackimg from './../../../../../img/ic_account_circle_black_48dp_2x.pn
 class Controller {
 
     constructor(OrphaUtilService) {
-        'ngInject'
+
         this._util = OrphaUtilService;
         this.fallbackimg = Fallbackimg;
     }
@@ -51,6 +51,8 @@ class Controller {
         return Math.ceil(number);
     }
 }
+
+Controller.$inject = ['OrphaUtilService'];
 
 export let CriancaListComponent = {
     selector: 'criancaList',

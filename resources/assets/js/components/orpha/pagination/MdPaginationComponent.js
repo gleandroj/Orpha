@@ -11,7 +11,7 @@ import Template from './md-pagination.tpl.html';
 class PaginationController{
 
     constructor(OrphaUtilService){
-        'ngInject'
+
         this.util = OrphaUtilService;
         this.arrow_before = arrow_before;
         this.arrow_first = arrow_first;
@@ -45,6 +45,8 @@ class PaginationController{
         return Math.ceil(this.nItems/this.itemsPerPage);
     }
 }
+
+PaginationController.$inject = ['OrphaUtilService'];
 
 export let MdPaginationComponent = {
     selector:'mdPagination',

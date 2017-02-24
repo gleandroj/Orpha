@@ -8,7 +8,7 @@ import Fallbackimg from './../../../../../img/ic_account_circle_black_48dp_2x.pn
 class Controller {
 
     constructor(OrphaUtilService) {
-        'ngInject'
+
         this._util = OrphaUtilService;
         this.fallbackimg = Fallbackimg;
         this.selectedPage = 'dados';
@@ -24,6 +24,9 @@ class Controller {
         this.isPasswordFieldRequired = !(this.isPasswordFieldRequired === false || this.isPasswordFieldRequired === 'false');
     }
 }
+
+Controller.$inject = ['OrphaUtilService'];
+
 
 export let UserFormComponent = {
     selector: 'userForm',

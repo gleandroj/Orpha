@@ -2,7 +2,7 @@
 export default class LoginController {
 
     constructor(AuthService, ToastService, MessageService, $state) {
-        'ngInject'
+
         this.route = $state;
         this.auth = AuthService;
         this.toast = ToastService;
@@ -30,3 +30,5 @@ export default class LoginController {
     }
 
 }
+
+LoginController.$inject = ['AuthService', 'ToastService', 'MessageService', '$state'];

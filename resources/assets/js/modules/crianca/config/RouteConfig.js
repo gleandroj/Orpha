@@ -4,8 +4,9 @@ import LayoutTemplate from './../pages/layout.tpl.html';
 import ListController from './../controllers/ListController';
 import ListTemplate from './../pages/list.tpl.html';
 
+RouteConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
+
 export default function RouteConfig($stateProvider, $urlRouterProvider) {
-    'ngInject';
 
     $stateProvider
         .state('crianca', {
@@ -23,5 +24,3 @@ export default function RouteConfig($stateProvider, $urlRouterProvider) {
             template: ListTemplate
         })
 }
-
-RouteConfig.$inject = ['$stateProvider', '$urlRouterProvider'];

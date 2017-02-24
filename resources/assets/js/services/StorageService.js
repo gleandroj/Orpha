@@ -5,7 +5,7 @@
 export default class StorageService{
 
     constructor(OrphaUtilService){
-        'ngInject';
+
         this.util = OrphaUtilService;
     }
 
@@ -43,3 +43,5 @@ export default class StorageService{
         localStorage.removeItem(key);
     }
 }
+
+StorageService.$inject = ['OrphaUtilService'];

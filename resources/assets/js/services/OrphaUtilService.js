@@ -5,7 +5,7 @@
 export default class OrphaUtilService{
 
     constructor($rootScope, $timeout, $interval, $q){
-        'ngInject';
+
         this.rootscope = $rootScope;
         this.$q = $q;
         this.$timeout = $timeout;
@@ -73,3 +73,5 @@ export default class OrphaUtilService{
         return deferred;
     }
 }
+
+OrphaUtilService.$inject = ['$rootScope', '$timeout', '$interval', '$q'];

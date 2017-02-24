@@ -10,6 +10,8 @@ import DialogServiceConfig from './config/DialogServiceConfig';
 import ThemeConfig from './config/ThemeConfig';
 import DateConfig from './config/DateConfig';
 
+console.log('teste');
+
 angular.module('orpha.config')
         .config(MessageServiceConfig)
         .config(AuthServiceConfig)

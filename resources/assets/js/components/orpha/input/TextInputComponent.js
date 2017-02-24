@@ -11,7 +11,6 @@ import FallbackImg from './../../../../img/ic_account_circle_black_48dp_2x.png';
 class TextInputController{
 
     constructor($scope, OrphaUtilService, $http){
-        'ngInject'
         this.scope = $scope;
         this.util = OrphaUtilService;
         this.http = $http;
@@ -78,10 +77,12 @@ class TextInputController{
     }
 }
 
+TextInputController.$inject = ['$scope', 'OrphaUtilService', '$http'];
+
 class FileInputController{
 
     constructor($scope, OrphaUtilService, CameraService){
-        'ngInject'
+
         this.scope = $scope;
         this.util = OrphaUtilService;
         this.cameraService = CameraService;
@@ -160,10 +161,12 @@ class FileInputController{
     }
 }
 
+FileInputController.$inject = ['$scope', 'OrphaUtilService', 'CameraService'];
+
 class SearchInputController{
 
     constructor($scope, OrphaUtilService){
-        'ngInject'
+
         this.scope = $scope;
         this.util = OrphaUtilService;
     }
@@ -212,6 +215,8 @@ class SearchInputController{
         this.form[this.name].$validate();
     }
 }
+
+SearchInputController.$inject = ['$scope', 'OrphaUtilService'];
 
 export let TextInputComponent = {
     selector:'textInput',

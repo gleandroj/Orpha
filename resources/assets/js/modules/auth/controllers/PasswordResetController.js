@@ -2,7 +2,7 @@
 export default class PasswordResetController {
 
     constructor(AuthService, ToastService, LogService, $state, token) {
-        'ngInject'
+
         this.route = $state;
         this.auth = AuthService;
         this.toast = ToastService;
@@ -39,3 +39,5 @@ export default class PasswordResetController {
             })
     }
 }
+
+PasswordResetController.$inject  = ['AuthService', 'ToastService', 'LogService', '$state', 'token'];

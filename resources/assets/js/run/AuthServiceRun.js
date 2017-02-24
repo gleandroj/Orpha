@@ -1,8 +1,9 @@
 import { AuthEvents } from './../services/AuthService';
 import { SessionEvents } from './../services/SessionService';
 
+AuthServiceRun.$inject = ['AuthService', 'DialogService', 'ToastService', 'MessageService', 'OrphaUtilService', 'LogService', '$state'];
+
 export default function AuthServiceRun(AuthService, DialogService, ToastService, MessageService, OrphaUtilService, LogService, $state) {
-    'ngInject'
 
     OrphaUtilService.on(AuthEvents.logoutSuccess, (event, args) => {
         DialogService.clearDialogs();
