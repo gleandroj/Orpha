@@ -14,17 +14,6 @@ use Illuminate\Support\Facades\DB;
 
 class PasswordRepository implements PasswordRepositoryInterface
 {
-
-    /**
-     * @param $token
-     * @return string
-     */
-    function getEmailByResetToken($token)
-    {
-        $obj = DB::table('password_resets')->where('token', $token)->first();
-        return $obj->email;
-    }
-
     /**
      * Reset the given user's password.
      *

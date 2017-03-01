@@ -10,7 +10,5 @@ namespace App\Modulos\Auth\Contracts;
  */
 interface PasswordRepositoryInterface
 {
-    function getEmailByResetToken($token);
-
     function resetPassword($user, $password);
 }

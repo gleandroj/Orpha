@@ -14,14 +14,20 @@ class ResetPasswordNotification extends Notification
      * @var
      */
     private $token;
+    /**
+     * @var
+     */
+    private $email;
 
     /**
      * Create a new notification instance.
      *
+     * @param $email
      * @param $token
      */
-    public function __construct($token)
+    public function __construct($email, $token)
     {
+        $this->email = $email;
         $this->token = $token;
     }
 
@@ -48,7 +54,7 @@ class ResetPasswordNotification extends Notification
                     ->greeting('Olá!')
                     ->subject('Redefinição de senha')
                     ->line('Você está recebendo este e-mail porque recebemos um pedido de redefinição de senha para sua conta.')
-                    ->action('Resetar senha', url('/#!/auth/password/reset', $this->token))
+                    ->action('Resetar senha', url('/#!/auth/password/reset', [$this->email, $this->token]))
                     ->line('Se você não solicitou uma redefinição de senha, nenhuma outra ação é necessária.');
     }
 

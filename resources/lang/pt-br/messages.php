@@ -12,7 +12,7 @@ return [
     "MSG9" => ":attribute não conferem.",
     "MSG10" => ":attribute inválido.",
     "MSG11" => "O campo deve ter no mínimo :min e no máximo :max caracteres.",
-    "MSG12" => "Não foi possível enviar e-mail, tente novamente!",
+    "MSG12" => "Não foi possível enviar o e-mail, tente novamente!",
     "MSG13" => "Um link de redefinição de senha foi enviado para o e-mail: :email.",
     "MSG14" => "Usuário ou senha incorretos.",
     "MSG15" => "Sessão expirada, entre novamente.",

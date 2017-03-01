@@ -25,7 +25,7 @@ export default class PasswordResetController {
                     .success(() => {
                         self.loading = false;
                         self.toast.showSuccess(response.status);
-                        self.route.go('orpha');
+                        self.route.go(AuthService.OAuth.redirect_route);
                     })
                     .error((response) => {
                         self.loading = false;

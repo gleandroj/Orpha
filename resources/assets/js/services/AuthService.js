@@ -280,9 +280,9 @@ class AuthService {
     }
 
     /*Public*/
-    checkResetPasswordToken(token) {
+    checkResetPasswordToken(data) {
         var deferred = this.util.defer();
-        this.http.post('api/auth/password/token', { token: token })
+        this.http.post('api/auth/password/token', data)
             .then((response) => {
                 deferred.resolve(response.data);
             },

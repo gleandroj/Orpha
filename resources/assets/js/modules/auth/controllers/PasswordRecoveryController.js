@@ -15,15 +15,14 @@ export default class PasswordRecoveryController {
         this.loading = true;
         this.auth.sendResetLinkEmail(this.email)
             .success((response) => {
-                self.toast.showSuccess(response.status);
+                self.toast.showSuccess(response.status.replace(':email', this.email));
                 self.loading = false;
                 self.route.go('auth.login');
             })
             .error((response) => {
-                let msg = response.error == 'validation' ? response.errors['email'] : response.message;
-                self.toast.showError(msg);
+                self.toast.showError(response['email']);
                 self.loading = false;
-            })
+            });
     }
 }
 
