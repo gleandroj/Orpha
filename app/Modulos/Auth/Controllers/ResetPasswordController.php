@@ -43,25 +43,6 @@ class ResetPasswordController extends Controller
         return $response == Password::RESET_LINK_SENT
             ? $this->sendResetLinkResponse($response, $request->only('email'))
             : $this->sendResetLinkFailedResponse($request, $response);
-        /*
-        try{
-            $this->apiValidate($request, $this->getRoles($request), [trans('messages.MSG12')]);
-
-            $response = $this->broker()->sendResetLink(
-                $request->only('email')
-            );
-
-            if ($response === Password::RESET_LINK_SENT) {
-                return ['status' => trans($response, $request->only('email'))];
-            }
-
-            throw new ApiException(trans($response));
-
-        }
-        catch (\Exception $e){
-            Log::error($e->getMessage());
-            throw new ApiException(trans('messages.MSG12'));
-        }*/
     }
 
     /**

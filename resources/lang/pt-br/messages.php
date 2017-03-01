@@ -18,5 +18,5 @@ return [
     "MSG15" => "Sessão expirada, entre novamente.",
     "MSG16" => "Não autenticado.",
     "MSG17" => "Ação não autorizada.",
-    "MSG18" => "Ops! Algo deu errdo, contate o administrador."
+    "MSG18" => "Ops! Algo deu errado, contate o administrador."
 ];
