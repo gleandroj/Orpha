@@ -57,6 +57,7 @@ class ApiException extends \Exception
             $this->errors = collect($messages)->map(function ($value, $key){
                 return $value[0];
             });
+            $this->message = $this->errors->first();
         }
     }
 
