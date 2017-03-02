@@ -316,7 +316,7 @@ class AuthService {
 
     /*Private*/
     onRouteChange(event, next, prev) {
-        console.log(event);
+
         if (this.isAuthenticated() && next.name.indexOf('auth') > -1) {
             event.preventDefault();
             this.log.info('Authenticated user, redirecting to: ' + this.OAuth['redirect_route']);
