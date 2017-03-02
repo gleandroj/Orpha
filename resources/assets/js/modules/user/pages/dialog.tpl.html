@@ -14,7 +14,7 @@
         <md-progress-linear md-mode="indeterminate" class="md-accent" ng-show="$ctrl.loading || userForm.$pending"></md-progress-linear>
 
         <md-content flex>
-            <user-userForm user="$ctrl.user" errors="$ctrl.serverErrors" read-only="$ctrl.readOnly" is-disabled="$ctrl.readOnly || $ctrl.loading" is-password-field-required="$ctrl.user.id == null || $ctrl.user.id == ''"></user-userForm>
+            <user-user user="$ctrl.user" errors="$ctrl.serverErrors" read-only="$ctrl.readOnly" is-disabled="$ctrl.readOnly || $ctrl.loading" is-password-field-required="$ctrl.user.id == null || $ctrl.user.id == ''"></user-user>
         </md-content>
 
         <span flex></span>
