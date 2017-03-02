@@ -1,6 +1,6 @@
 
 <md-dialog aria-label="User Form"  flex="auto" flex-gt-sm="60" flex-gt-md="50" layout="column">
-    <form name="userForm" layout="column" flex="100" ng-submit="$ctrl.submit()" novalidate>
+    <form name="userForm" ng-init="$ctrl.setForm(this)" layout="column" flex="100" ng-submit="$ctrl.submit()" novalidate>
 
         <md-toolbar>
             <div class="md-toolbar-tools">

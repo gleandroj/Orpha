@@ -5,14 +5,21 @@
 export default class UserDialogController {
 
     constructor(DialogService, UserService, ToastService, MessageService, OrphaUtilService) {
-
         this.dialogService = DialogService;
         this.userService = UserService;
         this.toastService = ToastService;
         this.messageService = MessageService;
         this.utilService = OrphaUtilService;
         this.loading = false;
-        this.serverErrors = [];
+        this.originalUser = this.utilService.copy(this.user);
+    }
+
+    setForm(scope){
+        this.utilService.timeout(() => this.form = scope.userForm, 10);
+    }
+
+    getForm(){
+        return this.form;
     }
 
     close() {
@@ -24,6 +31,9 @@ export default class UserDialogController {
             this.close();
         } else {
             this.readOnly = true;
+            if(!this.getForm().$submitted || !this.getForm().$valid){
+                this.user = this.utilService.copy(this.originalUser);
+            }
         }
     }
 
@@ -61,7 +71,7 @@ export default class UserDialogController {
     }
 
     submit() {
-        if (this.user.id === null || this.user.id === '') {
+        if (this.user.id == '' || this.user.id == null) {
             this.submitUser();
         } else {
             this.showConfirmation(()=>{
