@@ -100,15 +100,22 @@ class DialogService {
 
     onDialogCompleted(dialog, scope, element) {
         dialog.show = true;
-        dialog.scope = scope;
         dialog.element = element;
 
-       /* if (dialog.options.escapeToClose) {
-            dialog.element.bind('keydown keypress', (event)=> dialog.cancelCalled = dialog.cancelCalled || event.which === 27);
+        if(dialog.scope == null)
+            dialog.scope = scope;
+        else{
+            let oldScope = dialog.scope;
+            dialog.scope = dialog.scope[dialog.options.controllerAs].scope = dialog.scope[dialog.options.controllerAs].$scope = scope;
+            oldScope.$destroy();
         }
-        if (dialog.options.clickOutsideToClose) {
-            element.bind('click', (event)=> dialog.cancelCalled = dialog.cancelCalled || (event.target == dialog.element[0]));
-        }*/
+
+        /* if (dialog.options.escapeToClose) {
+             dialog.element.bind('keydown keypress', (event)=> dialog.cancelCalled = dialog.cancelCalled || event.which === 27);
+         }
+         if (dialog.options.clickOutsideToClose) {
+             element.bind('click', (event)=> dialog.cancelCalled = dialog.cancelCalled || (event.target == dialog.element[0]));
+         }*/
     }
 
     onDialogHidden(dialog, response) {
