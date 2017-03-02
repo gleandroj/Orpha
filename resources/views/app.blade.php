@@ -6,7 +6,7 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,500,700" rel="stylesheet">
         <link href="{{ mix('css/style.css') }}" rel="stylesheet">
-
+        <base href="/" />
         <title>{{ config('app.name') }}</title>
     </head>
     <body ng-app="orpha">
