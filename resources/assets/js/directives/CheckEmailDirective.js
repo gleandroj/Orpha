@@ -14,6 +14,10 @@ export let CheckEmailDirective = {
             link:(scope, element, attrs, $ctrl)=>{
                 let check = function(){ return attrs.check === 'true' && $ctrl.model.$touched && $ctrl.model.$dirty };
 
+                scope.$watch(check, function (val) {
+                    $ctrl.model.$validate();
+                });
+
                 $ctrl.model.$asyncValidators.checkEmail = function (value) {
                     var defer = OrphaUtilService.defer();
 
@@ -21,7 +25,8 @@ export let CheckEmailDirective = {
                         $http.post('/api/users/checkEmail', {email:value, user_id:attrs.userId})
                             .then((data) => defer.resolve(),
                                 (err)=>{
-                                    scope['check_email_result'] = err.data['email'][0];
+                                    if(err.status == 422)
+                                        scope['check_email_result'] = err.data.errors['email'];
                                     defer.reject();
                                 });
                     }else{
