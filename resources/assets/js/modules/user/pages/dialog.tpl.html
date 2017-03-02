@@ -1,6 +1,6 @@
 
 <md-dialog aria-label="User Form"  flex="auto" flex-gt-sm="60" flex-gt-md="50" layout="column">
-    <form name="userForm" layout="column" flex="100" ng-submit="$ctrl.submit()">
+    <form name="userForm" layout="column" flex="100" ng-submit="$ctrl.submit()" novalidate>
 
         <md-toolbar>
             <div class="md-toolbar-tools">
@@ -11,17 +11,17 @@
                 </md-button>
             </div>
         </md-toolbar>
-        <md-progress-linear md-mode="indeterminate" class="md-accent" ng-show="$ctrl.loading || form.$pending"></md-progress-linear>
+        <md-progress-linear md-mode="indeterminate" class="md-accent" ng-show="$ctrl.loading || userForm.$pending"></md-progress-linear>
 
         <md-content flex>
-            <user-form user="$ctrl.user" errors="$ctrl.serverErrors" read-only="$ctrl.readOnly" is-disabled="$ctrl.readOnly || $ctrl.loading" is-password-field-required="$ctrl.user.id == null || $ctrl.user.id == ''"></user-form>
+            <user-userForm user="$ctrl.user" errors="$ctrl.serverErrors" read-only="$ctrl.readOnly" is-disabled="$ctrl.readOnly || $ctrl.loading" is-password-field-required="$ctrl.user.id == null || $ctrl.user.id == ''"></user-userForm>
         </md-content>
 
         <span flex></span>
         <md-divider></md-divider>
 
         <md-dialog-actions ng-if="!$ctrl.readOnly"  layout="row" layout-align="end center">
-            <md-button type="submit" class="md-accent md-raised" ng-disabled="$ctrl.loading || form.$invalid || form.$pending">
+            <md-button type="submit" class="md-accent md-raised" ng-disabled="$ctrl.loading || userForm.$invalid || userForm.$pending">
                 Salvar
             </md-button>
             <md-button class="md-warn" ng-click="$ctrl.cancel()" ng-disabled="$ctrl.loading">
@@ -40,5 +40,6 @@
                 Voltar
             </md-button>
         </md-dialog-actions>
+
     </form>
 </md-dialog>
