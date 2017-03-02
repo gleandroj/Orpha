@@ -44,7 +44,7 @@ class CriancaController extends Controller
     public function store(Request $request)
     {
         $this->authorizeForUser($this->getCurrentUser(), 'create', Crianca::class);
-        $this->apiValidate($request, [
+        $this->validate($request, [
             'nome' => 'required|max:50',
             'dt_nascimento' => 'required|date',
             'filiacao' => 'required|max:50',
@@ -78,7 +78,7 @@ class CriancaController extends Controller
     public function update(Request $request, Crianca $crianca)
     {
         $this->authorizeForUser($this->getCurrentUser(), 'update', $crianca);
-        $this->apiValidate($request, [
+        $this->validate($request, [
             'nome' => 'required|max:50',
             'dt_nascimento' => 'required|date',
             'filiacao' => 'required|max:50',

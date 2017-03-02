@@ -44,7 +44,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $this->authorizeForUser($this->getCurrentUser(), 'create', User::class);
-        $this->apiValidate($request, [
+        $this->validate($request, [
             'name' => 'required|max:50',
             'email' => 'required|email|max:40|unique:users,email',
             'phone' => ['required','max:20', 'regex:/^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/'],
@@ -79,7 +79,7 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $this->authorizeForUser($this->getCurrentUser(), 'update',  $user);
-        $this->apiValidate($request, [
+        $this->validate($request, [
             'id' => 'required|exists:users,id',
             'name' => 'required|max:50',
             'email' => 'required|email|max:40|unique:users,email,'.$user->id,

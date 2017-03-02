@@ -15,23 +15,7 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     /**
-     * @param Request $request
-     * @param array $rules
-     * @param array $messages
-     * @param array $customAttributes
-     * @throws ApiException
-     */
-    public function apiValidate(Request $request, array $rules, array $messages = [], array $customAttributes = [])
-    {
-        $validator = $this->getValidationFactory()->make($request->all(), $rules, $messages, $customAttributes);
-
-        if ($validator->fails()) {
-            throw new ApiException(ApiException::validation, ApiException::validation, 422, $validator);
-        }
-    }
-
-    /**
-     * @return \App\Modulos\User\Models\User
+     * @return \App\Modulos\User\Models\User|\Illuminate\Contracts\Auth\Authenticatable
      */
     protected function getCurrentUser()
     {
