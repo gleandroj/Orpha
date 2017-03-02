@@ -8,6 +8,7 @@ use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -55,13 +56,13 @@ class Handler extends ExceptionHandler
         if($exception instanceof NotFoundHttpException && $sendJson){
             return (new ExceptionResponse(trans('messages.MSG19'), $exception->getStatusCode()))->getHttpResponse();
         }elseif($exception instanceof ModelNotFoundException && $sendJson){
-            return (new ExceptionResponse(trans('messages.MSG8'), 404))->getHttpResponse();
+            return (new ExceptionResponse(trans('messages.MSG8'), Response::HTTP_NOT_FOUND))->getHttpResponse();
         }elseif($exception instanceof AuthorizationException && $sendJson){
-            return (new ExceptionResponse(trans('messages.MSG17'), 403))->getHttpResponse();
+            return (new ExceptionResponse(trans('messages.MSG17'), Response::HTTP_FORBIDDEN))->getHttpResponse();
         }elseif ($exception instanceof AuthenticationException) {
             return $this->unauthenticated($request, $exception, $sendJson);
         }elseif ($exception instanceof ValidationException) {
-            return (new ExceptionResponse(trans('messages.MSG20'), 422, $exception->validator))->getHttpResponse();
+            return (new ExceptionResponse(trans('messages.MSG20'), Response::HTTP_UNPROCESSABLE_ENTITY, $exception->validator))->getHttpResponse();
         }elseif ($exception instanceof HttpResponseException && $sendJson){
             return (new ExceptionResponse($exception->getMessage(), $exception->getStatusCode()))->getHttpResponse();
         }elseif(!$sendJson){
