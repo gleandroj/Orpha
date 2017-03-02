@@ -9,6 +9,8 @@
 namespace App\Exceptions;
 
 
+use Illuminate\Http\Response;
+
 class ExceptionResponse
 {
     /**
@@ -37,13 +39,24 @@ class ExceptionResponse
         $this->validator = $validator;
     }
 
+
+    /**
+     * @param $validator
+     * @return array
+     */
+    private function formatValidatorErros($validator){
+        return collect($validator->errors()->getMessages())->mapWithKeys(function ($value, $key){
+                return [$key => $value[0]];
+            })->all();
+    }
+
     /**
      * @return \Illuminate\Http\JsonResponse
      */
     public function getHttpResponse(){
         if($this->validator != null)
-            return response()->json(['error' => $this->code, 'message' => $this->message, 'errors' => $this->validator->errors()->getMessages()], $this->code);
+            return response()->json(['error' => Response::$statusTexts[$this->code] , 'message' => $this->message, 'errors' => $this->formatValidatorErros($this->validator)], $this->code);
         else
-            return response()->json(['error' => $this->code, 'message' => $this->message, 'errors' => null], $this->code);
+            return response()->json(['error' => Response::$statusTexts[$this->code] , 'message' => $this->message, 'errors' => null], $this->code);
     }
 }
