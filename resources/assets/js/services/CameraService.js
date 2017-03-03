@@ -2,34 +2,7 @@
  * Created by FG0003 on 28/12/2016.
  */
 
-var camDialogTemplate =
-    '<md-dialog aria-label="Camera Dialog" layout="column">' +
-    '	<md-toolbar>' +
-    '		<div class="md-toolbar-tools">' +
-    '			<h2>{{$ctrl.title}}</h2>' +
-    '			<span flex></span>' +
-    '			<md-button class="md-icon-button" ng-click="$ctrl.cancel()">' +
-    '				<md-icon class="material-icons" aria-label="Close dialog">close</md-icon>' +
-    '			</md-button>' +
-    '		</div>' +
-    '	</md-toolbar>' +
-    '   <div id="camera-root" layout="column" flex layout-align="start center">' +
-    '       <video ng-show="!$ctrl.captured && !$ctrl.error && !$ctrl.loading" id="camera-video" autoplay="true" ></video>' +
-    '       <canvas ng-show="$ctrl.captured && !$ctrl.error && !$ctrl.loading" id="camera-canvas" width="{{$ctrl.dimensions.width + \'px\'}}" height="{{$ctrl.dimensions.height + \'px\'}}"></canvas>' +
-    '       <div ng-show="$ctrl.error && !$ctrl.loading" layout="column" ng-style="{width:$ctrl.dimensions.width + \'px\', height:$ctrl.dimensions.height + \'px\'}" layout-align="center center"><md-icon class="material-icons" style="font-size: 40px;">sentiment_very_dissatisfied</md-icon><p class="md-title" style="text-align: center;">{{ $ctrl.message }}</p></div>' +
-    '       <div ng-show="$ctrl.loading" layout="row" layout-sm="column" ng-style="{width:$ctrl.dimensions.width + \'px\', height:$ctrl.dimensions.height + \'px\'}" layout-align="center center"><md-progress-circular md-indetermied class="md-accent" md-diameter="96"></md-progress-circular></div>' +
-    '   </div>' +
-    '	<md-divider></md-divider>' +
-    '	<md-dialog-actions ng-if="!$ctrl.captured" layout="row" layout-align="end center" >' +
-    '		<md-button class="md-raised md-accent" ng-disabled="$ctrl.error" ng-click="$ctrl.takeSnapshot()"  md-auto-focus><md-icon class="material-icons">photo_camera</md-icon><md-tooltip md-direction="top">Capturar</md-tooltip></md-button>' +
-    '		<md-button class="md-warn" ng-click="$ctrl.cancel()">Cancelar</md-button>' +
-    '	</md-dialog-actions>' +
-    '	<md-dialog-actions ng-if="$ctrl.captured" layout="row" layout-align="end center" >' +
-    '		<md-button class="md-raised md-accent" ng-click="$ctrl.salvar()" md-auto-focus>Salvar</md-button>' +
-    '		<md-button class="md-warn" ng-click="$ctrl.voltar()">Voltar</md-button>' +
-    '	</md-dialog-actions>' +
-    '</md-dialog>';
-
+import camDialogTemplate from './../components/camera/camera.tpl.html';
 
 class CameraController {
 
@@ -43,8 +16,8 @@ class CameraController {
         this.captured = false;
         this.snapshot = '';
         this.dimensions = {
-            height: locals.height || 0,
-            width: locals.width || 0
+            height: locals.height || 250,
+            width: locals.width || 300
         };
         this.loading = true;
         this.error = false;
@@ -74,7 +47,6 @@ class CameraController {
     }
 
     takeSnapshot() {
-
         var ctx = this.elements.canvas.getContext('2d');
         this.util.timeout(()=> {
             ctx.drawImage(this.elements.video, 0, 0, this.elements.video.videoWidth, this.elements.video.videoHeight);
@@ -86,14 +58,6 @@ class CameraController {
     initialize() {
         this._findElements();
         let self = this;
-
-        if (this.dimensions.width == 0) {
-            this.dimensions.width = this.elements.root.parentElement.clientWidth;
-        }
-
-        if (this.dimensions.height == 0) {
-            this.dimensions.height = this.elements.root.parentElement.clientHeight;
-        }
 
         if (!this.hasUserMedia()) return this.cancel();
 
@@ -117,9 +81,9 @@ class CameraController {
         var onFailure = function (err) {
             self.log.error(err.message);
             if (err.name == 'PermissionDeniedError') {
-                self.error = true;
                 self.message = err.message;
             }
+            self.error = true;
             self.loading = false;
         };
 
@@ -138,14 +102,18 @@ class CameraController {
 
     _findElements() {
         this.elements.root = this.util.element(document.getElementById('camera-root'))[0];
-        this.elements.video = this.util.element(this.elements.root.firstElementChild)[0];
-        this.elements.canvas = this.util.element(this.elements.root.lastElementChild)[0];
+        this.elements.video = this.util.element(document.getElementById('camera-video'))[0];
+        this.elements.canvas = this.util.element(document.getElementById('camera-canvas'))[0];
     }
 
-    salvar() {
+    stopVideo(){
         if (!this.error) {
             this.videoStream.getVideoTracks()[0].stop();
         }
+    }
+
+    salvar() {
+        this.stopVideo();
         this.dialog.hideDialog(this.snapshot);
     }
 
@@ -155,9 +123,7 @@ class CameraController {
     }
 
     cancel() {
-        if (!this.error) {
-            this.videoStream.getVideoTracks()[0].stop();
-        }
+        this.stopVideo();
         this.dialog.cancelDialog('cancel');
     }
 }
