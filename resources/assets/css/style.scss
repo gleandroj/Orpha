@@ -12,6 +12,10 @@ a.md-button:not([disabled]).md-focused, .md-button:not([disabled]).md-focused {
     background-color: rgba(158,158,158,0.0) !important;
 }
 
+.ng-auth-hide{
+  display: none !important;
+}
+
 .menu-button{
     display: block !important;
     width: 100% !important;

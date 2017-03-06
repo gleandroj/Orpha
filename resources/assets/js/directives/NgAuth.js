@@ -1,7 +1,16 @@
 import { AuthEvents } from './../services/AuthService';
 
+function compile(user, element, authorized){
+    if(user == null || !user.hasPermission(authorized)){
+        element.addClass("ng-hide");
+    }else{
+        element.removeClass("ng-hide");
+    }
+}
+
 export let NgAuth = {
     selector: 'ngAuth',
+    priority:9999,
     fn: ['AuthService', 'OrphaUtilService', (AuthService, OrphaUtilService)=> {
         return {
             scope: {
@@ -9,23 +18,12 @@ export let NgAuth = {
             },
             link: (scope, element, attrs)=> {
                 if(scope.authorized === undefined) return;
-                var removed = false;
 
-                function compile(user){
-                    if(user == null || !user.hasPermission(scope.authorized)){
-                        if(!removed){
-                            element.addClass("ng-hide");
-                            removed = true;
-                        }
-                    }else{
-                        if(removed){
-                            element.removeClass("ng-hide");
-                            removed = false;
-                        }
-                    }
-                }
-                OrphaUtilService.on(AuthEvents.currentUserUpdated, (event, args) => compile(args.user));
-                OrphaUtilService.timeout(()=> compile(AuthService.getCurrentUser()), 10);
+                OrphaUtilService.on(AuthEvents.currentUserUpdated, (event, args) => {
+                    compile(args.user, element, scope.authorized);
+                });
+
+                compile(AuthService.getCurrentUser(), element, scope.authorized);
             }
         }
     }]
