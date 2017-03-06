@@ -23,7 +23,7 @@
 
         <md-content layout-padding  md-colors="{background: 'default-primary'}">
             <ul>
-                <li ng-repeat="menu in $ctrl.menus" ng-click="$ctrl.toggle()" ui-sref="{{menu.state}}" ui-sref-active="active"> <!--ng-auth="menu.permission" ui-sref="{{menu.state}}" ui-sref-active="active" -->
+                <li ng-repeat="menu in $ctrl.menus" ng-click="$ctrl.toggle()" ui-sref="{{menu.state}}" ui-sref-active="active" ng-auth="menu.permission"> <!--ng-auth="menu.permission" ui-sref="{{menu.state}}" ui-sref-active="active" -->
                     <md-button class="menu-button">
                         <md-icon class="material-icons" style="color: white;" ng-if="menu.icon">{{menu.icon}}</md-icon>
                         {{menu.title}}
