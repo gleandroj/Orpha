@@ -38,7 +38,8 @@ export default function RouteConfig($stateProvider) {
             url: '/password/reset?email&token',
             resolve: {
                 token: (AuthService, OrphaUtilService, LogService, $stateParams, $state) => {
-
+                    console.log($stateParams);
+                    return;
                     let deferred = OrphaUtilService.defer();
                     AuthService.checkResetPasswordToken({email:$stateParams.email, token:$stateParams.token})
                         .success((token) => { deferred.resolve(token) })
