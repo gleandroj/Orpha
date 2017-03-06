@@ -28,7 +28,7 @@ export default function RouteConfig($stateProvider) {
             allowAnonymous:true
         })
         .state('auth.password', {
-            url: '/password',
+            url: '/password/email',
             controller: PasswordRecoveryController,
             controllerAs: '$ctrl',
             template: PasswordRecoveryTemplate,
