@@ -67,6 +67,6 @@ class UserPolicy
      */
     public function delete(User $currentUser, User $user)
     {
-        return $currentUser->hasPermission('delete-user') && $user->orfanato_id === $currentUser->orfanato_id;
+        return $currentUser->hasPermission('disable-user') && $user->orfanato_id === $currentUser->orfanato_id;
     }
 }

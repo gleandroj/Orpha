@@ -24,7 +24,7 @@ class OrphaDbSeed extends Seeder
         $adm->permissions()->create(['name' => 'Visualizar Usuário', 'modulo' => 'Usuários'  ,'slug' => 'show-user', 'description' =>  'Permissão de visualizar usuários no sistema']);
         $adm->permissions()->create(['name' => 'Cadastrar Usuário', 'modulo' => 'Usuários'  ,'slug' => 'create-user', 'description' =>  'Permissão de cadastrar usuários no sistema']);
         $adm->permissions()->create(['name' => 'Alterar Usuário', 'modulo' => 'Usuários'  ,'slug' => 'edit-user', 'description' =>  'Permissão de alterar usuários no sistema']);
-        $adm->permissions()->create(['name' => 'Inativar Usuário', 'modulo' => 'Usuários'  ,'slug' => 'delete-user', 'description' =>  'Permissão de inativar usuários no sistema']);
+        $adm->permissions()->create(['name' => 'Inativar Usuário', 'modulo' => 'Usuários'  ,'slug' => 'disable-user', 'description' =>  'Permissão de inativar usuários no sistema']);
         $adm->permissions()->create(['name' => 'Ativar Usuário', 'modulo' => 'Usuários'  ,'slug' => 'active-user', 'description' =>  'Permissão de ativar usuários no sistema']);
 
         $adm->permissions()->create(['name' => 'Listar Crianças / Adolescentes', 'modulo' => 'Crianças / Adolescentes'  ,'slug' => 'list-crianca', 'description' =>  'Permissão de listar Criança / Adolescente no sistema']);
