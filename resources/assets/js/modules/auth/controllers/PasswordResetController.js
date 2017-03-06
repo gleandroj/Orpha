@@ -2,7 +2,6 @@
 export default class PasswordResetController {
 
     constructor(AuthService, ToastService, LogService, $state, token) {
-        console.log("Password Reset Controller Called");
         this.route = $state;
         this.auth = AuthService;
         this.toast = ToastService;
@@ -33,8 +32,8 @@ export default class PasswordResetController {
                         self.route.go('auth.login');
                     });
             })
-            .error((response) => {
-                self.toast.showError(response.message);
+            .error((error) => {
+                self.toast.showError(response.email);
                 self.loading = false;
             })
     }
