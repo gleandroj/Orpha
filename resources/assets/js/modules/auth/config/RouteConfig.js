@@ -39,7 +39,7 @@ export default function RouteConfig($stateProvider) {
             resolve: {
                 token: (AuthService, OrphaUtilService, LogService, $stateParams, $state) => {
                     console.log($stateParams);
-                    return;
+                    return $stateParams;
                     let deferred = OrphaUtilService.defer();
                     AuthService.checkResetPasswordToken({email:$stateParams.email, token:$stateParams.token})
                         .success((token) => { deferred.resolve(token) })
