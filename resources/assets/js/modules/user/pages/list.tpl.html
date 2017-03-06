@@ -36,12 +36,18 @@
                 title="Usuários Ativos"
                 users="$controller.users"
                 filter="{deleted_at: '!'}"
-                on-user-click="$controller.showUser(user)"
+
+                show-primary-btn="$controller.authService.getCurrentUser().hasPermission('edit-user')"
+                show-secondary-btn="$controller.authService.getCurrentUser().hasPermission('disable-user')"
+
+                on-user-click="!$controller.authService.getCurrentUser().hasPermission('show-user') || $controller.showUser(user)"
+
                 on-primary-btn-click="$controller.editUser(user)"
                 on-secondary-btn-click="$controller.disableUser(user)"></user-list>
 
         <user-list
                 ng-show="showInactive && !$controller.loading"
+                show-primary-btn="$controller.authService.getCurrentUser().hasPermission('active-user')"
                 show-secondary-btn="'false'"
                 primary-btn-text="Ativar Usuário"
                 primary-btn-icon="check"
@@ -50,7 +56,8 @@
                 users="$controller.users"
                 filter="{deleted_at: '!!'}"
                 background-color="'default-warn-200-0.5'"
-                on-user-click="$controller.showUser(user)"
+
+                on-user-click="!$controller.authService.getCurrentUser().hasPermission('show-user') || $controller.showUser(user)"
                 on-primary-btn-click="$controller.enableUser(user)"></user-list>
 
     </md-card-content>
@@ -58,7 +65,7 @@
 </md-card>
 
 <div class="fab-panel">
-    <md-button aria-label="create-user" id="create-fab" class="md-fab" aria-label="Action" ng-click="$controller.createUser()">
+    <md-button aria-label="create-user" id="create-fab" class="md-fab" aria-label="Action" ng-click="$controller.createUser()" ng-auth="'create-user'">
         <md-icon aria-label="create-user-icon" class="material-icons">add</md-icon>
         <md-tooltip md-direction="left">
             Novo usuário
