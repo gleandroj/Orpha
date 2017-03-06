@@ -54,7 +54,7 @@ class ResetPasswordNotification extends Notification
                     ->greeting('Olá!')
                     ->subject('Redefinição de senha')
                     ->line('Você está recebendo este e-mail porque recebemos um pedido de redefinição de senha para sua conta.')
-                    ->action('Resetar senha', url('/#!/auth/password/reset', [$this->email, $this->token]))
+                    ->action('Resetar senha', urldecode(url('/').'/#!/auth/password/reset?email='.$this->email.'&token='.$this->token))
                     ->line('Se você não solicitou uma redefinição de senha, nenhuma outra ação é necessária.');
     }
 
