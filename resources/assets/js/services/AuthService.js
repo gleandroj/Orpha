@@ -64,7 +64,10 @@ class AuthUser{
 
             return isAllowed;
         }
-        return false;
+        else if(permissions == null || permissions.length == 0)
+            return true;
+        else
+            return false;
     }
 }
 
