@@ -1,4 +1,3 @@
-PasswordResetController.$inject  = ['AuthService', 'ToastService', 'LogService', '$state', 'token'];
 
 export default class PasswordResetController {
 
@@ -40,3 +39,5 @@ export default class PasswordResetController {
             })
     }
 }
+
+PasswordResetController.$inject  = ['AuthService', 'ToastService', 'LogService', '$state', 'token'];

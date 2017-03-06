@@ -10,6 +10,8 @@ import PasswordRecoveryTemplate from './../pages/password-recovery.tpl.html';
 import PasswordResetController from './../controllers/PasswordResetController';
 import PasswordResetTemplate from './../pages/password-reset.tpl.html';
 
+import TokenResolve from './../helpers/TokenResolve';
+
 export default function RouteConfig($stateProvider) {
 
     $stateProvider
@@ -37,19 +39,7 @@ export default function RouteConfig($stateProvider) {
         .state('auth.password_reset', {
             url: '/password/reset?email&token',
             resolve: {
-                token: (AuthService, OrphaUtilService, LogService, $stateParams, $state) => {
-                    console.log($stateParams);
-                    return $stateParams;
-                    let deferred = OrphaUtilService.defer();
-                    AuthService.checkResetPasswordToken({email:$stateParams.email, token:$stateParams.token})
-                        .success((token) => { deferred.resolve(token) })
-                        .error((error) => {
-                            $state.go('auth.login');
-                            LogService.error(error['message']);
-                        });
-
-                    return deferred.promise;
-                }
+                token: TokenResolve
             },
             controller: PasswordResetController,
             controllerAs: '$ctrl',
