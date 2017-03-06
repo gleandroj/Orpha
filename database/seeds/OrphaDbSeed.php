@@ -31,7 +31,7 @@ class OrphaDbSeed extends Seeder
         $adm->permissions()->create(['name' => 'Visualizar Crianças / Adolescente', 'modulo' => 'Crianças / Adolescentes'  ,'slug' => 'show-crianca', 'description' =>  'Permissão de visualizar Criança / Adolescente no sistema']);
         $adm->permissions()->create(['name' => 'Cadastrar Crianças / Adolescente', 'modulo' => 'Crianças / Adolescentes'  ,'slug' => 'create-crianca', 'description' =>  'Permissão de cadastrar Criança / Adolescente no sistema']);
         $adm->permissions()->create(['name' => 'Alterar Crianças / Adolescente', 'modulo' => 'Crianças / Adolescentes'  ,'slug' => 'edit-crianca', 'description' =>  'Permissão de alterar Criança / Adolescente no sistema']);
-        $adm->permissions()->create(['name' => 'Inativar Crianças / Adolescente', 'modulo' => 'Crianças / Adolescentes'  ,'slug' => 'delete-crianca', 'description' =>  'Permissão de inativar Criança / Adolescente no sistema']);
+        $adm->permissions()->create(['name' => 'Inativar Crianças / Adolescente', 'modulo' => 'Crianças / Adolescentes'  ,'slug' => 'disable-crianca', 'description' =>  'Permissão de inativar Criança / Adolescente no sistema']);
         $adm->permissions()->create(['name' => 'Ativar Crianças / Adolescente', 'modulo' => 'Crianças / Adolescentes'  ,'slug' => 'active-crianca', 'description' =>  'Permissão de ativar Criança / Adolescente no sistema']);
 
         //factory(App\Crianca::class, 10)->create(['orfanato_id' => $orfanato->id]);
