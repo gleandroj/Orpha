@@ -11,8 +11,4 @@
 |
 */
 
-Route::group(['middleware' => ['auth:api']], function () {
-    Route::get('orpha/dashboard', 'DashboardController@getData');
-});
-
 Route::get('/messages', function (){ return trans('messages'); });
