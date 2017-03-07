@@ -4,7 +4,7 @@ namespace App\Modulos\User\Models;
 
 use App\Modulos\Auth\Models\Permission;
 use App\Modulos\Auth\Notifications\ResetPasswordNotification;
-use App\Traits\OrfanatoQuery;
+use App\Modulos\Orpha\Traits\OrfanatoQuery;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -39,6 +39,16 @@ class User extends Authenticatable
      */
     protected $dates = [
         'deleted_at'
+    ];
+
+    /**
+     * The relations to eager load on every query.
+     *
+     * @var array
+     */
+    protected $with = [
+        'permissions',
+        'orfanato'
     ];
 
     /**

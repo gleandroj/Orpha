@@ -1,7 +1,14 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: FG0003
+ * Date: 07/03/2017
+ * Time: 09:16
+ */
 
-namespace App\Http\Controllers;
+namespace App\Modulos\Orpha\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Modulos\Crianca\Contracts\CriancaRepositoryInterface;
 use App\Modulos\User\Contracts\UserRepositoryInterface;
 

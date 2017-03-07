@@ -2,10 +2,9 @@
 
 namespace App\Modulos\Crianca\Models;
 
-use App\Orfanato;
-use App\Traits\OrfanatoQuery;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use App\Modulos\Orpha\Traits\OrfanatoQuery;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Crianca extends Model
@@ -42,14 +41,6 @@ class Crianca extends Model
 
     public function getIdadeAttribute()
     {
-        return  Carbon::now()->diffInYears($this->dt_nascimento);
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function orfanato()
-    {
-        return $this->belongsTo(Orfanato::class);
+        return Carbon::now()->diffInYears($this->dt_nascimento);
     }
 }

@@ -8,13 +8,13 @@
 
 namespace App\Modulos\Crianca\Services;
 
-
-use App\Exceptions\ApiException;
 use App\Modulos\Crianca\Contracts\CriancaRepositoryInterface;
 use App\Modulos\Crianca\Contracts\CriancaServiceInterface;
 use App\Modulos\Crianca\Models\Crianca;
+use App\Modulos\User\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
 
 class CriancaService implements CriancaServiceInterface
@@ -25,20 +25,20 @@ class CriancaService implements CriancaServiceInterface
     private $criancaRepository;
 
     /**
-     * @var \App\Modulos\User\Models\User
-     */
-    private $user;
-
-    /**
      * CriancaSerivce constructor.
      * @param CriancaRepositoryInterface $criancaRepository
-     * @throws ApiException
      * @internal param UserService $userService
      */
     public function __construct(CriancaRepositoryInterface $criancaRepository)
     {
         $this->criancaRepository = $criancaRepository;
-        $this->user = Auth::user();
+    }
+
+    /**
+     * @return User|\Illuminate\Contracts\Auth\Authenticatable
+     */
+    protected function getCurrentUser(){
+        return Auth::user();
     }
 
     /**
@@ -52,26 +52,26 @@ class CriancaService implements CriancaServiceInterface
     /**
      * @param $id
      * @return Model
-     * @throws ApiException
+     * @throws ModelNotFoundException
      */
     public function getById($id)
     {
-        if(!$crianca = $this->criancaRepository->getById($id)) throw new ApiException(trans('messages.MSG8'), ApiException::modelNotFound, 404);
+        if(!$crianca = $this->criancaRepository->getById($id)) throw (new ModelNotFoundException())->setModel(Crianca::class);
         return $crianca;
     }
 
     /**
      * @param array $data
      * @return mixed
-     * @throws ApiException
+     * @throws \Exception
      */
     public function create(array $data)
     {
         $data = collect($data);
 
-        $data->put('orfanato_id', $this->user->orfanato_id);
+        $data->put('orfanato_id', $this->getCurrentUser()->orfanato_id);
 
-        if(!$crianca = $this->criancaRepository->create($data->all())) throw new ApiException(trans('messages.MSG4'), ApiException::internal, 500);
+        if(!$crianca = $this->criancaRepository->create($data->all())) throw new \Exception(trans('messages.MSG4'));
         return $crianca;
     }
 
@@ -79,13 +79,13 @@ class CriancaService implements CriancaServiceInterface
      * @param $id
      * @param array $data
      * @return Model
-     * @throws ApiException
+     * @throws \Exception
      */
     public function update($id, array $data)
     {
         $data = collect($data);
 
-        if(!$crianca = $this->criancaRepository->update($id, $data->all())) throw new ApiException(trans('messages.MSG4'), ApiException::internal, 500);
+        if(!$crianca = $this->criancaRepository->update($id, $data->all())) throw new \Exception(trans('messages.MSG4'));
         return $crianca;
     }
 
@@ -96,7 +96,7 @@ class CriancaService implements CriancaServiceInterface
      */
     public function delete($id)
     {
-        if(!$deleted = $this->criancaRepository->delete($id)) throw new ApiException(trans('messages.MSG4'), ApiException::internal, 500);
+        if(!$deleted = $this->criancaRepository->delete($id)) throw new \Exception(trans('messages.MSG4'));
         return $deleted;
     }
 
@@ -107,7 +107,7 @@ class CriancaService implements CriancaServiceInterface
      */
     public function restore($id)
     {
-        if(!$restored = $this->criancaRepository->restore($id)) throw new ApiException(trans('messages.MSG4'), ApiException::internal, 500);
+        if(!$restored = $this->criancaRepository->restore($id)) throw new \Exception(trans('messages.MSG4'));
         return $restored;
     }
 }

@@ -9,6 +9,7 @@ use App\Modulos\User\Policies\UserPolicy;
 use App\Modulos\User\Repositories\UserRepository;
 use App\Modulos\User\Services\UserService;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 
 class UserServiceProvider extends ServiceProvider
@@ -29,6 +30,7 @@ class UserServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Validator::extend('avatar', 'App\Modulos\User\Validators\AvatarValidator@validate');
         $this->mapModuleRoutes();
     }
 

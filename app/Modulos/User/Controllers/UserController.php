@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Modulos\User\Contracts\UserServiceInterface;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\Response;
 
 class UserController extends Controller
 {
@@ -52,7 +53,8 @@ class UserController extends Controller
             'permissions.*.id' => 'required|exists:permissions,id',
             'avatar' => 'avatar',
         ]);
-        return $this->userService->create($request->all());
+
+        return response()->json($this->userService->create($request->all())->toArray(), Response::HTTP_CREATED);
     }
 
     /**

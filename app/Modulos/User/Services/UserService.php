@@ -9,14 +9,13 @@
 namespace App\Modulos\User\Services;
 
 use App\Modulos\User\Models\User;
-use App\Exceptions\ApiException;
 use App\Modulos\User\Contracts\UserRepositoryInterface;
 use App\Modulos\User\Contracts\UserServiceInterface;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Intervention\Image\Facades\Image;
-use League\Flysystem\Exception;
 
 class UserService implements UserServiceInterface
 {
@@ -26,14 +25,8 @@ class UserService implements UserServiceInterface
     private $userRepository;
 
     /**
-     * @var User
-     */
-    private $user;
-
-    /**
      * UserService constructor.
      * @param UserRepositoryInterface $userRepository
-     * @throws ApiException
      */
     public function __construct(UserRepositoryInterface $userRepository)
     {
@@ -41,7 +34,7 @@ class UserService implements UserServiceInterface
     }
 
     /**
-     * @return User
+     * @return User|\Illuminate\Contracts\Auth\Authenticatable
      */
     protected function getCurrentUser(){
         return Auth::user();
@@ -52,7 +45,7 @@ class UserService implements UserServiceInterface
      */
     public function getAll()
     {
-        return $this->userRepository->getAll()->load('permissions');
+        return $this->userRepository->getAll();
     }
 
     /**
@@ -60,24 +53,23 @@ class UserService implements UserServiceInterface
      *
      * @param $id
      * @return User|\Illuminate\Database\Eloquent\Model
-     * @throws ApiException
      */
     public function getById($id)
     {
-        if(!$user = $this->userRepository->getById($id)) throw new ApiException(trans('messages.MSG8'), ApiException::modelNotFound, 404);
-        return $user->load('permissions');
+        if(!$user = $this->userRepository->getById($id)) throw (new ModelNotFoundException())->setModel(User::class);
+        return $user;
     }
 
     /**
      * @param array $data
      * @return mixed
-     * @throws ApiException
+     * @throws \Exception
      */
     public function create(array $data)
     {
         $data = collect($data);
 
-        if($data->has('avatar')){
+        if($data->has('avatar') && $data->get('avatar') != null){
             $data['avatar'] = $this->uploadBase64Img($data['avatar']);
         }
 
@@ -86,7 +78,7 @@ class UserService implements UserServiceInterface
 
         $user = $this->userRepository->create($data->all());
 
-        if(!$user) throw new ApiException(trans('messages.MSG4'));
+        if(!$user) throw new \Exception(trans('messages.MSG4'));
         else{
             $permissions = collect($data->get('permissions'));
 
@@ -96,7 +88,7 @@ class UserService implements UserServiceInterface
 
             $user->permissions()->sync(collect($permissions)->all());
 
-            return $user->load('permissions');
+            return $user->fresh();
         }
     }
 
@@ -104,7 +96,7 @@ class UserService implements UserServiceInterface
      * @param $id
      * @param array $data
      * @return User|\Illuminate\Database\Eloquent\Model
-     * @throws ApiException
+     * @throws \Exception
      */
     public function update($id, array $data)
     {
@@ -121,7 +113,7 @@ class UserService implements UserServiceInterface
 
         $user = $this->userRepository->update($id, $data->all());
 
-        if(!$user) throw new ApiException(trans('messages.MSG4'));
+        if(!$user) throw new \Exception(trans('messages.MSG4'));
         else {
             $permissions = collect($data->get('permissions'));
 
@@ -131,7 +123,7 @@ class UserService implements UserServiceInterface
 
             $user->permissions()->sync(collect($permissions)->all());
 
-            return $user->load('permissions');
+            return $user->fresh();
         }
     }
 
@@ -142,7 +134,7 @@ class UserService implements UserServiceInterface
      */
     public function delete($id)
     {
-        if(!$deleted = $this->userRepository->delete($id)) throw new ApiException(trans('messages.MSG4'), ApiException::internal, 500);
+        if(!$deleted = $this->userRepository->delete($id)) throw new \Exception(trans('messages.MSG4'));
         return $deleted;
     }
 
@@ -153,7 +145,7 @@ class UserService implements UserServiceInterface
      */
     public function restore($id)
     {
-        if(!$restored = $this->userRepository->restore($id)) throw new ApiException(trans('messages.MSG4'), ApiException::internal, 500);
+        if(!$restored = $this->userRepository->restore($id)) throw new \Exception(trans('messages.MSG4'));
         return $restored;
     }
 
