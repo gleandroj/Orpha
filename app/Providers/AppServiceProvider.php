@@ -7,7 +7,6 @@ use App\Contracts\RepositoryInterface;
 use App\Contracts\UnitOfWorkInterface;
 use App\Repositories\AbstractRepository;
 use App\Repositories\UnitOfWork;
-use Validator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -18,7 +17,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Validator::extend('avatar', 'App\Validators\AvatarValidator@validate');
+
     }
 
     /**
