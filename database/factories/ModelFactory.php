@@ -12,8 +12,8 @@
 */
 
 
+use App\Modulos\Auth\Models\Permission;
 use App\Modulos\Crianca\Models\Crianca;
-use App\Modulos\User\Models\Permission;
 use App\Modulos\User\Models\User;
 
 $factory->define(User::class, function (Faker\Generator $faker) {
@@ -22,7 +22,7 @@ $factory->define(User::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
-        'phone' => $faker->phoneNumber,
+        'phone' => '62999999999',
         'avatar' => $faker->imageUrl,
         'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
