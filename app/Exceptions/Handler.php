@@ -51,10 +51,10 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        $sendJson = (($request->wantsJson() || $request->ajax()) && str_contains($request->url(), 'api'));
+        $sendJson = (($request->wantsJson() || $request->ajax()) || str_contains($request->url(), 'api'));
 
         if($exception instanceof NotFoundHttpException && $sendJson){
-            return (new ExceptionResponse(trans('messages.MSG19'), $exception->getStatusCode()))->getHttpResponse();
+            return (new ExceptionResponse(trans('messages.MSG19'), Response::HTTP_NOT_FOUND))->getHttpResponse();
         }elseif($exception instanceof ModelNotFoundException && $sendJson){
             return (new ExceptionResponse(trans('messages.MSG8'), Response::HTTP_NOT_FOUND))->getHttpResponse();
         }elseif($exception instanceof AuthorizationException && $sendJson){
@@ -66,7 +66,7 @@ class Handler extends ExceptionHandler
         }elseif ($exception instanceof HttpResponseException && $sendJson){
             return (new ExceptionResponse($exception->getMessage(), $exception->getStatusCode()))->getHttpResponse();
         }elseif(!$sendJson){
-            return response()->view('errors.404', ['exception' => $exception->getMessage()], $exception->getStatusCode());
+            return response()->view('errors.404', ['exception' => $exception->getMessage()], Response::HTTP_NOT_FOUND);
         }
 
         return parent::render($request, $exception);
