@@ -1,8 +1,11 @@
 <?php
 
+use App\Modulos\Crianca\Models\Crianca;
 use App\Modulos\User\Models\User;
+use App\Modulos\Orpha\Models\Orfanato;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class OrphaDbSeed extends Seeder
 {
@@ -17,7 +20,7 @@ class OrphaDbSeed extends Seeder
 
         //factory(User::class, 5)->create(['orfanato_id' => 1]);
 
-        $orfanato = App\Orfanato::create(['nome' => 'Teste Orfanato']);
+        $orfanato = Orfanato::create(['nome' => 'Teste Orfanato']);
         $adm = $orfanato->users()->create(['name' => 'Admin', 'email' => 'admin@orpha.com.br', 'password' => Hash::make('123321123'), 'phone' => '62994372288']);
 
         $adm->permissions()->create(['name' => 'Listar Usuários', 'modulo' => 'Usuários'  ,'slug' => 'list-user', 'description' =>  'Permissão de listar usuários no sistema']);
@@ -34,7 +37,8 @@ class OrphaDbSeed extends Seeder
         $adm->permissions()->create(['name' => 'Inativar Crianças / Adolescente', 'modulo' => 'Crianças / Adolescentes'  ,'slug' => 'disable-crianca', 'description' =>  'Permissão de inativar Criança / Adolescente no sistema']);
         $adm->permissions()->create(['name' => 'Ativar Crianças / Adolescente', 'modulo' => 'Crianças / Adolescentes'  ,'slug' => 'active-crianca', 'description' =>  'Permissão de ativar Criança / Adolescente no sistema']);
 
-        //factory(App\Crianca::class, 10)->create(['orfanato_id' => $orfanato->id]);
+        //factory(Crianca::class, 10)->create(['orfanato_id' => $orfanato->id]);
+
         Model::reguard();
     }
 }

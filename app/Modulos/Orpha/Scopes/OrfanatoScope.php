@@ -2,14 +2,13 @@
 /**
  * Created by PhpStorm.
  * User: FG0003
- * Date: 21/10/2016
- * Time: 12:43
+ * Date: 07/03/2017
+ * Time: 09:03
  */
 
-namespace App\Scopes;
+namespace App\Modulos\Orpha\Scopes;
 
-
-use App\User;
+use App\Modulos\User\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Scope;

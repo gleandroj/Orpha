@@ -1,6 +1,12 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: FG0003
+ * Date: 07/03/2017
+ * Time: 09:02
+ */
 
-namespace App;
+namespace App\Modulos\Orpha\Models;
 
 use App\Modulos\Crianca\Models\Crianca;
 use App\Modulos\User\Models\User;

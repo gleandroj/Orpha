@@ -2,15 +2,16 @@
 /**
  * Created by PhpStorm.
  * User: FG0003
- * Date: 21/10/2016
- * Time: 14:34
+ * Date: 07/03/2017
+ * Time: 09:04
  */
 
-namespace App\Traits;
+namespace App\Modulos\Orpha\Traits;
 
 
-use App\Orfanato;
-use App\Scopes\OrfanatoScope;
+
+use App\Modulos\Orpha\Models\Orfanato;
+use App\Modulos\Orpha\Scopes\OrfanatoScope;
 
 trait OrfanatoQuery
 {

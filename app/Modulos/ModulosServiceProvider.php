@@ -4,6 +4,7 @@ namespace App\Modulos;
 
 use App\Modulos\Auth\AuthServiceProvider;
 use App\Modulos\Crianca\CriancaServiceProvider;
+use App\Modulos\Orpha\OrphaServiceProvider;
 use App\Modulos\User\UserServiceProvider;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
@@ -11,6 +12,7 @@ use Illuminate\Support\ServiceProvider;
 class ModulosServiceProvider extends ServiceProvider
 {
     protected $providers = [
+        OrphaServiceProvider::class,
         UserServiceProvider::class,
         CriancaServiceProvider::class,
         AuthServiceProvider::class
