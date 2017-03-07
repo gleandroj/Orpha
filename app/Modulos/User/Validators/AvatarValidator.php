@@ -1,10 +1,16 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: FG0003
+ * Date: 07/03/2017
+ * Time: 08:57
+ */
 
-namespace App\Validators;
+namespace App\Modulos\User\Validators;
+
 
 class AvatarValidator
 {
-
     public function validate($attribute, $value, $parameters, $validator) {
 
         $b64 = '/^(data:image\/(jpeg|png|jpg|gif|bmp);base64)/';
@@ -16,5 +22,4 @@ class AvatarValidator
             return true;
         }
     }
-
 }
