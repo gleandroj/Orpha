@@ -14,6 +14,7 @@ use App\Modulos\User\Contracts\UserServiceInterface;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Intervention\Image\Facades\Image;
 
@@ -155,7 +156,7 @@ class UserService implements UserServiceInterface
      */
     public function checkEmail(array $data)
     {
-        \validator::make($data, [
+        Validator::make($data, [
             'email' => [
                 'required',
                 Rule::unique('users')->ignore($data['user_id'], 'id')
