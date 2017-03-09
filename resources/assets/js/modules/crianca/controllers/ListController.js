@@ -7,7 +7,7 @@ import FallbackImg from './../../../../img/ic_account_circle_black_48dp_2x.png';
 
 export default class ListController {
 
-    constructor(DialogService, OrphaUtilService, AuthService, CriancaService, ToastService, MessageService) {
+    constructor(DialogService, OrphaUtilService, AuthService, CriancaService, ToastService, MessageService, LogService) {
 
         this.authService = AuthService;
         this.util = OrphaUtilService;
@@ -15,6 +15,7 @@ export default class ListController {
         this.criancaService = CriancaService;
         this.toastService = ToastService;
         this.messageService = MessageService;
+        this.logService = LogService;
         this.fallbackImg = FallbackImg;
         this.criancas = [];
         this.search = '';
@@ -26,15 +27,12 @@ export default class ListController {
 
     getAll() {
         this.loading = true;
-        this.criancaService.getAll().success((criancas) => {
+        this.criancaService.getAll()
+        .success((criancas) => {
             this.loading = false;
             this.criancas = criancas;
         })
-            .error((error) => {
-                console.log(error);
-                this.loading = false;
-                this.toastService.showError(error ? error['message'] : this.messageService.get('MSG4'));
-            });
+        .error((error) => this.showError(error));
     }
 
     showCrianca(crianca) {
@@ -42,7 +40,7 @@ export default class ListController {
             .then((newCrianca)=> {
                 this.util.extend(crianca, newCrianca);
                 this.toastService.showSuccess(this.messageService.get('MSG7'));
-            }, (err)=> {});
+            }, () => {});
     }
 
     editCrianca(crianca) {
@@ -50,7 +48,7 @@ export default class ListController {
             .then((newCrianca)=> {
                 this.util.extend(crianca, newCrianca);
                 this.toastService.showSuccess(this.messageService.get('MSG7'));
-            }, (err)=> {});
+            }, () => {});
     }
 
     createCrianca() {
@@ -58,21 +56,29 @@ export default class ListController {
             .then((newCrianca)=> {
                 this.criancas.push(newCrianca);
                 this.toastService.showSuccess(this.messageService.get('MSG5'));
-            }, (err) => {});
+            }, () => {});
     }
 
     disableCrianca(crianca) {
         this.criancaService.disable(crianca)
-            .then((newCrianca)=> {
+            .success((newCrianca)=> {
                 this.util.extend(crianca, newCrianca);
-            }, ()=> {});
+            })
+            .error((error) => this.showError(error));
     }
 
     enableCrianca(crianca) {
         this.criancaService.enable(crianca)
-            .then((newCrianca)=> {
+            .success((newCrianca)=> {
                 this.util.extend(crianca, newCrianca);
-            }, ()=> {});
+            })
+            .error((error) => this.showError(error));
+    }
+
+    showError(error){
+        this.loading = false;
+        this.logService.error(error ? error.error  +": "+error['message'] : this.messageService.get('MSG4'));
+        this.toastService.showError(error ? error['message'] : this.messageService.get('MSG4'));
     }
 
     showDialog(crianca, title, readOnly) {
@@ -88,4 +94,4 @@ export default class ListController {
     }
 }
 
-ListController.$inject = ['DialogService', 'OrphaUtilService', 'AuthService', 'CriancaService', 'ToastService', 'MessageService'];
+ListController.$inject = ['DialogService', 'OrphaUtilService', 'AuthService', 'CriancaService', 'ToastService', 'MessageService', 'LogService'];
