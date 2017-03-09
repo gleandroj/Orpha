@@ -4,7 +4,7 @@
 
 import AbstractInputComponent from './../AbstractInputComponent/AbstractInputController'
 import FileInputTemplate from './file-input.tpl.html';
-import FallbackImg from './../../../../img/ic_account_circle_black_48dp_2x.png';
+import FallbackImg from './../../../img/ic_account_circle_black_48dp_2x.png';
 
 class FileInputController extends AbstractInputComponent {
 
