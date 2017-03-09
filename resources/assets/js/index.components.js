@@ -2,12 +2,15 @@
  * Created by FG0003 on 29/12/2016.
  */
 
-import { TextInputComponent, NumberInputComponent, FileInputComponent, SearchInputComponent } from './components/orpha/input/TextInputComponent';
-import { MdPaginationComponent } from './components/orpha/pagination/MdPaginationComponent';
+import { TextInputComponent } from './components/TextInputComponent/TextInputComponent';
+import { NumberInputComponent } from './components/NumberInputComponent/NumberInputComponent';
+import { FileInputComponent } from './components/FileInputComponent/FileInputComponent';
+import { SearchInputComponent } from './components/SearchInputComponent/SearchInputComponent';
+import { PaginationComponent } from './components/PaginationComponent/PaginationComponent';
 
 angular.module('orpha.components')
     .component(TextInputComponent.selector, TextInputComponent)
     .component(NumberInputComponent.selector, NumberInputComponent)
     .component(FileInputComponent.selector, FileInputComponent)
     .component(SearchInputComponent.selector, SearchInputComponent)
-    .component(MdPaginationComponent.selector, MdPaginationComponent);
+    .component(PaginationComponent.selector, PaginationComponent);
