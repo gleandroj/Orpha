@@ -1,7 +1,7 @@
 /**
  * Created by FG0003 on 28/12/2016.
  */
-import camDialogTemplate from './../components/camera/camera.tpl.html';
+import CamDialogTemplate from './../components/CameraComponent/camera.tpl.html';
 
 export const DefaultVars = {
     height: 250,
@@ -224,7 +224,7 @@ export class CameraService {
         this.log.info("Camera started.");
         this.dialogService.showCustomDialog({
             controller: CameraController,
-            template: camDialogTemplate,
+            template: CamDialogTemplate,
             clickOutsideToClose: false,
             fullscreen: false,
             locals: options
