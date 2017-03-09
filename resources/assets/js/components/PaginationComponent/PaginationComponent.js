@@ -6,7 +6,7 @@ import arrow_first from '../../../../img/icons/navigate-first.svg';
 import arrow_next from '../../../../img/icons/navigate-next.svg';
 import arrow_last from '../../../../img/icons/navigate-last.svg';
 
-import Template from './md-pagination.tpl.html';
+import Template from './pagination.tpl.html';
 
 class PaginationController{
 
@@ -48,7 +48,7 @@ class PaginationController{
 
 PaginationController.$inject = ['OrphaUtilService'];
 
-export let MdPaginationComponent = {
+export let PaginationComponent = {
     selector:'mdPagination',
     bindings:{
         itemsPerPage:'=',
