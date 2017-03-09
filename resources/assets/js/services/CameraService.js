@@ -1,8 +1,88 @@
 /**
  * Created by FG0003 on 28/12/2016.
  */
-
 import camDialogTemplate from './../components/camera/camera.tpl.html';
+
+export const DefaultVars = {
+    height: 250,
+    width: 300
+};
+
+export class ImageHelperService{
+
+    constructor(OrphaUtilService){
+        this.util = OrphaUtilService;
+    }
+
+    getResizeArea(){
+        let resizeAreaId = 'resize-area';
+
+        let resizeArea = document.getElementById(resizeAreaId);
+
+        resizeArea = document.createElement('canvas');
+        resizeArea.id = resizeAreaId;
+        resizeArea.style.visibility = 'hidden';
+        document.body.appendChild(resizeArea);
+
+        return resizeArea;
+    }
+
+    resizeImage(origImage, options) {
+
+        let maxHeight = options.maxHeight || DefaultVars.height;
+        let maxWidth = options.maxWidth || DefaultVars.width;
+        let quality = options.quality || 0.7;
+        let type = options.resizeType || 'image/jpg';
+
+        let canvas = this.getResizeArea();
+
+        let height = origImage.height;
+        let width = origImage.width;
+
+        // calculate the width and height, constraining the proportions
+        if (width > height) {
+            if (width > maxWidth) {
+                height = Math.round(height *= maxWidth / width);
+                width = maxWidth;
+            }
+        } else {
+            if (height > maxHeight) {
+                width = Math.round(width *= maxHeight / height);
+                height = maxHeight;
+            }
+        }
+
+        canvas.width = width;
+        canvas.height = height;
+
+        //draw image on canvas
+        let ctx = canvas.getContext("2d");
+        ctx.drawImage(origImage, 0, 0, width, height);
+
+        // get the data from canvas as 70% jpg (or specified type).
+        return canvas.toDataURL(type, quality);
+    };
+
+    createImage(url, callback) {
+        let image = new Image();
+        image.onload = function() {
+            callback(image);
+        };
+        image.src = url;
+    };
+
+    fileToDataURL(file) {
+        let deferred = this.util.defer();
+        let reader = new FileReader();
+        reader.onload = (e) => deferred.resolve(e.target.result);
+        reader.onerror = (e) => deferred.reject(e);
+        reader.readAsDataURL(file);
+        return deferred.promise;
+    };
+
+}
+
+ImageHelperService.$inject = ['OrphaUtilService'];
 
 class CameraController {
 
@@ -16,8 +96,8 @@ class CameraController {
         this.captured = false;
         this.snapshot = '';
         this.dimensions = {
-            height: locals.height || 250,
-            width: locals.width || 300
+            height: locals.height || DefaultVars.height,
+            width: locals.width || DefaultVars.width
         };
         this.loading = true;
         this.error = false;
@@ -130,7 +210,7 @@ class CameraController {
 
 CameraController.$inject = ['DialogService', 'OrphaUtilService', 'LogService', '$window', 'locals'];
 
-export default class CameraService {
+export class CameraService {
     constructor(DialogService, OrphaUtilService, LogService) {
 
         this.log = LogService;
