@@ -68,6 +68,6 @@ class CriancaPolicy
      */
     public function delete(User $currentUser, Crianca $crianca)
     {
-        return $currentUser->hasPermission('delete-crianca') && $crianca->orfanato_id === $currentUser->orfanato_id;
+        return $currentUser->hasPermission('disable-crianca') && $crianca->orfanato_id === $currentUser->orfanato_id;
     }
 }
