@@ -1,10 +1,10 @@
 /**
  * Created by FG0003 on 09/02/2017.
  */
-import arrow_before from '../../../../img/icons/arrow-before.svg';
-import arrow_first from '../../../../img/icons/navigate-first.svg';
-import arrow_next from '../../../../img/icons/navigate-next.svg';
-import arrow_last from '../../../../img/icons/navigate-last.svg';
+import arrow_before from '../../../img/icons/arrow-before.svg';
+import arrow_first from '../../../img/icons/navigate-first.svg';
+import arrow_next from '../../../img/icons/navigate-next.svg';
+import arrow_last from '../../../img/icons/navigate-last.svg';
 
 import Template from './pagination.tpl.html';
 
