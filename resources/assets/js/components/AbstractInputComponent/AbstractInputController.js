@@ -63,4 +63,16 @@ export default class AbstractInputController {
         this.model.$validate();
         this.form[this.name].$validate();
     }
+
+    get errors(){
+        return this.form && this.name ? this.form[this.name].$error : null;
+    }
+
+    get valid(){
+        return this.form[this.name].$valid;
+    }
+
+    get invalid(){
+        return this.form[this.name].$invalid;
+    }
 }
