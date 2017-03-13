@@ -7,10 +7,12 @@ import { NumberInputComponent } from './components/NumberInputComponent/NumberIn
 import { FileInputComponent } from './components/FileInputComponent/FileInputComponent';
 import { SearchInputComponent } from './components/SearchInputComponent/SearchInputComponent';
 import { PaginationComponent } from './components/PaginationComponent/PaginationComponent';
+import { DateInputComponent } from './components/DateInputComponent/DateInputComponent';
 
 angular.module('orpha.components')
     .component(TextInputComponent.selector, TextInputComponent)
     .component(NumberInputComponent.selector, NumberInputComponent)
     .component(FileInputComponent.selector, FileInputComponent)
     .component(SearchInputComponent.selector, SearchInputComponent)
-    .component(PaginationComponent.selector, PaginationComponent);
+    .component(PaginationComponent.selector, PaginationComponent)
+    .component(DateInputComponent.selector, DateInputComponent);

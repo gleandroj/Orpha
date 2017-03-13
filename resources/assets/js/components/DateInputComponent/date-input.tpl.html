@@ -1,0 +1,30 @@
+<ng-form name="_form_{{$component.name}}" flex-gt-xs>
+    <h4>{{ $component.title }}</h4>
+
+    <md-input-container>
+        <label>{{ $component.label }}</label>
+        <md-datepicker ng-model="$component.value"
+                       name="{{ $component.name }}"
+                       id="{{ $component.name }}"
+                       md-date-filter="$component.filterDate"
+
+                       ng-required="$component.isRequired"
+                       ng-disabled="$component.isDisabled"
+
+                       ng-keypress="$component.validateChar($event)"
+
+                       ng-model-options="{allowInvalid: false, debounce: 250}"
+                       ng-change="$component.onChange()"
+
+                       ng-focus="$component.isDisabled || $component.model.$setTouched()"
+                       ng-click="$component.isDisabled || $component.model.$setTouched()">
+        </md-datepicker>
+
+        <div ng-messages="$component.errors" ng-show="$component.model.$dirty || $component.model.$touched">
+            <div ng-message="valid">The entered value is not a date!</div>
+            <div ng-message="required">This date is required!</div>
+            <div ng-message="mindate">Date is too early!</div>
+            <div ng-message="maxdate">Date is too late!</div>
+        </div>
+    </md-input-container>
+</ng-form>
