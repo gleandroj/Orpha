@@ -1,6 +1,6 @@
 <md-dialog md-theme="default" flex-gt-sm="30">
-    <form name="pwForm" ng-submit="$ctrl.submitPassword()" novalidate>
-        <md-dialog-content class="md-dialog-content">
+    <form name="pwForm" ng-submit="$ctrl.submitPassword()" novalidate layout="column" flex="100">
+        <md-content class="md-dialog-content" flex>
             <h2 class="md-title ng-binding">Alterar senha</h2><br/>
 
             <text-input max-length="14" min-length="8" name="Senha" type="password" icon="lock" label="Senha" is-disabled="$ctrl.loading" is-required="true" ng-model="$ctrl.user.password">
@@ -13,7 +13,8 @@
                 <error-message name="match" message="{{ 'MSG9' | message:{attribute:'As senhas'} }}"></error-message>
             </text-input>
             
-        </md-dialog-content>
+        </md-content>
+        <span flex-gt-sm></span>
         <md-dialog-actions>
             <md-button aria-label="salve" type="submit" class="md-primary md-confirm-button md-button md-default-theme md-ink-ripple" ng-disabled="pwForm.$invalid">
                 Salvar

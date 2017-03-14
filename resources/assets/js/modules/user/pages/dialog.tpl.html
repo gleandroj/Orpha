@@ -17,7 +17,7 @@
             <user-form user="$ctrl.user" errors="$ctrl.serverErrors" read-only="$ctrl.readOnly" is-disabled="$ctrl.readOnly || $ctrl.loading" is-password-field-required="$ctrl.user.id == null || $ctrl.user.id == ''"></user-form>
         </md-content>
 
-        <span flex></span>
+        <span flex-gt-sm></span>
         <md-divider></md-divider>
 
         <md-dialog-actions ng-if="!$ctrl.readOnly"  layout="row" layout-align="end center">

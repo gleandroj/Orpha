@@ -13,9 +13,9 @@
     </md-nav-item>
 
 </md-nav-bar>
-<md-content layout-padding>
+<md-content layout-padding flex>
 
-    <div ng-show="$form.selectedPage == 'dados'" >
+    <div ng-show="$form.selectedPage == 'dados'" flex="100">
 
         <file-input name="avatar" preview="true" is-disabled="$form.readOnly || $form.isDisabled" show-buttons="!$form.readOnly" is-required="false" ng-model="$form.user.avatar" >
             <error-message name="image" message="{{ 'MSG10' | message:{attribute:'Avatar'} }}"></error-message>
@@ -47,7 +47,7 @@
 
     </div>
 
-    <div ng-show="$form.selectedPage != 'dados'" flex>
+    <div ng-show="$form.selectedPage != 'dados'" flex="100">
         <user-permissions-card is-disabled="$form.readOnly || $form.isDisabled" ng-model="$form.user.permissions"></user-permissions-card>
     </div>
 

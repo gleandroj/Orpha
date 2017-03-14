@@ -17,7 +17,7 @@
                     </div>
                 </div>
                 <md-divider></md-divider>
-               <simple-user-card show-actions="true" logout-click="$ctrl.logout()" profile-click="$ctrl.state.go('user.profile')"></simple-user-card>
+               <simple-user-card show-actions="true" logout-click="$ctrl.logout()" profile-click="$ctrl.state.go('user.profile') && $ctrl.toggle()"></simple-user-card>
             </md-toolbar>
         </header>
 
