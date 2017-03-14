@@ -14,12 +14,12 @@ export default class UserDialogController {
         this.originalUser = this.utilService.copy(this.user);
     }
 
-    setForm(scope){
-        this.utilService.timeout(() => this.form = scope.userForm, 10);
+    set form(scope){
+        this.utilService.timeout(() => this._form = scope.userForm, 10);
     }
 
-    getForm(){
-        return this.form;
+    get form(){
+        return this._form;
     }
 
     close() {
@@ -31,7 +31,7 @@ export default class UserDialogController {
             this.close();
         } else {
             this.readOnly = true;
-            if(!this.getForm().$submitted || !this.getForm().$valid){
+            if(!this.form.$submitted || !this.form.$valid){
                 this.user = this.utilService.copy(this.originalUser);
             }
         }
