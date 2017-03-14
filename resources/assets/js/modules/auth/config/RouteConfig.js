@@ -10,7 +10,7 @@ import PasswordRecoveryTemplate from './../pages/password-recovery.tpl.html';
 import PasswordResetController from './../controllers/PasswordResetController';
 import PasswordResetTemplate from './../pages/password-reset.tpl.html';
 
-import TokenResolve from './../helpers/TokenResolve';
+import TokenResolve from './../resolvers/TokenResolve';
 
 export default function RouteConfig($stateProvider) {
 
@@ -39,7 +39,7 @@ export default function RouteConfig($stateProvider) {
         .state('auth.password_reset', {
             url: '/password/reset?email&token',
             resolve: {
-                token: TokenResolve
+                Token: TokenResolve
             },
             controller: PasswordResetController,
             controllerAs: '$ctrl',
