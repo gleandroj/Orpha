@@ -2,6 +2,7 @@
  * Created by FG0003 on 29/12/2016.
  */
 
+import moment from 'moment';
 import AbstractInputComponent from './../AbstractInputComponent/AbstractInputController'
 import DateInputTemplate from './date-input.tpl.html';
 
@@ -11,12 +12,18 @@ class DateInputController extends AbstractInputComponent {
         super($scope, OrphaUtilService);
     }
 
+    $onInit(){
+        this.model.$render = () => this.value = typeof this.model.$viewValue === 'string' ? this.parseDate(this.model.$viewValue) :  this.model.$viewValue;
+        this.util.timeout(()=> this.initialize(), 0);
+    }
+
     initialize() {
         super.initialize();
         let _date = new Date();
         this.maxDate = !this.maxDate ? new Date(_date.getFullYear() - 50, _date.getMonth(), _date.getDate()) : this.maxDate;
         this.minDate = !this.minDate ? new Date(_date.getFullYear() + 50, _date.getMonth(), _date.getDate()) : this.minDate;
-        this.filterDate = this.filterDate || function () { return true; }
+        this.filterDate = this.filterDate || function () { return true; };
+        this.model.$render();
     }
 
     setupValidation() {
@@ -28,6 +35,11 @@ class DateInputController extends AbstractInputComponent {
         this.scope.$watch(function(){ return self.form[self.name].$valid }, function () {
             self.validate();
         })
+    }
+
+    parseDate(dateString){
+        var m = moment(dateString);
+        return m.isValid() ? m.toDate() : new Date(NaN);
     }
 }
 
@@ -45,7 +57,6 @@ export let DateInputComponent = {
         minDate: '<',
         filterDate:'<',
         name: '@',
-        title: '@',
         label: '@'
     },
     controller: DateInputController,

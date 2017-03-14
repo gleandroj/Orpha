@@ -23,11 +23,12 @@ export default function DateConfig($mdDateLocaleProvider, $provide) {
 
     $provide.decorator('mdDatepickerDirective', ['$delegate',
         function ($delegate) {
-            var directive = $delegate[0];
+            let directive = $delegate[0];
 
-            var template = directive.template;
+            let template = directive.template;
 
             directive.template = function (tElement, tAttrs) {
+
                 var originalTemplate = template.apply(this, arguments);
 
                 var element = angular.element(originalTemplate);
@@ -35,11 +36,11 @@ export default function DateConfig($mdDateLocaleProvider, $provide) {
                 element.find('input').attr('restrict', 'reject');
                 element.find('input').attr('clean', 'true');
                 element.find('input').attr('ng-model', "ctrl.dateInput");//ng-model is required by ngMask
-                let template = '';
+                let newTemplate = '';
                 for(let i = 0; i < element.length ; i++)
-                    template += element[i].outerHTML;
+                    newTemplate += element[i].outerHTML;
 
-                return template;
+                return newTemplate;
             };
 
             return $delegate;
