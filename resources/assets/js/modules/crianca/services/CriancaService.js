@@ -34,29 +34,29 @@ export default class CriancaService{
         return $q.promise;
     }
 
-    save(user) {
+    save(crianca) {
         let defer = this._util.defer();
-
-        if (user.id == null || user.id == '') {
-            this._http.post(this._url, user).then((response)=> defer.resolve(this._util.extend(new Crianca(), response.data)), (response)=> defer.reject(response.data));
+        console.log(crianca);
+        if (crianca.id == null || crianca.id == '') {
+            this._http.post(this._url, crianca).then((response)=> defer.resolve(this._util.extend(new Crianca(), response.data)), (response)=> defer.reject(response.data));
         } else {
-            this._http.put(this._url + '/' + user.id, user).then((response)=> defer.resolve(this._util.extend(new Crianca(), response.data)), (response)=> defer.reject(response.data));
+            this._http.put(this._url + '/' + crianca.id, crianca).then((response)=> defer.resolve(this._util.extend(new Crianca(), response.data)), (response)=> defer.reject(response.data));
         }
         return defer.promise;
     }
 
-    disable(user) {
+    disable(crianca) {
         let $q = this._util.defer();
 
-        this._http.delete(this._url + '/' + user.id).then((response)=> $q.resolve(this._util.extend(new Crianca(), response.data)), (response) => $q.reject(response.data));
+        this._http.delete(this._url + '/' + crianca.id).then((response)=> $q.resolve(this._util.extend(new Crianca(), response.data)), (response) => $q.reject(response.data));
 
         return $q.promise;
     }
 
-    enable(user) {
+    enable(crianca) {
         let $q = this._util.defer();
 
-        this._http.get(this._url + '/restore/' + user.id).then((response)=> $q.resolve(this._util.extend(new Crianca(), response.data)), (response) => $q.reject(response.data));
+        this._http.get(this._url + '/restore/' + crianca.id).then((response)=> $q.resolve(this._util.extend(new Crianca(), response.data)), (response) => $q.reject(response.data));
 
         return $q.promise;
     }
