@@ -56,6 +56,7 @@ export default class FormController {
     }
 
     save(){
+        if(!this.authService.getCurrentUser().hasPermission(['create-crianca', 'edit-crianca'])) return;
         if (this.crianca.id == '' || this.crianca.id == null) {
             this.submitCrianca();
         } else {
@@ -87,7 +88,7 @@ export default class FormController {
     }
 
     disableCrianca(){
-        if(!this.authService.getCurrentCrianca().hasPermission('disable-crianca')  || this.authService.getCurrentCrianca().id == this.crianca.id) return;
+        if(!this.authService.getCurrentUser().hasPermission('disable-crianca')) return;
         this.loading = true;
         this.criancaService.disable(this.crianca)
             .success((newCrianca)=> {
@@ -101,7 +102,7 @@ export default class FormController {
     }
 
     enableCrianca() {
-        if(!this.authService.getCurrentCrianca().hasPermission('active-crianca')) return;
+        if(!this.authService.getCurrentUser().hasPermission('active-crianca')) return;
         this.loading = true;
         this.criancaService.enable(this.crianca)
             .success((newCrianca)=> {
