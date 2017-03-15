@@ -105,12 +105,13 @@ class CriancaController extends Controller
     /**
      * Restore the specified resource from storage.
      *
-     * @param $id
+     * @param Crianca $crianca
      * @return Crianca
+     * @internal param $id
      */
-    public function restore($id)
+    public function restore(Crianca $crianca)
     {
-        $this->authorizeForUser($this->getCurrentUser(), 'active', $this->criancaService->getById($id));
-        return $this->criancaService->restore($id);
+        $this->authorizeForUser($this->getCurrentUser(), 'active', $crianca);
+        return $this->criancaService->restore($crianca->id);
     }
 }
