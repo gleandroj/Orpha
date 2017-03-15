@@ -115,11 +115,7 @@ class UserModuleTest extends TestCase
 
         $this->assertTrue($deletedUser['deleted_at'] != null);
 
-        $this->call('GET', 'api/users/' . $deletedUser['id'])
-            ->assertStatus(200)
-            ->assertJsonStructure(['error', 'message', 'errors']);
-
-        $this->call('GET', 'api/users/restore/' . $deletedUser['id'])
+        $deletedUser = $this->call('GET', 'api/users/' . $deletedUser['id'])
             ->assertStatus(200)
             ->assertJsonStructure([
                 'name', 'email', 'phone', 'avatar', 'orfanato_id',
@@ -131,6 +127,24 @@ class UserModuleTest extends TestCase
                         'name', 'slug', 'description'
                     ]
                 ]
-            ]);
+            ])->json();
+
+        $this->assertTrue($deletedUser['deleted_at'] != null);
+
+        $restoredUser = $this->call('GET', 'api/users/restore/' . $deletedUser['id'])
+            ->assertStatus(200)
+            ->assertJsonStructure([
+                'name', 'email', 'phone', 'avatar', 'orfanato_id',
+                'orfanato' => [
+                    'nome'
+                ],
+                'permissions' => [
+                    '*' => [
+                        'name', 'slug', 'description'
+                    ]
+                ]
+            ])->json();
+
+        $this->assertTrue($restoredUser['deleted_at'] == null);
     }
 }
