@@ -35,8 +35,8 @@
                 primary-btn-icon="create"
                 secondary-btn-icon="delete"
 
-                show-primary-btn="$controller.authService.getCurrentCrianca().hasPermission('edit-crianca')"
-                show-secondary-btn="$controller.authService.getCurrentCrianca().hasPermission('disable-crianca')"
+                show-primary-btn="$controller.authService.getCurrentUser().hasPermission('edit-crianca')"
+                show-secondary-btn="$controller.authService.getCurrentUser().hasPermission('disable-crianca')"
 
                 on-crianca-click="$controller.showCrianca(crianca)"
                 on-primary-btn-click="$controller.editCrianca(crianca)"
@@ -50,7 +50,7 @@
         <crianca-list
                 ng-show="showInactive && !$controller.loading"
 
-                show-primary-btn="$controller.authService.getCurrentCrianca().hasPermission('active-crianca')"
+                show-primary-btn="$controller.authService.getCurrentUser().hasPermission('active-crianca')"
                 show-secondary-btn="'false'"
                 show-pia-btn="'false'"
 
