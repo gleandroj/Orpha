@@ -116,7 +116,7 @@ class UserModuleTest extends TestCase
         $this->assertTrue($deletedUser['deleted_at'] != null);
 
         $this->call('GET', 'api/users/' . $deletedUser['id'])
-            ->assertStatus(404)
+            ->assertStatus(200)
             ->assertJsonStructure(['error', 'message', 'errors']);
 
         $this->call('GET', 'api/users/restore/' . $deletedUser['id'])
