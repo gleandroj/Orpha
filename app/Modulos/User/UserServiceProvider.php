@@ -31,6 +31,9 @@ class UserServiceProvider extends ServiceProvider
     public function boot()
     {
         Validator::extend('avatar', 'App\Modulos\User\Validators\AvatarValidator@validate');
+        Route::bind('user', function ($id){
+            return User::withTrashed()->find($id);
+        });
         $this->mapModuleRoutes();
     }
 
