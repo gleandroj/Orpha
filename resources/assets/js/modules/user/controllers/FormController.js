@@ -18,10 +18,10 @@ export default class FormController {
         this.readOnly = true;
         this.originalUser = this.util.copy(User);
         this.user = User;
-        this.title = this.state.current.data.Title || 'Formulário';
         if(this.state.current.data.EditMode){
             this.changeToEditMode();
         }
+        this.title = this.state.current.data.Title || 'Formulário';
     }
 
     get form(){
