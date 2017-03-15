@@ -42,6 +42,8 @@ export default class AbstractInputController {
 
     setupValidation(){
         this.model.$validators = this.form[this.name].$validators;
+        this.scope.$watch(() => { return this.isRequired; }, ()=> this.validate());
+        this.scope.$watch(() => { return this.isDisabled; }, ()=> this.validate());
         this.validate();
     }
 
