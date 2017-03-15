@@ -108,13 +108,14 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param $id
-     * @return User|\Illuminate\Http\Response
+     * @param User $user
+     * @return User|Response
+     * @internal param $id
      */
-    public function restore($id)
+    public function restore(User $user)
     {
-        $this->authorizeForUser($this->getCurrentUser(), 'active', $this->userService->getById($id));
-        return $this->userService->restore($id);
+        $this->authorizeForUser($this->getCurrentUser(), 'active', $user);
+        return $this->userService->restore($user->id);
     }
 
     /**
