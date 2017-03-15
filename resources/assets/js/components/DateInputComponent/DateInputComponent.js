@@ -13,7 +13,9 @@ class DateInputController extends AbstractInputComponent {
     }
 
     $onInit(){
-        this.model.$render = () => this.value = typeof this.model.$viewValue === 'string' ? this.parseDate(this.model.$viewValue) :  this.model.$viewValue;
+        this.model.$render = () =>
+            this.value = typeof this.model.$viewValue === 'string' ?
+                this.parseDate(this.model.$viewValue) :  this.model.$viewValue;
         this.util.timeout(()=> this.initialize(), 0);
     }
 
@@ -35,6 +37,11 @@ class DateInputController extends AbstractInputComponent {
         this.scope.$watch(function(){ return self.form[self.name].$valid }, function () {
             self.validate();
         })
+    }
+
+    onChange(){
+        this.model.$setViewValue(moment(this.value).format('YYYY-MM-DD'));
+        this.validate();
     }
 
     parseDate(dateString){
