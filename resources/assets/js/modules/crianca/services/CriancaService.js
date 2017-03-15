@@ -36,7 +36,6 @@ export default class CriancaService{
 
     save(crianca) {
         let defer = this._util.defer();
-        console.log(crianca);
         if (crianca.id == null || crianca.id == '') {
             this._http.post(this._url, crianca).then((response)=> defer.resolve(this._util.extend(new Crianca(), response.data)), (response)=> defer.reject(response.data));
         } else {
