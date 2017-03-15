@@ -3,7 +3,7 @@
     <md-toolbar>
         <div class="md-toolbar-tools" layout="row">
             <h2 md-truncate>
-                <md-icon class="material-icons">person</md-icon>
+                <md-icon class="material-icons">face</md-icon>
                 <span>Crianças</span>
             </h2>
             <span flex></span>
@@ -27,30 +27,43 @@
         <md-checkbox ng-hide="$controller.loading" ng-model="showInactive">Mostrar inativos</md-checkbox>
 
         <crianca-list
-                ng-hide="$controller.loading"
+                ng-show="!$controller.loading"
+
                 primary-btn-text="Editar Criança"
                 secondary-btn-text="Desativar Criança"
+
                 primary-btn-icon="create"
                 secondary-btn-icon="delete"
+
+                show-primary-btn="$controller.authService.getCurrentUser().hasPermission('edit-crianca')"
+                show-secondary-btn="$controller.authService.getCurrentUser().hasPermission('disable-crianca')"
+                show-pia-btn="'true'"
+
                 search="$controller.search"
                 title="Crianças Ativas"
                 criancas="$controller.criancas"
                 filter="{deleted_at: '!'}"
+
                 on-crianca-click="$controller.showCrianca(crianca)"
                 on-primary-btn-click="$controller.editCrianca(crianca)"
                 on-secondary-btn-click="$controller.disableCrianca(crianca)"></crianca-list>
 
         <crianca-list
                 ng-show="showInactive && !$controller.loading"
+
+                show-primary-btn="$controller.authService.getCurrentUser().hasPermission('active-crianca')"
                 show-secondary-btn="'false'"
                 show-pia-btn="'false'"
+
                 primary-btn-text="Ativar Criança"
                 primary-btn-icon="check"
+
                 search="$controller.search"
                 title="Crianças Inativas"
                 criancas="$controller.criancas"
                 filter="{deleted_at: '!!'}"
                 background-color="'default-warn-200-0.5'"
+
                 on-crianca-click="$controller.showCrianca(crianca)"
                 on-primary-btn-click="$controller.enableCrianca(crianca)"></crianca-list>
 
@@ -59,7 +72,7 @@
 </md-card>
 
 <div class="fab-panel">
-    <md-button aria-label="create-crianca" id="create-fab" class="md-fab" aria-label="Action" ng-click="$controller.createCrianca()">
+    <md-button aria-label="create-crianca" id="create-fab" class="md-fab" aria-label="Action" ng-click="$controller.createCrianca()"  ng-auth="'create-crianca'">
         <md-icon aria-label="create-crianca-icon" class="material-icons">add</md-icon>
         <md-tooltip md-direction="left">
             Nova Criança
