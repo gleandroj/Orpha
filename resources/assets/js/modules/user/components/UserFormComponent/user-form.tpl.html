@@ -31,7 +31,7 @@
             <error-message name="email" message="{{ 'MSG10' | message:{attribute:'E-mail'} }}"></error-message>
             <error-message name="checkEmail" message="{{ check_email_result }}"></error-message>
         </text-input>
-        <text-input max-length="20" name="Telefone" mask="(99) 9?9999-9999" mask-restrict="reject" mask-clean="true" icon="phone" label="Telefone" is-disabled="$form.readOnly || $form.isDisabled" is-required="'true'" ng-model="$form.user.phone">
+        <text-input max-length="20" name="Telefone" mask="(99) 9?9999-9999" mask-restrict="reject" icon="phone" label="Telefone" is-disabled="$form.readOnly || $form.isDisabled" is-required="'true'" ng-model="$form.user.phone">
             <error-message name="required" message="{{ 'MSG2' | message }}"></error-message>
             <error-message name="mask" message="{{ 'MSG10' | message:{attribute:'Telefone'} }}"></error-message>
         </text-input>
