@@ -1,0 +1,87 @@
+<md-card aria-label="Crianca Form" md-whiteframe="7" ng-cloak layout="column">
+
+    <md-toolbar>
+        <div class="md-toolbar-tools" layout="row">
+
+            <md-button class="md-icon-button" ng-disabled="$controller.loading" ng-click="$controller.state.go('crianca.list')">
+                <md-icon class="material-icons">arrow_back</md-icon>
+                <md-tooltip md-direction="top">
+                    Voltar
+                </md-tooltip>
+            </md-button>
+
+            <h2 md-truncate>
+                <md-icon class="material-icons">person</md-icon>
+                <span>{{$controller.title}} {{ $controller.crianca.deleted_at ? '(Inativo)' : ''}}</span>
+            </h2>
+
+            <span flex></span>
+
+            <md-menu ng-if="$controller.readOnly" >
+                <md-button class="md-icon-button" ng-disabled="$controller.loading" ng-click="$mdMenu.open($event)" ng-auth="['disable-crianca', 'active-crianca']">
+                    <md-icon md-menu-origin class="material-icons">more_vert</md-icon>
+                    <md-tooltip md-direction="top">
+                        Mais
+                    </md-tooltip>
+                </md-button>
+                <md-menu-content width="2">
+                    <md-menu-item ng-show="$controller.crianca.deleted_at == null" ng-auth="'disable-crianca'" ng-click="$controller.disableCrianca()">
+                        <md-button ng-disabled="$controller.authService.getCurrentCrianca().id == $controller.crianca.id"><span md-menu-align-target>Desativar</span></md-button>
+                    </md-menu-item>
+                    <md-menu-item ng-show="$controller.crianca.deleted_at != null" ng-auth="'active-crianca'" ng-click="$controller.enableCrianca()">
+                        <md-button ><span md-menu-align-target>Ativar</span></md-button>
+                    </md-menu-item>
+                </md-menu-content>
+            </md-menu>
+            <!--
+            <md-button class="md-icon-button" ng-disabled="$controller.loading || criancaForm.$invalid || criancaForm.$pending" ng-if="!$controller.readOnly" ng-click="$controller.save()">
+                <md-icon class="material-icons">done</md-icon>
+                <md-tooltip md-direction="top">
+                    Salvar
+                </md-tooltip>
+            </md-button>
+            -->
+        </div>
+    </md-toolbar>
+
+    <md-progress-linear md-mode="indeterminate" class="md-accent" ng-show="$controller.loading || criancaForm.$pending"></md-progress-linear>
+
+    <md-content>
+        <form name="criancaForm" ng-submit="$controller.save()" novalidate>
+
+            <div  layout-margin layout-padding>
+                <crianca-form crianca="$controller.crianca" read-only="$controller.readOnly" is-disabled="$controller.readOnly || $controller.loading" ></crianca-form>
+            </div>
+
+            <span flex-gt-sm></span>
+            <md-divider></md-divider>
+
+            <div ng-if="!$controller.readOnly"  layout="row" layout-align="end center">
+
+                <md-button type="submit" class="md-accent md-raised" ng-disabled="$controller.loading || criancaForm.$invalid || criancaForm.$pending">
+                    Salvar
+                </md-button>
+                <md-button class="md-warn" ng-click="$controller.cancel()" ng-disabled="$controller.loading">
+                    Cancelar
+                </md-button>
+
+            </div>
+
+            <div ng-if="$controller.readOnly" layout="row" layout-align="end center">
+
+                <md-button  ng-click="$controller.changeToEditMode()" class="md-primary md-raised" ng-auth="'edit-crianca'" ng-if="$controller.crianca.deleted_at == null" ng-disabled="$controller.loading">
+                    Alterar
+                </md-button>
+                <md-button class="md-primary md-raised" ng-click="$controller.enableCrianca()" ng-auth="'active-crianca'" ng-if="$controller.crianca.deleted_at != null" ng-disabled="$controller.loading">
+                    Ativar
+                </md-button>
+                <md-button ng-click="$controller.state.go('crianca.list')" ng-disabled="$controller.loading">
+                    Voltar
+                </md-button>
+
+            </div>
+
+        </form>
+    </md-content>
+
+</md-card>
