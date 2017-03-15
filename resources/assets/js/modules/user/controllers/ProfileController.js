@@ -17,7 +17,9 @@ export default class ProfileController{
         this.dialog.showCustomDialog({
             controller: () => this,
             template: passwordDialogTemplate
-        }).then(()=>{}, ()=>{});
+        }).then(()=>
+            this.user.password =
+                this.user.password_confirmation = null, ()=>{});
     }
 
     submitPassword(){
@@ -26,6 +28,7 @@ export default class ProfileController{
         .then((scss)=>{
             this.cancelDialog();
             this.loading = false;
+            this.toastService.showSuccess(this.messageService.get('MSG7'));
         }, (err)=>{
             this.loading = false;
             console.log(err);
