@@ -145,7 +145,7 @@
                                                             <p >Sua senha temporária é: {{$password}}.
                                                                 <br/>
                                                                 <br/>
-                                                                Para realizar login e alterar sua senha, copie a senha       disponibilizada e acesse o link: {{url($url)}}
+                                                                Para realizar login e alterar sua senha, copie a senha       disponibilizada e acesse o link: <a href="{{url($url)}}">{{url($url)}}</a>
                                                         </div>
                                                     </div>
                                                 </td>

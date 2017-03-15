@@ -1,0 +1,25 @@
+<md-card md-whiteframe="7" ng-cloak layout="column">
+
+    <md-toolbar>
+        <div class="md-toolbar-tools" layout="row">
+            <h2>
+                <md-icon class="material-icons">person</md-icon>
+                <span>Perfil</span>
+            </h2>
+            <span flex></span>
+            <md-button class="md-icon-button md-raised md-accent" ng-click="$controller.showPasswordDialog()">
+                <md-icon class="material-icons">vpn_key</md-icon>
+                <md-tooltip md-direction="left">
+                    Alterar senha
+                </md-tooltip>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-content flex>
+
+        <user-form user="$controller.user" read-only="'true'" flex="100"></user-form>
+
+    </md-content>
+
+</md-card>

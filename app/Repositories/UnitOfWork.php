@@ -9,7 +9,9 @@
 namespace App\Repositories;
 
 
-class UnitOfWork implements \App\Contracts\UnitOfWork
+use App\Contracts\UnitOfWorkInterface;
+
+class UnitOfWork implements UnitOfWorkInterface
 {
     private $inTransaction = false;
 

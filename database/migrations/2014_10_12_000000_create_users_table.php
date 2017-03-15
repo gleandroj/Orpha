@@ -20,6 +20,10 @@ class CreateUsersTable extends Migration
             $table->string('email', 50)->unique();
             $table->string('avatar')->nullable()->unique();
             $table->string('password');
+
+            $table->integer('orfanato_id')->unsigned();
+            $table->foreign('orfanato_id')->references('id')->on('orfanatos');
+
             $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();

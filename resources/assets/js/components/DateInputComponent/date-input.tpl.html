@@ -1,0 +1,54 @@
+<style>
+    .md-datepicker-button :not(disabled){
+        color: rgba(0,0,0,0.87);
+    }
+
+    .date-picker-row {
+        margin-left: -15px;
+        position: relative;
+        min-height: 60px;
+    }
+
+    .date-picker-row label {
+        right: auto !important;
+        left: auto !important;
+        margin-left: 0px !important;;
+        width: calc(100% - 84px) !important;
+    }
+
+    .date-picker-row .md-datepicker-input-container {
+        margin-left: 0;
+        width: 150px !important;
+    }
+
+    .md-datepicker-calendar-pane{
+        /*background-color: white !important;
+    }
+
+</style>
+<ng-form name="_form_{{$component.name}}" flex-gt-xs>
+    <md-input-container flex="auto" class="md-block date-picker-row">
+        <label>{{ $component.label }}</label>
+        <md-datepicker
+                       ng-model="$component.value"
+                       name="{{ $component.name }}"
+                       id="{{ $component.name }}"
+                       md-date-filter="$component.filterDate"
+
+                       ng-required="$component.isRequired"
+                       ng-disabled="$component.isDisabled"
+
+                       ng-model-options="{allowInvalid: false, debounce: 250}"
+                       ng-change="$component.onChange()"
+
+                       md-date-locale="{ msgOpenCalendar: 'Open a special calendar' }"
+
+                       ng-focus="$component.isDisabled || $component.model.$setTouched()"
+                       ng-click="$component.isDisabled || $component.model.$setTouched()">
+        </md-datepicker>
+
+        <div ng-messages="$component.errors" ng-show="$component.model.$dirty || $component.model.$touched" style="margin-left: -15px;">
+            <ng-transclude></ng-transclude>
+        </div>
+    </md-input-container>
+</ng-form>

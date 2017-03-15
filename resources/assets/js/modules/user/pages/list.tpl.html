@@ -1,0 +1,82 @@
+<md-card md-whiteframe="7" ng-cloak layout="column">
+
+    <md-toolbar>
+        <div class="md-toolbar-tools" layout="row">
+            <h2 md-truncate>
+                <md-icon class="material-icons">person</md-icon>
+                <span>Usuários</span>
+            </h2>
+            <span flex></span>
+            <md-button class="md-icon-button md-raised md-accent" ng-disabled="$controller.loading" ng-click="$controller.getAll()">
+                <md-icon class="material-icons">refresh</md-icon>
+                <md-tooltip md-direction="top">
+                    Atualizar
+                </md-tooltip>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-card-content layout-padding layout-margin>
+
+        <search-input label="Pesquisar" ng-model="$controller.search" max-length="50"></search-input>
+
+        <div ng-show="$controller.loading" layout="row" layout-sm="column" layout-align="center center">
+            <md-progress-circular md-indetermied class="md-accent" md-diameter="96"></md-progress-circular>
+        </div>
+
+        <md-checkbox ng-hide="$controller.loading" ng-model="showInactive">Mostrar inativos</md-checkbox>
+
+        <user-list
+                ng-show="!$controller.loading"
+
+                primary-btn-text="Editar Usuário"
+                secondary-btn-text="Desativar Usuário"
+
+                primary-btn-icon="create"
+                secondary-btn-icon="delete"
+
+                show-primary-btn="$controller.authService.getCurrentUser().hasPermission('edit-user')"
+                show-secondary-btn="$controller.authService.getCurrentUser().hasPermission('disable-user')"
+
+                check-secondary-btn-disabled="$controller.checkSecondaryBtnDisabled(user)"
+
+                on-user-click="$controller.showUser(user)"
+                on-primary-btn-click="$controller.editUser(user)"
+                on-secondary-btn-click="$controller.disableUser(user)"
+
+                search="$controller.search"
+                title="Usuários Ativos"
+                users="$controller.users"
+                filter="{deleted_at: '!'}"></user-list>
+
+        <user-list
+                ng-show="showInactive && !$controller.loading"
+
+                show-primary-btn="$controller.authService.getCurrentUser().hasPermission('active-user')"
+                show-secondary-btn="'false'"
+
+                primary-btn-text="Ativar Usuário"
+                primary-btn-icon="check"
+
+                on-user-click="$controller.showUser(user)"
+                on-primary-btn-click="$controller.enableUser(user)"
+
+                background-color="'default-warn-200-0.5'"
+
+                search="$controller.search"
+                title="Usuários Inativos"
+                users="$controller.users"
+                filter="{deleted_at: '!!'}"></user-list>
+
+    </md-card-content>
+
+</md-card>
+
+<div class="fab-panel">
+    <md-button aria-label="create-user" id="create-fab" class="md-fab" aria-label="Action" ng-click="$controller.createUser()" ng-auth="'create-user'">
+        <md-icon aria-label="create-user-icon" class="material-icons">add</md-icon>
+        <md-tooltip md-direction="left">
+            Novo usuário
+        </md-tooltip>
+    </md-button>
+</div>

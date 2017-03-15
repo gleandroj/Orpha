@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => 'Orpha',
+    'name' => 'Orpha - Sistema de gestão de orfanatos',
 
     /*
     |--------------------------------------------------------------------------
@@ -162,6 +162,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Laravel\Tinker\TinkerServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -179,6 +180,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 		Laravel\Passport\PassportServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        App\Modulos\ModulosServiceProvider::class
     ],
 
     /*

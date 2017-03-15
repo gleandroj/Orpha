@@ -15,8 +15,8 @@ return [
 
     'password' => 'As senhas devem ter pelo menos seis caracteres e combinar a confirmação.',
     'reset' => 'Sua senha foi redefinida!',
-    'sent' => 'Uma nova senha foi enviada para o e-mai: :email.',
+    'sent' => trans('messages.MSG13'),
     'token' => 'Este token de redefinição de senha é inválido.',
-    'user' => 'Não foi possível enviar e-mail, tente novamente!',
+    'user' => trans('messages.MSG12'),
 
 ];

@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => 'gabriel_hc@live.com',
-        'name' => 'Orpha',
+        'address' => env('MAIL_USERNAME', 'no-reply@orpha.com.br'),
+        'name' => 'Orpha - No Reply',
     ],
 
     /*

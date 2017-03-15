@@ -22,6 +22,10 @@ class CreateCriancasTable extends Migration
             $table->string('grau_parentesco', 50);
             $table->string('processo', 20);
             $table->string('comarca', 50);
+
+            $table->integer('orfanato_id')->unsigned();
+            $table->foreign('orfanato_id')->references('id')->on('orfanatos');
+
             $table->softDeletes();
             $table->timestamps();
         });

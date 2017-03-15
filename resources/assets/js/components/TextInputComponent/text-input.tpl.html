@@ -1,0 +1,31 @@
+<ng-form name="_form_{{$component.name}}">
+    <md-input-container flex-gt-lg class="md-block" md-is-error="$component.model.$invalid && $component.model.$touched">
+        <md-icon class="material-icons" ng-if="$component.icon">{{ $component.icon }}</md-icon>
+        <input
+                type="{{$component.type}}"
+                placeholder="{{$component.label}}"
+
+                name="{{ $component.name }}"
+                id="{{ $component.name }}"
+
+                ng-model="$component.value"
+                ng-change="$component.onChange()"
+                ng-model-options="{allowInvalid: true, debounce: 250}"
+
+                ng-required="$component.isRequired"
+                ng-disabled="$component.isDisabled"
+
+                ng-minlength="{{ $component.minLength }}"
+                ng-maxlength="{{ $component.maxLength }}"
+
+                md-maxlength="{{ $component.maxLength }}"
+
+                maxlength="{{ $component.maxLength }}"
+                ng-focus="$component.isDisabled || $component.model.$setTouched()"
+                ng-click="$component.isDisabled || $component.model.$setTouched()" >
+
+        <div ng-messages="$component.model.$error" ng-show="$component.model.$dirty || $component.model.$touched" >
+            <ng-transclude></ng-transclude>
+        </div>
+    </md-input-container>
+</ng-form>

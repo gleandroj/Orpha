@@ -1,47 +1,47 @@
-									Alterações
+									Alteraï¿½ï¿½es
 
 
 
 01) Mudar a cor das mensagens de sucesso!
 	tonalidade Verde
 
-02) Mudar a cor do ícone "Inserir"
+02) Mudar a cor do ï¿½cone "Inserir"
 
-03) Mudar a cor do ícone "Atualizar"
+03) Mudar a cor do ï¿½cone "Atualizar"
 
-04) O sistema está retornando uma mensagem incorreta ao escolher um arquivo com extesão
-diferente do permitido. O sistema retorna "Avatar inválido", porém o mais coerente
-é "Formato inválido".
+04) O sistema estï¿½ retornando uma mensagem incorreta ao escolher um arquivo com extesï¿½o
+diferente do permitido. O sistema retorna "Avatar invï¿½lido", porï¿½m o mais coerente
+ï¿½ "Formato invï¿½lido".
 
-05) O sistema está retorna uma mensagem incorreta ao inserir um telefone inválido.
-O sistema retorna "Formato inválido", porém o mais ideal seria retornar "Telefone inválido".
+05) O sistema estï¿½ retorna uma mensagem incorreta ao inserir um telefone invï¿½lido.
+O sistema retorna "Formato invï¿½lido", porï¿½m o mais ideal seria retornar "Telefone invï¿½lido".
 
-06) Todo o formulário possui um contator mostrando a quantidade de caracteres digitados e o limite permitido,
-porém quando chega no limite o sistema ainda permite continuar inserindo, sendo assim um campo pode ter
-100 caracteres de um máximo de 50. OBS: O sistema não permite inserir pois enquanto não for corrigido a quantidade
-de caracteres para o intervalo permitido a opção "Salvar" permanece desabilitada, porém deveria limitar o 
-preenchimento na quantidade máxima.
+06) Todo o formulï¿½rio possui um contator mostrando a quantidade de caracteres digitados e o limite permitido,
+porï¿½m quando chega no limite o sistema ainda permite continuar inserindo, sendo assim um campo pode ter
+100 caracteres de um mï¿½ximo de 50. OBS: O sistema nï¿½o permite inserir pois enquanto nï¿½o for corrigido a quantidade
+de caracteres para o intervalo permitido a opï¿½ï¿½o "Salvar" permanece desabilitada, porï¿½m deveria limitar o 
+preenchimento na quantidade mï¿½xima.
 
 **
-07) Ao alterar informações de um usuário o sistema permanece no formulário de alteração, porém deveria
-retornar para a lista de usuários. Desta forma as informações alteradas não são salvas, pois o sistema 
-sempre fica no formulário de alteração mesmo depois das alterações realizadas, com isso ao sair do "modal" 
-o sistema retorna para o fomulário e por exemplo o nome alterado na verdade não foi alterado...
+07) Ao alterar informaï¿½ï¿½es de um usuï¿½rio o sistema permanece no formulï¿½rio de alteraï¿½ï¿½o, porï¿½m deveria
+retornar para a lista de usuï¿½rios. Desta forma as informaï¿½ï¿½es alteradas nï¿½o sï¿½o salvas, pois o sistema 
+sempre fica no formulï¿½rio de alteraï¿½ï¿½o mesmo depois das alteraï¿½ï¿½es realizadas, com isso ao sair do "modal" 
+o sistema retorna para o fomulï¿½rio e por exemplo o nome alterado na verdade nï¿½o foi alterado...
 
-08) Ao preencher o campo "Confirmação de senha" com uma quantidade de caracteres inferior a quantida mínima
-o sistema retorna a mensagem "Quantidade de caracteres insuficiente", porém esta mensagem não existe e deveria 
-retorna "O campo deve ter no mínimo 8 e no máximo 14 caracteres".
+08) Ao preencher o campo "Confirmaï¿½ï¿½o de senha" com uma quantidade de caracteres inferior a quantida mï¿½nima
+o sistema retorna a mensagem "Quantidade de caracteres insuficiente", porï¿½m esta mensagem nï¿½o existe e deveria 
+retorna "O campo deve ter no mï¿½nimo 8 e no mï¿½ximo 14 caracteres".
 
-09) O campo telefone não possui máscara.
+09) O campo telefone nï¿½o possui mï¿½scara.
 
-10) Alterar a legenda do botão imagem de "Selecionar Avatar" para Selecionar Imagem".
+10) Alterar a legenda do botï¿½o imagem de "Selecionar Avatar" para Selecionar Imagem".
 
-11) Ao informar uma pesquisa que não existe o sistema retorna a mensagem: "Nenhum item inserido"
-porém, deveria retornar "Nenhum resultado encontrado".
+11) Ao informar uma pesquisa que nï¿½o existe o sistema retorna a mensagem: "Nenhum item inserido"
+porï¿½m, deveria retornar "Nenhum resultado encontrado".
 
-OBS: Corrija a observação anterior para verificar a próxima...
+OBS: Corrija a observaï¿½ï¿½o anterior para verificar a prï¿½xima...
 
-12) Ao realizar uma busca por um usuário ativo o sistema retorna na lista de inativos a mensagem "Nenhum resultado encontrado", porém 
-ao informar um usuário que está inativo o sistema não retorna na lista de ativos esta mensagem...
+12) Ao realizar uma busca por um usuï¿½rio ativo o sistema retorna na lista de inativos a mensagem "Nenhum resultado encontrado", porï¿½m 
+ao informar um usuï¿½rio que estï¿½ inativo o sistema nï¿½o retorna na lista de ativos esta mensagem...
 
 

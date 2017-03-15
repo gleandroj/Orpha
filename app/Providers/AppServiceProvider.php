@@ -3,6 +3,10 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Contracts\RepositoryInterface;
+use App\Contracts\UnitOfWorkInterface;
+use App\Repositories\AbstractRepository;
+use App\Repositories\UnitOfWork;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,16 +17,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        \Validator::extend('avatar', function($attribute, $value, $parameters, $validator) {
-            $b64 = '/^(data:image\/(jpeg|png|jpg|gif|bmp);base64)/';
-            $url = '/(http(s?):)|([\/|.|\w|\s])*\.(?:jpg|gif|png)/';
 
-            if($value != null){
-                return preg_match($b64, $value) || preg_match($url, $value);
-            }else{
-                return true;
-            }
-        });
     }
 
     /**
@@ -32,11 +27,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(\App\Contracts\UnitOfWork::class, \App\Repositories\UnitOfWork::class);
-        $this->app->bind(\App\Contracts\Repository::class, \App\Repositories\AbstractRepository::class);
-        $this->app->bind(\App\Contracts\UserRepository::class, \App\Repositories\UserRepository::class);
-        $this->app->bind(\App\Contracts\UserService::class, \App\Services\UserService::class);
-        $this->app->bind(\App\Contracts\CriancaRepository::class, \App\Repositories\CriancaRepository::class);
-        $this->app->bind(\App\Contracts\CriancaService::class, \App\Services\CriancaSerivce::class);
+        $this->app->bind(UnitOfWorkInterface::class, UnitOfWork::class);
+        $this->app->bind(RepositoryInterface::class, AbstractRepository::class);
     }
 }

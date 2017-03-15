@@ -11,20 +11,25 @@
 |
 */
 
-$factory->define(App\User::class, function (Faker\Generator $faker) {
+
+use App\Modulos\Auth\Models\Permission;
+use App\Modulos\Crianca\Models\Crianca;
+use App\Modulos\User\Models\User;
+
+$factory->define(User::class, function (Faker\Generator $faker) {
     static $password;
 
     return [
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
-        'phone' => $faker->phoneNumber,
+        'phone' => '62999999999',
         'avatar' => $faker->imageUrl,
         'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
     ];
 });
 
-$factory->define(App\Permission::class, function (Faker\Generator $faker) {
+$factory->define(Permission::class, function (Faker\Generator $faker) {
 
     return [
         'name' => $faker->name,
@@ -33,10 +38,10 @@ $factory->define(App\Permission::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Crianca::class, function (Faker\Generator $faker) {
+$factory->define(Crianca::class, function (Faker\Generator $faker) {
     return [
         'nome' => $faker->name,
-        'dt_nascimento' => $faker->dateTime,
+        'dt_nascimento' => $faker->dateTimeBetween('-18 years', '-2 years'),
         'filiacao' => $faker->name,
         'responsavel' => $faker->name,
         'grau_parentesco' => $faker->word,
