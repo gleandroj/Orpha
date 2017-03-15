@@ -31,8 +31,8 @@ class Controller {
         this.primaryBtnDisabled = this.primaryBtnDisabled || false;
         this.secondaryBtnDisabled = this.secondaryBtnDisabled || false;
 
-        this.checkPrimaryBtnClick = this.checkPrimaryBtnClick || function(){ return false; };
-        this.checkSecondaryBtnClick = this.checkSecondaryBtnClick || function(){ return false; };
+        this.checkPrimaryBtnDisabled = this.checkPrimaryBtnDisabled || function(){ return false; };
+        this.checkSecondaryBtnDisabled = this.checkSecondaryBtnDisabled || function(){ return false; };
 
         this.primaryBtnIcon = this.primaryBtnIcon || 'touch_app';
         this.secondaryBtnIcon = this.secondaryBtnIcon || 'touch_app';
