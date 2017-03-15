@@ -19,14 +19,14 @@
 
         </div>
 
-        <md-button ng-click="$component.onPrimaryBtnClick({user: user})" ng-if="$component.showPrimaryBtn" ng-disabled="$component.primaryBtnDisabled || $component.isDisabled" class="md-icon-button md-secondary md-raised md-primary md-secondary" aria-label="primary-btn">
+        <md-button ng-click="$component.onPrimaryBtnClick({user: user})" ng-if="$component.showPrimaryBtn" ng-disabled="$component.primaryBtnDisabled || $component.isDisabled || $component.checkPrimaryBtnDisabled(user)" class="md-icon-button md-secondary md-raised md-primary md-secondary" aria-label="primary-btn">
             <md-icon class="material-icons">{{ $component.primaryBtnIcon }}</md-icon>
             <md-tooltip md-direction="left">
                 {{ $component.primaryBtnText }}
             </md-tooltip>
         </md-button>
 
-        <md-button ng-click="$component.onSecondaryBtnClick({user: user})" ng-if="$component.showSecondaryBtn" ng-disabled="$component.secondaryBtnDisabled || $component.isDisabled" class="md-icon-button md-secondary md-raised md-warn md-hue-2 md-secondary" aria-label="secondary-btn">
+        <md-button ng-click="$component.onSecondaryBtnClick({user: user})" ng-if="$component.showSecondaryBtn" ng-disabled="$component.secondaryBtnDisabled || $component.isDisabled  || $component.checkSecondaryBtnDisabled(user)" class="md-icon-button md-secondary md-raised md-warn md-hue-2 md-secondary" aria-label="secondary-btn">
             <md-icon class="material-icons">{{ $component.secondaryBtnIcon }}</md-icon>
             <md-tooltip md-direction="left">
                 {{ $component.secondaryBtnText }}

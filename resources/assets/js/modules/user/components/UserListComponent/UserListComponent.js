@@ -31,6 +31,9 @@ class Controller {
         this.primaryBtnDisabled = this.primaryBtnDisabled || false;
         this.secondaryBtnDisabled = this.secondaryBtnDisabled || false;
 
+        this.checkPrimaryBtnClick = this.checkPrimaryBtnClick || function(){ return false; };
+        this.checkSecondaryBtnClick = this.checkSecondaryBtnClick || function(){ return false; };
+
         this.primaryBtnIcon = this.primaryBtnIcon || 'touch_app';
         this.secondaryBtnIcon = this.secondaryBtnIcon || 'touch_app';
 
@@ -76,6 +79,10 @@ export let UserListComponent = {
 
         primaryBtnDisabled: '<',
         secondaryBtnDisabled: '<',
+
+
+        checkPrimaryBtnDisabled: '&',
+        checkSecondaryBtnDisabled: '&',
 
         primaryBtnIcon: '@',
         secondaryBtnIcon: '@',
