@@ -60,7 +60,7 @@ class Implantation extends Command
 
         $this->info('Utilize as seguintes credenciais para acessar (em modo teste):');
         $this->line('<comment>E-mail:</comment> admin@orpha.com.br');
-        $this->line('<comment>Senha:</comment> 123321');
+        $this->line('<comment>Senha:</comment> 123321123');
 
         if($this->confirm('Deseja executar o servidor?', true)){
             $this->call('serve');
