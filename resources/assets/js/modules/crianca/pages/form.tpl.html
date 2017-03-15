@@ -17,6 +17,13 @@
 
             <span flex></span>
 
+            <md-button class="md-icon-button" ng-disabled="$controller.loading || criancaForm.$invalid || criancaForm.$pending" ng-if="$controller.readOnly">
+                <md-icon class="material-icons">description</md-icon>
+                <md-tooltip md-direction="top">
+                    PIA
+                </md-tooltip>
+            </md-button>
+
             <md-menu ng-if="$controller.readOnly" >
                 <md-button class="md-icon-button" ng-disabled="$controller.loading" ng-click="$mdMenu.open($event)" ng-auth="['disable-crianca', 'active-crianca']">
                     <md-icon md-menu-origin class="material-icons">more_vert</md-icon>
@@ -26,7 +33,7 @@
                 </md-button>
                 <md-menu-content width="2">
                     <md-menu-item ng-show="$controller.crianca.deleted_at == null" ng-auth="'disable-crianca'" ng-click="$controller.disableCrianca()">
-                        <md-button ng-disabled="$controller.authService.getCurrentCrianca().id == $controller.crianca.id"><span md-menu-align-target>Desativar</span></md-button>
+                        <md-button><span md-menu-align-target>Desativar</span></md-button>
                     </md-menu-item>
                     <md-menu-item ng-show="$controller.crianca.deleted_at != null" ng-auth="'active-crianca'" ng-click="$controller.enableCrianca()">
                         <md-button ><span md-menu-align-target>Ativar</span></md-button>
