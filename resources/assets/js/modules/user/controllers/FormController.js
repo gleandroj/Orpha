@@ -56,6 +56,7 @@ export default class FormController {
     }
 
     save(){
+        if(!this.authService.getCurrentUser().hasPermission(['create-user', 'edit-user'])) return;
         if (this.user.id == '' || this.user.id == null) {
             this.submitUser();
         } else {
