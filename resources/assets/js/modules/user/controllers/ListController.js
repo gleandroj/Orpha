@@ -7,8 +7,8 @@ import UserDialogTemplate from './../pages/dialog.tpl.html';
 
 export default class ListController {
 
-    constructor(DialogService, OrphaUtilService, AuthService, UserService, ToastService, MessageService, LogService) {
-
+    constructor($state, DialogService, OrphaUtilService, AuthService, UserService, ToastService, MessageService, LogService) {
+        this.state = $state;
         this.authService = AuthService;
         this.util = OrphaUtilService;
         this.dialogService = DialogService;
@@ -36,37 +36,47 @@ export default class ListController {
     }
 
     showUser(user) {
-        this.showDialog(user, 'Visualizar Usuário', true)
+        /*this.showDialog(user, 'Visualizar Usuário', true)
             .then((newUser)=> {
                 this.util.extend(user, newUser);
                 if (this.authService.getCurrentUser().id === newUser.id) {
                     this.authService.setCurrentUser(newUser);
                 }
                 this.toastService.showSuccess(this.messageService.get('MSG7'));
-            }, () => {});
+            }, () => {});*/
+        if(this.authService.getCurrentUser().hasPermission('show-user')){
+            this.state.go('user.show', {id: user.id});
+        }
     }
 
     editUser(user) {
-        this.showDialog(user, 'Alterar Usuário', false)
+        /*this.showDialog(user, 'Alterar Usuário', false)
             .then((newUser)=> {
                 this.util.extend(user, newUser);
                 if (this.authService.getCurrentUser().id === newUser.id) {
                     this.authService.setCurrentUser(newUser);
                 }
                 this.toastService.showSuccess(this.messageService.get('MSG7'));
-            }, () => {});
+            }, () => {});*/
+        if(this.authService.getCurrentUser().hasPermission('edit-user')){
+            this.state.go('user.edit', {id: user.id});
+        }
     }
 
     createUser() {
-        this.showDialog({}, 'Inserir Usuário', false)
+        /*this.showDialog({}, 'Inserir Usuário', false)
             .then((newUser)=> {
                 console.log('teste');
                 this.users.push(newUser);
                 this.toastService.showSuccess(this.messageService.get('MSG5'));
-            }, () => {});
+            }, () => {});*/
+        if(this.authService.getCurrentUser().hasPermission('create-user')){
+            this.state.go('user.create');
+        }
     }
 
     disableUser(user) {
+        if(!this.authService.getCurrentUser().hasPermission('disable-user') || this.authService.getCurrentUser().id == user.id) return;
         this.userService.disable(user)
             .success((newUser)=> {
                 this.util.extend(user, newUser);
@@ -78,6 +88,7 @@ export default class ListController {
     }
 
     enableUser(user) {
+        if(!this.authService.getCurrentUser().hasPermission('active-user')) return;
         this.userService.enable(user)
             .success((newUser)=> {
                 this.util.extend(user, newUser);
@@ -94,6 +105,11 @@ export default class ListController {
         this.toastService.showError(error ? error['message'] : this.messageService.get('MSG4'));
     }
 
+    checkSecondaryBtnDisabled(user){
+        return this.authService.getCurrentUser().id == user.id;
+    }
+
+    /*
     showDialog(user, title, readOnly) {
         return this.dialogService.showCustomDialog({
             controller: UserDialogController,
@@ -105,6 +121,7 @@ export default class ListController {
             }
         });
     }
+    */
 }
 
-ListController.$inject = ['DialogService', 'OrphaUtilService', 'AuthService', 'UserService', 'ToastService', 'MessageService', 'LogService'];
+ListController.$inject = ['$state','DialogService', 'OrphaUtilService', 'AuthService', 'UserService', 'ToastService', 'MessageService', 'LogService'];
