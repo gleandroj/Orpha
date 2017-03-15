@@ -30,6 +30,9 @@ class CriancaServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->mapModuleRoutes();
+        Route::bind('crianca', function ($id){
+            return Crianca::withTrashed()->find($id);
+        });
     }
 
     /**
