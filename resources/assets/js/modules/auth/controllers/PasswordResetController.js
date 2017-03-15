@@ -1,15 +1,15 @@
 
 export default class PasswordResetController {
 
-    constructor(AuthService, ToastService, LogService, $state, token) {
+    constructor(AuthService, ToastService, LogService, $state, Token) {
         this.route = $state;
         this.auth = AuthService;
         this.toast = ToastService;
         this.log = LogService;
         this.loading = false;
         this.credentials = {
-            token: token.token,
-            email: token.email,
+            token: Token.token,
+            email: Token.email,
             password: '',
             password_confirmation: ''
         };
@@ -39,4 +39,4 @@ export default class PasswordResetController {
     }
 }
 
-PasswordResetController.$inject  = ['AuthService', 'ToastService', 'LogService', '$state', 'token'];
+PasswordResetController.$inject  = ['AuthService', 'ToastService', 'LogService', '$state', 'Token'];
