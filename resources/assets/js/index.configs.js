@@ -9,6 +9,7 @@ import RouteAppConfig from './config/RouteAppConfig';
 import DialogServiceConfig from './config/DialogServiceConfig';
 import ThemeConfig from './config/ThemeConfig';
 import DateConfig from './config/DateConfig';
+import ChartConfig from './config/ChartConfig';
 
 angular.module('orpha.config')
         .config(MessageServiceConfig)
@@ -18,3 +19,5 @@ angular.module('orpha.config')
         .config(DialogServiceConfig)
         .config(ThemeConfig)
         .config(DateConfig);
+
+ChartConfig(Chart);

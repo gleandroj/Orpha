@@ -10,6 +10,8 @@ import 'angular-messages';
 import 'angular-filter';
 import 'angular-material-expansion-panel';
 import 'ng-mask/dist/ngMask.js';
+import 'chart.js';
+import 'angular-chart.js';
 
 import 'angular-material/angular-material.css';
 import 'angular-material-expansion-panel/dist/md-expansion-panel.min.css';
@@ -34,6 +36,7 @@ angular.module('orpha.modules', [
     'ngMaterial',
     'ui.router',
     'ngMask',
+    'chart.js',
     AuthModule,
     OrphaModule,
     UserModule,
