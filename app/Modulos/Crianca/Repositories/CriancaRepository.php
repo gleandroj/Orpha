@@ -45,9 +45,12 @@ class CriancaRepository extends AbstractRepository implements CriancaRepositoryI
             return $crianca->idade;
         });
         $idades = $criancas->pluck('idade')->unique();
+
         $series = collect([]);$j = 0;
+
         $data = collect([]);
-        for ($i = 0 ; $i <= round(($idades->max() - $idades->min()) / 4) ; $i++){
+
+        for ($i = 0 ; $i < round(($idades->max() / 4), 0, PHP_ROUND_HALF_DOWN ) ; $i++){
             $min = ($i+$j);
             $max = ($i+($j+=4));
             $data->offsetSet($min.' a '.$max, $criancas->filter(function($value) use($min, $max){
@@ -55,9 +58,8 @@ class CriancaRepository extends AbstractRepository implements CriancaRepositoryI
             })->count());
         }
 
-
         return $data->filter(function ($count){
-            return $count > 0;
+            return $count >= 0;
         });
     }
 }
