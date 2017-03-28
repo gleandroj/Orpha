@@ -15,7 +15,7 @@ export default function AuthServiceConfig(AuthServiceProvider, $httpProvider) {
         "api_permissions_url": "api/auth/permissions",
         "api_user_url": "api/auth/current",
 
-        "redirect_route": "user.profile",
+        "redirect_route": "orpha.dashboard",
         "login_route": "auth.login"
     });
 
