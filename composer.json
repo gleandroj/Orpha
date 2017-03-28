@@ -10,7 +10,8 @@
         "paragonie/random_compat": "^1.4",
         "intervention/image": "^2.3",
         "laravel/passport": "^1.0",
-        "laravel/tinker": "^1.0"
+        "laravel/tinker": "^1.0",
+	"ext-gd": "*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
