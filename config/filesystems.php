@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'default' => 'local',
+    'default' => 's3',
 
     /*
     |--------------------------------------------------------------------------
@@ -56,10 +56,10 @@ return [
 
         's3' => [
             'driver' => 's3',
-            'key' => 'your-key',
-            'secret' => 'your-secret',
-            'region' => 'your-region',
-            'bucket' => 'your-bucket',
+            'key' => 'AKIAIITQSSY3YHAIFB3A',
+            'secret' => 'nDttlpSpP8OSjr25ZcY+2SkfStb4IIR0YrYYx6AV',
+            'region' => 'sa-east-1',
+            'bucket' => 'orpha-br',
         ],
 
     ],

@@ -43,7 +43,7 @@ class DialogService {
 
         dialog.options = this.util.extend({
             clickOutsideToClose: true,
-            fullscreen: true,
+            fullscreen: false,
             bindToController: true,
             hasBackdrop: true,
             multiple: this.showMultipleDialogs,

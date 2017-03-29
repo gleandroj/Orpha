@@ -14,6 +14,7 @@ use App\Modulos\User\Contracts\UserServiceInterface;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Intervention\Image\Facades\Image;
@@ -170,13 +171,13 @@ class UserService implements UserServiceInterface
      */
     private function uploadBase64Img($base64){
 
-        $image = Image::make($base64);
+        $image = Image::make($base64)->encode('jpg');
 
-        $file_name = '\images\profile\\'.$this->newGuid().'.jpg';
+        $file_name = 'images/profile/'.$this->newGuid().'.jpg';
 
-        $image->save(public_path().$file_name);
+        Storage::disk('s3')->put($file_name, $image->getEncoded(), 'public');
 
-        return $file_name;
+        return Storage::disk('s3')->url($file_name);
     }
 
     /**
