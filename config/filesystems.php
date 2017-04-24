@@ -56,10 +56,10 @@ return [
 
         's3' => [
             'driver' => 's3',
-            'key' => 'AKIAIITQSSY3YHAIFB3A',
-            'secret' => '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',
-            'region' => 'sa-east-1',
-            'bucket' => 'orpha-br',
+            'key' => env('S3_KEY'),
+            'secret' => env('S3_SECRET'),
+            'region' => env('S3_REGION'),
+            'bucket' => env('S3_BUCKET'),
         ],
 
     ],
