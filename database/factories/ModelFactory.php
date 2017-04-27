@@ -14,7 +14,27 @@
 
 use App\Modulos\Auth\Models\Permission;
 use App\Modulos\Crianca\Models\Crianca;
+use App\Modulos\Orpha\Models\Orfanato;
 use App\Modulos\User\Models\User;
+
+$factory->define(Orfanato::class, function (Faker\Generator $faker) {
+    return [
+        'nome' => $faker->unique()->catchPhrase,
+
+        'endereco' => $faker->address,
+        'cidade' => $faker->city,
+        'estado' => $faker->state,
+        'cep' => $faker->postcode,
+
+        'cnpj' => $faker->unique()->cnpj,
+        'telefone' => $faker->phoneNumber,
+        'email' => $faker->unique()->companyEmail,
+
+        'responsavel' => $faker->name,
+        'responsavel_email' => $faker->email,
+        'responsavel_telefone' => $faker->phoneNumber
+    ];
+});
 
 $factory->define(User::class, function (Faker\Generator $faker) {
     static $password;
