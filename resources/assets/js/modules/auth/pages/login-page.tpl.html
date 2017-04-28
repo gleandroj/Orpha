@@ -12,12 +12,12 @@
 
             <!--E-mail-->
             <text-input name="email" label="E-mail" ng-model="$ctrl.user.email" icon="person" type="email" is-required="true" is-disabled="$ctrl.loading">
-                <error-message name="required" message="{{ 'MSG2' | message }}"></error-message>
-                <error-message name="email" message="{{ 'MSG10' | message:{'attribute':'E-mail'} }}"></error-message>
+                <error-message error="required" message="{{ 'MSG2' | message }}"></error-message>
+                <error-message error="email" message="{{ 'MSG10' | message:{'attribute':'E-mail'} }}"></error-message>
             </text-input>
             <!--Senha-->
             <text-input name="password" label="Senha" ng-model="$ctrl.user.password" icon="lock" type="password" is-required="true" is-disabled="$ctrl.loading">
-                <error-message name="required" message="{{ 'MSG2' | message }}"></error-message>
+                <error-message error="required" message="{{ 'MSG2' | message }}"></error-message>
             </text-input>
             <!--Forget PW-->
             <md-button class="md-primary" ui-sref="auth.password">Esqueci minha senha</md-button>

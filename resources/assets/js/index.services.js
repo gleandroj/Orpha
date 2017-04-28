@@ -8,8 +8,7 @@ import StorageService from './services/StorageService';
 import MessageService from './services/MessageService';
 import { DialogServiceProvider } from './services/DialogService';
 import ToastService from './services/ToastService';
-import { CameraService, ImageHelperService } from './services/CameraService';
-import { SessionService, SessionEvents } from './services/SessionService';
+import { SessionService } from './services/SessionService';
 import { AuthServiceProvider } from './services/AuthService';
 
 angular.module('orpha.services')
@@ -19,7 +18,5 @@ angular.module('orpha.services')
     .service('MessageService', MessageService)
     .provider('DialogService', DialogServiceProvider)
     .service('ToastService', ToastService)
-    .service('CameraService', CameraService)
-    .service('ImageHelperService', ImageHelperService)
     .service('SessionService', SessionService)
     .provider('AuthService', AuthServiceProvider);

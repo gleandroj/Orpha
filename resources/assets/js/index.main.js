@@ -13,6 +13,7 @@ import 'ng-mask/dist/ngMask.js';
 import 'chart.js';
 import 'angular-chart.js';
 
+import 'angular-material-simple-components';
 import 'angular-material/angular-material.css';
 import 'angular-material-expansion-panel/dist/md-expansion-panel.min.css';
 //import './../css/animations.scss';
@@ -31,6 +32,7 @@ angular.module('orpha.components', ['ngMaterial', 'ngMessages', 'orpha.filters']
 angular.module('orpha.directives', ['ngMaterial', 'ngMessages']);
 
 angular.module('orpha.modules', [
+    'angular-material-simple-components',
     'material.components.expansionPanels',
     'angular.filter',
     'ngMaterial',
