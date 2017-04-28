@@ -19,7 +19,7 @@ use App\Modulos\User\Models\User;
 
 $factory->define(Orfanato::class, function (Faker\Generator $faker) {
     return [
-        'nome' => $faker->unique()->catchPhrase,
+        'nome' => $faker->unique()->name,
 
         'endereco' => $faker->address,
         'cidade' => $faker->city,
