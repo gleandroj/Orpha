@@ -71,27 +71,22 @@ class UserService implements UserServiceInterface
     {
         $data = collect($data);
 
-        if($data->has('avatar') && $data->get('avatar') != null){
-            $data['avatar'] = $this->uploadBase64Img($data['avatar']);
-        }
-
         $data->put('password', bcrypt($data['password']));
         $data->put('orfanato_id', $this->getCurrentUser()->orfanato_id);
 
-        $user = $this->userRepository->create($data->all());
+        if(!$user = $this->userRepository->create($data->except('avatar')->all()))
+            throw new \Exception(trans('messages.MSG4'));
 
-        if(!$user) throw new \Exception(trans('messages.MSG4'));
-        else{
-            $permissions = collect($data->get('permissions'));
+        if($data->has('avatar') && $data->get('avatar') != null)
+            $user->avatar = $this->uploadBase64Img($data['avatar'], 'users/avatars/'.$user->id);
 
-            $permissions = $permissions->map(function ($item, $key){
-                return $item['id'];
-            });
+        $permissions = collect($data->get('permissions'))->pluck('id');
 
-            $user->permissions()->sync(collect($permissions)->all());
+        $user->permissions()->sync(collect($permissions)->all());
 
-            return $user->fresh();
-        }
+        $user->save();
+
+        return $user->fresh();
     }
 
     /**
@@ -102,31 +97,25 @@ class UserService implements UserServiceInterface
      */
     public function update($id, array $data)
     {
-
         $data = collect($data);
+        $oldUser = $this->getById($id);
 
-        if($data->has('avatar') && $data->get('avatar') != null && $this->getById($id)->avatar != $data->get('avatar')){
-            $data['avatar'] = $this->uploadBase64Img($data['avatar']);
-        }
-
-        if($data->has('password')){
+        if($data->has('password'))
             $data['password'] = bcrypt($data['password']);
-        }
 
-        $user = $this->userRepository->update($id, $data->all());
+        if(!$user = $this->userRepository->update($id, $data->except('avatar')->all()))
+            throw new \Exception(trans('messages.MSG4'));
 
-        if(!$user) throw new \Exception(trans('messages.MSG4'));
-        else {
-            $permissions = collect($data->get('permissions'));
+        if($data->has('avatar') && $data->get('avatar') != null && $oldUser->avatar != $data->get('avatar'))
+            $user->avatar = $this->uploadBase64Img($data['avatar'], 'users/avatars/'.$id);
 
-            $permissions = $permissions->map(function ($item, $key){
-                return $item['id'];
-            });
+        $permissions = collect($data->get('permissions'))->pluck('id');
 
-            $user->permissions()->sync(collect($permissions)->all());
+        $user->permissions()->sync(collect($permissions)->all());
 
-            return $user->fresh();
-        }
+        $user->save();
+
+        return $user->fresh();
     }
 
     /**
@@ -142,7 +131,7 @@ class UserService implements UserServiceInterface
 
     /**
      * @param $id
-     * @return User
+     * @return User|\Illuminate\Database\Eloquent\Model
      * @throws \Exception
      */
     public function restore($id)
@@ -167,31 +156,17 @@ class UserService implements UserServiceInterface
 
     /**
      * @param $base64
+     * @param null $fileName
      * @return string
      */
-    private function uploadBase64Img($base64){
+    private function uploadBase64Img($base64, $fileName = null){
 
         $image = Image::make($base64)->encode('jpg');
 
-        $file_name = 'images/profile/'.$this->newGuid().'.jpg';
+        if($fileName == null) $fileName = 'images/'.$this->newGuid().'.jpg';
 
-        Storage::disk('s3')->put($file_name, $image->getEncoded(), 'public');
+        Storage::disk('s3')->put($fileName, $image->getEncoded(), 'public');
 
-        return Storage::disk('s3')->url($file_name);
+        return Storage::disk('s3')->url($fileName).'?timestamp='.round(microtime(true) * 1000);
     }
-
-    /**
-     * @return string
-     */
-    private function newGuid() {
-        $s = strtoupper(md5(uniqid(rand(),true)));
-        $guidText =
-            substr($s,0,8) . '-' .
-            substr($s,8,4) . '-' .
-            substr($s,12,4). '-' .
-            substr($s,16,4). '-' .
-            substr($s,20);
-        return $guidText;
-    }
-
 }
