@@ -41,6 +41,7 @@
                 on-crianca-click="$controller.showCrianca(crianca)"
                 on-primary-btn-click="$controller.editCrianca(crianca)"
                 on-secondary-btn-click="$controller.disableCrianca(crianca)"
+                on-pia-btn-click="$controller.state.go('crianca.pia', { id: crianca.id })"
 
                 search="$controller.search"
                 title="Crianças Ativos"

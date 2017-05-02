@@ -9,6 +9,9 @@ import ListTemplate from './../pages/list.tpl.html';
 import FormController from './../controllers/FormController';
 import FormTemplate from './../pages/form.tpl.html';
 
+import PiaController from './../controllers/PiaController';
+import PiaMenuTemplate from './../pages/pia.menu.tpl.html';
+
 import CriancaResolver from './../resolvers/CriancaResolve';
 
 RouteConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
@@ -69,4 +72,17 @@ export default function RouteConfig($stateProvider, $urlRouterProvider) {
             controllerAs: '$controller',
             template: FormTemplate
         })
+
+        .state('crianca.pia', {
+            url: '/:id/pia',
+            resolve: {
+                Crianca: CriancaResolver
+            },
+            data:{},
+            controller: PiaController,
+            controllerAs: '$controller',
+            template: PiaMenuTemplate
+        })
+
+
 }
