@@ -7,7 +7,6 @@ import Template from './user-permissions.tpl.html';
 class Controller {
 
     constructor(AuthService, DialogService, OrphaUtilService, $filter) {
-
         this.auth = AuthService;
         this.util = OrphaUtilService;
         this.dialog = DialogService;
@@ -16,7 +15,6 @@ class Controller {
     }
 
     $onInit() {
-        var self = this;
         this.model.$render = () => this.value = this.model.$viewValue || [];
         this.util.timeout(()=> this.initialize(), 1);
     }
@@ -45,7 +43,7 @@ class Controller {
         /*this.form[this.name].$validate();*/
     }
 
-    toggle ($panel) {
+    toggle($panel) {
         if($panel.isOpen()){
             $panel.collapse();
         }else
@@ -53,7 +51,7 @@ class Controller {
     }
 
     getPermissionBySlug (slug, array) {
-        var itens = this.filter('filter')(array, {slug:slug});
+        let itens = this.filter('filter')(array, {slug:slug});
         return itens[0] || null;
     }
 
@@ -62,15 +60,15 @@ class Controller {
     }
 
     isAllModuleSelected(module) {
-        var isOk = true;
-        var modulePermissions = this.getPermissionByModule(module, this.permissions);
+        let isOk = true;
+        let modulePermissions = this.getPermissionByModule(module, this.permissions);
         this.util.forEach(modulePermissions, (item) =>  isOk = (isOk && this.exists(item, this.getUserPermissions())));
         return isOk;
     }
 
     toggleAllPermissions(module) {
-        var modulePermissions = this.getPermissionByModule(module, this.permissions);
-        var userModulePermissions = this.getPermissionByModule(module, this.getUserPermissions());
+        let modulePermissions = this.getPermissionByModule(module, this.permissions);
+        let userModulePermissions = this.getPermissionByModule(module, this.getUserPermissions());
         if(userModulePermissions.length === modulePermissions.length){
             this.util.forEach(modulePermissions, (item) =>  this.remove(item));
         }else{
@@ -89,18 +87,18 @@ class Controller {
     }
 
     exists(item) {
-        return this.getPermissionBySlug(item['slug'], this.getUserPermissions()) != null;
+        return this.getPermissionBySlug(item['slug'], this.getUserPermissions()) !== null;
     }
 
     add(item) {
-        var idx = this.getUserPermissions().indexOf(this.getPermissionBySlug(item['slug'], this.getUserPermissions()));
+        let idx = this.getUserPermissions().indexOf(this.getPermissionBySlug(item['slug'], this.getUserPermissions()));
         if (!(idx > -1)){
             this.getUserPermissions().push(item);
         }
     }
 
     remove(item) {
-        var idx = this.getUserPermissions().indexOf(this.getPermissionBySlug(item['slug'], this.getUserPermissions()));
+        let idx = this.getUserPermissions().indexOf(this.getPermissionBySlug(item['slug'], this.getUserPermissions()));
         if (idx > -1) {
             this.getUserPermissions().splice(idx, 1);
         }
