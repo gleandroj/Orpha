@@ -16,18 +16,21 @@
         </div>
     </md-toolbar>
 
+    <md-progress-linear md-mode="indeterminate" class="md-accent" ng-show="$controller.loading"></md-progress-linear>
+
     <md-card-content layout-padding layout-margin>
 
         <search-input label="Pesquisar" ng-model="$controller.search" max-length="50"></search-input>
 
-        <div ng-show="$controller.loading" layout="row" layout-sm="column" layout-align="center center">
+        <!--<div ng-show="$controller.loading" layout="row" layout-sm="column" layout-align="center center">
             <md-progress-circular md-indetermied class="md-accent" md-diameter="96"></md-progress-circular>
-        </div>
+        </div>-->
 
-        <md-checkbox ng-hide="$controller.loading" ng-model="showInactive">Mostrar inativos</md-checkbox>
+        <md-checkbox ng-model="showInactive">Mostrar inativos</md-checkbox>
 
         <crianca-list
-                ng-show="!$controller.loading"
+
+                is-disabled="$controller.loading"
 
                 primary-btn-text="Editar Criança"
                 secondary-btn-text="Desativar Criança"
@@ -41,15 +44,17 @@
                 on-crianca-click="$controller.showCrianca(crianca)"
                 on-primary-btn-click="$controller.editCrianca(crianca)"
                 on-secondary-btn-click="$controller.disableCrianca(crianca)"
-                on-pia-btn-click="$controller.state.go('crianca.pia', { id: crianca.id })"
+                on-pia-btn-click="$controller.showPia(crianca)"
 
                 search="$controller.search"
-                title="Crianças Ativos"
+                title="Crianças Ativas"
                 criancas="$controller.criancas"
                 filter="{deleted_at: '!'}"></crianca-list>
 
         <crianca-list
-                ng-show="showInactive && !$controller.loading"
+                ng-show="showInactive"
+
+                is-disabled="$controller.loading"
 
                 show-primary-btn="$controller.authService.getCurrentUser().hasPermission('active-crianca')"
                 show-secondary-btn="'false'"
@@ -64,7 +69,7 @@
                 background-color="'default-warn-200-0.5'"
 
                 search="$controller.search"
-                title="Crianças Inativos"
+                title="Crianças Inativas"
                 criancas="$controller.criancas"
                 filter="{deleted_at: '!!'}"></crianca-list>
 

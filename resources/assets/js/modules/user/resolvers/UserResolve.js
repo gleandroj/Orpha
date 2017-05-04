@@ -11,7 +11,7 @@ export default function UserResolve(UserService, OrphaUtilService, LogService, $
         .success((user) => { deferred.resolve(user) })
         .error((error) => {
             $state.go('user.list');
-            LogService.error(error['message']);
+            deferred.reject(error);
         });
 
     return deferred.promise;

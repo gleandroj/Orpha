@@ -8,7 +8,7 @@ export default function CriancaResolve(CriancaService, OrphaUtilService, LogServ
         .success((crianca) => { deferred.resolve(crianca) })
         .error((error) => {
             $state.go('crianca.list');
-            LogService.error(error['message']);
+            deferred.reject(error);
         });
 
     return deferred.promise;
