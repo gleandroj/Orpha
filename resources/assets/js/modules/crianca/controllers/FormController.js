@@ -44,7 +44,7 @@ export default class FormController {
     }
 
     cancel() {
-        if (this.crianca.id == '' || this.crianca.id == null) {
+        if (this.crianca.id === '' || this.crianca.id === null) {
             this.state.go('crianca.list');
         } else {
             this.readOnly = true;
@@ -57,7 +57,7 @@ export default class FormController {
 
     save(){
         if(!this.authService.getCurrentUser().hasPermission(['create-crianca', 'edit-crianca'])) return;
-        if (this.crianca.id == '' || this.crianca.id == null) {
+        if (this.crianca.id === '' || this.crianca.id === null) {
             this.submitCrianca();
         } else {
             this.showConfirmation(()=>{
@@ -85,6 +85,13 @@ export default class FormController {
                 else
                     this.toastService.showError(err ? err['message'] : this.messageService.get('MSG4'));
             });
+    }
+
+    showPia(){
+        if(this.authService.getCurrentUser().hasPermission('show-crianca')){ // need validate the correct permission
+            this.loading = true;
+            this.state.go('crianca.pia', {id: this.crianca.id}).then(()=>{}, (error) => this.showError(error));
+        }
     }
 
     disableCrianca(){

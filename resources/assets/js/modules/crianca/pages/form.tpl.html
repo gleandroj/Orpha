@@ -17,7 +17,7 @@
 
             <span flex></span>
 
-            <md-button class="md-icon-button" ng-click="$controller.state.go('crianca.pia', { id: crianca.id })" ng-disabled="$controller.loading || criancaForm.$invalid || criancaForm.$pending" ng-if="$controller.readOnly">
+            <md-button class="md-icon-button" ng-click="$controller.showPia()" ng-disabled="$controller.loading || criancaForm.$invalid || criancaForm.$pending" ng-if="$controller.readOnly">
                 <md-icon class="material-icons">description</md-icon>
                 <md-tooltip md-direction="top">
                     PIA
