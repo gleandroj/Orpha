@@ -90,7 +90,7 @@ export default class FormController {
     showPia(){
         if(this.authService.getCurrentUser().hasPermission('show-crianca')){ // need validate the correct permission
             this.loading = true;
-            this.state.go('crianca.pia', {id: this.crianca.id}).then(()=>{}, (error) => this.showError(error));
+            this.state.go('crianca.pia.menu', {id: this.crianca.id}).then(()=>{}, (error) => this.showError(error));
         }
     }
 

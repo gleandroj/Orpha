@@ -1,5 +1,5 @@
 
-export default class PiaController{
+export default class PiaMenuController{
 
     constructor($state, $scope, DialogService, OrphaUtilService, AuthService, CriancaService, ToastService, MessageService, LogService, Crianca) {
         this.state = $state;
@@ -15,19 +15,19 @@ export default class PiaController{
         this.menus = [
             {
                 title: 'Dados e Necessidades',
-                state: 'crianca.pia({id:'+this.crianca.id+'})'
+                state: 'crianca.pia.menu({id:'+this.crianca.id+'})'
             },
             {
                 title: 'Atividades Socioeducativas',
-                state: 'crianca.pia({id:'+this.crianca.id+'})'
+                state: 'crianca.pia.menu({id:'+this.crianca.id+'})'
             },
             {
                 title: 'Informações da Família',
-                state: 'crianca.pia({id:'+this.crianca.id+'})'
+                state: 'crianca.pia.menu({id:'+this.crianca.id+'})'
             }
         ];
     }
 }
 
 
-PiaController.$inject = ['$state', '$scope', 'DialogService', 'OrphaUtilService', 'AuthService', 'CriancaService', 'ToastService', 'MessageService', 'LogService', 'Crianca'];
+PiaMenuController.$inject = ['$state', '$scope', 'DialogService', 'OrphaUtilService', 'AuthService', 'CriancaService', 'ToastService', 'MessageService', 'LogService', 'Crianca'];

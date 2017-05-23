@@ -23,6 +23,7 @@ import AuthModule from './modules/auth/auth.module';
 import OrphaModule from './modules/orpha/orpha.module';
 import UserModule from './modules/user/user.module';
 import CriancaModule from './modules/crianca/crianca.module';
+import PiaModule from './modules/pia/pia.module';
 
 angular.module('orpha.run', ['ngMaterial', 'ui.router']);
 angular.module('orpha.config', ['ngMaterial', 'ui.router']);
@@ -42,7 +43,8 @@ angular.module('orpha.modules', [
     AuthModule,
     OrphaModule,
     UserModule,
-    CriancaModule
+    CriancaModule,
+    PiaModule
 ]);
 
 angular.module('orpha', [
