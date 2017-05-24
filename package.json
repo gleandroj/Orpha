@@ -24,6 +24,7 @@
     "angular-resource": "^1.6.0",
     "angular-ui-router": "^0.4.2",
     "chart.js": "^2.5.0",
+    "md-steppers": "^0.3.4",
     "moment": "^2.15.1",
     "ngMask": "https://github.com/candreoliveira/ngMask.git"
   }
