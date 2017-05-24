@@ -15,7 +15,7 @@ export default class PiaMenuController{
         this.menus = [
             {
                 title: 'Dados e Necessidades',
-                state: 'crianca.pia.menu({id:'+this.crianca.id+'})'
+                state: 'crianca.pia.dadosenecessidades({id:'+this.crianca.id+'})'
             },
             {
                 title: 'Atividades Socioeducativas',
