@@ -71,7 +71,7 @@ export default class FormController {
         this.criancaService.save(this.crianca)
             .success((newCrianca) => {
 
-                this.toastService.showSuccess(this.messageService.get(this.crianca.id == '' || this.crianca.id == null ? 'MSG5' : 'MSG7'));
+                this.toastService.showSuccess(this.messageService.get(this.crianca.id === '' || this.crianca.id === null ? 'MSG5' : 'MSG7'));
 
                 this.loading = false;
                 this.originalCrianca = this.util.copy(newCrianca);

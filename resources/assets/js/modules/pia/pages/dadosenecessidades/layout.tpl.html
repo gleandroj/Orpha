@@ -1,4 +1,4 @@
-<md-card md-whiteframe="7" ng-cloak layout="column">
+<md-card md-whiteframe="7" layout="column">
 
     <md-toolbar>
         <div class="md-toolbar-tools" layout="row">
@@ -15,27 +15,9 @@
             <span flex></span>
         </div>
     </md-toolbar>
-
-    <md-steppers md-stretch-steppers="always" md-dynamic-height>                                                                  ">
-        <md-step label="Doc. Apresentada" flex="100">
-            <md-content layout="column" flex="100">
-                <md-divider></md-divider>
-                <h1>
-                    Content Step 1
-                </h1>
-                <span flex></span>
-                <md-divider></md-divider>
-                <div layout="row" layout-align="end center">
-
-                    <md-button type="submit" class="md-accent md-raised" >
-                        Proximo
-                    </md-button>
-                    <md-button class="md-warn">
-                        Cancelar
-                    </md-button>
-
-                </div>
-            </md-content>
+    <md-steppers md-stretch-steppers="always" md-dynamic-height ng-cloak>
+        <md-step label="Doc. Apresentada">
+            <md-content layout="column" ui-view="documentacao"></md-content>
         </md-step>
         <md-step label="Nec. de atendimento" >
             <md-content>
