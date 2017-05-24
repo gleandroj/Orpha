@@ -16,13 +16,15 @@
         </div>
     </md-toolbar>
 
+    <md-progress-linear md-mode="indeterminate" class="md-accent" ng-show="$controller.loading"></md-progress-linear>
+
     <md-card-content layout-padding layout-margin layout="row" layout-align="center center">
 
             <md-list flex-gt-lg="60" flex-gt-md="70" flex-gt-sm="80" flex-xs="100" md-whiteframe="4">
                 <md-subheader>
                     Módulo 01
                 </md-subheader>
-                <md-list-item ng-repeat="menu in $controller.menus" ng-click="d();" ui-sref="{{menu.state}}" ui-sref-opts="{reload: true}" ui-sref-active="active" > <!--ng-auth="menu.permission" ui-sref="{{menu.state}}" ui-sref-active="active" -->
+                <md-list-item ng-repeat="menu in $controller.menus" ng-click="$controller.navigateTo(menu.state)"  ui-sref-active="active" > <!--ng-auth="menu.permission" ui-sref="{{menu.state}}" ui-sref-active="active" -->
                     <p style="text-align: center;">{{menu.title}}</p>
                 </md-list-item>
             </md-list>

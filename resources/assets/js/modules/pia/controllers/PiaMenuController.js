@@ -15,17 +15,28 @@ export default class PiaMenuController{
         this.menus = [
             {
                 title: 'Dados e Necessidades',
-                state: 'crianca.pia.dadosenecessidades({id:'+this.crianca.id+'})'
+                state: 'crianca.pia.dadosenecessidades'
             },
             {
                 title: 'Atividades Socioeducativas',
-                state: 'crianca.pia.menu({id:'+this.crianca.id+'})'
+                state: 'crianca.pia.menu'
             },
             {
                 title: 'Informações da Família',
-                state: 'crianca.pia.menu({id:'+this.crianca.id+'})'
+                state: 'crianca.pia.menu'
             }
         ];
+    }
+
+    navigateTo(state){
+        this.loading = true;
+        this.state.go(state, {id: this.crianca.id }).then(()=>{}, (error) => this.showError(error));
+    }
+
+    showError(error){
+        this.loading = false;
+        this.logService.error(error ? error.error  +": "+error['message'] : this.messageService.get('MSG4'));
+        this.toastService.showError(error ? error['message'] : this.messageService.get('MSG4'));
     }
 }
 

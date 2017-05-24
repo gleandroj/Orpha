@@ -1,12 +1,20 @@
-
+/*
 import PiaController from './../controllers/PiaController';
-import PiaTemplate from './../pages/layout.tpl.html';
+import PiaLayoutTemplate from './../pages/pia.layout.tpl.html';
+*/
 
 import PiaMenuController from './../controllers/PiaMenuController';
 import PiaMenuTemplate from './../pages/pia.menu.tpl.html';
 
 import DadosNecessidadesController from './../controllers/DadosNecessidadesController';
-import DadosNecessidadesTemplate from './../pages/pia.dadosenecessidades.tpl.html';
+import DadosNecessidadesTemplate from './../pages/dadosenecessidades/layout.tpl.html';
+
+import DocumentacaoTemplate from './../pages/dadosenecessidades/documentacaoapresentada.tpl.html';
+import NecessidadesTemplate from './../pages/dadosenecessidades/necessidadedeatendimento.tpl.html';
+import RedeApoioTemplate from './../pages/dadosenecessidades/rededeapoio.tpl.html';
+import AtividadesTemplate from './../pages/dadosenecessidades/atividadequerealizava.tpl.html';
+import TratamentosTemplate from './../pages/dadosenecessidades/tratamentosexternos.tpl.html';
+import ReligiosidadeTemplate from './../pages/dadosenecessidades/religiosidade.tpl.html';
 
 import CriancaResolver from './../../crianca/resolvers/CriancaResolve';
 
@@ -18,10 +26,7 @@ export default function RouteConfig($stateProvider, $urlRouterProvider) {
         .state('crianca.pia', {
             abstract:true,
             url: '/:id/pia',
-            data:{},
-            controller: PiaController,
-            controllerAs: '$controller',
-            template: PiaTemplate
+            template: '<ui-view ng-cloak/>'
         })
         .state('crianca.pia.menu', {
             url: '/menu',
@@ -35,14 +40,22 @@ export default function RouteConfig($stateProvider, $urlRouterProvider) {
         })
         .state('crianca.pia.dadosenecessidades', {
             url: '/dadosenecessidades',
-            resolve: {
-                Crianca: CriancaResolver
+            views:{
+                '':{
+                    controller: DadosNecessidadesController,
+                    controllerAs: '$controller',
+                    resolve: {
+                        Crianca: CriancaResolver
+                    },
+                     template: DadosNecessidadesTemplate
+                 },
+                'documentacao@crianca.pia.dadosenecessidades':{ template: DocumentacaoTemplate },
+                'necessidades@crianca.pia.dadosenecessidades':{ template: NecessidadesTemplate },
+                'rededeapoio@crianca.pia.dadosenecessidades':{ template: RedeApoioTemplate },
+                'atividades@crianca.pia.dadosenecessidades':{ template: AtividadesTemplate },
+                'tratamentos@crianca.pia.dadosenecessidades':{ template: TratamentosTemplate },
+                'religiosidade@crianca.pia.dadosenecessidades':{ template: ReligiosidadeTemplate },
             },
-            data:{},
-            controller: DadosNecessidadesController,
-            controllerAs: '$controller',
-            template: DadosNecessidadesTemplate
+            data:{}
         })
-
-
 }
