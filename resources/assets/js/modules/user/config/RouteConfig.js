@@ -1,7 +1,3 @@
-
-import UserController from './../controllers/UserController';
-import LayoutTemplate from './../pages/layout.tpl.html';
-
 import ListController from './../controllers/ListController';
 import ListTemplate from './../pages/list.tpl.html';
 
@@ -22,9 +18,7 @@ export default function RouteConfig($stateProvider, $urlRouterProvider) {
             parent:'orpha',
             abstract: true,
             url: '/user',
-            controller: UserController,
-            controllerAs: '$controller',
-            template: LayoutTemplate
+            template: '<ui-view/>'
         })
         .state('user.profile', {
             url: '/profile',

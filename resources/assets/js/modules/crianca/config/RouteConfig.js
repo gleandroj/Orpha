@@ -1,10 +1,5 @@
-
-import CriancaController from './../controllers/CriancaController';
-import LayoutTemplate from './../pages/layout.tpl.html';
-
 import ListController from './../controllers/ListController';
 import ListTemplate from './../pages/list.tpl.html';
-
 
 import FormController from './../controllers/FormController';
 import FormTemplate from './../pages/form.tpl.html';
@@ -20,9 +15,7 @@ export default function RouteConfig($stateProvider, $urlRouterProvider) {
             parent:'orpha',
             abstract: true,
             url: '/crianca',
-            controller: CriancaController,
-            controllerAs: '$controller',
-            template: LayoutTemplate
+            template: '<ui-view/>'
         })
         .state('crianca.list', {
             url: '/list',
