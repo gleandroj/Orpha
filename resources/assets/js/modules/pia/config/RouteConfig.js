@@ -26,7 +26,7 @@ export default function RouteConfig($stateProvider, $urlRouterProvider) {
         .state('crianca.pia', {
             abstract:true,
             url: '/:id/pia',
-            template: '<ui-view ng-cloak/>'
+            template: '<ui-view/>'
         })
         .state('crianca.pia.menu', {
             url: '/menu',

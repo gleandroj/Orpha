@@ -8,16 +8,16 @@ import 'angular-material';
 import 'angular-ui-router';
 import 'angular-messages';
 import 'angular-filter';
+import 'md-steppers';
 import 'angular-material-expansion-panel';
 import 'ng-mask/dist/ngMask.js';
 import 'chart.js';
 import 'angular-chart.js';
-import 'md-steppers';
 
-import 'angular-material-simple-components';
-import 'angular-material/angular-material.css';
-import 'angular-material-expansion-panel/dist/md-expansion-panel.min.css';
 import 'md-steppers/dist/md-steppers.min.css';
+import 'angular-material/angular-material.css';
+import 'angular-material-simple-components';
+import 'angular-material-expansion-panel/dist/md-expansion-panel.min.css';
 
 //import './../css/animations.scss';
 import './../css/style.scss';
@@ -36,14 +36,14 @@ angular.module('orpha.components', ['ngMaterial', 'ngMessages', 'orpha.filters']
 angular.module('orpha.directives', ['ngMaterial', 'ngMessages']);
 
 angular.module('orpha.modules', [
-    'angular-material-simple-components',
-    'material.components.expansionPanels',
-    'angular.filter',
     'ngMaterial',
     'ui.router',
+    'angular-material-simple-components',
+    'material.components.expansionPanels',
+    'md-steppers',
     'ngMask',
     'chart.js',
-    'md-steppers',
+    'angular.filter',
     AuthModule,
     OrphaModule,
     UserModule,

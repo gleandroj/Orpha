@@ -18,7 +18,7 @@
 
     <md-progress-linear md-mode="indeterminate" class="md-accent" ng-show="$controller.loading"></md-progress-linear>
 
-    <md-content ng-cloak>
+    <md-content>
         <md-steppers md-stretch-steppers="always" md-dynamic-height md-selected="$controller.selected" md-busy-text="'Carregando...'" md-busy="$controller.loading" ng-disabled="$controller.loading">
             <md-step label="Doc. Apresentada" md-complete="$controller.dadosenecessidades.documentacao_completado">
                 <md-divider></md-divider>
@@ -50,7 +50,7 @@
         <md-divider></md-divider>
         <div layout="row" layout-align="end center" ng-if="!$controller.readOnly">
             <md-button type="submit" class="md-accent md-raised" ng-click="$controller.saveAndNext()" ng-disabled="$controller.loading || !$controller.canSaveAndNext()">
-                {{ $controller.selected <= 4 ? 'Salvar e Continuar' : 'Salvar' }}
+                {{ $controller.selected < 5 ? 'Salvar e Continuar' : 'Salvar' }}
             </md-button>
             <md-button class="md-warn" ng-click="$controller.finish()" ng-disabled="$controller.loading">
                 {{ $controller.selected == 0 ? 'Voltar' : 'Finalizar' }}
