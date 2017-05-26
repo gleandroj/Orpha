@@ -37,7 +37,7 @@ export function AuthServiceProvider() {
 
 class AuthUser{
     hasPermission(permissions) {
-        if (this.permissions !== null && this.permissions.length > 0) {
+        if (this.permissions != null && this.permissions.length > 0) {
             permissions = permissions === null ? [] : permissions;
 
             let roles = this.permissions;
