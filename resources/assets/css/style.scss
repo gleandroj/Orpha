@@ -147,6 +147,33 @@ md-select.md-page-select > .md-select-value {
   counter-reset: md-step;
 }
 
+/* Radio group */
+.orpha-radio-label{
+  color: rgba(0,0,0,0.38);
+  min-width: 200px;
+  position: relative;
+}
+
+md-radio-group[aria-required]:last-child + .orpha-radio-label{
+  background-color: red !important;
+}
+
+.orpha-radio-label::after{
+  font-size: 16px;
+  vertical-align: top;
+  content: ':';
+}
+
+.orpha-radio-group{
+  padding-left: 48px !important;
+  margin: 18px 0 !important;
+  min-width: 200px !important;
+
+}
+.orpha-radio-group > md-radio-group{
+  margin-left: 5px !important;
+}
+
 /* md-tabs */
 .stepper > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper > md-ink-bar {
   background-color: transparent !important;

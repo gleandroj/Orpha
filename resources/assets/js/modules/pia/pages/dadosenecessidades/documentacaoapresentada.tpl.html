@@ -1,9 +1,15 @@
 <ng-form name="form" ng-init="$controller.pushScope(this)">
     <md-content layout="column" layout-padding>
 
-        <div layout="row" style="padding-left: 48px; margin: 18px 0; min-width: 200px;">
-            <span class="md-subhead" style="color: rgba(0,0,0,0.38);">Certidão de Nascimento<span style="font-size: 13px; vertical-align: top;">* </span>: </span>
-            <md-radio-group ng-init="$controller.dadosenecessidades.documentacao_certidao_nascimento = $controller.dadosenecessidades.documentacao_historico_escolar || false" ng-model="$controller.dadosenecessidades.documentacao_certidao_nascimento" ng-required="true" style="margin-left: 5px;" ng-disabled="$controller.readOnly" layout="row">
+        <div layout="row" class="orpha-radio-group">
+            <div class="orpha-radio-label">
+                <span class="md-subhead">Certidão de Nascimento</span>
+            </div>
+            <md-radio-group
+                    ng-init="$controller.dadosenecessidades.documentacao_certidao_nascimento = $controller.dadosenecessidades.documentacao_historico_escolar || false"
+                    ng-model="$controller.dadosenecessidades.documentacao_certidao_nascimento"
+                    ng-required="true"
+                    ng-disabled="$controller.readOnly" layout="row">
                 <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
                 <md-radio-button ng-value="false">Não</md-radio-button>
             </md-radio-group>
@@ -27,17 +33,26 @@
         <text-input max-length="10" name="reservista" label="Nº Certificado de Reservista" is-disabled="$controller.readOnly" ng-model="$controller.dadosenecessidades.documentacao_reservista">
         </text-input>
 
-        <div layout="row" style="padding-left: 48px; margin: 18px 0;">
-            <span class="md-subhead" style="color: rgba(0,0,0,0.38); min-width: 200px;">Histórico Escolar<span style="font-size: 13px; vertical-align: top;">* </span>:  </span>
-            <md-radio-group ng-init="$controller.dadosenecessidades.documentacao_historico_escolar = $controller.dadosenecessidades.documentacao_historico_escolar || false" ng-model="$controller.dadosenecessidades.documentacao_historico_escolar" ng-required="true"  style="margin-left: 5px;" ng-disabled="$controller.readOnly" layout="row">
+        <div layout="row" class="orpha-radio-group">
+            <span class="md-subhead orpha-radio-label">Histórico Escolar</span>
+            <md-radio-group
+                    ng-init="$controller.dadosenecessidades.documentacao_historico_escolar = $controller.dadosenecessidades.documentacao_historico_escolar || false"
+                    ng-model="$controller.dadosenecessidades.documentacao_historico_escolar"
+                    ng-required="true"
+                    ng-disabled="$controller.readOnly" layout="row">
                 <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
                 <md-radio-button ng-value="false">Não</md-radio-button>
             </md-radio-group>
         </div>
 
-        <div layout="row" style="padding-left: 48px; margin: 18px 0;">
-            <span class="md-subhead" style="color: rgba(0,0,0,0.38); min-width: 200px;">Declaração Escolar<span style="font-size: 13px; vertical-align: top;">* </span>: </span>
-            <md-radio-group ng-init="$controller.dadosenecessidades.documentacao_declaracao_escolar = $controller.dadosenecessidades.documentacao_declaracao_escolar || false" ng-model="$controller.dadosenecessidades.documentacao_declaracao_escolar" ng-required="true"  style="margin-left: 5px;" ng-disabled="$controller.readOnly" layout="row">
+        <div layout="row" class="orpha-radio-group">
+            <span class="md-subhead orpha-radio-label">Declaração Escolar</span>
+            <md-radio-group
+                    ng-init="$controller.dadosenecessidades.documentacao_declaracao_escolar = $controller.dadosenecessidades.documentacao_declaracao_escolar || false"
+                    ng-model="$controller.dadosenecessidades.documentacao_declaracao_escolar"
+                    ng-required="true"
+                    ng-disabled="$controller.readOnly"
+                    layout="row">
                 <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
                 <md-radio-button ng-value="false">Não</md-radio-button>
             </md-radio-group>
