@@ -8,13 +8,13 @@ import 'angular-material';
 import 'angular-ui-router';
 import 'angular-messages';
 import 'angular-filter';
-import 'md-steppers';
+/*import 'md-steppers';*/
 import 'angular-material-expansion-panel';
 import 'ng-mask/dist/ngMask.js';
 import 'chart.js';
 import 'angular-chart.js';
 
-import 'md-steppers/dist/md-steppers.min.css';
+/*import 'md-steppers/dist/md-steppers.min.css';*/
 import 'angular-material/angular-material.css';
 import 'angular-material-simple-components';
 import 'angular-material-expansion-panel/dist/md-expansion-panel.min.css';
@@ -40,7 +40,7 @@ angular.module('orpha.modules', [
     'ui.router',
     'angular-material-simple-components',
     'material.components.expansionPanels',
-    'md-steppers',
+    /*'md-steppers',*/
     'ngMask',
     'chart.js',
     'angular.filter',

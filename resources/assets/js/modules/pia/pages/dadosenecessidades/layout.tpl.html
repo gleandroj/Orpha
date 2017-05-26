@@ -1,4 +1,4 @@
-<md-card md-whiteframe="7" layout="column">
+<md-card md-whiteframe="7" layout="column" ng-cloak>
 
     <md-toolbar>
         <div class="md-toolbar-tools" layout="row">
@@ -19,32 +19,72 @@
     <md-progress-linear md-mode="indeterminate" class="md-accent" ng-show="$controller.loading"></md-progress-linear>
 
     <md-content>
-        <md-steppers md-stretch-steppers="always" md-dynamic-height md-selected="$controller.selected" md-busy-text="'Carregando...'" md-busy="$controller.loading" ng-disabled="$controller.loading">
-            <md-step label="Doc. Apresentada" md-complete="$controller.dadosenecessidades.documentacao_completado">
-                <md-divider></md-divider>
-                <md-content layout="column" ui-view="documentacao"></md-content>
-            </md-step>
-            <md-step label="Nec. de atendimento" md-complete="$controller.dadosenecessidades.necessidades_completado" ng-disabled="!$controller.dadosenecessidades.documentacao_completado">
-                <md-divider></md-divider>
-                <md-content layout="column" ui-view="necessidades"></md-content>
-            </md-step>
-            <md-step label="Rede de Apoio" md-complete="$controller.dadosenecessidades.rededeapoio_completado" ng-disabled="!$controller.dadosenecessidades.necessidades_completado">
-                <md-divider></md-divider>
-                <md-content layout="column" ui-view="rededeapoio"></md-content>
-            </md-step>
-            <md-step label="Ativ. que Realizava" md-complete="$controller.dadosenecessidades.atividades_completado" ng-disabled="!$controller.dadosenecessidades.rededeapoio_completado">
-                <md-divider></md-divider>
-                <md-content layout="column" ui-view="atividades"></md-content>
-            </md-step>
-            <md-step label="Trat. Externos" md-complete="$controller.dadosenecessidades.tratamentos_completado" ng-disabled="!$controller.dadosenecessidades.atividades_completado">
-                <md-divider></md-divider>
-                <md-content layout="column" ui-view="tratamentos"></md-content>
-            </md-step>
-            <md-step label="Religiosidade"md-complete="$controller.dadosenecessidades.religiosidade_completado" ng-disabled="!$controller.dadosenecessidades.tratamentos_completado">
-                <md-divider></md-divider>
-                <md-content layout="column" ui-view="religiosidade"></md-content>
-            </md-step>
-        </md-steppers>
+
+        <md-tabs class="stepper" md-dynamic-height md-border-bottom md-selected="$controller.selected">
+            <md-tab>
+                <md-tab-label>
+                    <md-step ng-class="{'md-complete':$controller.dadosenecessidades.documentacao_completado}"> Doc. Apresentada </md-step>
+                </md-tab-label>
+                <md-tab-body>
+                    <md-divider></md-divider>
+                    <md-content layout="column" ui-view="documentacao"></md-content>
+                </md-tab-body>
+            </md-tab>
+            <md-tab ng-disabled="!$controller.dadosenecessidades.documentacao_completado">
+                <md-tab-label>
+                    <md-step ng-class="{'md-complete':$controller.dadosenecessidades.necessidades_completado}"> Nec. de atendimento </md-step>
+                </md-tab-label>
+                <md-tab-body>
+                    <md-divider></md-divider>
+                    <md-content layout="column" ui-view="necessidades"></md-content>
+                </md-tab-body>
+            </md-tab>
+            <md-tab ng-disabled="!$controller.dadosenecessidades.necessidades_completado">
+                <md-tab-label>
+                    <md-step ng-class="{'md-complete':$controller.dadosenecessidades.rededeapoio_completado}"> Rede de Apoio </md-step>
+                </md-tab-label>
+                <md-tab-body>
+                    <md-divider></md-divider>
+                    <md-content layout="column" ui-view="rededeapoio"></md-content>
+                </md-tab-body>
+            </md-tab>
+            <md-tab ng-disabled="!$controller.dadosenecessidades.rededeapoio_completado">
+                <md-tab-label>
+                    <md-step ng-class="{'md-complete':$controller.dadosenecessidades.atividades_completado}"> Ativ. que Realizava </md-step>
+                </md-tab-label>
+                <md-tab-body>
+                    <md-divider></md-divider>
+                    <md-content layout="column" ui-view="atividades"></md-content>
+                </md-tab-body>
+            </md-tab>
+            <md-tab ng-disabled="!$controller.dadosenecessidades.atividades_completado">
+                <md-tab-label>
+                    <md-step ng-class="{'md-complete':$controller.dadosenecessidades.tratamentos_completado}" > Trat. Externos </md-step>
+                </md-tab-label>
+                <md-tab-body>
+                    <md-divider></md-divider>
+                    <md-content layout="column" ui-view="tratamentos"></md-content>
+                </md-tab-body>
+            </md-tab>
+            <md-tab ng-disabled="!$controller.dadosenecessidades.tratamentos_completado">
+                <md-tab-label>
+                    <md-step ng-class="{'md-complete':$controller.dadosenecessidades.religiosidade_completado}" > Religiosidade </md-step>
+                </md-tab-label>
+                <md-tab-body>
+                    <md-divider></md-divider>
+                    <md-content layout="column" ui-view="religiosidade"></md-content>
+                </md-tab-body>
+            </md-tab>
+            <md-tab ng-disabled="!$controller.dadosenecessidades.tratamentos_completado">
+                <md-tab-label>
+                    <md-step ng-class="{'md-complete':$controller.dadosenecessidades.religiosidade_completado}" > Religiosidade </md-step>
+                </md-tab-label>
+                <md-tab-body>
+                    <md-divider></md-divider>
+                    <md-content layout="column" ui-view="religiosidade"></md-content>
+                </md-tab-body>
+            </md-tab>
+        </md-tabs>
 
         <span flex></span>
         <md-divider></md-divider>

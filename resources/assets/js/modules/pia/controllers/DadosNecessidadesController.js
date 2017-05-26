@@ -29,9 +29,22 @@ export default class DadosNecessidadesController{
     saveAndNext(){
         this.loading = true;
         this.util.timeout(()=>{
-            if(this.selected === 0){
-                this.dadosenecessidades.documentacao_completado = true;
-            }
+            switch (this.selected){
+                case 0:
+                    this.dadosenecessidades.documentacao_completado = true;
+                    break;
+                default:
+                    this.dadosenecessidades = {
+                        documentacao_completado:true,
+                        necessidades_completado:true,
+                        rededeapoio_completado:true,
+                        atividades_completado:true,
+                        tratamentos_completado:true,
+                        religiosidade_completado:true,
+                        completado:false
+                    };
+                    break;
+            };
             this.loading = false;
             this.selected++;
             console.log(this);
