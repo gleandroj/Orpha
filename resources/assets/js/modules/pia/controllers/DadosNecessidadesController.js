@@ -33,16 +33,22 @@ export default class DadosNecessidadesController{
                 case 0:
                     this.dadosenecessidades.documentacao_completado = true;
                     break;
+                case 1:
+                    this.dadosenecessidades.necessidades_completado = true;
+                    break;
+                case 2:
+                    this.dadosenecessidades.rededeapoio_completado = true;
+                    break;
+                case 3:
+                    this.dadosenecessidades.atividades_completado = true;
+                    break;
+                case 4:
+                    this.dadosenecessidades.tratamentos_completado = true;
+                    break;
+                case 5:
+                    this.dadosenecessidades.religiosidade_completado = true;
+                    break;
                 default:
-                    this.dadosenecessidades = {
-                        documentacao_completado:true,
-                        necessidades_completado:true,
-                        rededeapoio_completado:true,
-                        atividades_completado:true,
-                        tratamentos_completado:true,
-                        religiosidade_completado:true,
-                        completado:false
-                    };
                     break;
             };
             this.loading = false;
@@ -51,19 +57,27 @@ export default class DadosNecessidadesController{
         }, 1500);
     }
 
-    voltar(){
+    back(){
         this.loading = true;
         this.state.go('crianca.pia.menu', {id: this.crianca.id }).then(()=>{}, (error) => this.showError(error));
     }
 
-    finish(){
-        if(this.selected === 0){
-            this.voltar();
+    prev(){
+        if(this.selected === 0 && this.readOnly){
+            this.back();
+        }else if(!this.readOnly){
+            this.finish();
+        }else{
+            this.selected--;
         }
     }
 
-    changeToEditMode(){
+    finish(){
+        this.readOnly = true;
+    }
 
+    changeToEditMode(){
+        this.readOnly = false;
     }
 
     pushScope(scope){

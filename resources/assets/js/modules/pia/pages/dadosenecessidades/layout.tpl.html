@@ -18,12 +18,12 @@
 
     <md-progress-linear md-mode="indeterminate" class="md-accent" ng-show="$controller.loading"></md-progress-linear>
 
-    <md-content>
+    <md-content layout="column" flex>
 
-        <md-tabs class="stepper" md-dynamic-height md-border-bottom md-selected="$controller.selected">
+        <md-tabs class="stepper" flex md-dynamic-height md-border-bottom md-selected="$controller.selected">
             <md-tab>
                 <md-tab-label>
-                    <md-step ng-class="{'md-complete':$controller.dadosenecessidades.documentacao_completado}"> Doc. Apresentada </md-step>
+                    <md-step ng-class="{'md-linear':$controller.readOnly ,'md-complete':$controller.dadosenecessidades.documentacao_completado}"> Doc. Apresentada </md-step>
                 </md-tab-label>
                 <md-tab-body>
                     <md-divider></md-divider>
@@ -32,7 +32,7 @@
             </md-tab>
             <md-tab ng-disabled="!$controller.dadosenecessidades.documentacao_completado">
                 <md-tab-label>
-                    <md-step ng-class="{'md-complete':$controller.dadosenecessidades.necessidades_completado}"> Nec. de atendimento </md-step>
+                    <md-step ng-class="{'md-linear':$controller.readOnly ,'md-complete':$controller.dadosenecessidades.necessidades_completado}"> Nec. de atendimento </md-step>
                 </md-tab-label>
                 <md-tab-body>
                     <md-divider></md-divider>
@@ -41,7 +41,7 @@
             </md-tab>
             <md-tab ng-disabled="!$controller.dadosenecessidades.necessidades_completado">
                 <md-tab-label>
-                    <md-step ng-class="{'md-complete':$controller.dadosenecessidades.rededeapoio_completado}"> Rede de Apoio </md-step>
+                    <md-step ng-class="{'md-linear':$controller.readOnly ,'md-complete':$controller.dadosenecessidades.rededeapoio_completado}"> Rede de Apoio </md-step>
                 </md-tab-label>
                 <md-tab-body>
                     <md-divider></md-divider>
@@ -50,7 +50,7 @@
             </md-tab>
             <md-tab ng-disabled="!$controller.dadosenecessidades.rededeapoio_completado">
                 <md-tab-label>
-                    <md-step ng-class="{'md-complete':$controller.dadosenecessidades.atividades_completado}"> Ativ. que Realizava </md-step>
+                    <md-step ng-class="{'md-linear':$controller.readOnly ,'md-complete':$controller.dadosenecessidades.atividades_completado}"> Ativ. que Realizava </md-step>
                 </md-tab-label>
                 <md-tab-body>
                     <md-divider></md-divider>
@@ -59,7 +59,7 @@
             </md-tab>
             <md-tab ng-disabled="!$controller.dadosenecessidades.atividades_completado">
                 <md-tab-label>
-                    <md-step ng-class="{'md-complete':$controller.dadosenecessidades.tratamentos_completado}" > Trat. Externos </md-step>
+                    <md-step ng-class="{'md-linear':$controller.readOnly ,'md-complete':$controller.dadosenecessidades.tratamentos_completado}" > Trat. Externos </md-step>
                 </md-tab-label>
                 <md-tab-body>
                     <md-divider></md-divider>
@@ -68,16 +68,7 @@
             </md-tab>
             <md-tab ng-disabled="!$controller.dadosenecessidades.tratamentos_completado">
                 <md-tab-label>
-                    <md-step ng-class="{'md-complete':$controller.dadosenecessidades.religiosidade_completado}" > Religiosidade </md-step>
-                </md-tab-label>
-                <md-tab-body>
-                    <md-divider></md-divider>
-                    <md-content layout="column" ui-view="religiosidade"></md-content>
-                </md-tab-body>
-            </md-tab>
-            <md-tab ng-disabled="!$controller.dadosenecessidades.tratamentos_completado">
-                <md-tab-label>
-                    <md-step ng-class="{'md-complete':$controller.dadosenecessidades.religiosidade_completado}" > Religiosidade </md-step>
+                    <md-step ng-class="{'md-linear':$controller.readOnly ,'md-complete':$controller.dadosenecessidades.religiosidade_completado}" > Religiosidade </md-step>
                 </md-tab-label>
                 <md-tab-body>
                     <md-divider></md-divider>
@@ -89,18 +80,18 @@
         <span flex></span>
         <md-divider></md-divider>
         <div layout="row" layout-align="end center" ng-if="!$controller.readOnly">
-            <md-button type="submit" class="md-accent md-raised" ng-click="$controller.saveAndNext()" ng-disabled="$controller.loading || !$controller.canSaveAndNext()">
+            <md-button class="md-accent md-raised" ng-click="$controller.saveAndNext()" ng-disabled="$controller.loading || !$controller.canSaveAndNext()">
                 {{ $controller.selected < 5 ? 'Salvar e Continuar' : 'Salvar' }}
             </md-button>
-            <md-button class="md-warn" ng-click="$controller.finish()" ng-disabled="$controller.loading">
+            <md-button class="md-warn" ng-click="$controller.prev()" ng-disabled="$controller.loading">
                 {{ $controller.selected == 0 ? 'Voltar' : 'Finalizar' }}
             </md-button>
         </div>
         <div layout="row" layout-align="end center" ng-if="$controller.readOnly">
-            <md-button type="submit" class="md-accent md-raised" ng-click="$controller.finish()" ng-disabled="$controller.loading">
+            <md-button class="md-accent md-raised" ng-click="$controller.changeToEditMode()" ng-disabled="$controller.loading">
                 Alterar
             </md-button>
-            <md-button class="md-warn" ng-click="$controller.finish()" ng-disabled="$controller.loading">
+            <md-button class="md-warn" ng-click="$controller.prev()" ng-disabled="$controller.loading">
                 Voltar
             </md-button>
         </div>
