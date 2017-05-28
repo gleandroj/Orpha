@@ -33,6 +33,10 @@ export default class PiaMenuController{
         this.state.go(state, {id: this.crianca.id }).then(()=>{}, (error) => this.showError(error));
     }
 
+    goBack(){
+        this.navigateTo('crianca.show');
+    }
+
     showError(error){
         this.loading = false;
         this.logService.error(error ? error.error  +": "+error['message'] : this.messageService.get('MSG4'));
