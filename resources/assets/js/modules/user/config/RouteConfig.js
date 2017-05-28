@@ -24,13 +24,19 @@ export default function RouteConfig($stateProvider, $urlRouterProvider) {
             url: '/profile',
             controller: ProfileController,
             controllerAs: '$controller',
-            template: ProfileTemplate
+            template: ProfileTemplate,
+            ncyBreadcrumb: {
+                label: 'Perfil'
+            }
         })
         .state('user.list', {
             url: '/list',
             controller: ListController,
             controllerAs: '$controller',
-            template: ListTemplate
+            template: ListTemplate,
+            ncyBreadcrumb: {
+                label: 'Usuários'
+            }
         })
         .state('user.create', {
             url: '/create',
@@ -43,7 +49,11 @@ export default function RouteConfig($stateProvider, $urlRouterProvider) {
             },
             controller: FormController,
             controllerAs: '$controller',
-            template: FormTemplate
+            template: FormTemplate,
+            ncyBreadcrumb: {
+                label: 'Cadastrar',
+                parent: 'user.list'
+            }
         })
         .state('user.show', {
             url: '/:id',
@@ -56,7 +66,11 @@ export default function RouteConfig($stateProvider, $urlRouterProvider) {
             },
             controller: FormController,
             controllerAs: '$controller',
-            template: FormTemplate
+            template: FormTemplate,
+            ncyBreadcrumb: {
+                label: '{{ $controller.user.name }}',
+                parent: 'user.list'
+            }
         })
         .state('user.edit', {
             url: '/:id/edit',
@@ -69,6 +83,10 @@ export default function RouteConfig($stateProvider, $urlRouterProvider) {
             },
             controller: FormController,
             controllerAs: '$controller',
-            template: FormTemplate
+            template: FormTemplate,
+            ncyBreadcrumb: {
+                label: '{{ $controller.user.name }}',
+                parent: 'user.list'
+            }
         })
 }

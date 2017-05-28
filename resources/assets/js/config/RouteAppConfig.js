@@ -4,9 +4,15 @@
  * Redirect user to the correct route when him types a wrong URL
  */
 
-RouteAppConfig.$inject = ['$urlRouterProvider'];
+import breadCrumbTemplate from './../components/Breadcrumb/breadcrumb.tpl.html';
 
-export default function RouteAppConfig($urlRouterProvider) {
+RouteAppConfig.$inject = ['$urlRouterProvider', '$breadcrumbProvider'];
+
+export default function RouteAppConfig($urlRouterProvider, $breadcrumbProvider) {
+
+    $breadcrumbProvider.setOptions({
+        template: breadCrumbTemplate
+    });
 
     //$urlRouterProvider.otherwise('/orpha');
     let defaultRoute = 'user.profile';

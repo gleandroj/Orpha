@@ -12,6 +12,7 @@ import 'angular-material-expansion-panel';
 import 'ng-mask/dist/ngMask.js';
 import 'chart.js';
 import 'angular-chart.js';
+import 'angular-breadcrumb';
 
 import 'angular-material/angular-material.css';
 import 'angular-material-simple-components';
@@ -41,6 +42,7 @@ angular.module('orpha.modules', [
     'ngMask',
     'chart.js',
     'angular.filter',
+    'ncy-angular-breadcrumb',
     AuthModule,
     OrphaModule,
     UserModule,

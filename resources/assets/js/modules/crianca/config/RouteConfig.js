@@ -21,7 +21,10 @@ export default function RouteConfig($stateProvider, $urlRouterProvider) {
             url: '/list',
             controller: ListController,
             controllerAs: '$controller',
-            template: ListTemplate
+            template: ListTemplate,
+            ncyBreadcrumb: {
+                label: 'Crianças'
+            }
         })
         .state('crianca.create', {
             url: '/create',
@@ -34,7 +37,11 @@ export default function RouteConfig($stateProvider, $urlRouterProvider) {
             },
             controller: FormController,
             controllerAs: '$controller',
-            template: FormTemplate
+            template: FormTemplate,
+            ncyBreadcrumb: {
+                label: 'Cadastrar',
+                parent: 'crianca.list'
+            }
         })
         .state('crianca.show', {
             url: '/:id',
@@ -47,7 +54,11 @@ export default function RouteConfig($stateProvider, $urlRouterProvider) {
             },
             controller: FormController,
             controllerAs: '$controller',
-            template: FormTemplate
+            template: FormTemplate,
+            ncyBreadcrumb: {
+                label: '{{ $controller.crianca.nome }}',
+                parent: 'crianca.list'
+            }
         })
         .state('crianca.edit', {
             url: '/:id/edit',
@@ -60,6 +71,10 @@ export default function RouteConfig($stateProvider, $urlRouterProvider) {
             },
             controller: FormController,
             controllerAs: '$controller',
-            template: FormTemplate
+            template: FormTemplate,
+            ncyBreadcrumb: {
+                label: '{{ $controller.crianca.nome }}',
+                parent: 'crianca.list'
+            }
         });
 }

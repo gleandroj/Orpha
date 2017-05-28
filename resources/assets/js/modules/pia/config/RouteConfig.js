@@ -36,7 +36,11 @@ export default function RouteConfig($stateProvider, $urlRouterProvider) {
             data:{},
             controller: PiaMenuController,
             controllerAs: '$controller',
-            template: PiaMenuTemplate
+            template: PiaMenuTemplate,
+            ncyBreadcrumb: {
+                label: 'PIA',
+                parent: 'crianca.show'
+            }
         })
         .state('crianca.pia.dadosenecessidades', {
             url: '/dadosenecessidades',
@@ -56,6 +60,10 @@ export default function RouteConfig($stateProvider, $urlRouterProvider) {
                 'tratamentos@crianca.pia.dadosenecessidades':{ template: TratamentosTemplate },
                 'religiosidade@crianca.pia.dadosenecessidades':{ template: ReligiosidadeTemplate },
             },
-            data:{}
+            data:{},
+            ncyBreadcrumb: {
+                label: 'Dados e Necessidades',
+                parent: 'crianca.pia.menu'
+            }
         })
 }
