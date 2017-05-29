@@ -65,6 +65,8 @@ class DadosNecessidadesService implements DadosNecessidadesServiceInterface
         $dadosNecessidades = $crianca->pia->dadosNecessidades;
         $update_data->put($update_key.'_completado', true);
 
+        if($update_key == 'religiosidade') $update_data->put('completado', true);
+
         if(!$dadosNecessidades = $this->dadosNecessidadesRepository->update($dadosNecessidades->id, $update_data->all())) throw new Exception(trans('messages.MSG4'));
         return $dadosNecessidades->fresh();
     }
