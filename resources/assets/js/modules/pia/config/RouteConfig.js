@@ -17,6 +17,8 @@ import TratamentosTemplate from './../pages/dadosenecessidades/tratamentosextern
 import ReligiosidadeTemplate from './../pages/dadosenecessidades/religiosidade.tpl.html';
 
 import CriancaResolver from './../../crianca/resolvers/CriancaResolve';
+import PiaResolve from './../resolvers/PiaResolve';
+import DadosNecessidadesResolve from './../resolvers/DadosNecessidadesResolve';
 
 RouteConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
 
@@ -31,7 +33,8 @@ export default function RouteConfig($stateProvider, $urlRouterProvider) {
         .state('crianca.pia.menu', {
             url: '/menu',
             resolve: {
-                Crianca: CriancaResolver
+                Crianca: CriancaResolver,
+                Pia: PiaResolve
             },
             data:{},
             controller: PiaMenuController,
@@ -49,7 +52,9 @@ export default function RouteConfig($stateProvider, $urlRouterProvider) {
                     controller: DadosNecessidadesController,
                     controllerAs: '$controller',
                     resolve: {
-                        Crianca: CriancaResolver
+                        Crianca: CriancaResolver,
+                        Pia: PiaResolve,
+                        DadosNecessidades: DadosNecessidadesResolve
                     },
                      template: DadosNecessidadesTemplate
                  },

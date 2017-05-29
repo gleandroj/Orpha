@@ -4,27 +4,20 @@
 
 export default class DadosNecessidadesController{
 
-    constructor(OrphaUtilService, Scope, State, Crianca, DadosNecessidadesService, LogService, ToastService){
+    constructor(OrphaUtilService, Scope, State, Crianca, DadosNecessidades, DadosNecessidadesService, LogService, ToastService){
         this.util = OrphaUtilService;
         this.scope = Scope;
         this.state = State;
         this.crianca = Crianca;
+        this.originalDadosenecessidades = this.util.copy(DadosNecessidades);
+        this.dadosenecessidades = DadosNecessidades;
         this.dadosNecessidadesService = DadosNecessidadesService;
         this.logService = LogService;
         this.toastService = ToastService;
         this.selected = 0;
         this.loading = false;
-        this.readOnly = false;
+        this.readOnly = this.dadosenecessidades.completado || false;
         this.scopes = [];
-        this.dadosenecessidades = {
-            documentacao_completado:false,
-            necessidades_completado:false,
-            rededeapoio_completado:false,
-            atividades_completado:false,
-            tratamentos_completado:false,
-            religiosidade_completado:false,
-            completado:false
-        };
     }
 
     saveAndNext(){
@@ -32,24 +25,22 @@ export default class DadosNecessidadesController{
         this.util.timeout(()=>{
             switch (this.selected){
                 case 0:
-                    this.dadosenecessidades.documentacao_completado = true;
+                    this.save('documentacao');
                     break;
                 case 1:
-                    this.dadosenecessidades.necessidades_completado = true;
+                    this.save('necessidades');
                     break;
                 case 2:
-                    this.dadosenecessidades.rededeapoio_completado = true;
+                    this.save('rededeapoio');
                     break;
                 case 3:
-                    this.dadosenecessidades.atividades_completado = true;
+                    this.save('atividades');
                     break;
                 case 4:
-                    this.dadosenecessidades.tratamentos_completado = true;
+                    this.save('tratamentos');
                     break;
                 case 5:
-                    this.dadosenecessidades.religiosidade_completado = true;
-                    this.dadosenecessidades.completado = true;
-                    this.dadosNecessidadesService.save(this.crianca.id, this.dadosenecessidades);
+                    this.save('religiosidade');
                     this.finish();
                     break;
                 default:
@@ -58,6 +49,16 @@ export default class DadosNecessidadesController{
             this.loading = false;
             this.selected++;
         }, 1500);
+    }
+
+    save(key){
+        this.dadosNecessidadesService.save(this.crianca.id, this.util.extend(this.dadosenecessidades, { completado: true }), key)
+            .success((dadosenecessidades)=>{
+                this.originalDadosenecessidades = this.util.copy(dadosenecessidades);
+                this.dadosenecessidades = dadosenecessidades;
+                if(this.selected < 5) this.selected++;
+            })
+            .error((error)=> this.showError(error));
     }
 
     back(){
@@ -91,6 +92,10 @@ export default class DadosNecessidadesController{
         return this.scopes[this.selected] && this.scopes[this.selected]['form'] && this.scopes[this.selected]['form'].$valid;
     }
 
+    canGoBack(){
+        this.util.compare(this.dadosenecessidades, this.originalDadosenecessidades);
+    }
+
     showError(error){
         this.loading = false;
         this.logService.error(error ? error.error  +": "+error['message'] : this.messageService.get('MSG4'));
@@ -98,4 +103,4 @@ export default class DadosNecessidadesController{
     }
 }
 
-DadosNecessidadesController.$inject = ['OrphaUtilService', '$scope', '$state', 'Crianca', 'DadosNecessidadesService', 'LogService', 'ToastService'];
+DadosNecessidadesController.$inject = ['OrphaUtilService', '$scope', '$state', 'Crianca', 'DadosNecessidades', 'DadosNecessidadesService', 'LogService', 'ToastService'];

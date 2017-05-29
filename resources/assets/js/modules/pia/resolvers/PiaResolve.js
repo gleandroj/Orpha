@@ -2,10 +2,10 @@
  * Created by FG0003 on 06/03/2017.
  */
 
-export default function CriancaResolve(CriancaService, OrphaUtilService, LogService, $stateParams, $state) {
+export default function PiaResolve(PiaService, OrphaUtilService, LogService, $stateParams, $state) {
     let deferred = OrphaUtilService.defer();
-    CriancaService.get($stateParams.id)
-        .success((crianca) => { deferred.resolve(crianca) })
+    PiaService.get($stateParams.id)
+        .success((pia) => { deferred.resolve(pia) })
         .error((error) => {
             try{
                 $state.go('^');
@@ -14,8 +14,7 @@ export default function CriancaResolve(CriancaService, OrphaUtilService, LogServ
             }
             deferred.reject(error);
         });
-
     return deferred.promise;
 }
 
-CriancaResolve.$inject = ['CriancaService', 'OrphaUtilService', 'LogService', '$stateParams', '$state'];
+PiaResolve.$inject = ['PiaService', 'OrphaUtilService', 'LogService', '$stateParams', '$state'];

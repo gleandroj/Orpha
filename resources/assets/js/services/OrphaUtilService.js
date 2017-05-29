@@ -72,6 +72,10 @@ export default class OrphaUtilService{
         this._decorate(deferred.promise);
         return deferred;
     }
+
+    compare(a, b) {
+        return this.toJson(a) === this.toJson(b);
+    }
 }
 
 OrphaUtilService.$inject = ['$rootScope', '$timeout', '$interval', '$q'];
