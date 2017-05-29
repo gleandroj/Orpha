@@ -15,6 +15,6 @@ export default function PiaResolve(PiaService, OrphaUtilService, $state, $stateP
             deferred.reject(error);
         });
     return deferred.promise;
-}
+};
 
 PiaResolve.$inject = ['PiaService', 'OrphaUtilService', '$state', '$stateParams'];
