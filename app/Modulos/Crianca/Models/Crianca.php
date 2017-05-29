@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use App\Modulos\Orpha\Traits\OrfanatoQuery;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Modulos\Pia\Models\Pia;
 
 class Crianca extends Model
 {
@@ -38,6 +39,10 @@ class Crianca extends Model
         'dt_nascimento',
         'deleted_at'
     ];
+
+    public function pia(){
+        return $this->hasOne(Pia::class);
+    }
 
     public function getIdadeAttribute()
     {
