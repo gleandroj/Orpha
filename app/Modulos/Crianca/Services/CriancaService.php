@@ -72,7 +72,9 @@ class CriancaService implements CriancaServiceInterface
         $data->put('orfanato_id', $this->getCurrentUser()->orfanato_id);
 
         if(!$crianca = $this->criancaRepository->create($data->all())) throw new \Exception(trans('messages.MSG4'));
-        return $crianca;
+        $crianca->pia()->create([]);
+        $crianca->pia->dadosNecessidades()->create([]);
+        return $crianca->fresh();
     }
 
     /**
@@ -86,12 +88,12 @@ class CriancaService implements CriancaServiceInterface
         $data = collect($data);
 
         if(!$crianca = $this->criancaRepository->update($id, $data->all())) throw new \Exception(trans('messages.MSG4'));
-        return $crianca;
+        return $crianca->fresh();
     }
 
     /**
      * @param $id
-     * @return Crianca
+     * @return Crianca|Model
      * @throws \Exception
      */
     public function delete($id)
@@ -102,7 +104,7 @@ class CriancaService implements CriancaServiceInterface
 
     /**
      * @param $id
-     * @return Crianca
+     * @return Crianca|Model
      * @throws \Exception
      */
     public function restore($id)
