@@ -5,7 +5,7 @@
 export default function PiaResolve(PiaService, OrphaUtilService, $state, $stateParams) {
     let deferred = OrphaUtilService.defer();
     PiaService.get($stateParams.id)
-        .success((pia) => { deferred.resolve(pia) })
+        .success((pia) => deferred.resolve(pia))
         .error((error) => {
             try{
                 $state.go('^');
@@ -15,6 +15,6 @@ export default function PiaResolve(PiaService, OrphaUtilService, $state, $stateP
             deferred.reject(error);
         });
     return deferred.promise;
-};
+}
 
 PiaResolve.$inject = ['PiaService', 'OrphaUtilService', '$state', '$stateParams'];
