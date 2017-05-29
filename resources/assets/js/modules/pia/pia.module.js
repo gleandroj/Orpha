@@ -3,11 +3,11 @@
  */
 
 import RouteConfig from './config/RouteConfig';
-import PiaService from './services/PiaService';
+import DadosNecessidadesService from './services/DadosNecessidadesService';
 
 let module = angular
     .module('orpha.modules.pia', [])
-    .service('PiaService', PiaService)
+    .service('DadosNecessidadesService', DadosNecessidadesService)
     .config(RouteConfig);
 
 export default module.name;

@@ -1,3 +1,39 @@
-<h1>
-    Religiosidade
-</h1>
+<ng-form name="form" ng-init="$controller.pushScope(this)">
+    <md-content layout="column" layout-padding>
+
+        <div layout="row" class="orpha-radio-group" layout-align="start center">
+            <div class="orpha-radio-label no-after">
+                <span class="md-subhead">Participava de atividade religiosa?</span>
+            </div>
+            <md-radio-group
+                    ng-init="$controller.dadosenecessidades.religiosidade_atividade_religiosa = $controller.dadosenecessidades.religiosidade_atividade_religiosa || false"
+                    ng-model="$controller.dadosenecessidades.religiosidade_atividade_religiosa"
+                    ng-required="true"
+                    ng-disabled="$controller.readOnly" layout="row">
+                <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
+                <md-radio-button ng-value="false">Não</md-radio-button>
+            </md-radio-group>
+        </div>
+
+        <div layout="row" class="orpha-radio-group" layout-align="start center">
+            <div class="orpha-radio-label no-after">
+                <span class="md-subhead">Deseja assistência religiosa?</span>
+            </div>
+            <md-radio-group
+                    ng-init="$controller.dadosenecessidades.religiosidade_assistencia_religiosa = $controller.dadosenecessidades.religiosidade_assistencia_religiosa || false"
+                    ng-model="$controller.dadosenecessidades.religiosidade_assistencia_religiosa"
+                    ng-required="true"
+                    ng-disabled="$controller.readOnly" layout="row">
+                <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
+                <md-radio-button ng-value="false">Não</md-radio-button>
+            </md-radio-group>
+        </div>
+
+        <text-input max-length="50" name="denominacao" label="Denominação Religiosa" is-required="true" is-disabled="$controller.readOnly" ng-model="$controller.dadosenecessidades.religiosidade_denominacao_religiosa">
+            <error-message error="required" message="{{ 'MSG2' | message }}"></error-message>
+        </text-input>
+
+        <text-area-input name="outros" label="Outros" is-disabled="$controller.readOnly" ng-model="$controller.dadosenecessidades.religiosidade_outros"></text-area-input>
+
+    </md-content>
+</ng-form>

@@ -1,3 +1,85 @@
-<h1>
-    Rede de Apoio
-</h1>
+<ng-form name="form" ng-init="$controller.pushScope(this)">
+    <md-content layout="column" layout-padding>
+
+        <div class="orpha-radio-group" layout="row" layout-align="start center">
+            <span class="md-subhead orpha-radio-label">Equipamentos – CRAS/CREAS</span>
+            <md-radio-group
+                    ng-init="$controller.dadosenecessidades.rededeapoio_equipamentos = $controller.dadosenecessidades.rededeapoio_equipamentos || 'encaminhar'"
+                    ng-model="$controller.dadosenecessidades.rededeapoio_equipamentos"
+                    ng-required="true"
+                    ng-disabled="$controller.readOnly"
+                    layout="row">
+                <md-radio-button ng-value="'contato'" class="md-primary">Contato</md-radio-button>
+                <md-radio-button ng-value="'encaminhar'">Encaminhar</md-radio-button>
+            </md-radio-group>
+        </div>
+
+        <div class="orpha-radio-group" layout="row" layout-align="start center">
+            <span class="md-subhead orpha-radio-label">Família extensa</span>
+            <md-radio-group
+                    ng-init="$controller.dadosenecessidades.rededeapoio_familia_extensa = $controller.dadosenecessidades.rededeapoio_familia_extensa || 'encaminhar'"
+                    ng-model="$controller.dadosenecessidades.rededeapoio_familia_extensa"
+                    ng-required="true"
+                    ng-disabled="$controller.readOnly"
+                    layout="row">
+                <md-radio-button ng-value="'contato'" class="md-primary">Contato</md-radio-button>
+                <md-radio-button ng-value="'encaminhar'">Encaminhar</md-radio-button>
+            </md-radio-group>
+        </div>
+
+        <div class="orpha-radio-group" layout="row" layout-align="start center">
+            <span class="md-subhead orpha-radio-label">Pais/Responsáveis</span>
+            <md-radio-group
+                    ng-init="$controller.dadosenecessidades.rededeapoio_pais_responsaveis = $controller.dadosenecessidades.rededeapoio_pais_responsaveis || 'encaminhar'"
+                    ng-model="$controller.dadosenecessidades.rededeapoio_pais_responsaveis"
+                    ng-required="true"
+                    ng-disabled="$controller.readOnly"
+                    layout="row">
+                <md-radio-button ng-value="'contato'" class="md-primary">Contato</md-radio-button>
+                <md-radio-button ng-value="'encaminhar'">Encaminhar</md-radio-button>
+            </md-radio-group>
+        </div>
+
+        <div class="orpha-radio-group" layout="row" layout-align="start center">
+            <span class="md-subhead orpha-radio-label">Programas de Apoio Comunitário</span>
+            <md-radio-group
+                    ng-init="$controller.dadosenecessidades.rededeapoio_programas_apoio_comunitario = $controller.dadosenecessidades.rededeapoio_programas_apoio_comunitario || 'encaminhar'"
+                    ng-model="$controller.dadosenecessidades.rededeapoio_programas_apoio_comunitario"
+                    ng-required="true"
+                    ng-disabled="$controller.readOnly"
+                    layout="row">
+                <md-radio-button ng-value="'contato'" class="md-primary">Contato</md-radio-button>
+                <md-radio-button ng-value="'encaminhar'">Encaminhar</md-radio-button>
+            </md-radio-group>
+        </div>
+
+        <div class="orpha-radio-group" layout="row" layout-align="start center">
+            <span class="md-subhead orpha-radio-label">Programas de Proteção</span>
+            <md-radio-group
+                    ng-init="$controller.dadosenecessidades.rededeapoio_programas_protecao = $controller.dadosenecessidades.rededeapoio_programas_protecao || 'encaminhar'"
+                    ng-model="$controller.dadosenecessidades.rededeapoio_programas_protecao"
+                    ng-required="true"
+                    ng-disabled="$controller.readOnly"
+                    layout="row">
+                <md-radio-button ng-value="'contato'" class="md-primary">Contato</md-radio-button>
+                <md-radio-button ng-value="'encaminhar'">Encaminhar</md-radio-button>
+            </md-radio-group>
+        </div>
+
+        <div class="orpha-radio-group" layout="row" layout-align="start center">
+            <span class="md-subhead orpha-radio-label">Serviço de atendimento à vítimas de maus tratos</span>
+            <md-radio-group
+                    ng-init="$controller.dadosenecessidades.rededeapoio_servico_atendimento_vitimias_maus_tratos = $controller.dadosenecessidades.rededeapoio_servico_atendimento_vitimias_maus_tratos || 'encaminhar'"
+                    ng-model="$controller.dadosenecessidades.rededeapoio_servico_atendimento_vitimias_maus_tratos"
+                    ng-required="true"
+                    ng-disabled="$controller.readOnly"
+                    layout="row">
+                <md-radio-button ng-value="'contato'" class="md-primary">Contato</md-radio-button>
+                <md-radio-button ng-value="'encaminhar'">Encaminhar</md-radio-button>
+            </md-radio-group>
+        </div>
+
+        <text-area-input name="outros" label="Outros" is-disabled="$controller.readOnly" ng-model="$controller.dadosenecessidades.rededeapoio_outros"></text-area-input>
+
+    </md-content>
+</ng-form>

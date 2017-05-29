@@ -138,7 +138,6 @@ md-select.md-page-select > .md-select-value {
   color: rgba(0,0,0,0.54) !important;
 }
 
-
 [ng\:cloak], [ng-cloak], .ng-cloak {
   display: none !important;
 }
@@ -150,11 +149,12 @@ md-select.md-page-select > .md-select-value {
 /* Radio group */
 .orpha-radio-label{
   color: rgba(0,0,0,0.38);
-  min-width: 215px;
+  min-width: 250px !important;
+  max-width: 250px !important;
   position: relative;
 }
 
-.orpha-radio-label::after{
+.orpha-radio-label:not(.no-after)::after{
   font-size: 16px;
   vertical-align: top;
   content: ':';
@@ -163,11 +163,14 @@ md-select.md-page-select > .md-select-value {
 .orpha-radio-group{
   padding-left: 48px !important;
   margin: 18px 0 !important;
-  min-width: 200px !important;
+  min-width: 250px !important;
 
 }
 .orpha-radio-group > md-radio-group{
   margin-left: 5px !important;
+}
+.orpha-radio-group > md-radio-group > md-radio-button{
+  outline: none !important;
 }
 
 /* md-tabs */
@@ -223,12 +226,12 @@ md-pagination-wrapper {
   background-color: #106cc8;
 }
 
-.stepper .md-tab:not(.md-active) > md-step.md-complete::before{
+.stepper .md-tab:not(.md-active) > md-step:not(.md-linear).md-complete::before{
   content: '\00A0' !important;
   background: #106cc8 url("data:image/svg+xml;utf8,<svg fill=\"rgba(255,255,255,0.87)\" height=\"16\" viewBox=\"0 0 24 24\" width=\"16\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M0 0h24v24H0z\" fill=\"none\"/><path d=\"M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z\"/></svg>") no-repeat center center;
 }
 
-.stepper .md-tab.md-active > md-step.md-complete::before{
+.stepper .md-tab.md-active > md-step:not(.md-linear).md-complete::before{
   content: '\00A0' !important;
   background: #106cc8 url("data:image/svg+xml;utf8,<svg fill=\"rgba(255,255,255,0.87)\" height=\"16\" viewBox=\"0 0 24 24\" width=\"16\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z\"/><path d=\"M0 0h24v24H0z\" fill=\"none\"/></svg>") no-repeat center center !important;
 }

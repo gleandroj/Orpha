@@ -4,11 +4,12 @@
 
 export default class DadosNecessidadesController{
 
-    constructor(OrphaUtilService, Scope, State, Crianca, LogService, ToastService){
+    constructor(OrphaUtilService, Scope, State, Crianca, DadosNecessidadesService, LogService, ToastService){
         this.util = OrphaUtilService;
         this.scope = Scope;
         this.state = State;
         this.crianca = Crianca;
+        this.dadosNecessidadesService = DadosNecessidadesService;
         this.logService = LogService;
         this.toastService = ToastService;
         this.selected = 0;
@@ -47,13 +48,15 @@ export default class DadosNecessidadesController{
                     break;
                 case 5:
                     this.dadosenecessidades.religiosidade_completado = true;
+                    this.dadosenecessidades.completado = true;
+                    this.dadosNecessidadesService.save(this.crianca.id, this.dadosenecessidades);
+                    this.finish();
                     break;
                 default:
                     break;
             };
             this.loading = false;
             this.selected++;
-            console.log(this);
         }, 1500);
     }
 
@@ -95,4 +98,4 @@ export default class DadosNecessidadesController{
     }
 }
 
-DadosNecessidadesController.$inject = ['OrphaUtilService', '$scope', '$state', 'Crianca', 'LogService', 'ToastService'];
+DadosNecessidadesController.$inject = ['OrphaUtilService', '$scope', '$state', 'Crianca', 'DadosNecessidadesService', 'LogService', 'ToastService'];
