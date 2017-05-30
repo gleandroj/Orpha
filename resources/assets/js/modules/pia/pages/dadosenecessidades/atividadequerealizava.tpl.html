@@ -9,12 +9,12 @@
                     ng-init="escolarizacao_detalhes = ($controller.dadosenecessidades.atividades_escolarizacao != null && $controller.dadosenecessidades.atividades_escolarizacao != '') || false"
                     ng-model="escolarizacao_detalhes"
                     ng-required="true"
-                    ng-disabled="$controller.readOnly" layout="row">
+                    ng-disabled="$controller.isReadOnly" layout="row">
                 <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
                 <md-radio-button ng-value="false" ng-click="$controller.dadosenecessidades.atividades_escolarizacao = null">Não</md-radio-button>
             </md-radio-group>
         </div>
-        <text-input ng-show="escolarizacao_detalhes" flex max-length="50" name="escolarização" label="Detalhes" is-disabled="$controller.readOnly" is-required="escolarizacao_detalhes" ng-model="$controller.dadosenecessidades.atividades_escolarizacao">
+        <text-input ng-show="escolarizacao_detalhes" flex max-length="50" name="escolarização" label="Detalhes" is-disabled="$controller.isReadOnly" is-required="escolarizacao_detalhes" ng-model="$controller.dadosenecessidades.atividades_escolarizacao">
             <error-message error="required" message="{{ 'MSG2' | message }}"></error-message>
         </text-input>
         <!-- End Group -->
@@ -28,12 +28,12 @@
                     ng-init="curso_profissionalizante_detalhes = ($controller.dadosenecessidades.atividades_curso_profissionalizante != null && $controller.dadosenecessidades.atividades_curso_profissionalizante != '') || false"
                     ng-model="curso_profissionalizante_detalhes"
                     ng-required="true"
-                    ng-disabled="$controller.readOnly" layout="row">
+                    ng-disabled="$controller.isReadOnly" layout="row">
                 <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
                 <md-radio-button ng-value="false" ng-click="$controller.dadosenecessidades.atividades_curso_profissionalizante = null">Não</md-radio-button>
             </md-radio-group>
         </div>
-        <text-input ng-show="curso_profissionalizante_detalhes" flex max-length="50" name="escolarização" label="Detalhes" is-disabled="$controller.readOnly" is-required="curso_profissionalizante_detalhes" ng-model="$controller.dadosenecessidades.atividades_curso_profissionalizante">
+        <text-input ng-show="curso_profissionalizante_detalhes" flex max-length="50" name="escolarização" label="Detalhes" is-disabled="$controller.isReadOnly" is-required="curso_profissionalizante_detalhes" ng-model="$controller.dadosenecessidades.atividades_curso_profissionalizante">
             <error-message error="required" message="{{ 'MSG2' | message }}"></error-message>
         </text-input>
         <!-- End Group -->
@@ -47,12 +47,12 @@
                     ng-init="atividades_artisticas_detalhes = ($controller.dadosenecessidades.atividades_atividades_artisticas != null && $controller.dadosenecessidades.atividades_atividades_artisticas != '') || false"
                     ng-model="atividades_artisticas_detalhes"
                     ng-required="true"
-                    ng-disabled="$controller.readOnly" layout="row">
+                    ng-disabled="$controller.isReadOnly" layout="row">
                 <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
                 <md-radio-button ng-value="false" ng-click="$controller.dadosenecessidades.atividades_atividades_artisticas = null">Não</md-radio-button>
             </md-radio-group>
         </div>
-        <text-input ng-show="atividades_artisticas_detalhes" flex max-length="50" name="escolarização" label="Detalhes" is-disabled="$controller.readOnly" is-required="atividades_artisticas_detalhes" ng-model="$controller.dadosenecessidades.atividades_atividades_artisticas">
+        <text-input ng-show="atividades_artisticas_detalhes" flex max-length="50" name="escolarização" label="Detalhes" is-disabled="$controller.isReadOnly" is-required="atividades_artisticas_detalhes" ng-model="$controller.dadosenecessidades.atividades_atividades_artisticas">
             <error-message error="required" message="{{ 'MSG2' | message }}"></error-message>
         </text-input>
         <!-- End Group -->
@@ -66,12 +66,12 @@
                     ng-init="atividades_culturais_detalhes = ($controller.dadosenecessidades.atividades_atividades_culturais != null && $controller.dadosenecessidades.atividades_atividades_culturais != '') || false"
                     ng-model="atividades_culturais_detalhes"
                     ng-required="true"
-                    ng-disabled="$controller.readOnly" layout="row">
+                    ng-disabled="$controller.isReadOnly" layout="row">
                 <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
                 <md-radio-button ng-value="false" ng-click="$controller.dadosenecessidades.atividades_atividades_culturais = null">Não</md-radio-button>
             </md-radio-group>
         </div>
-        <text-input ng-show="atividades_culturais_detalhes" flex max-length="50" name="escolarização" label="Detalhes" is-disabled="$controller.readOnly" is-required="atividades_culturais_detalhes" ng-model="$controller.dadosenecessidades.atividades_atividades_culturais">
+        <text-input ng-show="atividades_culturais_detalhes" flex max-length="50" name="escolarização" label="Detalhes" is-disabled="$controller.isReadOnly" is-required="atividades_culturais_detalhes" ng-model="$controller.dadosenecessidades.atividades_atividades_culturais">
             <error-message error="required" message="{{ 'MSG2' | message }}"></error-message>
         </text-input>
         <!-- End Group -->
@@ -85,17 +85,17 @@
                     ng-init="atividades_esportivas_detalhes = ($controller.dadosenecessidades.atividades_atividades_esportivas != null && $controller.dadosenecessidades.atividades_atividades_esportivas != '') || false"
                     ng-model="atividades_esportivas_detalhes"
                     ng-required="true"
-                    ng-disabled="$controller.readOnly" layout="row">
+                    ng-disabled="$controller.isReadOnly" layout="row">
                 <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
                 <md-radio-button ng-value="false" ng-click="$controller.dadosenecessidades.atividades_atividades_esportivas = null">Não</md-radio-button>
             </md-radio-group>
         </div>
-        <text-input ng-show="atividades_esportivas_detalhes" flex max-length="50" name="escolarização" label="Detalhes" is-disabled="$controller.readOnly" is-required="atividades_esportivas_detalhes" ng-model="$controller.dadosenecessidades.atividades_atividades_esportivas">
+        <text-input ng-show="atividades_esportivas_detalhes" flex max-length="50" name="escolarização" label="Detalhes" is-disabled="$controller.isReadOnly" is-required="atividades_esportivas_detalhes" ng-model="$controller.dadosenecessidades.atividades_atividades_esportivas">
             <error-message error="required" message="{{ 'MSG2' | message }}"></error-message>
         </text-input>
         <!-- End Group -->
 
-        <text-area-input name="outros" label="Outros" is-disabled="$controller.readOnly" ng-model="$controller.dadosenecessidades.atividades_outros">
+        <text-area-input name="outros" label="Outros" is-disabled="$controller.isReadOnly" ng-model="$controller.dadosenecessidades.atividades_outros">
         </text-area-input>
 
     </md-content>

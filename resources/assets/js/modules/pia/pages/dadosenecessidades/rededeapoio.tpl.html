@@ -7,7 +7,7 @@
                     ng-init="$controller.dadosenecessidades.rededeapoio_equipamentos = $controller.dadosenecessidades.rededeapoio_equipamentos || 'encaminhar'"
                     ng-model="$controller.dadosenecessidades.rededeapoio_equipamentos"
                     ng-required="true"
-                    ng-disabled="$controller.readOnly"
+                    ng-disabled="$controller.isReadOnly"
                     layout="row">
                 <md-radio-button ng-value="'contato'" class="md-primary">Contato</md-radio-button>
                 <md-radio-button ng-value="'encaminhar'">Encaminhar</md-radio-button>
@@ -20,7 +20,7 @@
                     ng-init="$controller.dadosenecessidades.rededeapoio_familia_extensa = $controller.dadosenecessidades.rededeapoio_familia_extensa || 'encaminhar'"
                     ng-model="$controller.dadosenecessidades.rededeapoio_familia_extensa"
                     ng-required="true"
-                    ng-disabled="$controller.readOnly"
+                    ng-disabled="$controller.isReadOnly"
                     layout="row">
                 <md-radio-button ng-value="'contato'" class="md-primary">Contato</md-radio-button>
                 <md-radio-button ng-value="'encaminhar'">Encaminhar</md-radio-button>
@@ -33,7 +33,7 @@
                     ng-init="$controller.dadosenecessidades.rededeapoio_pais_responsaveis = $controller.dadosenecessidades.rededeapoio_pais_responsaveis || 'encaminhar'"
                     ng-model="$controller.dadosenecessidades.rededeapoio_pais_responsaveis"
                     ng-required="true"
-                    ng-disabled="$controller.readOnly"
+                    ng-disabled="$controller.isReadOnly"
                     layout="row">
                 <md-radio-button ng-value="'contato'" class="md-primary">Contato</md-radio-button>
                 <md-radio-button ng-value="'encaminhar'">Encaminhar</md-radio-button>
@@ -46,7 +46,7 @@
                     ng-init="$controller.dadosenecessidades.rededeapoio_programas_apoio_comunitario = $controller.dadosenecessidades.rededeapoio_programas_apoio_comunitario || 'encaminhar'"
                     ng-model="$controller.dadosenecessidades.rededeapoio_programas_apoio_comunitario"
                     ng-required="true"
-                    ng-disabled="$controller.readOnly"
+                    ng-disabled="$controller.isReadOnly"
                     layout="row">
                 <md-radio-button ng-value="'contato'" class="md-primary">Contato</md-radio-button>
                 <md-radio-button ng-value="'encaminhar'">Encaminhar</md-radio-button>
@@ -59,7 +59,7 @@
                     ng-init="$controller.dadosenecessidades.rededeapoio_programas_protecao = $controller.dadosenecessidades.rededeapoio_programas_protecao || 'encaminhar'"
                     ng-model="$controller.dadosenecessidades.rededeapoio_programas_protecao"
                     ng-required="true"
-                    ng-disabled="$controller.readOnly"
+                    ng-disabled="$controller.isReadOnly"
                     layout="row">
                 <md-radio-button ng-value="'contato'" class="md-primary">Contato</md-radio-button>
                 <md-radio-button ng-value="'encaminhar'">Encaminhar</md-radio-button>
@@ -72,14 +72,14 @@
                     ng-init="$controller.dadosenecessidades.rededeapoio_servico_atendimento_vitimias_maus_tratos = $controller.dadosenecessidades.rededeapoio_servico_atendimento_vitimias_maus_tratos || 'encaminhar'"
                     ng-model="$controller.dadosenecessidades.rededeapoio_servico_atendimento_vitimias_maus_tratos"
                     ng-required="true"
-                    ng-disabled="$controller.readOnly"
+                    ng-disabled="$controller.isReadOnly"
                     layout="row">
                 <md-radio-button ng-value="'contato'" class="md-primary">Contato</md-radio-button>
                 <md-radio-button ng-value="'encaminhar'">Encaminhar</md-radio-button>
             </md-radio-group>
         </div>
 
-        <text-area-input name="outros" label="Outros" is-disabled="$controller.readOnly" ng-model="$controller.dadosenecessidades.rededeapoio_outros"></text-area-input>
+        <text-area-input name="outros" label="Outros" is-disabled="$controller.isReadOnly" ng-model="$controller.dadosenecessidades.rededeapoio_outros"></text-area-input>
 
     </md-content>
 </ng-form>

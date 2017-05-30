@@ -7,7 +7,7 @@
                     ng-init="$controller.dadosenecessidades.necessidades_enfermagem = $controller.dadosenecessidades.necessidades_enfermagem || false"
                     ng-model="$controller.dadosenecessidades.necessidades_enfermagem"
                     ng-required="true"
-                    ng-disabled="$controller.readOnly"
+                    ng-disabled="$controller.isReadOnly"
                     layout="row">
                 <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
                 <md-radio-button ng-value="false">Não</md-radio-button>
@@ -20,7 +20,7 @@
                     ng-init="$controller.dadosenecessidades.necessidades_medico = $controller.dadosenecessidades.necessidades_medico || false"
                     ng-model="$controller.dadosenecessidades.necessidades_medico"
                     ng-required="true"
-                    ng-disabled="$controller.readOnly"
+                    ng-disabled="$controller.isReadOnly"
                     layout="row">
                 <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
                 <md-radio-button ng-value="false">Não</md-radio-button>
@@ -33,7 +33,7 @@
                     ng-init="$controller.dadosenecessidades.necessidades_nutricao = $controller.dadosenecessidades.necessidades_nutricao || false"
                     ng-model="$controller.dadosenecessidades.necessidades_nutricao"
                     ng-required="true"
-                    ng-disabled="$controller.readOnly"
+                    ng-disabled="$controller.isReadOnly"
                     layout="row">
                 <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
                 <md-radio-button ng-value="false">Não</md-radio-button>
@@ -46,7 +46,7 @@
                     ng-init="$controller.dadosenecessidades.necessidades_odontologia = $controller.dadosenecessidades.necessidades_odontologia || false"
                     ng-model="$controller.dadosenecessidades.necessidades_odontologia"
                     ng-required="true"
-                    ng-disabled="$controller.readOnly"
+                    ng-disabled="$controller.isReadOnly"
                     layout="row">
                 <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
                 <md-radio-button ng-value="false">Não</md-radio-button>
@@ -59,7 +59,7 @@
                     ng-init="$controller.dadosenecessidades.necessidades_oftalmologia = $controller.dadosenecessidades.necessidades_oftalmologia || false"
                     ng-model="$controller.dadosenecessidades.necessidades_oftalmologia"
                     ng-required="true"
-                    ng-disabled="$controller.readOnly"
+                    ng-disabled="$controller.isReadOnly"
                     layout="row">
                 <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
                 <md-radio-button ng-value="false">Não</md-radio-button>
@@ -72,7 +72,7 @@
                     ng-init="$controller.dadosenecessidades.necessidades_psicologia = $controller.dadosenecessidades.necessidades_psicologia || false"
                     ng-model="$controller.dadosenecessidades.necessidades_psicologia"
                     ng-required="true"
-                    ng-disabled="$controller.readOnly"
+                    ng-disabled="$controller.isReadOnly"
                     layout="row">
                 <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
                 <md-radio-button ng-value="false">Não</md-radio-button>
@@ -85,7 +85,7 @@
                     ng-init="$controller.dadosenecessidades.necessidades_psiquiatria = $controller.dadosenecessidades.necessidades_psiquiatria || false"
                     ng-model="$controller.dadosenecessidades.necessidades_psiquiatria"
                     ng-required="true"
-                    ng-disabled="$controller.readOnly"
+                    ng-disabled="$controller.isReadOnly"
                     layout="row">
                 <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
                 <md-radio-button ng-value="false">Não</md-radio-button>
@@ -98,7 +98,7 @@
                     ng-init="$controller.dadosenecessidades.necessidades_servico_social = $controller.dadosenecessidades.necessidades_servico_social || false"
                     ng-model="$controller.dadosenecessidades.necessidades_servico_social"
                     ng-required="true"
-                    ng-disabled="$controller.readOnly"
+                    ng-disabled="$controller.isReadOnly"
                     layout="row">
                 <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
                 <md-radio-button ng-value="false">Não</md-radio-button>
@@ -111,7 +111,7 @@
                     ng-init="$controller.dadosenecessidades.necessidades_tratamento_drogas = $controller.dadosenecessidades.necessidades_tratamento_drogas || false"
                     ng-model="$controller.dadosenecessidades.necessidades_tratamento_drogas"
                     ng-required="true"
-                    ng-disabled="$controller.readOnly"
+                    ng-disabled="$controller.isReadOnly"
                     layout="row">
                 <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
                 <md-radio-button ng-value="false">Não</md-radio-button>
@@ -124,7 +124,7 @@
                     ng-init="$controller.dadosenecessidades.necessidades_musicoterapia = $controller.dadosenecessidades.necessidades_musicoterapia || false"
                     ng-model="$controller.dadosenecessidades.necessidades_musicoterapia"
                     ng-required="true"
-                    ng-disabled="$controller.readOnly"
+                    ng-disabled="$controller.isReadOnly"
                     layout="row">
                 <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
                 <md-radio-button ng-value="false">Não</md-radio-button>
@@ -137,7 +137,7 @@
                     ng-init="$controller.dadosenecessidades.necessidades_ter_ocupacional = $controller.dadosenecessidades.necessidades_ter_ocupacional || false"
                     ng-model="$controller.dadosenecessidades.necessidades_ter_ocupacional"
                     ng-required="true"
-                    ng-disabled="$controller.readOnly"
+                    ng-disabled="$controller.isReadOnly"
                     layout="row">
                 <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
                 <md-radio-button ng-value="false">Não</md-radio-button>
@@ -150,39 +150,14 @@
                     ng-init="$controller.dadosenecessidades.necessidades_pedagogia = $controller.dadosenecessidades.necessidades_pedagogia || false"
                     ng-model="$controller.dadosenecessidades.necessidades_pedagogia"
                     ng-required="true"
-                    ng-disabled="$controller.readOnly"
+                    ng-disabled="$controller.isReadOnly"
                     layout="row">
                 <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
                 <md-radio-button ng-value="false">Não</md-radio-button>
             </md-radio-group>
         </div>
 
-        <text-area-input name="outros" label="Outros" is-disabled="$controller.readOnly" ng-model="$controller.dadosenecessidades.necessidades_outros"></text-area-input>
+        <text-area-input name="outros" label="Outros" is-disabled="$controller.isReadOnly" ng-model="$controller.dadosenecessidades.necessidades_outros"></text-area-input>
 
     </md-content>
 </ng-form>
-
-<!--
-    <date-input name="dt_nascimento" title="Data de Nascimento" label="Dt. Nascimento" is-disabled="$form.readOnly || $form.isDisabled" is-required="true" ng-model="$form.crianca.dt_nascimento" date-mask="39/19/9999">
-        <error-message error="required" message="{{ 'MSG2' | message }}"></error-message>
-    </date-input>
-
-    <text-input  max-length="50" name="filiacao" label="Filiação" is-disabled="$form.readOnly || $form.isDisabled" is-required="true" ng-model="$form.crianca.filiacao">
-        <error-message error="required" message="{{ 'MSG2' | message }}"></error-message>
-    </text-input>
-
-    <text-input  max-length="50" name="responsavel" label="Responsável" is-disabled="$form.readOnly || $form.isDisabled" is-required="true" ng-model="$form.crianca.responsavel">
-        <error-message error="required" message="{{ 'MSG2' | message }}"></error-message>
-    </text-input>
-
-    <text-input  max-length="50" name="grau_parentesco" label="Grau de Parentesco" is-disabled="$form.readOnly || $form.isDisabled" is-required="true" ng-model="$form.crianca.grau_parentesco">
-        <error-message error="required" message="{{ 'MSG2' | message }}"></error-message>
-    </text-input>
-
-    <text-input  max-length="50" name="processo" label="Processo" is-disabled="$form.readOnly || $form.isDisabled" is-required="true" ng-model="$form.crianca.processo">
-        <error-message error="required" message="{{ 'MSG2' | message }}"></error-message>
-    </text-input>
-
-    <text-input  max-length="50" name="comarca" label="Comarca" is-disabled="$form.readOnly || $form.isDisabled" is-required="true" ng-model="$form.crianca.comarca">
-        <error-message error="required" message="{{ 'MSG2' | message }}"></error-message>
-    </text-input>-->
