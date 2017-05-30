@@ -1,8 +1,9 @@
+import LogoPath from './../../../../img/logo.png';
 
 export default class LoginController {
 
     constructor(AuthService, ToastService, MessageService, $state) {
-
+        this.logoPath = LogoPath;
         this.route = $state;
         this.auth = AuthService;
         this.toast = ToastService;

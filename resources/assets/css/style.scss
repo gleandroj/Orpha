@@ -142,8 +142,9 @@ md-select.md-page-select > .md-select-value {
   display: none !important;
 }
 
-.stepper{
-  counter-reset: md-step;
+/* Login Card */
+.login-card{
+  max-width: 640px !important;
 }
 
 /* Radio group */
@@ -176,6 +177,10 @@ md-select.md-page-select > .md-select-value {
 /* md-tabs */
 md-pagination-wrapper {
   width:auto !important;
+}
+
+.stepper{
+  counter-reset: md-step;
 }
 
 .stepper md-ink-bar {
