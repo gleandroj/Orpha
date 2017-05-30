@@ -33,4 +33,4 @@ export default class DadosNecessidadesService{
     }
 }
 
-DadosNecessidadesService.inject = ['$http', 'OrphaUtilService'];
+DadosNecessidadesService.$inject = ['$http', 'OrphaUtilService'];
