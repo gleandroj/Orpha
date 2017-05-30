@@ -26,4 +26,4 @@ export default class PiaService{
     }
 }
 
-PiaService.inject = ['$http', 'OrphaUtilService'];
+PiaService.$inject = ['$http', 'OrphaUtilService'];

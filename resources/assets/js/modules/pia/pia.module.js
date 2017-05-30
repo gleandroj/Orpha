@@ -3,8 +3,8 @@
  */
 
 import RouteConfig from './config/RouteConfig';
-import DadosNecessidadesService from './services/DadosNecessidadesService';
 import PiaService from './services/PiaService';
+import DadosNecessidadesService from './services/DadosNecessidadesService';
 
 let module = angular
     .module('orpha.modules.pia', [])
