@@ -23,7 +23,12 @@ class CriancaModuloSeeder extends Seeder
 
     public function testDataSeed()
     {
-        factory(Crianca::class, 10)->create(['orfanato_id' => 1]);
+        factory(Crianca::class, 10)
+            ->create(['orfanato_id' => 1])
+            ->each(function($c) {
+                $c->pia()->create([]);
+                $c->pia->dadosNecessidades()->create([]);
+            });;
     }
     
     public function moduloPermissionSeed()

@@ -56,6 +56,10 @@ export default class OrphaUtilService{
         return this.$interval.cancel(callback);
     }
 
+    isUndefined(obj){
+        return angular.isUndefined(obj);
+    }
+
     _decorate(promise){
         promise.success = (callback) => {
             promise.then(callback, ()=>{});
@@ -78,4 +82,4 @@ export default class OrphaUtilService{
     }
 }
 
-OrphaUtilService.$inject = ['$rootScope', '$timeout', '$interval', '$q'];
+OrphaUtilService.$inject = ['$rootScope', '$timeout', '$interval', '$q', '$window', '$document', '$anchorScroll'];

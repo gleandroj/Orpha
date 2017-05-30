@@ -4,7 +4,7 @@
 
 export default class DadosNecessidadesController{
 
-    constructor(OrphaUtilService, Scope, State, Crianca, DadosNecessidades, DadosNecessidadesService, LogService, ToastService){
+    constructor(OrphaUtilService, Scope, State, Crianca, DadosNecessidades, DadosNecessidadesService, LogService, ToastService, MessageService, DialogService){
         this.util = OrphaUtilService;
         this.scope = Scope;
         this.state = State;
@@ -14,49 +14,69 @@ export default class DadosNecessidadesController{
         this.dadosNecessidadesService = DadosNecessidadesService;
         this.logService = LogService;
         this.toastService = ToastService;
+        this.messageService = MessageService;
+        this.dialogService = DialogService;
+        this.scopes = [];
         this.selected = 0;
         this.loading = false;
-        this.readOnly = this.dadosenecessidades.completado || false;
-        this.scopes = [];
+        this.readOnly = this.dadosenecessidades.documentacao_completado;
+    }
+
+    get isReadOnly(){
+        return this.readOnly;
+    }
+
+    get tabKey(){
+        switch (this.selected){
+            case 0:
+                return 'documentacao';
+                break;
+            case 1:
+                return 'necessidades';
+                break;
+            case 2:
+                return 'rededeapoio';
+                break;
+            case 3:
+                return 'atividades';
+                break;
+            case 4:
+                return 'tratamentos';
+                break;
+            case 5:
+                return 'religiosidade';
+                break;
+            default:
+                return null;
+                break;
+        }
     }
 
     saveAndNext(){
-        this.loading = true;
-        this.util.timeout(()=>{
-            switch (this.selected){
-                case 0:
-                    this.save('documentacao');
-                    break;
-                case 1:
-                    this.save('necessidades');
-                    break;
-                case 2:
-                    this.save('rededeapoio');
-                    break;
-                case 3:
-                    this.save('atividades');
-                    break;
-                case 4:
-                    this.save('tratamentos');
-                    break;
-                case 5:
-                    this.save('religiosidade');
-                    this.finish();
-                    break;
-                default:
-                    break;
-            };
-            this.loading = false;
-            this.selected++;
-        }, 1500);
+        this.save(this.tabKey);
     }
 
     save(key){
+        if (!this.editMode) {
+            this.submit(key);
+        } else {
+            this.showConfirmation(()=>{
+                this.submit(key);
+            }, ()=>{});
+        }
+    }
+
+    submit(key){
+        this.loading = true;
         this.dadosNecessidadesService.save(this.crianca.id, this.util.extend(this.dadosenecessidades, { completado: true }), key)
             .success((dadosenecessidades)=>{
-                this.originalDadosenecessidades = this.util.copy(dadosenecessidades);
-                this.dadosenecessidades = dadosenecessidades;
-                if(this.selected < 5) this.selected++;
+                this.util.extend(this.originalDadosenecessidades, dadosenecessidades);
+                this.util.extend(this.dadosenecessidades, dadosenecessidades);
+                this.toastService.showSuccess(this.messageService.get(this.editMode ? 'MSG7' : 'MSG5'));
+
+                if(this.tabKey !== 'religiosidade') this.selected++;
+                else this.readOnly = true;
+                this.loading = false;
             })
             .error((error)=> this.showError(error));
     }
@@ -67,20 +87,11 @@ export default class DadosNecessidadesController{
     }
 
     prev(){
-        if(this.selected === 0 && this.readOnly){
-            this.back();
-        }else if(!this.readOnly){
-            this.finish();
-        }else{
-            this.selected--;
-        }
-    }
-
-    finish(){
-        this.readOnly = true;
+        this.back();
     }
 
     changeToEditMode(){
+        this.editMode = true;
         this.readOnly = false;
     }
 
@@ -88,12 +99,18 @@ export default class DadosNecessidadesController{
         this.scopes.push(scope);
     }
 
-    canSaveAndNext(){
+    get canSaveAndNext(){
         return this.scopes[this.selected] && this.scopes[this.selected]['form'] && this.scopes[this.selected]['form'].$valid;
     }
 
-    canGoBack(){
-        this.util.compare(this.dadosenecessidades, this.originalDadosenecessidades);
+    showConfirmation(okCallback, cancelCallback){
+        this.dialogService
+            .showConfirmDialog({
+                title: 'Confirmação',
+                okBtn: 'Sim',
+                cancelBtn: 'Não',
+                message: this.messageService.get('MSG6')
+            }).then(okCallback, cancelCallback);
     }
 
     showError(error){
@@ -103,4 +120,4 @@ export default class DadosNecessidadesController{
     }
 }
 
-DadosNecessidadesController.$inject = ['OrphaUtilService', '$scope', '$state', 'Crianca', 'DadosNecessidades', 'DadosNecessidadesService', 'LogService', 'ToastService'];
+DadosNecessidadesController.$inject = ['OrphaUtilService', '$scope', '$state', 'Crianca', 'DadosNecessidades', 'DadosNecessidadesService', 'LogService', 'ToastService', 'MessageService', 'DialogService'];
