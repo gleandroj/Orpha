@@ -74,9 +74,11 @@ export default class DadosNecessidadesController{
                 this.util.extend(this.dadosenecessidades, dadosenecessidades);
                 this.toastService.showSuccess(this.messageService.get(this.editMode ? 'MSG7' : 'MSG5'));
 
-                if(this.tabKey !== 'religiosidade') this.selected++;
+                if(this.tabKey !== 'religiosidade'){
+                    this.selected++;
+                    this.loading = false;
+                }
                 else this.back();
-                this.loading = false;
             })
             .error((error)=> this.showError(error));
     }

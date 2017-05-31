@@ -7,4 +7,8 @@ Route::group(['middleware' => ['auth:api']], function () {
 
     Route::get('criancas/{crianca}/pia/dadosenecessidades', 'Controllers\DadosNecessidadesController@show');
     Route::put('criancas/{crianca}/pia/dadosenecessidades', 'Controllers\DadosNecessidadesController@update');
+
+    Route::get('criancas/{crianca}/pia/atividadessocioeducativas', 'Controllers\AtividadesSocioeducativasControllerController@show');
+    Route::put('criancas/{crianca}/pia/atividadessocioeducativas', 'Controllers\AtividadesSocioeducativasController@update');
 });
+

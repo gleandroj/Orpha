@@ -11,7 +11,7 @@ export default class AtividadesSocioeducativasController{
         this.crianca = Crianca;
         this.originalDadosenecessidades = this.util.copy(AtividadesSocioeducativas);
         this.atividadessocioeducativas = AtividadesSocioeducativas;
-        this.dadosNecessidadesService = AtividadesSocioeducativasService;
+        this.atividadesSocioeducativasService = AtividadesSocioeducativasService;
         this.logService = LogService;
         this.toastService = ToastService;
         this.messageService = MessageService;
@@ -59,16 +59,18 @@ export default class AtividadesSocioeducativasController{
 
     submit(key){
         this.loading = true;
-        this.dadosNecessidadesService
+        this.atividadesSocioeducativasService
             .save(this.crianca.id, this.atividadessocioeducativas, key)
             .success((atividadessocioeducativas)=>{
                 this.util.extend(this.originalDadosenecessidades, atividadessocioeducativas);
                 this.util.extend(this.atividadessocioeducativas, atividadessocioeducativas);
                 this.toastService.showSuccess(this.messageService.get(this.editMode ? 'MSG7' : 'MSG5'));
 
-                if(this.tabKey !== 'educacaoesaude') this.selected++;
+                if(this.tabKey !== 'educacaoesaude'){
+                    this.selected++;
+                    this.loading = false;
+                }
                 else this.back();
-                this.loading = false;
             })
             .error((error)=> this.showError(error));
     }

@@ -92,7 +92,7 @@ export default function RouteConfig($stateProvider) {
             resolve: {
                 Crianca: CriancaResolver,
                 Pia: PiaResolve,
-                DadosNecessidades: AtividadesSocioeducativasResolve
+                AtividadesSocioeducativas: AtividadesSocioeducativasResolve
             },
             authorized: ['show-atividades-socioeducativas'],
             ncyBreadcrumb: {
