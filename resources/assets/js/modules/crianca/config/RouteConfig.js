@@ -22,6 +22,7 @@ export default function RouteConfig($stateProvider, $urlRouterProvider) {
             controller: ListController,
             controllerAs: '$controller',
             template: ListTemplate,
+            authorized:['list-crianca'],
             ncyBreadcrumb: {
                 label: 'Crianças'
             }
@@ -38,6 +39,7 @@ export default function RouteConfig($stateProvider, $urlRouterProvider) {
             controller: FormController,
             controllerAs: '$controller',
             template: FormTemplate,
+            authorized:['create-crianca'],
             ncyBreadcrumb: {
                 label: 'Cadastrar',
                 parent: 'crianca.list'
@@ -55,6 +57,7 @@ export default function RouteConfig($stateProvider, $urlRouterProvider) {
             controller: FormController,
             controllerAs: '$controller',
             template: FormTemplate,
+            authorized:['show-crianca'],
             ncyBreadcrumb: {
                 label: '{{ $controller.crianca.nome }}',
                 parent: 'crianca.list'
@@ -72,6 +75,7 @@ export default function RouteConfig($stateProvider, $urlRouterProvider) {
             controller: FormController,
             controllerAs: '$controller',
             template: FormTemplate,
+            authorized:['edit-crianca'],
             ncyBreadcrumb: {
                 label: '{{ $controller.crianca.nome }}',
                 parent: 'crianca.list'

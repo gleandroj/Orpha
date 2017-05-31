@@ -5,7 +5,7 @@ import 'angular';
 import 'angular-aria';
 import 'angular-animate';
 import 'angular-material';
-import 'angular-ui-router';
+import '@uirouter/angularjs';
 import 'angular-messages';
 import 'angular-filter';
 import 'angular-material-expansion-panel';

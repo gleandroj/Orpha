@@ -40,6 +40,7 @@
 
                 show-primary-btn="$controller.authService.getCurrentUser().hasPermission('edit-crianca')"
                 show-secondary-btn="$controller.authService.getCurrentUser().hasPermission('disable-crianca')"
+                show-pia-btn="$controller.authService.getCurrentUser().hasPermission('show-pia-menu')"
 
                 on-crianca-click="$controller.showCrianca(crianca)"
                 on-primary-btn-click="$controller.editCrianca(crianca)"

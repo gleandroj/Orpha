@@ -2,9 +2,9 @@
  * Created by hc on 5/29/17.
  */
 
-export default function PiaResolve(PiaService, OrphaUtilService, $state, $stateParams) {
+export default function PiaResolve(PiaService, OrphaUtilService, $state, $transition$) {
     let deferred = OrphaUtilService.defer();
-    PiaService.get($stateParams.id)
+    PiaService.get($transition$.params().id)
         .success((pia) => deferred.resolve(pia))
         .error((error) => {
             try{
@@ -17,4 +17,4 @@ export default function PiaResolve(PiaService, OrphaUtilService, $state, $stateP
     return deferred.promise;
 }
 
-PiaResolve.$inject = ['PiaService', 'OrphaUtilService', '$state', '$stateParams'];
+PiaResolve.$inject = ['PiaService', 'OrphaUtilService', '$state', '$transition$'];

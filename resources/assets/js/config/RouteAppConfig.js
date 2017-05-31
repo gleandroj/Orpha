@@ -14,6 +14,9 @@ export default function RouteAppConfig($urlRouterProvider, $breadcrumbProvider) 
         template: breadCrumbTemplate
     });
 
+    //Disabel Error Handler
+    $urlRouterProvider._router.stateService.defaultErrorHandler(function(){});
+
     //$urlRouterProvider.otherwise('/orpha');
     let defaultRoute = 'user.profile';
 

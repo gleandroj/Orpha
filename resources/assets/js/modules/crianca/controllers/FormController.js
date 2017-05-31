@@ -39,8 +39,9 @@ export default class FormController {
 
     showError(error){
         this.loading = false;
-        this.logService.error(error ? error.error  +": "+error['message'] : this.messageService.get('MSG4'));
-        this.toastService.showError(error ? error['message'] : this.messageService.get('MSG4'));
+        let err = (error && error.detail) ? error.detail : error;
+        this.logService.error(err && err.error ? err.error  +": "+err['message'] : this.messageService.get('MSG4'));
+        this.toastService.showError(err && err.error ? err['message'] : this.messageService.get('MSG4'));
     }
 
     showValidationErrors(errors){
@@ -58,7 +59,7 @@ export default class FormController {
     }
 
     showPia(){
-        if(this.authService.getCurrentUser().hasPermission('show-crianca')){ // need validate the correct permission
+        if(this.authService.getCurrentUser().hasPermission('show-pia-menu')){
             this.loading = true;
             this.state.go('crianca.pia.menu', {id: this.crianca.id}).then(()=>{}, (error) => this.showError(error));
         }
@@ -76,7 +77,7 @@ export default class FormController {
     }
 
     cancel() {
-        this.state.go('crianca.list');
+        this.state.go('crianca.list').then(()=>{}, (err) => this.showError(err));
     }
 
     submitCrianca(){
@@ -90,10 +91,10 @@ export default class FormController {
                 this.loading = false;
             }).error((err)=> {
                 this.loading = false;
-                if(err.error === 'Unprocessable Entity')
+                if(err && err.error === 'Unprocessable Entity')
                     this.showValidationErrors(err.errors);
                 else
-                    this.toastService.showError(err ? err['message'] : this.messageService.get('MSG4'));
+                    this.showError(err);
             });
     }
 

@@ -2,12 +2,13 @@ import LogoPath from './../../../../img/logo.png';
 
 export default class LoginController {
 
-    constructor(AuthService, ToastService, MessageService, $state) {
+    constructor(AuthService, ToastService, MessageService, LogService, $state) {
         this.logoPath = LogoPath;
         this.route = $state;
         this.auth = AuthService;
-        this.toast = ToastService;
-        this.message = MessageService;
+        this.toastService = ToastService;
+        this.messageService = MessageService;
+        this.logService = LogService;
         this.user = {
             email: '',
             password: ''
@@ -24,12 +25,16 @@ export default class LoginController {
                 self.route.go(this.authRoute);
                 self.loading = false;
             })
-            .error((error) => {
-                self.toast.showError(self.message.get('MSG14'));
-                self.loading = false;
-            });
+            .error((error) => this.showError(error));
+    }
+
+    showError(error){
+        this.loading = false;
+        let err = (error && error.detail) ? error.detail : error;
+        this.logService.error(err && err.error ? err.error  +": "+err['message'] : this.messageService.get('MSG4'));
+        this.toastService.showError(err && err.error ? err['message'] : this.messageService.get('MSG4'));
     }
 
 }
 
-LoginController.$inject = ['AuthService', 'ToastService', 'MessageService', '$state'];
+LoginController.$inject = ['AuthService', 'ToastService', 'MessageService', 'LogService', '$state'];

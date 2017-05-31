@@ -23,7 +23,7 @@
     "angular-material-simple-components": "^1.1.0",
     "angular-messages": "^1.6.1",
     "angular-resource": "^1.6.0",
-    "angular-ui-router": "^0.4.2",
+    "@uirouter/angularjs": "^1.0.3",
     "chart.js": "^2.5.0",
     "moment": "^2.15.1",
     "ngMask": "https://github.com/candreoliveira/ngMask.git"

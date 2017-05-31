@@ -33,10 +33,15 @@ export default class FormController {
         this.title = 'Alterar usuário';
     }
 
+    goBack(){
+        this.state.go('user.list').then(()=>{}, (err) => this.showError(err));
+    }
+
     showError(error){
         this.loading = false;
-        this.logService.error(error ? error.error  +": "+error['message'] : this.messageService.get('MSG4'));
-        this.toastService.showError(error ? error['message'] : this.messageService.get('MSG4'));
+        let err = (error && error.detail) ? error.detail : error;
+        this.logService.error(err && err.error ? err.error  +": "+err['message'] : this.messageService.get('MSG4'));
+        this.toastService.showError(err && err.error ? err['message'] : this.messageService.get('MSG4'));
     }
 
     showValidationErrors(errors){
@@ -86,7 +91,7 @@ export default class FormController {
                 if(err.error === 'Unprocessable Entity')
                     this.showValidationErrors(err.errors);
                 else
-                    this.toastService.showError(err ? err['message'] : this.messageService.get('MSG4'));
+                    this.showError(err);
             });
     }
 

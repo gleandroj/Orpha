@@ -27,10 +27,10 @@ export function AuthServiceProvider() {
         _oauth = OAuth;
     };
 
-    this.$get = ['$http', 'OrphaUtilService', 'SessionService', 'StorageService', 'LogService', '$state' ,($http, OrphaUtilService, SessionService, StorageService, LogService, $state) => {
+    this.$get = ['$http', 'OrphaUtilService', 'SessionService', 'StorageService', 'LogService', 'MessageService', '$state', '$transitions' ,($http, OrphaUtilService, SessionService, StorageService, LogService, MessageService, $state, $transitions) => {
 
         SessionService.setSessionTTL(_sessionTime);
-        return new AuthService($http, OrphaUtilService, SessionService, StorageService, LogService, $state, _oauth);
+        return new AuthService($http, OrphaUtilService, SessionService, StorageService, LogService, MessageService, $state, $transitions, _oauth);
 
     }];
 }
@@ -70,13 +70,15 @@ class AuthUser{
 
 class AuthService {
 
-    constructor($http, OrphaUtilService, SessionService, StorageService, LogService, $state, OAuthConfig) {
+    constructor($http, OrphaUtilService, SessionService, StorageService, LogService, MessageService, $state , $transitions, OAuthConfig) {
         this.http = $http;
         this.util = OrphaUtilService;
         this.session = SessionService;
         this.storage = StorageService;
         this.log = LogService;
+        this.messageService = MessageService;
         this.route = $state;
+        this.transitions = $transitions;
         this.OAuth = OAuthConfig || {
             "api_oauth_url": "",
             "api_user_url": "",
@@ -90,7 +92,9 @@ class AuthService {
             "login_route": ""
         };
         this.permissions = null;
-        this.util.on('$stateChangeStart', (event, next) => this.onRouteChange(event, next));
+        this.transitions.onStart({}, (transition) => {
+            return this.onRouteChange(transition);
+        });
         this.initialize();
     }
 
@@ -316,38 +320,45 @@ class AuthService {
     }
 
     /*Private*/
-    onRouteChange(event, next, prev) {
+    onRouteChange(transition) {
+        let next = transition.to();
+
         if (this.isAuthenticated() && next.name.indexOf('auth') > -1) {
-            event.preventDefault();
             this.log.info('Authenticated user, redirecting to: ' + this.OAuth['redirect_route']);
-            this.route.go(this.OAuth['redirect_route']);
+            return transition.router.stateService.target(this.OAuth['redirect_route']);
         }
 
         let auth = next['authorized'] ? next['authorized'] : [];
         let allowAnonymous = next['allowAnonymous'] ? next['allowAnonymous'] : false;
+
         if (!allowAnonymous) {
-            if (!this.isAuthenticated()) this.danyRouteAcess(event, next, true);
-            else if (this.isAuthenticated() && !this.getCurrentUser().hasPermission(auth)) this.danyRouteAcess(event, next, false);
-            else if (this.isAuthenticated()) this.session.touch();
+            if (!this.isAuthenticated())
+                return this.danyRouteAcess(transition, next, true);
+            else if (this.isAuthenticated() && !this.getCurrentUser().hasPermission(auth))
+                return this.danyRouteAcess(transition, next, false);
+            else if (this.isAuthenticated())
+                this.session.touch();
         }
+
+        return true;
     }
 
     /*Private*/
-    danyRouteAcess(event, next, redirect) {
-        event.preventDefault();
+    danyRouteAcess(transition, next, redirect) {
         this.util.broadcast(AuthEvents.accessDenied, next);
 
         if (next.name !== "") this.log.error("Access denied on unauthorized root:" + next.name);
         else this.log.error("Access denied");
 
         let isAuthenticated = this.isAuthenticated();
+        let error = (isAuthenticated ? 'Unauthorized' : 'Unauthenticated');
 
         if (redirect) {
-            this.route.go(this.OAuth['login_route']);
-            this.log.info((isAuthenticated ? 'Unauthorized' : 'Unauthenticated') +
-                ' user, redirecting to: ' +
-                (isAuthenticated ? this.OAuth.redirect_route : this.OAuth.login_route));
+            this.log.info(error + ' user, redirecting to: ' + (isAuthenticated ? this.OAuth.redirect_route : this.OAuth.login_route));
+            return this.route.target(this.OAuth['login_route']);
         }
+
+        return this.util.$q.reject({error: error, message: this.messageService.get('MSG17')});
     }
 }
 

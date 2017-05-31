@@ -34,6 +34,7 @@ export default function RouteConfig($stateProvider, $urlRouterProvider) {
             controller: ListController,
             controllerAs: '$controller',
             template: ListTemplate,
+            authorized: ['list-user'],
             ncyBreadcrumb: {
                 label: 'Usuários'
             }
@@ -50,6 +51,7 @@ export default function RouteConfig($stateProvider, $urlRouterProvider) {
             controller: FormController,
             controllerAs: '$controller',
             template: FormTemplate,
+            authorized: ['create-user'],
             ncyBreadcrumb: {
                 label: 'Cadastrar',
                 parent: 'user.list'
@@ -67,6 +69,7 @@ export default function RouteConfig($stateProvider, $urlRouterProvider) {
             controller: FormController,
             controllerAs: '$controller',
             template: FormTemplate,
+            authorized: ['show-user'],
             ncyBreadcrumb: {
                 label: '{{ $controller.user.name }}',
                 parent: 'user.list'
@@ -84,6 +87,7 @@ export default function RouteConfig($stateProvider, $urlRouterProvider) {
             controller: FormController,
             controllerAs: '$controller',
             template: FormTemplate,
+            authorized: ['edit-user'],
             ncyBreadcrumb: {
                 label: '{{ $controller.user.name }}',
                 parent: 'user.list'

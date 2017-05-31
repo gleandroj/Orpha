@@ -1,8 +1,3 @@
-/*
-import PiaController from './../controllers/PiaController';
-import PiaLayoutTemplate from './../pages/pia.layout.tpl.html';
-*/
-
 import PiaMenuController from './../controllers/PiaMenuController';
 import PiaMenuTemplate from './../pages/pia.menu.tpl.html';
 
@@ -20,9 +15,9 @@ import CriancaResolver from './../../crianca/resolvers/CriancaResolve';
 import PiaResolve from './../resolvers/PiaResolve';
 import DadosNecessidadesResolve from './../resolvers/DadosNecessidadesResolve';
 
-RouteConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
+RouteConfig.$inject = ['$stateProvider'];
 
-export default function RouteConfig($stateProvider, $urlRouterProvider) {
+export default function RouteConfig($stateProvider) {
 
     $stateProvider
         .state('crianca.pia', {
@@ -40,6 +35,7 @@ export default function RouteConfig($stateProvider, $urlRouterProvider) {
             controller: PiaMenuController,
             controllerAs: '$controller',
             template: PiaMenuTemplate,
+            authorized: ['show-pia-menu'],
             ncyBreadcrumb: {
                 label: 'PIA',
                 parent: 'crianca.show'
@@ -51,12 +47,7 @@ export default function RouteConfig($stateProvider, $urlRouterProvider) {
                 '':{
                     controller: DadosNecessidadesController,
                     controllerAs: '$controller',
-                    resolve: {
-                        Crianca: CriancaResolver,
-                        Pia: PiaResolve,
-                        DadosNecessidades: DadosNecessidadesResolve
-                    },
-                     template: DadosNecessidadesTemplate
+                     template: DadosNecessidadesTemplate,
                  },
                 'documentacao@crianca.pia.dadosenecessidades':{ template: DocumentacaoTemplate },
                 'necessidades@crianca.pia.dadosenecessidades':{ template: NecessidadesTemplate },
@@ -66,6 +57,12 @@ export default function RouteConfig($stateProvider, $urlRouterProvider) {
                 'religiosidade@crianca.pia.dadosenecessidades':{ template: ReligiosidadeTemplate },
             },
             data:{},
+            resolve: {
+                Crianca: CriancaResolver,
+                Pia: PiaResolve,
+                DadosNecessidades: DadosNecessidadesResolve
+            },
+            authorized: ['show-dados-necessidades'],
             ncyBreadcrumb: {
                 label: 'Dados e Necessidades',
                 parent: 'crianca.pia.menu'

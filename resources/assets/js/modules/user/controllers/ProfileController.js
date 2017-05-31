@@ -32,8 +32,15 @@ export default class ProfileController{
         }, (err)=>{
             this.loading = false;
             console.log(err);
-            this.toastService.showError(err ? err['message'] : this.messageService.get('MSG4'));
+            this.showError(err);
         });
+    }
+
+    showError(error){
+        this.loading = false;
+        let err = (error && error.detail) ? error.detail : error;
+        this.logService.error(err && err.error ? err.error  +": "+err['message'] : this.messageService.get('MSG4'));
+        this.toastService.showError(err && err.error ? err['message'] : this.messageService.get('MSG4'));
     }
 
     cancelDialog(){

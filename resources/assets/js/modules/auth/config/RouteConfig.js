@@ -12,7 +12,7 @@ import PasswordResetTemplate from './../pages/password-reset.tpl.html';
 
 import TokenResolve from './../resolvers/TokenResolve';
 
-export default function RouteConfig($stateProvider) {
+export default function RouteConfig($stateProvider, $uiRouterProvider) {
 
     $stateProvider
         .state('auth', {
@@ -48,4 +48,4 @@ export default function RouteConfig($stateProvider) {
         });
 }
 
-RouteConfig.$inject = ['$stateProvider'];
+RouteConfig.$inject = ['$stateProvider', '$uiRouterProvider'];
