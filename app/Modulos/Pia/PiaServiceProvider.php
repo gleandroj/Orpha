@@ -5,8 +5,14 @@ namespace App\Modulos\Pia;
 
 use App\Modulos\Pia\Contracts\DadosNecessidadesRepositoryInterface;
 use App\Modulos\Pia\Contracts\DadosNecessidadesServiceInterface;
+use App\Modulos\Pia\Contracts\PiaServiceInterface;
+use App\Modulos\Pia\Models\DadosNecessidades;
+use App\Modulos\Pia\Models\Pia;
+use App\Modulos\Pia\Policies\DadosNecessidadesPolicy;
+use App\Modulos\Pia\Policies\PiaPolicy;
 use App\Modulos\Pia\Repositories\DadosNecessidadesRepository;
 use App\Modulos\Pia\Services\DadosNecessidadesService;
+use App\Modulos\Pia\Services\PiaService;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Route;
 
@@ -18,7 +24,8 @@ class PiaServiceProvider extends ServiceProvider
      * @var array
      */
     public $policies = [
-
+        DadosNecessidades::class => DadosNecessidadesPolicy::class,
+        Pia::class => PiaPolicy::class
     ];
 
     /**
@@ -40,6 +47,7 @@ class PiaServiceProvider extends ServiceProvider
     {
         $this->app->bind(DadosNecessidadesRepositoryInterface::class, DadosNecessidadesRepository::class);
         $this->app->bind(DadosNecessidadesServiceInterface::class, DadosNecessidadesService::class);
+        $this->app->bind(PiaServiceInterface::class, PiaService::class);
     }
 
     /**

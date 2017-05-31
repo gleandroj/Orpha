@@ -33,19 +33,25 @@ class DadosNecessidadesController extends Controller
 
     /**
      * @param Crianca $crianca
-     * @return mixed
+     * @return \Illuminate\Database\Eloquent\Model|DadosNecessidades
      */
-    public function dadosNecessidades(Crianca $crianca){
-        return $crianca->pia->dadosNecessidades;
+    public function show(Crianca $crianca){
+        $dadosNecessidades = $this->dadosNecessidadesService->getByCriancaId($crianca->id);
+
+        $this->authorizeForUser($this->getCurrentUser(), 'show', [$dadosNecessidades, $crianca]);
+
+        return $dadosNecessidades;
     }
 
     /**
      * @param Crianca $crianca
      * @param Request $request
-     * @return \Illuminate\Database\Eloquent\Model
-     * @internal param DadosNecessidades $dadosNecessidades
+     * @return \Illuminate\Database\Eloquent\Model|DadosNecessidades
      */
     public function update(Crianca $crianca, Request $request){
+
+        $this->authorizeForUser($this->getCurrentUser(), 'update', [$this->dadosNecessidadesService->getByCriancaId($crianca->id), $crianca]);
+
         return $this->dadosNecessidadesService->update($crianca->id, $request->all());
     }
 }

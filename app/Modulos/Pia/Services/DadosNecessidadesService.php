@@ -10,6 +10,7 @@ namespace App\Modulos\Pia\Services;
 
 
 use App\Modulos\Crianca\Contracts\CriancaServiceInterface;
+use App\Modulos\Crianca\Models\Crianca;
 use App\Modulos\Pia\Contracts\DadosNecessidadesRepositoryInterface;
 use App\Modulos\Pia\Contracts\DadosNecessidadesServiceInterface;
 use App\Modulos\Pia\Models\DadosNecessidades;
@@ -48,7 +49,18 @@ class DadosNecessidadesService implements DadosNecessidadesServiceInterface
     }
 
     /**
-     * @param $id
+     * @param $criancaId
+     * @return \Illuminate\Database\Eloquent\Model
+     * @throws ModelNotFoundException
+     */
+    public function getByCriancaId($criancaId)
+    {
+        if(!$crianca = $this->criancaService->getById($criancaId)) throw (new ModelNotFoundException())->setModel(Crianca::class);
+        return $crianca->pia->dadosNecessidades;
+    }
+
+    /**
+     * @param $criancaId
      * @param array $data
      * @return DadosNecessidades|\Illuminate\Database\Eloquent\Model
      * @throws Exception
@@ -61,8 +73,7 @@ class DadosNecessidadesService implements DadosNecessidadesServiceInterface
             return str_contains($key, $update_key);
         });
 
-        $crianca = $this->criancaService->getById($criancaId);
-        $dadosNecessidades = $crianca->pia->dadosNecessidades;
+        $dadosNecessidades = $this->getByCriancaId($criancaId);
         $update_data->put($update_key.'_completado', true);
 
         if($update_key == 'religiosidade') $update_data->put('completado', true);

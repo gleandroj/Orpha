@@ -12,7 +12,13 @@ namespace App\Modulos\Pia\Contracts;
 interface DadosNecessidadesServiceInterface
 {
     /**
-     * @param $id
+     * @param $criancaId
+     * @return \Illuminate\Database\Eloquent\Model
+     */
+    public function getByCriancaId($criancaId);
+
+    /**
+     * @param $criancaId
      * @param array $data
      * @return \Illuminate\Database\Eloquent\Model
      */

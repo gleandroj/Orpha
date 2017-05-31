@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(OrphaModuloSeeder::class);
         $this->call(CriancaModuloSeeder::class);
+        $this->call(PiaModuloSeeder::class);
         $this->call(UserModuloSeeder::class);
     }
 }

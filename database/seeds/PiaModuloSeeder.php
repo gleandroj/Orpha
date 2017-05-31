@@ -27,7 +27,7 @@ class PiaModuloSeeder extends Seeder
 
     public function moduloPermissionSeed()
     {
-        Permission::create(['name' => 'Acessar Menu PIA', 'modulo' => 'PIA'  ,'slug' => 'show-pia-menu', 'description' =>  'Permissão de acessar o menu PIA no sistema']);
+        Permission::create(['name' => 'Acessar PIA', 'modulo' => 'PIA'  ,'slug' => 'show-pia', 'description' =>  'Permissão de acessar o PIA no sistema']);
 
         Permission::create(['name' => 'Visualizar Dados e Necessidades', 'modulo' => 'PIA'  ,'slug' => 'show-dados-necessidades', 'description' =>  'Permissão de visualizar os Dados e necessidades do PIA no sistema']);
         Permission::create(['name' => 'Cadastrar e Alterar Dados e Necessidades', 'modulo' => 'PIA'  ,'slug' => 'update-dados-necessidades', 'description' =>  'Permissão de cadastrar e Alterar os Dados e necessidades do PIA no sistema']);

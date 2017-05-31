@@ -12,17 +12,26 @@ use App\Modulos\Pia\Contracts\PiaServiceInterface;
 class PiaController extends Controller
 {
     /**
-     * PiaController constructor.
+     * @var PiaServiceInterface
      */
-    public function __construct()
+    private $piaService;
+
+    /**
+     * PiaController constructor.
+     * @param PiaServiceInterface $piaService
+     */
+    public function __construct(PiaServiceInterface $piaService)
     {
+        $this->piaService = $piaService;
     }
 
     /**
      * @param Crianca $crianca
      * @return mixed
      */
-    public function pia(Crianca $crianca){
-        return $crianca->pia;
+    public function show(Crianca $crianca){
+        $pia = $this->piaService->getPiaByCriancaId($crianca->id);
+        $this->authorizeForUser($this->getCurrentUser(), 'show', [$pia, $crianca]);
+        return $pia;
     }
 }

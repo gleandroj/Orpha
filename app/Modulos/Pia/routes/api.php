@@ -2,12 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::group(['middleware' => []], function () {/*'auth:api'*/
+Route::group(['middleware' => ['auth:api']], function () {
+    Route::get('criancas/{crianca}/pia', 'Controllers\PiaController@show');
 
-    //Route::resource('/pia', 'Controllers\CriancaController', ['except' => ['create', 'edit']]);
-    Route::get('criancas/{crianca}/pia', 'Controllers\PiaController@pia');
-
-    Route::get('criancas/{crianca}/pia/dadosenecessidades', 'Controllers\DadosNecessidadesController@dadosNecessidades');
+    Route::get('criancas/{crianca}/pia/dadosenecessidades', 'Controllers\DadosNecessidadesController@show');
     Route::put('criancas/{crianca}/pia/dadosenecessidades', 'Controllers\DadosNecessidadesController@update');
-
 });
