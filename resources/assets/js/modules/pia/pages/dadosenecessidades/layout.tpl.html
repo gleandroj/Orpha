@@ -80,7 +80,7 @@
         <span flex></span>
         <md-divider></md-divider>
 
-        <div layout="row" layout-align="end center" ng-if="!$controller.isReadOnly">
+        <div layout="row" layout-align="end center" ng-if="!$controller.isReadOnly" ng-auth="'update-dados-necessidades'">
             <md-button class="md-accent md-raised" ng-click="$controller.saveAndNext()" ng-disabled="$controller.loading || !$controller.canSaveAndNext">
                 {{ (($controller.selected != 5) ? "Salvar e Continuar" : "Salvar") }}
             </md-button>
@@ -90,7 +90,7 @@
         </div>
 
         <div layout="row" layout-align="end center" ng-if="$controller.isReadOnly">
-            <md-button class="md-accent md-raised" ng-click="$controller.changeToEditMode()" ng-disabled="$controller.loading">
+            <md-button class="md-accent md-raised" ng-click="$controller.changeToEditMode()" ng-disabled="$controller.loading" ng-auth="'update-dados-necessidades'">
                 Alterar
             </md-button>
             <md-button class="md-warn" ng-click="$controller.prev()" ng-disabled="$controller.loading">

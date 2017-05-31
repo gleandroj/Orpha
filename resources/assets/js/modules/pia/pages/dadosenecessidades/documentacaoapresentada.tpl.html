@@ -19,9 +19,9 @@
             <error-message error="required" message="{{ 'MSG2' | message }}"></error-message>
         </text-input>
 
-        <text-input max-length="14" name="cpf" label="CPF" is-disabled="$controller.isReadOnly" mask="999.999.999-99" restrict="reject" is-required="true" ng-model="$controller.dadosenecessidades.documentacao_cpf">
+        <text-input max-length="14" name="cpf" label="CPF" is-disabled="$controller.isReadOnly" mask="999.999.999-99" restrict="reject" valida-cpf is-required="true" ng-model="$controller.dadosenecessidades.documentacao_cpf">
             <error-message error="required" message="{{ 'MSG2' | message }}"></error-message>
-            <error-message error="mask" message="{{ 'MSG10' | message:{attribute:'CPF'} }}"></error-message>
+            <error-message error="mask, valida-cpf" message="{{ 'MSG10' | message:{attribute:'CPF'} }}"></error-message>
         </text-input>
 
         <text-input max-length="12" name="titulo_eleitor" label="Nº Título Eleitoral" is-disabled="$controller.isReadOnly" ng-model="$controller.dadosenecessidades.documentacao_titulo_eleitoral">

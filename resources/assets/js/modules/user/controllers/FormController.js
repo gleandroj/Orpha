@@ -49,15 +49,7 @@ export default class FormController {
     }
 
     cancel() {
-        if (this.user.id == '' || this.user.id == null) {
-            this.state.go('user.list');
-        } else {
-            this.readOnly = true;
-            this.title = 'Visualizar usuário';
-            if(!this.form.$submitted || !this.form.$valid){
-                this.user = this.util.copy(this.originalUser);
-            }
-        }
+        this.state.go('user.list');
     }
 
     save(){

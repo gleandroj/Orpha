@@ -75,7 +75,7 @@ export default class DadosNecessidadesController{
                 this.toastService.showSuccess(this.messageService.get(this.editMode ? 'MSG7' : 'MSG5'));
 
                 if(this.tabKey !== 'religiosidade') this.selected++;
-                else this.readOnly = true;
+                else this.back();
                 this.loading = false;
             })
             .error((error)=> this.showError(error));

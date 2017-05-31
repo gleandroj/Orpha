@@ -35,7 +35,7 @@ export default function RouteConfig($stateProvider) {
             controller: PiaMenuController,
             controllerAs: '$controller',
             template: PiaMenuTemplate,
-            authorized: ['show-pia-menu'],
+            authorized: ['show-pia'],
             ncyBreadcrumb: {
                 label: 'PIA',
                 parent: 'crianca.show'

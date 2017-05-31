@@ -37,7 +37,7 @@ export default class ListController {
     }
 
     showPia(crianca){
-        if(this.authService.getCurrentUser().hasPermission('show-pia-menu')){
+        if(this.authService.getCurrentUser().hasPermission('show-pia')){
             this.loading = true;
             this.state.go('crianca.pia.menu', {id: crianca.id}).then(()=>{}, (error) => this.showError(error));
         }
