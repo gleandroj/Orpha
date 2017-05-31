@@ -36,11 +36,11 @@ class AtividadesSocioeducativasController extends Controller
      * @return \Illuminate\Database\Eloquent\Model|AtividadesSocioeducativas
      */
     public function show(Crianca $crianca){
-        $dadosNecessidades = $this->atividadesSocioeducativasService->getByCriancaId($crianca->id);
+        $atividadesSocioeducativas = $this->atividadesSocioeducativasService->getByCriancaId($crianca->id);
 
-        $this->authorizeForUser($this->getCurrentUser(), 'show', [$dadosNecessidades, $crianca]);
+        $this->authorizeForUser($this->getCurrentUser(), 'show', [$atividadesSocioeducativas, $crianca]);
 
-        return $dadosNecessidades;
+        return $atividadesSocioeducativas;
     }
 
     /**
