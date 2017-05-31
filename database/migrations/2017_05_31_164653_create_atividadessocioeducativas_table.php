@@ -31,6 +31,7 @@ class CreateAtividadessocioeducativasTable extends Migration
             $table->boolean('educacaoecidadania_orientacao_mundo_trabalho')->default(0)->nullable();
             $table->boolean('educacaoecidadania_orientacao_processo_escolarizacao')->default(0)->nullable();
             $table->boolean('educacaoecidadania_reflexao_ato_infracional')->default(0)->nullable();
+            $table->boolean('educacaoecidadania_completado')->default(0)->nullable();
             $table->string('educacaoecidadania_outros')->nullable();
 
             $table->boolean('educacaoemeioambiente_material_reciclavel')->default(0)->nullable();
