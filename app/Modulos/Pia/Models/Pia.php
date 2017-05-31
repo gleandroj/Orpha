@@ -31,6 +31,13 @@ class Pia extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\hasOne
+     */
+    public function atividadesSocioeducativas(){
+        return $this->hasOne(AtividadesSocioeducativas::class);
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function crianca(){

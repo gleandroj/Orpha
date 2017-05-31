@@ -74,6 +74,7 @@ class CriancaService implements CriancaServiceInterface
         if(!$crianca = $this->criancaRepository->create($data->all())) throw new \Exception(trans('messages.MSG4'));
         $crianca->pia()->create([]);
         $crianca->pia->dadosNecessidades()->create([]);
+        $crianca->pia->dadosNecessidades()->create([]);
         return $crianca->fresh();
     }
 
