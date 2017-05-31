@@ -2,16 +2,16 @@
  * Created by hc on 5/23/17.
  */
 
-export default class DadosNecessidadesController{
+export default class AtividadesSocioeducativasController{
 
-    constructor(OrphaUtilService, Scope, State, Crianca, DadosNecessidades, DadosNecessidadesService, LogService, ToastService, MessageService, DialogService){
+    constructor(OrphaUtilService, Scope, State, Crianca, AtividadesSocioeducativas, AtividadesSocioeducativasService, LogService, ToastService, MessageService, DialogService){
         this.util = OrphaUtilService;
         this.scope = Scope;
         this.state = State;
         this.crianca = Crianca;
-        this.originalDadosenecessidades = this.util.copy(DadosNecessidades);
-        this.dadosenecessidades = DadosNecessidades;
-        this.dadosNecessidadesService = DadosNecessidadesService;
+        this.originalDadosenecessidades = this.util.copy(AtividadesSocioeducativas);
+        this.atividadessocioeducativas = AtividadesSocioeducativas;
+        this.dadosNecessidadesService = AtividadesSocioeducativasService;
         this.logService = LogService;
         this.toastService = ToastService;
         this.messageService = MessageService;
@@ -19,7 +19,7 @@ export default class DadosNecessidadesController{
         this.scopes = [];
         this.selected = 0;
         this.loading = false;
-        this.readOnly = this.dadosenecessidades.documentacao_completado;
+        this.readOnly = this.atividadessocioeducativas.educacaoecidadania_completado;
     }
 
     get isReadOnly(){
@@ -29,22 +29,13 @@ export default class DadosNecessidadesController{
     get tabKey(){
         switch (this.selected){
             case 0:
-                return 'documentacao';
+                return 'educacaoecidadania';
                 break;
             case 1:
-                return 'necessidades';
+                return 'educacaoemeioambiente';
                 break;
             case 2:
-                return 'rededeapoio';
-                break;
-            case 3:
-                return 'atividades';
-                break;
-            case 4:
-                return 'tratamentos';
-                break;
-            case 5:
-                return 'religiosidade';
+                return 'educacaoesaude';
                 break;
             default:
                 return null;
@@ -68,13 +59,14 @@ export default class DadosNecessidadesController{
 
     submit(key){
         this.loading = true;
-        this.dadosNecessidadesService.save(this.crianca.id, this.dadosenecessidades, key)
-            .success((dadosenecessidades)=>{
-                this.util.extend(this.originalDadosenecessidades, dadosenecessidades);
-                this.util.extend(this.dadosenecessidades, dadosenecessidades);
+        this.dadosNecessidadesService
+            .save(this.crianca.id, this.atividadessocioeducativas, key)
+            .success((atividadessocioeducativas)=>{
+                this.util.extend(this.originalDadosenecessidades, atividadessocioeducativas);
+                this.util.extend(this.atividadessocioeducativas, atividadessocioeducativas);
                 this.toastService.showSuccess(this.messageService.get(this.editMode ? 'MSG7' : 'MSG5'));
 
-                if(this.tabKey !== 'religiosidade') this.selected++;
+                if(this.tabKey !== 'educacaoesaude') this.selected++;
                 else this.back();
                 this.loading = false;
             })
@@ -121,4 +113,4 @@ export default class DadosNecessidadesController{
     }
 }
 
-DadosNecessidadesController.$inject = ['OrphaUtilService', '$scope', '$state', 'Crianca', 'DadosNecessidades', 'DadosNecessidadesService', 'LogService', 'ToastService', 'MessageService', 'DialogService'];
+AtividadesSocioeducativasController.$inject = ['OrphaUtilService', '$scope', '$state', 'Crianca', 'AtividadesSocioeducativas', 'AtividadesSocioeducativasService', 'LogService', 'ToastService', 'MessageService', 'DialogService'];

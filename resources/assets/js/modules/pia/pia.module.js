@@ -5,10 +5,12 @@
 import RouteConfig from './config/RouteConfig';
 import PiaService from './services/PiaService';
 import DadosNecessidadesService from './services/DadosNecessidadesService';
+import AtividadesSocioeducativasService from './services/AtividadesSocioeducativasService';
 
 let module = angular
     .module('orpha.modules.pia', [])
     .service('DadosNecessidadesService', DadosNecessidadesService)
+    .service('AtividadesSocioeducativasService', AtividadesSocioeducativasService)
     .service('PiaService', PiaService)
     .config(RouteConfig);
 

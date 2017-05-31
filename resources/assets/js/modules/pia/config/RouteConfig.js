@@ -11,9 +11,17 @@ import AtividadesTemplate from './../pages/dadosenecessidades/atividadequerealiz
 import TratamentosTemplate from './../pages/dadosenecessidades/tratamentosexternos.tpl.html';
 import ReligiosidadeTemplate from './../pages/dadosenecessidades/religiosidade.tpl.html';
 
+import AtividadesSocioeducativasController from './../controllers/AtividadesSocioeducativasController';
+import AtividadesSocioeducativasTemplate from './../pages/atividadessocioeducativas/layout.tpl.html';
+
+import EducacaoCidadaniaTemplate from './../pages/atividadessocioeducativas/educacaoecidadania.tpl.html';
+import EducacaoMeioAmbienteTemplate from './../pages/atividadessocioeducativas/educacaoemeioambiente.tpl.html';
+import EducacaoSaudeTemplate from './../pages/atividadessocioeducativas/educacaoesaude.tpl.html';
+
 import CriancaResolver from './../../crianca/resolvers/CriancaResolve';
 import PiaResolve from './../resolvers/PiaResolve';
 import DadosNecessidadesResolve from './../resolvers/DadosNecessidadesResolve';
+import AtividadesSocioeducativasResolve from './../resolvers/AtividadesSocioeducativasResolve';
 
 RouteConfig.$inject = ['$stateProvider'];
 
@@ -65,6 +73,30 @@ export default function RouteConfig($stateProvider) {
             authorized: ['show-dados-necessidades'],
             ncyBreadcrumb: {
                 label: 'Dados e Necessidades',
+                parent: 'crianca.pia.menu'
+            }
+        })
+        .state('crianca.pia.atividadessocioeducativas', {
+            url: '/atividadessocioeducativas',
+            views:{
+                '':{
+                    controller: AtividadesSocioeducativasController,
+                     template: AtividadesSocioeducativasTemplate,
+                    controllerAs: '$controller',
+                 },
+                'educacaoecidadania@crianca.pia.atividadessocioeducativas':{ template: EducacaoCidadaniaTemplate },
+                'educacaoemeioambiente@crianca.pia.atividadessocioeducativas':{ template: EducacaoMeioAmbienteTemplate },
+                'educacaoesaude@crianca.pia.atividadessocioeducativas':{ template: EducacaoSaudeTemplate }
+            },
+            data:{},
+            resolve: {
+                Crianca: CriancaResolver,
+                Pia: PiaResolve,
+                DadosNecessidades: AtividadesSocioeducativasResolve
+            },
+            authorized: ['show-atividades-socioeducativas'],
+            ncyBreadcrumb: {
+                label: 'Atividades Socioeducativas',
                 parent: 'crianca.pia.menu'
             }
         })

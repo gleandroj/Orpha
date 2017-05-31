@@ -2,9 +2,9 @@
  * Created by FG0003 on 06/03/2017.
  */
 
-export default function DadosNecessidadesResolve(DadosNecessidadesService, OrphaUtilService, LogService, $transition$, $state) {
+export default function AtividadesSocioeducativasResolver(AtividadesSocioeducativasService, OrphaUtilService, LogService, $transition$, $state) {
     let deferred = OrphaUtilService.defer();
-    DadosNecessidadesService.get($transition$.params().id)
+    AtividadesSocioeducativasService.get($transition$.params().id)
         .success((dadosNecessidades) => { deferred.resolve(dadosNecessidades) })
         .error((error) => {
             try{
@@ -17,4 +17,4 @@ export default function DadosNecessidadesResolve(DadosNecessidadesService, Orpha
     return deferred.promise;
 }
 
-DadosNecessidadesResolve.$inject = ['DadosNecessidadesService', 'OrphaUtilService', 'LogService', '$transition$', '$state'];
+AtividadesSocioeducativasResolver.$inject = ['AtividadesSocioeducativasService', 'OrphaUtilService', 'LogService', '$transition$', '$state'];

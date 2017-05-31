@@ -31,5 +31,8 @@ class PiaModuloSeeder extends Seeder
 
         Permission::create(['name' => 'Visualizar Dados e Necessidades', 'modulo' => 'PIA'  ,'slug' => 'show-dados-necessidades', 'description' =>  'Permissão de visualizar os Dados e necessidades do PIA no sistema']);
         Permission::create(['name' => 'Cadastrar e Alterar Dados e Necessidades', 'modulo' => 'PIA'  ,'slug' => 'update-dados-necessidades', 'description' =>  'Permissão de cadastrar e Alterar os Dados e necessidades do PIA no sistema']);
+
+        Permission::create(['name' => 'Visualizar Atividades Socioeducativas', 'modulo' => 'PIA'  ,'slug' => 'show-atividades-socioeducativas', 'description' =>  'Permissão de visualizar as Atividades Socioeducativas do PIA no sistema']);
+        Permission::create(['name' => 'Cadastrar e Alterar Atividades Socioeducativas', 'modulo' => 'PIA'  ,'slug' => 'update-atividades-socioeducativas', 'description' =>  'Permissão de cadastrar e Alterar as Atividades Socioeducativas do PIA no sistema']);
     }
 }

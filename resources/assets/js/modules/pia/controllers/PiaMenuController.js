@@ -20,7 +20,7 @@ export default class PiaMenuController{
             },
             {
                 title: 'Atividades Socioeducativas',
-                state: 'crianca.pia.menu',
+                state: 'crianca.pia.atividadessocioeducativas',
                 permission: []
             },
             {
