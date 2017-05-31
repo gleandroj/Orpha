@@ -56,8 +56,10 @@ class AtividadesSocioeducativasService implements AtividadesSocioeducativasServi
     public function getByCriancaId($criancaId)
     {
         if(!$crianca = $this->criancaService->getById($criancaId)) throw (new ModelNotFoundException())->setModel(Crianca::class);
-        if($crianca->pia->atividadesSocioeducativas == null) $crianca->pia->atividadesSocioeducativas()->create([]);
-        return $crianca->pia->atividadesSocioeducativas;
+        if($crianca->pia->atividadesSocioeducativas == null)
+            return $crianca->pia->atividadesSocioeducativas()->create([]);
+        else
+            return $crianca->pia->atividadesSocioeducativas;
     }
 
     /**
