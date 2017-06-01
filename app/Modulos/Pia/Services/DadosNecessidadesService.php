@@ -56,7 +56,10 @@ class DadosNecessidadesService implements DadosNecessidadesServiceInterface
     public function getByCriancaId($criancaId)
     {
         if(!$crianca = $this->criancaService->getById($criancaId)) throw (new ModelNotFoundException())->setModel(Crianca::class);
-        return $crianca->pia->dadosNecessidades;
+        if($crianca->pia->dadosNecessidades == null)
+            return $crianca->pia->dadosNecessidades()->create([]);
+        else
+            return $crianca->pia->atividadesSocioeducativas;
     }
 
     /**
