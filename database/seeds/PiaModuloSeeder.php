@@ -34,5 +34,9 @@ class PiaModuloSeeder extends Seeder
 
         Permission::create(['name' => 'Visualizar Atividades Socioeducativas', 'modulo' => 'PIA'  ,'slug' => 'show-atividades-socioeducativas', 'description' =>  'Permissão de visualizar as Atividades Socioeducativas do PIA no sistema']);
         Permission::create(['name' => 'Cadastrar e Alterar Atividades Socioeducativas', 'modulo' => 'PIA'  ,'slug' => 'update-atividades-socioeducativas', 'description' =>  'Permissão de cadastrar e Alterar as Atividades Socioeducativas do PIA no sistema']);
+
+        Permission::create(['name' => 'Visualizar Informações da Família', 'modulo' => 'PIA'  ,'slug' => 'show-informacoes-familia', 'description' =>  'Permissão de visualizar as Informações da Família do PIA no sistema']);
+        Permission::create(['name' => 'Cadastrar e Alterar Informações da Família', 'modulo' => 'PIA'  ,'slug' => 'update-informacoes-familia', 'description' =>  'Permissão de cadastrar e Alterar as Informações da Família do PIA no sistema']);
+
     }
 }

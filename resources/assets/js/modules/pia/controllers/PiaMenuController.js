@@ -22,14 +22,13 @@ export default class PiaMenuController{
                 title: 'Atividades Socioeducativas',
                 state: 'crianca.pia.atividadessocioeducativas',
                 permission: ['show-atividades-socioeducativas']
+            },
+            {
+                title: 'Informações da Família',
+                state: 'crianca.pia.informacoesdafamilia',
+                permission: ['show-informacoes-familia']
             }
         ];
-        /*,
-         {
-         title: 'Informações da Família',
-         state: 'crianca.pia.menu',
-         permission: []
-         }*/
     }
 
     navigateTo(state){

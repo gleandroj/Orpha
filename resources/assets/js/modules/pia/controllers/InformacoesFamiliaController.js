@@ -1,0 +1,118 @@
+/**
+ * Created by hc on 5/23/17.
+ */
+
+export default class InformacoesFamiliaController{
+
+    constructor(OrphaUtilService, Scope, State, Crianca, InformacoesFamilia, InformacoesFamiliaService, LogService, ToastService, MessageService, DialogService){
+        this.util = OrphaUtilService;
+        this.scope = Scope;
+        this.state = State;
+        this.crianca = Crianca;
+        this.originalInformacoesFamilia = this.util.copy(InformacoesFamilia);
+        this.informacoesFamilia = InformacoesFamilia;
+        this.informacoesFamiliaService = InformacoesFamiliaService;
+        this.logService = LogService;
+        this.toastService = ToastService;
+        this.messageService = MessageService;
+        this.dialogService = DialogService;
+        this.scopes = [];
+        this.selected = 0;
+        this.loading = false;
+        this.readOnly = this.informacoesFamilia.atendimentorealizado_completado;
+    }
+
+    get isReadOnly(){
+        return this.readOnly;
+    }
+
+    get tabKey(){
+        switch (this.selected){
+            case 0:
+                return 'atendimentorealizado';
+                break;
+            case 1:
+                return 'rededeapoio';
+                break;
+            case 2:
+                return 'orientacaorealizada';
+                break;
+            default:
+                return null;
+                break;
+        }
+    }
+
+    saveAndNext(){
+        this.save(this.tabKey);
+    }
+
+    save(key){
+        if (!this.editMode) {
+            this.submit(key);
+        } else {
+            this.showConfirmation(()=>{
+                this.submit(key);
+            }, ()=>{});
+        }
+    }
+
+    submit(key){
+        this.loading = true;
+        this.informacoesFamiliaService
+            .save(this.crianca.id, this.informacoesFamilia, key)
+            .success((informacoesFamilia)=>{
+                this.util.extend(this.originalInformacoesFamilia, informacoesFamilia);
+                this.util.extend(this.informacoesFamilia, informacoesFamilia);
+                this.toastService.showSuccess(this.messageService.get(this.editMode ? 'MSG7' : 'MSG5'));
+
+                if(this.tabKey !== 'atendimentorealizado'){
+                    this.selected++;
+                    this.loading = false;
+                }
+                else this.back();
+            })
+            .error((error)=> this.showError(error));
+    }
+
+    back(){
+        this.loading = true;
+        this.state.go('crianca.pia.menu', {id: this.crianca.id }).then(()=>{}, (error) => this.showError(error));
+    }
+
+    prev(){
+        this.back();
+    }
+
+    changeToEditMode(){
+        this.editMode = true;
+        this.readOnly = false;
+    }
+
+    pushScope(scope){
+        this.scopes.push(scope);
+    }
+
+    get canSaveAndNext(){
+        return this.scopes[this.selected] && this.scopes[this.selected]['form'] && this.scopes[this.selected]['form'].$valid;
+    }
+
+    showConfirmation(okCallback, cancelCallback){
+        this.dialogService
+            .showConfirmDialog({
+                title: 'Confirmação',
+                okBtn: 'Sim',
+                cancelBtn: 'Não',
+                message: this.messageService.get('MSG6')
+            }).then(okCallback, cancelCallback);
+    }
+
+    showError(error){
+        this.loading = false;
+        let err = (error && error.detail) ? error.detail : error;
+        this.logService.error(err && err.error ? err.error  +": "+err['message'] : this.messageService.get('MSG4'));
+        this.toastService.showError(err && err.error ? err['message'] : this.messageService.get('MSG4'));
+    }
+}
+
+InformacoesFamiliaController.$inject = ['OrphaUtilService', '$scope', '$state', 'Crianca', 'InformacoesFamilia', 'InformacoesFamiliaService', 'LogService', 'ToastService', 'MessageService', 'DialogService'];

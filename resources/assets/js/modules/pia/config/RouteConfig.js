@@ -18,6 +18,10 @@ import EducacaoCidadaniaTemplate from './../pages/atividadessocioeducativas/educ
 import EducacaoMeioAmbienteTemplate from './../pages/atividadessocioeducativas/educacaoemeioambiente.tpl.html';
 import EducacaoSaudeTemplate from './../pages/atividadessocioeducativas/educacaoesaude.tpl.html';
 
+
+import InformacoesFamiliaController from './../controllers/InformacoesFamiliaController';
+import InformacoesFamiliaTemplate from './../pages/informacoesdafamilia/layout.tpl.html';
+
 import CriancaResolver from './../../crianca/resolvers/CriancaResolve';
 import PiaResolve from './../resolvers/PiaResolve';
 import DadosNecessidadesResolve from './../resolvers/DadosNecessidadesResolve';
@@ -93,6 +97,31 @@ export default function RouteConfig($stateProvider) {
                 Crianca: CriancaResolver,
                 Pia: PiaResolve,
                 AtividadesSocioeducativas: AtividadesSocioeducativasResolve
+            },
+            authorized: ['show-atividades-socioeducativas'],
+            ncyBreadcrumb: {
+                label: 'Atividades Socioeducativas',
+                parent: 'crianca.pia.menu'
+            }
+        })
+        .state('crianca.pia.informacoesdafamilia', {
+            url: '/informacoesdafamilia',
+            views:{
+                '':{
+                    controller: InformacoesFamiliaController,
+                     template: InformacoesFamiliaTemplate,
+                    controllerAs: '$controller',
+                 },
+                'atendimentorealizado@crianca.pia.informacoesdafamilia':{ template: EducacaoCidadaniaTemplate },
+                'rededeapoio@crianca.pia.informacoesdafamilia':{ template: EducacaoCidadaniaTemplate },
+                'orientacaorealizada@crianca.pia.informacoesdafamilia':{ template: EducacaoCidadaniaTemplate },
+                'rededeapoio2@crianca.pia.informacoesdafamilia':{ template: EducacaoCidadaniaTemplate }
+            },
+            data:{},
+            resolve: {
+                Crianca: CriancaResolver,
+                Pia: PiaResolve,
+                InformacoesFamilia: AtividadesSocioeducativasResolve
             },
             authorized: ['show-atividades-socioeducativas'],
             ncyBreadcrumb: {
