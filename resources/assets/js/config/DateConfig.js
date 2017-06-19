@@ -8,11 +8,12 @@ DateConfig.$inject = ['$mdDateLocaleProvider', '$provide'];
 export default function DateConfig($mdDateLocaleProvider, $provide) {
 
     $mdDateLocaleProvider.formatDate = function(date) {
-        return moment(date).format('DD/MM/YYYY');
+        let m = moment(date);
+        return m.isValid() ? m.format('DD/MM/YYYY') : null;
     };
 
     $mdDateLocaleProvider.parseDate = function(dateString) {
-        var m = moment(dateString, 'DD/MM/YYYY', true);
+        let m = moment(dateString, 'DD/MM/YYYY', true);
         return m.isValid() ? m.toDate() : new Date(NaN);
     };
 
@@ -21,29 +22,4 @@ export default function DateConfig($mdDateLocaleProvider, $provide) {
     $mdDateLocaleProvider.days = ['Dom','Seg','Ter','Qua','Qui','Sex','Sab'];
     $mdDateLocaleProvider.shortDays = ['D','S','T','Q','Q','S','S'];
 
-    $provide.decorator('mdDatepickerDirective', ['$delegate',
-        function ($delegate) {
-            let directive = $delegate[0];
-
-            let template = directive.template;
-
-            directive.template = function (tElement, tAttrs) {
-
-                var originalTemplate = template.apply(this, arguments);
-
-                var element = angular.element(originalTemplate);
-                element.find('input').attr('mask', '39/19/9999');
-                element.find('input').attr('restrict', 'reject');
-                element.find('input').attr('clean', 'true');
-                element.find('input').attr('ng-model', "ctrl.dateInput");//ng-model is required by ngMask
-                let newTemplate = '';
-                for(let i = 0; i < element.length ; i++)
-                    newTemplate += element[i].outerHTML;
-
-                return newTemplate;
-            };
-
-            return $delegate;
-        }
-    ]);
 }

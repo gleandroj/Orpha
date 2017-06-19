@@ -28,6 +28,7 @@ export default class ListController {
 
     getAll() {
         this.loading = true;
+        this.users = [];
         this.userService.getAll().success((users) => {
             this.loading = false;
             this.users = users;
@@ -36,92 +37,64 @@ export default class ListController {
     }
 
     showUser(user) {
-        /*this.showDialog(user, 'Visualizar Usuário', true)
-            .then((newUser)=> {
-                this.util.extend(user, newUser);
-                if (this.authService.getCurrentUser().id === newUser.id) {
-                    this.authService.setCurrentUser(newUser);
-                }
-                this.toastService.showSuccess(this.messageService.get('MSG7'));
-            }, () => {});*/
         if(this.authService.getCurrentUser().hasPermission('show-user')){
-            this.state.go('user.show', {id: user.id});
+            this.loading = true;
+            this.state.go('user.show', {id: user.id}).then(()=>{}, (error) => this.showError(error));
         }
     }
 
     editUser(user) {
-        /*this.showDialog(user, 'Alterar Usuário', false)
-            .then((newUser)=> {
-                this.util.extend(user, newUser);
-                if (this.authService.getCurrentUser().id === newUser.id) {
-                    this.authService.setCurrentUser(newUser);
-                }
-                this.toastService.showSuccess(this.messageService.get('MSG7'));
-            }, () => {});*/
         if(this.authService.getCurrentUser().hasPermission('edit-user')){
-            this.state.go('user.edit', {id: user.id});
+            this.loading = true;
+            this.state.go('user.edit', {id: user.id}).then(()=>{}, (error) => this.showError(error));
         }
     }
 
     createUser() {
-        /*this.showDialog({}, 'Inserir Usuário', false)
-            .then((newUser)=> {
-                console.log('teste');
-                this.users.push(newUser);
-                this.toastService.showSuccess(this.messageService.get('MSG5'));
-            }, () => {});*/
         if(this.authService.getCurrentUser().hasPermission('create-user')){
-            this.state.go('user.create');
+            this.loading = true;
+            this.state.go('user.create').then(()=>{}, (error) => this.showError(error));
         }
     }
 
     disableUser(user) {
-        if(!this.authService.getCurrentUser().hasPermission('disable-user') || this.authService.getCurrentUser().id == user.id) return;
+        if(!this.authService.getCurrentUser().hasPermission('disable-user') || this.authService.getCurrentUser().id === user.id) return;
+        this.loading = true;
         this.userService.disable(user)
             .success((newUser)=> {
                 this.util.extend(user, newUser);
                 if (this.authService.getCurrentUser().id === newUser.id) {
                     this.authService.setCurrentUser(newUser);
                 }
+                this.loading = false;
             })
             .error((error) => this.showError(error));
     }
 
     enableUser(user) {
         if(!this.authService.getCurrentUser().hasPermission('active-user')) return;
+        this.loading = true;
         this.userService.enable(user)
             .success((newUser)=> {
                 this.util.extend(user, newUser);
                 if (this.authService.getCurrentUser().id === newUser.id) {
                     this.authService.setCurrentUser(newUser);
                 }
+                this.loading = false;
             })
             .error((error) => this.showError(error));
     }
 
     showError(error){
         this.loading = false;
-        this.logService.error(error ? error.error  +": "+error['message'] : this.messageService.get('MSG4'));
-        this.toastService.showError(error ? error['message'] : this.messageService.get('MSG4'));
+        let err = (error && error.detail) ? error.detail : error;
+        this.logService.error(err && err.error ? err.error  +": "+err['message'] : this.messageService.get('MSG4'));
+        this.toastService.showError(err && err.error ? err['message'] : this.messageService.get('MSG4'));
     }
 
     checkSecondaryBtnDisabled(user){
-        return this.authService.getCurrentUser().id == user.id;
+        return this.authService.getCurrentUser().id === user.id;
     }
-
-    /*
-    showDialog(user, title, readOnly) {
-        return this.dialogService.showCustomDialog({
-            controller: UserDialogController,
-            template: UserDialogTemplate,
-            locals: {
-                title: title,
-                user: this.util.copy(user),
-                readOnly: readOnly
-            }
-        });
-    }
-    */
 }
 
 ListController.$inject = ['$state','DialogService', 'OrphaUtilService', 'AuthService', 'UserService', 'ToastService', 'MessageService', 'LogService'];

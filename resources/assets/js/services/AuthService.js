@@ -27,10 +27,10 @@ export function AuthServiceProvider() {
         _oauth = OAuth;
     };
 
-    this.$get = ['$http', 'OrphaUtilService', 'SessionService', 'StorageService', 'LogService', '$state' ,($http, OrphaUtilService, SessionService, StorageService, LogService, $state) => {
+    this.$get = ['$http', 'OrphaUtilService', 'SessionService', 'StorageService', 'LogService', 'MessageService', '$state', '$transitions' ,($http, OrphaUtilService, SessionService, StorageService, LogService, MessageService, $state, $transitions) => {
 
         SessionService.setSessionTTL(_sessionTime);
-        return new AuthService($http, OrphaUtilService, SessionService, StorageService, LogService, $state, _oauth);
+        return new AuthService($http, OrphaUtilService, SessionService, StorageService, LogService, MessageService, $state, $transitions, _oauth);
 
     }];
 }
@@ -38,9 +38,9 @@ export function AuthServiceProvider() {
 class AuthUser{
     hasPermission(permissions) {
         if (this.permissions != null && this.permissions.length > 0) {
-            permissions = permissions == null ? [] : permissions;
+            permissions = permissions === null ? [] : permissions;
 
-            var roles = this.permissions;
+            let roles = this.permissions;
 
             if (typeof permissions === "string") {
                 permissions = [permissions];
@@ -50,11 +50,11 @@ class AuthUser{
                 roles = [roles];
             }
 
-            var isAllowed = true;
+            let isAllowed = true;
 
             if (permissions[0]) {
                 isAllowed = false;
-                for (var i = 0; i < roles.length; i++) {
+                for (let i = 0; i < roles.length; i++) {
                     if (permissions.indexOf(roles[i].slug) !== -1) {
                         isAllowed = true;
                         break;
@@ -64,22 +64,21 @@ class AuthUser{
 
             return isAllowed;
         }
-        else if(permissions == null || permissions.length == 0)
-            return true;
-        else
-            return false;
+        else return (permissions === null || permissions.length === 0);
     }
 }
 
 class AuthService {
 
-    constructor($http, OrphaUtilService, SessionService, StorageService, LogService, $state, OAuthConfig) {
+    constructor($http, OrphaUtilService, SessionService, StorageService, LogService, MessageService, $state , $transitions, OAuthConfig) {
         this.http = $http;
         this.util = OrphaUtilService;
         this.session = SessionService;
         this.storage = StorageService;
         this.log = LogService;
+        this.messageService = MessageService;
         this.route = $state;
+        this.transitions = $transitions;
         this.OAuth = OAuthConfig || {
             "api_oauth_url": "",
             "api_user_url": "",
@@ -92,12 +91,15 @@ class AuthService {
             "redirect_route": "",
             "login_route": ""
         };
-        this.util.on('$stateChangeStart', (event, next) => this.onRouteChange(event, next));
+        this.permissions = null;
+        this.transitions.onStart({}, (transition) => {
+            return this.onRouteChange(transition);
+        });
         this.initialize();
     }
 
     initialize() {
-        if (this.isAuthenticated() && this.session.exists() && this.session.isExpired()) {
+        if (this.isAuthenticated() && this.session.exists()) {
             this.session.checkSessionFn();
         }
         else if (this.isAuthenticated()) {
@@ -169,7 +171,7 @@ class AuthService {
     getPermissions() {
         let defer = this.util.defer();
         let self = this;
-        if(this.permissions == null || this.permissions.length == 0){
+        if(this.permissions === null || this.permissions.length === 0){
             this.loadPermissions().success((p) => {
                 self.permissions = p;
                 defer.resolve(p);
@@ -177,7 +179,7 @@ class AuthService {
                 defer.reject(err);
             });
         }else{
-            this.util.timeout(()=> defer.resolve(this.permissions), 2);
+            this.util.timeout(() => defer.resolve(self.permissions), 1);
         }
 
         return defer.promise;
@@ -208,7 +210,7 @@ class AuthService {
 
     /*Public*/
     login(username, password) {
-        var deferred = this.util.defer();
+        let deferred = this.util.defer();
         this.http.post(this.OAuth.api_oauth_url, angular.extend({ username: username, password: password }, this.getClientConfig()))
             .then(
             (response) => {
@@ -242,8 +244,8 @@ class AuthService {
 
     /*Public*/
     reconnect() {
-        /*var deferred = this.util.defer();
-        var config = this.util.extend({ refresh_token: this.getToken().refresh_token }, this.getClientConfig());
+        /*let deferred = this.util.defer();
+        let config = this.util.extend({ refresh_token: this.getToken().refresh_token }, this.getClientConfig());
         config.grant_type = "refresh_token";
         this.http.post(this.OAuth.oauth_url, config)
             .then(
@@ -271,7 +273,7 @@ class AuthService {
 
     /*Public*/
     sendResetLinkEmail(email) {
-        var deferred = this.util.defer();
+        let deferred = this.util.defer();
         this.http.post('api/auth/password/email', { email: email })
             .then((response) => {
                 deferred.resolve(response.data);
@@ -284,7 +286,7 @@ class AuthService {
 
     /*Public*/
     checkResetPasswordToken(data) {
-        var deferred = this.util.defer();
+        let deferred = this.util.defer();
         this.http.post('api/auth/password/token', data)
             .then((response) => {
                 deferred.resolve(response.data);
@@ -297,7 +299,7 @@ class AuthService {
 
     /*Public*/
     resetPassword(credentials) {
-        var deferred = this.util.defer();
+        let deferred = this.util.defer();
         this.http.post('api/auth/password/reset', credentials)
             .then((response) => {
                 deferred.resolve(response.data);
@@ -311,45 +313,52 @@ class AuthService {
     /*Public*/
     isAuthenticated() {
         try {
-            return this.getToken() && this.getToken().access_token != "" && this.getCurrentUser() != null;
+            return this.getToken() && this.getToken().access_token !== "" && this.getCurrentUser() !== null;
         } catch (err) {
             return false;
         }
     }
 
     /*Private*/
-    onRouteChange(event, next, prev) {
+    onRouteChange(transition) {
+        let next = transition.to();
+
         if (this.isAuthenticated() && next.name.indexOf('auth') > -1) {
-            event.preventDefault();
             this.log.info('Authenticated user, redirecting to: ' + this.OAuth['redirect_route']);
-            this.route.go(this.OAuth['redirect_route']);
+            return transition.router.stateService.target(this.OAuth['redirect_route']);
         }
 
         let auth = next['authorized'] ? next['authorized'] : [];
         let allowAnonymous = next['allowAnonymous'] ? next['allowAnonymous'] : false;
+
         if (!allowAnonymous) {
-            if (!this.isAuthenticated()) this.danyRouteAcess(event, next, true);
-            else if (this.isAuthenticated() && !this.getCurrentUser().hasPermission(auth)) this.danyRouteAcess(event, next, false);
-            else if (this.isAuthenticated()) this.session.touch();
+            if (!this.isAuthenticated())
+                return this.danyRouteAcess(transition, next, true);
+            else if (this.isAuthenticated() && !this.getCurrentUser().hasPermission(auth))
+                return this.danyRouteAcess(transition, next, false);
+            else if (this.isAuthenticated())
+                this.session.touch();
         }
+
+        return true;
     }
 
     /*Private*/
-    danyRouteAcess(event, next, redirect) {
-        event.preventDefault();
+    danyRouteAcess(transition, next, redirect) {
         this.util.broadcast(AuthEvents.accessDenied, next);
 
-        if (next.name != "") this.log.error("Access denied on unauthorized root:" + next.name);
+        if (next.name !== "") this.log.error("Access denied on unauthorized root:" + next.name);
         else this.log.error("Access denied");
 
         let isAuthenticated = this.isAuthenticated();
+        let error = (isAuthenticated ? 'Unauthorized' : 'Unauthenticated');
 
         if (redirect) {
-            this.route.go(this.OAuth['login_route']);
-            this.log.info((isAuthenticated ? 'Unauthorized' : 'Unauthenticated') +
-                ' user, redirecting to: ' +
-                (isAuthenticated ? this.OAuth.redirect_route : this.OAuth.login_route));
+            this.log.info(error + ' user, redirecting to: ' + (isAuthenticated ? this.OAuth.redirect_route : this.OAuth.login_route));
+            return this.route.target(this.OAuth['login_route']);
         }
+
+        return this.util.$q.reject({error: error, message: this.messageService.get('MSG17')});
     }
 }
 
@@ -359,8 +368,8 @@ export function OAuthInterceptor($injector, LogService, OrphaUtilService) {
         const Auth = $injector.get('AuthService');
         const Session = $injector.get('SessionService');
 
-        var token = Auth.getToken();
-        if (token && token.access_token != "") {
+        let token = Auth.getToken();
+        if (token && token.access_token !== "") {
             Session.touch();
             config.headers.Authorization = token.token_type + " " + token.access_token;
         }
@@ -372,9 +381,9 @@ export function OAuthInterceptor($injector, LogService, OrphaUtilService) {
         const Auth = $injector.get('AuthService');
         const messageService = $injector.get('MessageService');
 
-        var deferred = OrphaUtilService.defer();
+        let deferred = OrphaUtilService.defer();
 
-        if ((response.config.url.indexOf('oauth/token') === -1) && response.status == 401) {
+        if ((response.config.url.indexOf('oauth/token') === -1) && response.status === 401) {
             //Try recovery request?
             deferred.reject(response);
         }else if(response.status === -1){

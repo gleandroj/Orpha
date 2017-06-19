@@ -17,7 +17,7 @@
 
             <span flex></span>
 
-            <md-button class="md-icon-button" ng-disabled="$controller.loading || criancaForm.$invalid || criancaForm.$pending" ng-if="$controller.readOnly">
+            <md-button class="md-icon-button" ng-auth="'show-pia'" ng-click="$controller.showPia()" ng-disabled="$controller.loading || criancaForm.$invalid || criancaForm.$pending" ng-if="$controller.readOnly">
                 <md-icon class="material-icons">description</md-icon>
                 <md-tooltip md-direction="top">
                     PIA
@@ -40,14 +40,6 @@
                     </md-menu-item>
                 </md-menu-content>
             </md-menu>
-            <!--
-            <md-button class="md-icon-button" ng-disabled="$controller.loading || criancaForm.$invalid || criancaForm.$pending" ng-if="!$controller.readOnly" ng-click="$controller.save()">
-                <md-icon class="material-icons">done</md-icon>
-                <md-tooltip md-direction="top">
-                    Salvar
-                </md-tooltip>
-            </md-button>
-            -->
         </div>
     </md-toolbar>
 

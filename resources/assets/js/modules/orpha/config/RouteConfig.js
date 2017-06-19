@@ -12,12 +12,15 @@ export default function RouteConfig($stateProvider, $urlRouterProvider) {
             url: '/orpha',
             controller: OrphaController,
             controllerAs: '$ctrl',
-            template: OrphaTemplate
+            template: OrphaTemplate,
         }).state('orpha.dashboard', {
             url: '/dashboard',
             controller: DashboardController,
             controllerAs: '$controller',
-            template: DashboardTemplate
+            template: DashboardTemplate,
+            ncyBreadcrumb: {
+                label: 'Dashboard'
+            }
         });
 
 }

@@ -5,6 +5,7 @@ namespace App\Modulos;
 use App\Modulos\Auth\AuthServiceProvider;
 use App\Modulos\Crianca\CriancaServiceProvider;
 use App\Modulos\Orpha\OrphaServiceProvider;
+use App\Modulos\Pia\PiaServiceProvider;
 use App\Modulos\User\UserServiceProvider;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
@@ -15,6 +16,7 @@ class ModulosServiceProvider extends ServiceProvider
         OrphaServiceProvider::class,
         UserServiceProvider::class,
         CriancaServiceProvider::class,
+        PiaServiceProvider::class,
         AuthServiceProvider::class
     ];
 

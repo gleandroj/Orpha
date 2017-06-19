@@ -1,10 +1,5 @@
-
-import CriancaController from './../controllers/CriancaController';
-import LayoutTemplate from './../pages/layout.tpl.html';
-
 import ListController from './../controllers/ListController';
 import ListTemplate from './../pages/list.tpl.html';
-
 
 import FormController from './../controllers/FormController';
 import FormTemplate from './../pages/form.tpl.html';
@@ -20,15 +15,17 @@ export default function RouteConfig($stateProvider, $urlRouterProvider) {
             parent:'orpha',
             abstract: true,
             url: '/crianca',
-            controller: CriancaController,
-            controllerAs: '$controller',
-            template: LayoutTemplate
+            template: '<ui-view/>'
         })
         .state('crianca.list', {
             url: '/list',
             controller: ListController,
             controllerAs: '$controller',
-            template: ListTemplate
+            template: ListTemplate,
+            authorized:['list-crianca'],
+            ncyBreadcrumb: {
+                label: 'Crianças'
+            }
         })
         .state('crianca.create', {
             url: '/create',
@@ -41,7 +38,12 @@ export default function RouteConfig($stateProvider, $urlRouterProvider) {
             },
             controller: FormController,
             controllerAs: '$controller',
-            template: FormTemplate
+            template: FormTemplate,
+            authorized:['create-crianca'],
+            ncyBreadcrumb: {
+                label: 'Cadastrar',
+                parent: 'crianca.list'
+            }
         })
         .state('crianca.show', {
             url: '/:id',
@@ -54,7 +56,12 @@ export default function RouteConfig($stateProvider, $urlRouterProvider) {
             },
             controller: FormController,
             controllerAs: '$controller',
-            template: FormTemplate
+            template: FormTemplate,
+            authorized:['show-crianca'],
+            ncyBreadcrumb: {
+                label: '{{ $controller.crianca.nome }}',
+                parent: 'crianca.list'
+            }
         })
         .state('crianca.edit', {
             url: '/:id/edit',
@@ -67,6 +74,11 @@ export default function RouteConfig($stateProvider, $urlRouterProvider) {
             },
             controller: FormController,
             controllerAs: '$controller',
-            template: FormTemplate
-        })
+            template: FormTemplate,
+            authorized:['edit-crianca'],
+            ncyBreadcrumb: {
+                label: '{{ $controller.crianca.nome }}',
+                parent: 'crianca.list'
+            }
+        });
 }

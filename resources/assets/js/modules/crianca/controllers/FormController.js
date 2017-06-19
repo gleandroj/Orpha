@@ -28,6 +28,10 @@ export default class FormController {
         return this.scope.criancaForm;
     }
 
+    get isNewCrianca(){
+        return this.crianca.id === '' || this.crianca.id === null || this.util.isUndefined(this.crianca.id);
+    }
+
     changeToEditMode(){
         this.readOnly = false;
         this.title = 'Alterar criança';
@@ -35,29 +39,35 @@ export default class FormController {
 
     showError(error){
         this.loading = false;
-        this.logService.error(error ? error.error  +": "+error['message'] : this.messageService.get('MSG4'));
-        this.toastService.showError(error ? error['message'] : this.messageService.get('MSG4'));
+        let err = (error && error.detail) ? error.detail : error;
+        this.logService.error(err && err.error ? err.error  +": "+err['message'] : this.messageService.get('MSG4'));
+        this.toastService.showError(err && err.error ? err['message'] : this.messageService.get('MSG4'));
     }
 
     showValidationErrors(errors){
         this.toastService.showError(Object.keys(errors).map((key) => errors[key]).join(", "));
     }
 
-    cancel() {
-        if (this.crianca.id == '' || this.crianca.id == null) {
-            this.state.go('crianca.list');
-        } else {
-            this.readOnly = true;
-            this.title = 'Visualizar criança';
-            if(!this.form.$submitted || !this.form.$valid){
-                this.crianca = this.util.copy(this.originalCrianca);
-            }
+    showConfirmation(okCallback, cancelCallback){
+        this.dialogService
+            .showConfirmDialog({
+                title: 'Confirmação',
+                okBtn: 'Sim',
+                cancelBtn: 'Não',
+                message: this.messageService.get('MSG6')
+            }).then(okCallback, cancelCallback);
+    }
+
+    showPia(){
+        if(this.authService.getCurrentUser().hasPermission('show-pia')){
+            this.loading = true;
+            this.state.go('crianca.pia.menu', {id: this.crianca.id}).then(()=>{}, (error) => this.showError(error));
         }
     }
 
     save(){
         if(!this.authService.getCurrentUser().hasPermission(['create-crianca', 'edit-crianca'])) return;
-        if (this.crianca.id == '' || this.crianca.id == null) {
+        if (this.isNewCrianca) {
             this.submitCrianca();
         } else {
             this.showConfirmation(()=>{
@@ -66,24 +76,25 @@ export default class FormController {
         }
     }
 
+    cancel() {
+        this.state.go('crianca.list').then(()=>{}, (err) => this.showError(err));
+    }
+
     submitCrianca(){
         this.loading = true;
         this.criancaService.save(this.crianca)
             .success((newCrianca) => {
-
-                this.toastService.showSuccess(this.messageService.get(this.crianca.id == '' || this.crianca.id == null ? 'MSG5' : 'MSG7'));
-
-                this.loading = false;
+                this.toastService.showSuccess(this.messageService.get(this.isNewCrianca ? 'MSG5' : 'MSG7'));
                 this.originalCrianca = this.util.copy(newCrianca);
                 this.crianca = newCrianca;
                 this.cancel();
-            }).error((err)=> {
-
                 this.loading = false;
-                if(err.error === 'Unprocessable Entity')
+            }).error((err)=> {
+                this.loading = false;
+                if(err && err.error === 'Unprocessable Entity')
                     this.showValidationErrors(err.errors);
                 else
-                    this.toastService.showError(err ? err['message'] : this.messageService.get('MSG4'));
+                    this.showError(err);
             });
     }
 
@@ -112,16 +123,6 @@ export default class FormController {
                 this.cancel();
             })
             .error((error) => this.showError(error));
-    }
-
-    showConfirmation(okCallback, cancelCallback){
-        this.dialogService
-            .showConfirmDialog({
-                title: 'Confirmação',
-                okBtn: 'Sim',
-                cancelBtn: 'Não',
-                message: this.messageService.get('MSG6')
-            }).then(okCallback, cancelCallback);
     }
 }
 

@@ -1,7 +1,3 @@
-
-import UserController from './../controllers/UserController';
-import LayoutTemplate from './../pages/layout.tpl.html';
-
 import ListController from './../controllers/ListController';
 import ListTemplate from './../pages/list.tpl.html';
 
@@ -22,21 +18,26 @@ export default function RouteConfig($stateProvider, $urlRouterProvider) {
             parent:'orpha',
             abstract: true,
             url: '/user',
-            controller: UserController,
-            controllerAs: '$controller',
-            template: LayoutTemplate
+            template: '<ui-view/>'
         })
         .state('user.profile', {
             url: '/profile',
             controller: ProfileController,
             controllerAs: '$controller',
-            template: ProfileTemplate
+            template: ProfileTemplate,
+            ncyBreadcrumb: {
+                label: 'Perfil'
+            }
         })
         .state('user.list', {
             url: '/list',
             controller: ListController,
             controllerAs: '$controller',
-            template: ListTemplate
+            template: ListTemplate,
+            authorized: ['list-user'],
+            ncyBreadcrumb: {
+                label: 'Usuários'
+            }
         })
         .state('user.create', {
             url: '/create',
@@ -49,7 +50,12 @@ export default function RouteConfig($stateProvider, $urlRouterProvider) {
             },
             controller: FormController,
             controllerAs: '$controller',
-            template: FormTemplate
+            template: FormTemplate,
+            authorized: ['create-user'],
+            ncyBreadcrumb: {
+                label: 'Cadastrar',
+                parent: 'user.list'
+            }
         })
         .state('user.show', {
             url: '/:id',
@@ -62,7 +68,12 @@ export default function RouteConfig($stateProvider, $urlRouterProvider) {
             },
             controller: FormController,
             controllerAs: '$controller',
-            template: FormTemplate
+            template: FormTemplate,
+            authorized: ['show-user'],
+            ncyBreadcrumb: {
+                label: '{{ $controller.user.name }}',
+                parent: 'user.list'
+            }
         })
         .state('user.edit', {
             url: '/:id/edit',
@@ -75,6 +86,11 @@ export default function RouteConfig($stateProvider, $urlRouterProvider) {
             },
             controller: FormController,
             controllerAs: '$controller',
-            template: FormTemplate
+            template: FormTemplate,
+            authorized: ['edit-user'],
+            ncyBreadcrumb: {
+                label: '{{ $controller.user.name }}',
+                parent: 'user.list'
+            }
         })
 }

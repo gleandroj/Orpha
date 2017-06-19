@@ -1,0 +1,98 @@
+<ng-form name="form" ng-init="$controller.pushScope(this)">
+    <md-content layout="column" layout-padding>
+
+        <div class="orpha-radio-group" layout="row" layout-align="start center" >
+            <span class="md-subhead orpha-radio-label">Direitos Legais</span>
+            <md-radio-group
+                    ng-init="$controller.informacoesdafamilia.orientacaorealizada_direitos_legais = $controller.informacoesdafamilia.orientacaorealizada_direitos_legais || false"
+                    ng-model="$controller.informacoesdafamilia.orientacaorealizada_direitos_legais"
+                    ng-required="true"
+                    ng-disabled="$controller.isReadOnly"
+                    layout="row">
+                <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
+                <md-radio-button ng-value="false">Não</md-radio-button>
+            </md-radio-group>
+        </div>
+
+        <div class="orpha-radio-group" layout="row" layout-align="start center" >
+            <span class="md-subhead orpha-radio-label">Direitos Sociais</span>
+            <md-radio-group
+                    ng-init="$controller.informacoesdafamilia.orientacaorealizada_direitos_sociais = $controller.informacoesdafamilia.orientacaorealizada_direitos_sociais || false"
+                    ng-model="$controller.informacoesdafamilia.orientacaorealizada_direitos_sociais"
+                    ng-required="true"
+                    ng-disabled="$controller.isReadOnly"
+                    layout="row">
+                <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
+                <md-radio-button ng-value="false">Não</md-radio-button>
+            </md-radio-group>
+        </div>
+
+        <div class="orpha-radio-group" layout="row" layout-align="start center" >
+            <span class="md-subhead orpha-radio-label">Direito Previdenciário</span>
+            <md-radio-group
+                    ng-init="$controller.informacoesdafamilia.orientacaorealizada_direitos_providenciario = $controller.informacoesdafamilia.orientacaorealizada_direitos_providenciario || false"
+                    ng-model="$controller.informacoesdafamilia.orientacaorealizada_direitos_providenciario"
+                    ng-required="true"
+                    ng-disabled="$controller.isReadOnly"
+                    layout="row">
+                <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
+                <md-radio-button ng-value="false">Não</md-radio-button>
+            </md-radio-group>
+        </div>
+
+        <div class="orpha-radio-group" layout="row" layout-align="start center">
+            <span class="md-subhead orpha-radio-label">Planejamento Familiar</span>
+            <md-radio-group
+                    ng-init="$controller.informacoesdafamilia.orientacaorealizada_planejamento_familiar = $controller.informacoesdafamilia.orientacaorealizada_planejamento_familiar || false"
+                    ng-model="$controller.informacoesdafamilia.orientacaorealizada_planejamento_familiar"
+                    ng-required="true"
+                    ng-disabled="$controller.isReadOnly"
+                    layout="row">
+                <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
+                <md-radio-button ng-value="false">Não</md-radio-button>
+            </md-radio-group>
+        </div>
+
+        <div class="orpha-radio-group" layout="row" layout-align="start center">
+            <span class="md-subhead orpha-radio-label">Planejamento Orçamentário</span>
+            <md-radio-group
+                    ng-init="$controller.informacoesdafamilia.orientacaorealizada_planejamento_orcamentario = $controller.informacoesdafamilia.orientacaorealizada_planejamento_orcamentario || false"
+                    ng-model="$controller.informacoesdafamilia.orientacaorealizada_planejamento_orcamentario"
+                    ng-required="true"
+                    ng-disabled="$controller.isReadOnly"
+                    layout="row">
+                <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
+                <md-radio-button ng-value="false">Não</md-radio-button>
+            </md-radio-group>
+        </div>
+
+        <div class="orpha-radio-group" layout="row" layout-align="start center">
+            <span class="md-subhead orpha-radio-label">Educação Formal</span>
+            <md-radio-group
+                    ng-init="$controller.informacoesdafamilia.orientacaorealizada_educacao_formal = $controller.informacoesdafamilia.orientacaorealizada_educacao_formal || false"
+                    ng-model="$controller.informacoesdafamilia.orientacaorealizada_educacao_formal"
+                    ng-required="true"
+                    ng-disabled="$controller.isReadOnly"
+                    layout="row">
+                <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
+                <md-radio-button ng-value="false">Não</md-radio-button>
+            </md-radio-group>
+        </div>
+
+        <div class="orpha-radio-group" layout="row" layout-align="start center">
+            <span class="md-subhead orpha-radio-label">Educação Profissional</span>
+            <md-radio-group
+                    ng-init="$controller.informacoesdafamilia.orientacaorealizada_educacao_profissional = $controller.informacoesdafamilia.orientacaorealizada_educacao_profissional || false"
+                    ng-model="$controller.informacoesdafamilia.orientacaorealizada_educacao_profissional"
+                    ng-required="true"
+                    ng-disabled="$controller.isReadOnly"
+                    layout="row">
+                <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
+                <md-radio-button ng-value="false">Não</md-radio-button>
+            </md-radio-group>
+        </div>
+
+        <text-area-input name="outros" label="Outros" is-disabled="$controller.isReadOnly" ng-model="$controller.informacoesdafamilia.orientacaorealizada_outros"></text-area-input>
+
+    </md-content>
+</ng-form>

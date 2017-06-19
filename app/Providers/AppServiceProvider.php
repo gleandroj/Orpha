@@ -8,6 +8,7 @@ use App\Contracts\UnitOfWorkInterface;
 use App\Repositories\AbstractRepository;
 use App\Repositories\UnitOfWork;
 
+
 class AppServiceProvider extends ServiceProvider
 {
     /**

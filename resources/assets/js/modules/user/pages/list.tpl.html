@@ -16,18 +16,20 @@
         </div>
     </md-toolbar>
 
+    <md-progress-linear md-mode="indeterminate" class="md-accent" ng-show="$controller.loading"></md-progress-linear>
+
     <md-card-content layout-padding layout-margin>
 
         <search-input label="Pesquisar" ng-model="$controller.search" max-length="50"></search-input>
 
-        <div ng-show="$controller.loading" layout="row" layout-sm="column" layout-align="center center">
+<!--        <div ng-show="$controller.loading" layout="row" layout-sm="column" layout-align="center center">
             <md-progress-circular md-indetermied class="md-accent" md-diameter="96"></md-progress-circular>
-        </div>
+        </div>-->
 
-        <md-checkbox ng-hide="$controller.loading" ng-model="showInactive">Mostrar inativos</md-checkbox>
+        <md-checkbox ng-model="showInactive">Mostrar inativos</md-checkbox>
 
         <user-list
-                ng-show="!$controller.loading"
+                is-disabled="$controller.loading"
 
                 primary-btn-text="Editar Usuário"
                 secondary-btn-text="Desativar Usuário"
@@ -50,7 +52,9 @@
                 filter="{deleted_at: '!'}"></user-list>
 
         <user-list
-                ng-show="showInactive && !$controller.loading"
+                ng-show="showInactive"
+
+                is-disabled="$controller.loading"
 
                 show-primary-btn="$controller.authService.getCurrentUser().hasPermission('active-user')"
                 show-secondary-btn="'false'"

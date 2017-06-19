@@ -11,6 +11,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(OrphaDbSeed::class);
+        $this->call(OrphaModuloSeeder::class);
+        $this->call(CriancaModuloSeeder::class);
+        $this->call(PiaModuloSeeder::class);
+        $this->call(UserModuloSeeder::class);
     }
 }
