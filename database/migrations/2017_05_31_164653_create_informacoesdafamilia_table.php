@@ -42,11 +42,11 @@ class CreateInformacoesdafamiliaTable extends Migration
             $table->boolean('rededeapoio2_cesta_basica')->default(0)->nullable();
             $table->boolean('rededeapoio2_completado')->default(0)->nullable();
             $table->boolean('rededeapoio2_custeio_transporte')->default(0)->nullable();
-            $table->string  ('rededeapoio2_custo')->nullable();
+            $table->string  ('rededeapoio2_custo')->nullable();
             $table->boolean('rededeapoio2_equipamentos')->default(0)->nullable();
             $table->boolean('rededeapoio2_geracao_trabalho_renda')->default(0)->nullable();
-            $table->boolean('rededeapoio2_local_residencia')->nullable();
-            $table->boolean('rededeapoio2_numero_transporte')->nullable();
+            $table->string('rededeapoio2_local_residencia')->nullable();
+            $table->string('rededeapoio2_numero_transporte')->nullable();
             $table->string('rededeapoio2_outros')->nullable();
             $table->boolean('rededeapoio2_programas_sociais')->default(0)->nullable();
             $table->boolean('rededeapoio_associacao_moradores')->default(0)->nullable();
