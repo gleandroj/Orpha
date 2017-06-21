@@ -17,18 +17,19 @@ export default class InformacoesFamiliaService{
 
         this._http.get(this._url + '/' + criancaId + '/pia/informacoesdafamilia')
             .then((response)=> {
-                let atividadesSocioeducativas = response.data;
-                this._util.extend(new InformacoesFamilia(), atividadesSocioeducativas);
-                $q.resolve(atividadesSocioeducativas);
+                let informacoesFamilia = response.data;
+                this._util.extend(new InformacoesFamilia(), informacoesFamilia);
+                $q.resolve(informacoesFamilia);
             }, (response) => $q.reject(response.data));
 
         return $q.promise;
     }
 
-    save(criancaId, atividadesSocioeducativas, key) {
+    save(criancaId, informacoesFamilia, key) {
+
         let defer = this._util.defer();
-        let url = this._url + '/' + criancaId + '/pia/informacoesdafamilia?key='+key;
-        this._http.put(url, atividadesSocioeducativas).then((response)=> defer.resolve(this._util.extend(new InformacoesFamilia(), response.data)), (response)=> defer.reject(response.data));
+        let url = this._url + '/' + criancaId + '/pia/informacoesdafamilia';
+        this._http.put(url, this._util.extend(informacoesFamilia, {key: key})).then((response)=> defer.resolve(this._util.extend(new InformacoesFamilia(), response.data)), (response)=> defer.reject(response.data));
         return defer.promise;
     }
 }

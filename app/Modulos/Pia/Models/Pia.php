@@ -26,6 +26,13 @@ class Pia extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\hasOne
      */
+    public function informacoesFamilia(){
+        return $this->hasOne(InformacoesFamilia::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\hasOne
+     */
     public function dadosNecessidades(){
         return $this->hasOne(DadosNecessidades::class);
     }

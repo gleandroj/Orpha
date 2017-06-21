@@ -18,14 +18,20 @@ import EducacaoCidadaniaTemplate from './../pages/atividadessocioeducativas/educ
 import EducacaoMeioAmbienteTemplate from './../pages/atividadessocioeducativas/educacaoemeioambiente.tpl.html';
 import EducacaoSaudeTemplate from './../pages/atividadessocioeducativas/educacaoesaude.tpl.html';
 
-
 import InformacoesFamiliaController from './../controllers/InformacoesFamiliaController';
 import InformacoesFamiliaTemplate from './../pages/informacoesdafamilia/layout.tpl.html';
+
+import AtendimentoRealizadoTemplate from './../pages/informacoesdafamilia/atendimentorealizado.tpl.html';
+import RedeApoioFamiliaTemplate from './../pages/informacoesdafamilia/rededeapoio.tpl.html';
+import OrientacaoRealizadaTemplate from './../pages/informacoesdafamilia/orientacaorealizada.tpl.html';
+import RedeApoio2Template from './../pages/informacoesdafamilia/rededeapoio2.tpl.html';
+
 
 import CriancaResolver from './../../crianca/resolvers/CriancaResolve';
 import PiaResolve from './../resolvers/PiaResolve';
 import DadosNecessidadesResolve from './../resolvers/DadosNecessidadesResolve';
 import AtividadesSocioeducativasResolve from './../resolvers/AtividadesSocioeducativasResolve';
+import InformacoesFamiliaResolve from './../resolvers/InformacoesFamiliaResolve';
 
 RouteConfig.$inject = ['$stateProvider'];
 
@@ -112,20 +118,20 @@ export default function RouteConfig($stateProvider) {
                      template: InformacoesFamiliaTemplate,
                     controllerAs: '$controller',
                  },
-                'atendimentorealizado@crianca.pia.informacoesdafamilia':{ template: EducacaoCidadaniaTemplate },
-                'rededeapoio@crianca.pia.informacoesdafamilia':{ template: EducacaoCidadaniaTemplate },
-                'orientacaorealizada@crianca.pia.informacoesdafamilia':{ template: EducacaoCidadaniaTemplate },
-                'rededeapoio2@crianca.pia.informacoesdafamilia':{ template: EducacaoCidadaniaTemplate }
+                'atendimentorealizado@crianca.pia.informacoesdafamilia':{ template: AtendimentoRealizadoTemplate },
+                'rededeapoio@crianca.pia.informacoesdafamilia':{ template: RedeApoioFamiliaTemplate },
+                'orientacaorealizada@crianca.pia.informacoesdafamilia':{ template: OrientacaoRealizadaTemplate },
+                'rededeapoio2@crianca.pia.informacoesdafamilia':{ template: RedeApoio2Template }
             },
             data:{},
             resolve: {
                 Crianca: CriancaResolver,
                 Pia: PiaResolve,
-                InformacoesFamilia: AtividadesSocioeducativasResolve
+                InformacoesFamilia: InformacoesFamiliaResolve
             },
-            authorized: ['show-atividades-socioeducativas'],
+            authorized: ['show-informacoes-familia'],
             ncyBreadcrumb: {
-                label: 'Atividades Socioeducativas',
+                label: 'Informações da Família',
                 parent: 'crianca.pia.menu'
             }
         })

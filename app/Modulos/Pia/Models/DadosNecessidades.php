@@ -8,7 +8,6 @@
 
 namespace App\Modulos\Pia\Models;
 
-use App\Modulos\Crianca\Models\Crianca;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -80,16 +79,6 @@ class DadosNecessidades extends Model
         'tratamentos_completado',
         'completado'
     ];
-
-
-    /**
-     * Crianca
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function crianca()
-    {
-        return $this->belongsTo(Crianca::class);
-    }
 
     /**
      * Crianca

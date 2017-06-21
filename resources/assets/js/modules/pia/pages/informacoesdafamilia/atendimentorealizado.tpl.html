@@ -2,10 +2,23 @@
     <md-content layout="column" layout-padding>
 
         <div class="orpha-radio-group" layout="row" layout-align="start center" >
-            <span class="md-subhead orpha-radio-label">Reflexão sobre Ato infracional cometido</span>
+            <span class="md-subhead orpha-radio-label">Acolhimento</span>
             <md-radio-group
-                    ng-init="$controller.atividadessocioeducativas.educacaoecidadania_reflexao_ato_infracional = $controller.atividadessocioeducativas.educacaoecidadania_reflexao_ato_infracional || false"
-                    ng-model="$controller.atividadessocioeducativas.educacaoecidadania_reflexao_ato_infracional"
+                    ng-init="$controller.informacoesdafamilia.atendimentorealizado_acolhimento = $controller.informacoesdafamilia.atendimentorealizado_acolhimento || false"
+                    ng-model="$controller.informacoesdafamilia.atendimentorealizado_acolhimento"
+                    ng-required="true"
+                    ng-disabled="$controller.isReadOnly"
+                    layout="row">
+                <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
+                <md-radio-button ng-value="false">Não</md-radio-button>
+            </md-radio-group>
+        </div>
+
+        <div class="orpha-radio-group" layout="row" layout-align="start center">
+            <span class="md-subhead orpha-radio-label">Esclarecimento sobre fluxo do processo/ JIJ</span>
+            <md-radio-group
+                    ng-init="$controller.informacoesdafamilia.atendimentorealizado_esclarecimento_fluxo_processo = $controller.informacoesdafamilia.atendimentorealizado_esclarecimento_fluxo_processo || false"
+                    ng-model="$controller.informacoesdafamilia.atendimentorealizado_esclarecimento_fluxo_processo"
                     ng-required="true"
                     ng-disabled="$controller.isReadOnly"
                     layout="row">
@@ -17,8 +30,8 @@
         <div class="orpha-radio-group" layout="row" layout-align="start center">
             <span class="md-subhead orpha-radio-label">Orientação sobre Medidas Socioeducativas</span>
             <md-radio-group
-                    ng-init="$controller.atividadessocioeducativas.educacaoecidadania_orientacao_medidas_socioeducativas = $controller.atividadessocioeducativas.educacaoecidadania_orientacao_medidas_socioeducativas || false"
-                    ng-model="$controller.atividadessocioeducativas.educacaoecidadania_orientacao_medidas_socioeducativas"
+                    ng-init="$controller.informacoesdafamilia.atendimentorealizado_orientacao_sobre_medidas_socioeducativas = $controller.informacoesdafamilia.atendimentorealizado_orientacao_sobre_medidas_socioeducativas || false"
+                    ng-model="$controller.informacoesdafamilia.atendimentorealizado_orientacao_sobre_medidas_socioeducativas"
                     ng-required="true"
                     ng-disabled="$controller.isReadOnly"
                     layout="row">
@@ -28,10 +41,10 @@
         </div>
 
         <div class="orpha-radio-group" layout="row" layout-align="start center">
-            <span class="md-subhead orpha-radio-label">Orientação para o mundo do trabalho</span>
+            <span class="md-subhead orpha-radio-label">Encaminhado a Grupo de Pais / Responsáveis</span>
             <md-radio-group
-                    ng-init="$controller.atividadessocioeducativas.educacaoecidadania_orientacao_mundo_trabalho = $controller.atividadessocioeducativas.educacaoecidadania_orientacao_mundo_trabalho || false"
-                    ng-model="$controller.atividadessocioeducativas.educacaoecidadania_orientacao_mundo_trabalho"
+                    ng-init="$controller.informacoesdafamilia.atendimentorealizado_encaminhado_grupo_pais_responsaveis = $controller.informacoesdafamilia.atendimentorealizado_encaminhado_grupo_pais_responsaveis || false"
+                    ng-model="$controller.informacoesdafamilia.atendimentorealizado_encaminhado_grupo_pais_responsaveis"
                     ng-required="true"
                     ng-disabled="$controller.isReadOnly"
                     layout="row">
@@ -40,85 +53,7 @@
             </md-radio-group>
         </div>
 
-        <div class="orpha-radio-group" layout="row" layout-align="start center">
-            <span class="md-subhead orpha-radio-label">Empreendedorismo</span>
-            <md-radio-group
-                    ng-init="$controller.atividadessocioeducativas.educacaoecidadania_empreendedorismo = $controller.atividadessocioeducativas.educacaoecidadania_empreendedorismo || false"
-                    ng-model="$controller.atividadessocioeducativas.educacaoecidadania_empreendedorismo"
-                    ng-required="true"
-                    ng-disabled="$controller.isReadOnly"
-                    layout="row">
-                <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
-                <md-radio-button ng-value="false">Não</md-radio-button>
-            </md-radio-group>
-        </div>
-
-        <div class="orpha-radio-group" layout="row" layout-align="start center">
-            <span class="md-subhead orpha-radio-label">Constituição Federal</span>
-            <md-radio-group
-                    ng-init="$controller.atividadessocioeducativas.educacaoecidadania_constituicao_federal = $controller.atividadessocioeducativas.educacaoecidadania_constituicao_federal || false"
-                    ng-model="$controller.atividadessocioeducativas.educacaoecidadania_constituicao_federal"
-                    ng-required="true"
-                    ng-disabled="$controller.isReadOnly"
-                    layout="row">
-                <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
-                <md-radio-button ng-value="false">Não</md-radio-button>
-            </md-radio-group>
-        </div>
-
-        <div class="orpha-radio-group" layout="row" layout-align="start center">
-            <span class="md-subhead orpha-radio-label">ECA – Direitos e Deveres</span>
-            <md-radio-group
-                    ng-init="$controller.atividadessocioeducativas.educacaoecidadania_eca_direitos_deveres = $controller.atividadessocioeducativas.educacaoecidadania_eca_direitos_deveres || false"
-                    ng-model="$controller.atividadessocioeducativas.educacaoecidadania_eca_direitos_deveres"
-                    ng-required="true"
-                    ng-disabled="$controller.isReadOnly"
-                    layout="row">
-                <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
-                <md-radio-button ng-value="false">Não</md-radio-button>
-            </md-radio-group>
-        </div>
-
-        <div class="orpha-radio-group" layout="row" layout-align="start center">
-            <span class="md-subhead orpha-radio-label">Família</span>
-            <md-radio-group
-                    ng-init="$controller.atividadessocioeducativas.educacaoecidadania_familia = $controller.atividadessocioeducativas.educacaoecidadania_familia || false"
-                    ng-model="$controller.atividadessocioeducativas.educacaoecidadania_familia"
-                    ng-required="true"
-                    ng-disabled="$controller.isReadOnly"
-                    layout="row">
-                <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
-                <md-radio-button ng-value="false">Não</md-radio-button>
-            </md-radio-group>
-        </div>
-
-        <div class="orpha-radio-group" layout="row" layout-align="start center">
-            <span class="md-subhead orpha-radio-label">Coletividade</span>
-            <md-radio-group
-                    ng-init="$controller.atividadessocioeducativas.educacaoecidadania_coletividade = $controller.atividadessocioeducativas.educacaoecidadania_coletividade || false"
-                    ng-model="$controller.atividadessocioeducativas.educacaoecidadania_coletividade"
-                    ng-required="true"
-                    ng-disabled="$controller.isReadOnly"
-                    layout="row">
-                <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
-                <md-radio-button ng-value="false">Não</md-radio-button>
-            </md-radio-group>
-        </div>
-
-        <div class="orpha-radio-group" layout="row" layout-align="start center">
-            <span class="md-subhead orpha-radio-label">Orientação para a importância do processo de escolarização e qualificação profissional</span>
-            <md-radio-group
-                    ng-init="$controller.atividadessocioeducativas.educacaoecidadania_orientacao_processo_escolarizacao = $controller.atividadessocioeducativas.educacaoecidadania_orientacao_processo_escolarizacao || false"
-                    ng-model="$controller.atividadessocioeducativas.educacaoecidadania_orientacao_processo_escolarizacao"
-                    ng-required="true"
-                    ng-disabled="$controller.isReadOnly"
-                    layout="row">
-                <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
-                <md-radio-button ng-value="false">Não</md-radio-button>
-            </md-radio-group>
-        </div>
-
-        <text-area-input name="outros" label="Outros" is-disabled="$controller.isReadOnly" ng-model="$controller.atividadessocioeducativas.educacaoecidadania_outros"></text-area-input>
+        <text-area-input name="outros" label="Outros" is-disabled="$controller.isReadOnly" ng-model="$controller.informacoesdafamilia.atendimentorealizado_outros"></text-area-input>
 
     </md-content>
 </ng-form>

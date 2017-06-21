@@ -37,8 +37,10 @@ class PiaService implements PiaServiceInterface
      */
     public function getPiaByCriancaId($criancaId)
     {
-        if(!$crianca = $this->criancaService->getById($criancaId)) throw (new ModelNotFoundException())->setModel(Crianca::class);if($crianca->pia->dadosNecessidades == null)
-            return $crianca->pia()->create([]);
+        if(!$crianca = $this->criancaService->getById($criancaId)) throw (new ModelNotFoundException())->setModel(Crianca::class);
+
+        if($crianca->pia == null)
+           return $crianca->pia()->create([]);
         else
             return $crianca->pia;
     }

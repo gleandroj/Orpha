@@ -10,5 +10,11 @@ Route::group(['middleware' => ['auth:api']], function () {
 
     Route::get('criancas/{crianca}/pia/atividadessocioeducativas', 'Controllers\AtividadesSocioeducativasController@show');
     Route::put('criancas/{crianca}/pia/atividadessocioeducativas', 'Controllers\AtividadesSocioeducativasController@update');
+
+    Route::get('criancas/{crianca}/pia/informacoesdafamilia', 'Controllers\InformacoesFamiliaController@show');
+    Route::put('criancas/{crianca}/pia/informacoesdafamilia', 'Controllers\InformacoesFamiliaController@update');
+
+
 });
+
 

@@ -12,7 +12,7 @@ let module = angular
     .module('orpha.modules.pia', [])
     .service('DadosNecessidadesService', DadosNecessidadesService)
     .service('AtividadesSocioeducativasService', AtividadesSocioeducativasService)
-    .service('InformacoesFamiliaService', AtividadesSocioeducativasService)
+    .service('InformacoesFamiliaService', InformacoesFamiliaService)
     .service('PiaService', PiaService)
     .config(RouteConfig);
 

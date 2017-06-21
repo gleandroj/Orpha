@@ -11,33 +11,33 @@ namespace App\Modulos\Pia\Services;
 
 use App\Modulos\Crianca\Contracts\CriancaServiceInterface;
 use App\Modulos\Crianca\Models\Crianca;
-use App\Modulos\Pia\Contracts\DadosNecessidadesRepositoryInterface;
-use App\Modulos\Pia\Contracts\DadosNecessidadesServiceInterface;
-use App\Modulos\Pia\Models\DadosNecessidades;
+use App\Modulos\Pia\Contracts\InformacoesFamiliaRepositoryInterface;
+use App\Modulos\Pia\Contracts\InformacoesFamiliaServiceInterface;
+use App\Modulos\Pia\Models\InformacoesFamilia;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
 use Exception;
 
-class DadosNecessidadesService implements DadosNecessidadesServiceInterface
+class InformacoesFamiliaService implements InformacoesFamiliaServiceInterface
 {
     /**
-     * @var DadosNecessidadesRepositoryInterface
+     * @var InformacoesFamiliaRepositoryInterface
      */
-    private $dadosNecessidadesRepository;
+    private $informacoesFamiliaRepository;
     /**
      * @var CriancaServiceInterface
      */
     private $criancaService;
 
     /**
-     * DadosNecessidadesService constructor.
-     * @param DadosNecessidadesRepositoryInterface $dadosNecessidadesRepository
+     * InformacoesFamiliaService constructor.
+     * @param InformacoesFamiliaRepositoryInterface $informacoesFamiliaRepository
      * @param CriancaServiceInterface $criancaService
      */
-    public function __construct(DadosNecessidadesRepositoryInterface $dadosNecessidadesRepository, CriancaServiceInterface $criancaService)
+    public function __construct(InformacoesFamiliaRepositoryInterface $informacoesFamiliaRepository, CriancaServiceInterface $criancaService)
     {
-        $this->dadosNecessidadesRepository = $dadosNecessidadesRepository;
+        $this->informacoesFamiliaRepository = $informacoesFamiliaRepository;
         $this->criancaService = $criancaService;
     }
 
@@ -57,16 +57,16 @@ class DadosNecessidadesService implements DadosNecessidadesServiceInterface
     {
         if(!$crianca = $this->criancaService->getById($criancaId)) throw (new ModelNotFoundException())->setModel(Crianca::class);
 
-        if($crianca->pia->dadosNecessidades == null)
-            return $crianca->pia->dadosNecessidades()->create([]);
+        if($crianca->pia->informacoesFamilia == null)
+            return $crianca->pia->informacoesFamilia()->create([]);
         else
-            return $crianca->pia->dadosNecessidades;
+            return $crianca->pia->informacoesFamilia;
     }
 
     /**
      * @param $criancaId
      * @param array $data
-     * @return DadosNecessidades|\Illuminate\Database\Eloquent\Model
+     * @return InformacoesFamilia|\Illuminate\Database\Eloquent\Model
      * @throws Exception
      */
     public function update($criancaId, array $data)
@@ -77,12 +77,12 @@ class DadosNecessidadesService implements DadosNecessidadesServiceInterface
             return str_contains($key, $update_key);
         });
 
-        $dadosNecessidades = $this->getByCriancaId($criancaId);
+        $informacoesFamilia = $this->getByCriancaId($criancaId);
         $update_data->put($update_key.'_completado', true);
 
         if($update_key == 'religiosidade') $update_data->put('completado', true);
 
-        if(!$dadosNecessidades = $this->dadosNecessidadesRepository->update($dadosNecessidades->id, $update_data->all())) throw new Exception(trans('messages.MSG4'));
-        return $dadosNecessidades->fresh();
+        if(!$informacoesFamilia = $this->informacoesFamiliaRepository->update($informacoesFamilia->id, $update_data->all())) throw new Exception(trans('messages.MSG4'));
+        return $informacoesFamilia->fresh();
     }
 }

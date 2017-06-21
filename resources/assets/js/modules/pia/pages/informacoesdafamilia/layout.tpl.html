@@ -23,34 +23,34 @@
         <md-tabs class="stepper" flex md-dynamic-height md-border-bottom md-selected="$controller.selected">
             <md-tab>
                 <md-tab-label>
-                    <md-step ng-class="{'md-linear':$controller.readOnly ,'md-complete':$controller.informacoesFamilia.atendimentorealizado_completado}"> Atendimento Realizado </md-step>
+                    <md-step ng-class="{'md-linear':$controller.readOnly ,'md-complete':$controller.informacoesdafamilia.atendimentorealizado_completado}"> Atendimento Realizado </md-step>
                 </md-tab-label>
                 <md-tab-body>
                     <md-divider></md-divider>
                     <md-content layout="column" ui-view="atendimentorealizado"></md-content>
                 </md-tab-body>
             </md-tab>
-            <md-tab ng-disabled="!$controller.informacoesFamilia.atendimentorealizado_completado">
+            <md-tab ng-disabled="!$controller.informacoesdafamilia.atendimentorealizado_completado">
                 <md-tab-label>
-                    <md-step ng-class="{'md-linear':$controller.readOnly ,'md-complete':$controller.informacoesFamilia.rededeapoio_completado}"> Rede de Apoio - Encaminhar </md-step>
+                    <md-step ng-class="{'md-linear':$controller.readOnly ,'md-complete':$controller.informacoesdafamilia.rededeapoio_completado}"> Rede de Apoio - Encaminhar </md-step>
                 </md-tab-label>
                 <md-tab-body>
                     <md-divider></md-divider>
                     <md-content layout="column" ui-view="rededeapoio"></md-content>
                 </md-tab-body>
             </md-tab>
-            <md-tab ng-disabled="!$controller.informacoesFamilia.rededeapoio_completado">
+            <md-tab ng-disabled="!$controller.informacoesdafamilia.rededeapoio_completado">
                 <md-tab-label>
-                    <md-step ng-class="{'md-linear':$controller.readOnly ,'md-complete':$controller.informacoesFamilia.orientacaorealizada_completado}"> Orientação Realizada </md-step>
+                    <md-step ng-class="{'md-linear':$controller.readOnly ,'md-complete':$controller.informacoesdafamilia.orientacaorealizada_completado}"> Orientação Realizada </md-step>
                 </md-tab-label>
                 <md-tab-body>
                     <md-divider></md-divider>
                     <md-content layout="column" ui-view="orientacaorealizada"></md-content>
                 </md-tab-body>
             </md-tab>
-            <md-tab ng-disabled="!$controller.informacoesFamilia.orientacaorealizada_completado">
+            <md-tab ng-disabled="!$controller.informacoesdafamilia.orientacaorealizada_completado">
                 <md-tab-label>
-                    <md-step ng-class="{'md-linear':$controller.readOnly ,'md-complete':$controller.informacoesFamilia.rededeapoio2_completado}"> Rede de Apoio - Encaminhar </md-step>
+                    <md-step ng-class="{'md-linear':$controller.readOnly ,'md-complete':$controller.informacoesdafamilia.rededeapoio2_completado}"> Rede de Apoio - Encaminhar </md-step>
                 </md-tab-label>
                 <md-tab-body>
                     <md-divider></md-divider>

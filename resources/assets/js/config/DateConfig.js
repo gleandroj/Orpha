@@ -8,11 +8,12 @@ DateConfig.$inject = ['$mdDateLocaleProvider', '$provide'];
 export default function DateConfig($mdDateLocaleProvider, $provide) {
 
     $mdDateLocaleProvider.formatDate = function(date) {
-        return moment(date).format('DD/MM/YYYY');
+        let m = moment(date);
+        return m.isValid() ? m.format('DD/MM/YYYY') : null;
     };
 
     $mdDateLocaleProvider.parseDate = function(dateString) {
-        var m = moment(dateString, 'DD/MM/YYYY', true);
+        let m = moment(dateString, 'DD/MM/YYYY', true);
         return m.isValid() ? m.toDate() : new Date(NaN);
     };
 

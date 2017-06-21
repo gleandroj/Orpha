@@ -10,7 +10,7 @@ export default class InformacoesFamiliaController{
         this.state = State;
         this.crianca = Crianca;
         this.originalInformacoesFamilia = this.util.copy(InformacoesFamilia);
-        this.informacoesFamilia = InformacoesFamilia;
+        this.informacoesdafamilia = InformacoesFamilia;
         this.informacoesFamiliaService = InformacoesFamiliaService;
         this.logService = LogService;
         this.toastService = ToastService;
@@ -19,7 +19,7 @@ export default class InformacoesFamiliaController{
         this.scopes = [];
         this.selected = 0;
         this.loading = false;
-        this.readOnly = this.informacoesFamilia.atendimentorealizado_completado;
+        this.readOnly = this.informacoesdafamilia.atendimentorealizado_completado;
     }
 
     get isReadOnly(){
@@ -36,6 +36,9 @@ export default class InformacoesFamiliaController{
                 break;
             case 2:
                 return 'orientacaorealizada';
+                break;
+            case 3:
+                return 'rededeapoio2';
                 break;
             default:
                 return null;
@@ -60,13 +63,13 @@ export default class InformacoesFamiliaController{
     submit(key){
         this.loading = true;
         this.informacoesFamiliaService
-            .save(this.crianca.id, this.informacoesFamilia, key)
+            .save(this.crianca.id, this.informacoesdafamilia, key)
             .success((informacoesFamilia)=>{
                 this.util.extend(this.originalInformacoesFamilia, informacoesFamilia);
-                this.util.extend(this.informacoesFamilia, informacoesFamilia);
+                this.util.extend(this.informacoesdafamilia, informacoesFamilia);
                 this.toastService.showSuccess(this.messageService.get(this.editMode ? 'MSG7' : 'MSG5'));
 
-                if(this.tabKey !== 'atendimentorealizado'){
+                if(this.tabKey !== 'rededeapoio2'){
                     this.selected++;
                     this.loading = false;
                 }
