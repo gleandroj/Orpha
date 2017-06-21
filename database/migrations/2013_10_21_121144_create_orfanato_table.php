@@ -15,7 +15,17 @@ class CreateOrfanatoTable extends Migration
     {
         Schema::create('orfanatos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nome', 50);
+            $table->string('nome', 50)->unique();
+            $table->string('endereco', 100);
+            $table->string('cidade', 50);
+            $table->string('estado', 50);
+            $table->string('cep', 50);
+            $table->string('cnpj', 50)->unique();
+            $table->string('telefone', 50);
+            $table->string('email', 50)->nullable()->unique();
+            $table->string('responsavel', 50);
+            $table->string('responsavel_email', 50);
+            $table->string('responsavel_telefone', 50);
             $table->softDeletes();
             $table->timestamps();
         });

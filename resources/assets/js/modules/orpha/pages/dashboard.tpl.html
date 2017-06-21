@@ -22,12 +22,10 @@
             <md-progress-circular md-indetermied class="md-accent" md-diameter="96"></md-progress-circular>
         </div>
 
-        <div ng-show="!$controller.loading" layout="column">
-
-            <div layout="row">
+        <div layout="row" layout-wrap ng-show="!$controller.loading" layout-align-xs="space-between center" layout-align-sm="space-between center" layout-align-md="space-between center">
 
                 <!--Usuários -->
-                <md-card flex-xs="100" flex-gt-xs="45" md-whiteframe="5">
+                <md-card flex-xs="100" flex-sm="45" flex-md="45" flex-gt-md="30" md-whiteframe="5">
                     <md-card-header>
                         <md-card-avatar>
                             <div class="md-avatar-icon material-icons md-dark" style="font-size: 48px;">account_circle</div>
@@ -42,7 +40,7 @@
                         </md-button>
                     </md-card-header>
                     <md-divider></md-divider>
-                    <md-content class="md-card-content">
+                    <md-content class="md-card-content" layout-align="center center" flex layout="column" style="background: white;">
                         <canvas id="pie" class="chart chart-pie"
                                 chart-data="$controller.usersByCategoriesChart.data"
                                 chart-labels="$controller.usersByCategoriesChart.labels"
@@ -51,7 +49,7 @@
                 </md-card>
 
                 <!--Crianças -->
-                <md-card flex-xs="100" flex-gt-xs="45" md-whiteframe="5">
+                <md-card flex-xs="100" flex-sm="45" flex-md="45" flex-gt-md="30" md-whiteframe="5">
                     <md-card-header>
                         <md-card-avatar>
                             <div class="md-avatar-icon material-icons md-dark" style="font-size: 48px;">face</div>
@@ -66,17 +64,17 @@
                         </md-button>
                     </md-card-header>
                     <md-divider></md-divider>
-                    <md-card-content layout="row" layout-align="center">
-                        <canvas class="chart chart-pie" chart-data="$controller.criancasByCategoriesChart.data" chart-labels="$controller.criancasByCategoriesChart.labels" chart-options="$controller.criancasByCategoriesChart.options"></canvas>
+                    <md-card-content layout-align="center center" flex layout="column" style="background: white;">
+                        <canvas
+                                class="chart chart-pie"
+                                chart-data="$controller.criancasByCategoriesChart.data"
+                                chart-labels="$controller.criancasByCategoriesChart.labels"
+                                chart-options="$controller.criancasByCategoriesChart.options"></canvas>
                     </md-card-content>
                 </md-card>
 
-            </div>
-
-            <div layout="row" layout-align="center center" >
-
                 <!-- Crianças Média Idades -->
-                <md-card class="chart-card" flex-xs="100" flex-gt-xs="95" md-whiteframe="5">
+                <md-card class="chart-card" flex-xs="100" flex-sm="100" flex-md="auto" flex-gt-md="33" flex><!--  flex-gt-xs="45" flex-gt-md="30" flex-gt-lg="20" md-whiteframe="5" style="max: auto"-->
                     <md-card-header>
                         <md-card-avatar>
                             <div class="md-avatar-icon material-icons md-dark" style="font-size: 48px;">face</div>
@@ -91,7 +89,7 @@
                         </md-button>
                     </md-card-header>
                     <md-divider></md-divider>
-                    <md-card-content layout="row" layout-align="center">
+                    <md-card-content layout-align="center center" flex layout="column" style="background: white;">
                         <canvas
                                 chart-colors="$controller.colors"
                                 id="bar"
@@ -103,7 +101,9 @@
                     </md-card-content>
                 </md-card>
 
-            </div>
+        </div>
+
+        <div layout="row" >
 
         </div>
 

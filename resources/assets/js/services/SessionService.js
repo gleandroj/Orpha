@@ -54,13 +54,13 @@ export class SessionService {
 
     isExpired() {
         const lastActivity = this._getLastActivity();
-        if (lastActivity != null)
+        if (lastActivity !== null)
             return ((new Date()).getTime() - lastActivity.getTime()) >= this.sessionTtl;
         return true;
     }
 
     exists() {
-        return checkSessionInterval != null && this._getLastActivity() != null;
+        return checkSessionInterval !== null && this._getLastActivity() !== null;
     }
 
     checkSessionFn() {

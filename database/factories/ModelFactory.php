@@ -14,9 +14,31 @@
 
 use App\Modulos\Auth\Models\Permission;
 use App\Modulos\Crianca\Models\Crianca;
+use App\Modulos\Orpha\Models\Orfanato;
 use App\Modulos\User\Models\User;
 
-$factory->define(User::class, function (Faker\Generator $faker) {
+$faker = Faker\Factory::create('pt_BR');
+
+$factory->define(Orfanato::class, function () use ($faker) {
+    return [
+        'nome' => $faker->unique()->name,
+
+        'endereco' => $faker->address,
+        'cidade' => $faker->city,
+        'estado' => $faker->state,
+        'cep' => $faker->postcode,
+
+        'cnpj' => $faker->unique()->cnpj,
+        'telefone' => $faker->phoneNumber,
+        'email' => $faker->unique()->companyEmail,
+
+        'responsavel' => $faker->name,
+        'responsavel_email' => $faker->email,
+        'responsavel_telefone' => $faker->phoneNumber
+    ];
+});
+
+$factory->define(User::class, function () use ($faker) {
     static $password;
 
     return [
@@ -29,7 +51,7 @@ $factory->define(User::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(Permission::class, function (Faker\Generator $faker) {
+$factory->define(Permission::class, function () use ($faker) {
 
     return [
         'name' => $faker->name,
@@ -38,7 +60,7 @@ $factory->define(Permission::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(Crianca::class, function (Faker\Generator $faker) {
+$factory->define(Crianca::class, function () use ($faker) {
     return [
         'nome' => $faker->name,
         'dt_nascimento' => $faker->dateTimeBetween('-18 years', '-2 years'),

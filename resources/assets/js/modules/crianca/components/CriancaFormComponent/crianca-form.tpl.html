@@ -4,7 +4,7 @@
         <error-message error="required" message="{{ 'MSG2' | message }}"></error-message>
     </text-input>
 
-    <date-input name="dt_nascimento" title="Data de Nascimento" label="Dt. Nascimento" is-disabled="$form.readOnly || $form.isDisabled" is-required="true" ng-model="$form.crianca.dt_nascimento">
+    <date-input name="dt_nascimento" title="Data de Nascimento" label="Dt. Nascimento" is-disabled="$form.readOnly || $form.isDisabled" is-required="true" ng-model="$form.crianca.dt_nascimento" date-mask="39/19/9999">
         <error-message error="required" message="{{ 'MSG2' | message }}"></error-message>
     </date-input>
 

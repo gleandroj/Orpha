@@ -156,17 +156,17 @@ class UserService implements UserServiceInterface
 
     /**
      * @param $base64
-     * @param null $fileName
+     * @param $fileName
      * @return string
      */
-    private function uploadBase64Img($base64, $fileName = null){
+    private function uploadBase64Img($base64, $fileName){
+
+        if($fileName == null) throw new \InvalidArgumentException("file name cannot be null");
 
         $image = Image::make($base64)->encode('jpg');
 
-        if($fileName == null) $fileName = 'images/'.$this->newGuid().'.jpg';
+        Storage::put($fileName, $image->getEncoded(), 'public');
 
-        Storage::disk('s3')->put($fileName, $image->getEncoded(), 'public');
-
-        return Storage::disk('s3')->url($fileName).'?timestamp='.round(microtime(true) * 1000);
+        return Storage::url($fileName).'?timestamp='.round(microtime(true) * 1000);
     }
 }
