@@ -1,3 +1,0 @@
-1) Colocar a validação de "Senhas não conferem" no campo "Confirmação de Senha"
-
-2) Colocar nas abas de formulários uma indicação de fluxo '>'.
