@@ -295,16 +295,16 @@ service nginx restart
 
 echo "Configurando o Monit com Redis..."
 
-touch /etc/monit/conf-available/redis
-cat > /etc/monit/conf-available/redis << EOF
-check process redis with pidfile /var/run/redis/redis-server.pid
-  start program = "/etc/init.d/redis-server start"
-  stop program = "/etc/init.d/redis-server stop"
-  if failed host 127.0.0.1 port 6379 then restart
-  if 5 restart within 5 cycles then timeout
-EOF
+##touch /etc/monit/conf-available/redis
+##cat > /etc/monit/conf-available/redis << EOF
+##check process redis with pidfile /var/run/redis/redis-server.pid
+##  start program = "/etc/init.d/redis-server start"
+##  stop program = "/etc/init.d/redis-server stop"
+##  if failed host 127.0.0.1 port 6379 then restart
+##  if 5 restart within 5 cycles then timeout
+##EOF
 
-ln -s /etc/monit/conf-available/redis /etc/monit/conf-enabled/redis
+## ln -s /etc/monit/conf-available/redis /etc/monit/conf-enabled/redis
 
 ## Testa as configuracoes do monit
 monit -t

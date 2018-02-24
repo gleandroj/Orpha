@@ -6,16 +6,16 @@ echo "Teste de Inicialização"
 ## Monitora e inicia servicos
 echo -e "\nIniciando os servicos..."
 
-service supervisor start
+## service supervisor start
 service cron start
 service php7.1-fpm start
 # service memcached restart
 
 ## Verifica se inicia servidor redis localmente
-if [ "${ENABLE_REDIS_SERVER_LOCAL}" == "true" ]; then
-    ## Inicia Servidor Redis Local
-    service redis-server start
-fi
+## if [ "${ENABLE_REDIS_SERVER_LOCAL}" == "true" ]; then
+##    ## Inicia Servidor Redis Local
+##    service redis-server start
+## fi
 
 ## Verifica se esta rodando no modo de teste
 if [ "${TEST_MODE}" == "true" ]; then

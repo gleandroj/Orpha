@@ -1,6 +1,8 @@
 FROM ubuntu
 
 ENV DEPLOY_USER deploy
+ARG APP_ENV="testing"
+ENV APP_ENV=${APP_ENV}
 
 COPY ./scripts/base.sh /tmp/base.sh
 RUN chmod +x /tmp/base.sh && \
@@ -39,6 +41,18 @@ RUN chown $USER:$USER /scripts && \
     chmod +x /scripts/*.sh && \
     mkdir -p /home/deploy/app && \
     chown -R deploy:deploy /home/deploy
+
+## onbuild
+ONBUILD USER root
+
+ONBUILD COPY . /home/deploy/app
+
+ONBUILD COPY ./scripts/onbuild.sh /tmp/onbuild.sh
+
+ONBUILD RUN chmod +x /tmp/onbuild.sh && \
+/tmp/onbuild.sh
+
+ONBUILD USER deploy
 
 WORKDIR /home/deploy/app
 

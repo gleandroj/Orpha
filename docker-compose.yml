@@ -1,0 +1,21 @@
+version: '2.2'
+services:
+  db:
+    image: postgres:9.6
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: forge
+      POSTGRES_PASSWORD: forge
+  web:
+    image: d97d9349878f
+    ports:
+      - "80:80"
+    volumes:
+      - .:/home/deploy/app:Z
+    depends_on:
+      - db
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
