@@ -9,7 +9,7 @@ services:
       POSTGRES_USER: forge
       POSTGRES_PASSWORD: forge
   web:
-    image: d97d9349878f
+    image: 2defb5a195f2
     ports:
       - "80:80"
     volumes:

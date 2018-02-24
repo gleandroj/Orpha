@@ -159,8 +159,8 @@ nginx -t
 source /etc/environment
 
 export DOLLAR='$'
-export APP_DOMAIN='exemplo.com.br'
-export APP_DIR='exemplo'
+export APP_DOMAIN=${APP_DOMAIN}
+export APP_DIR="app"
 
 ############################################
 ## Exemplos do Nginx com Laravel
@@ -283,6 +283,9 @@ server {
     
 }
 EOF
+
+## Habilita Site Local
+cp /etc/nginx/sites-available/site-laravel-exemplo /etc/nginx/sites-enabled/site-app-localhost
 
 # Testa o Nginx
 nginx -t

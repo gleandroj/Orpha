@@ -1,6 +1,7 @@
 FROM ubuntu
 
 ENV DEPLOY_USER deploy
+ENV APP_DOMAIN "app.localhost"
 ARG APP_ENV="testing"
 ENV APP_ENV=${APP_ENV}
 
