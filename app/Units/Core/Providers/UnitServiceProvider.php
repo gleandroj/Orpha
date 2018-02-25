@@ -11,7 +11,6 @@ class UnitServiceProvider extends ServiceProvider
      * @var array List of Unit Service Providers to Register
      */
     protected $providers = [
-        //BroadcastServiceProvider::class,
         RouteServiceProvider::class
     ];
 
