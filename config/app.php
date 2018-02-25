@@ -174,11 +174,6 @@ return [
         Orpha\Infrastructure\IoC\ContainerServiceProvider::class,
         Orpha\Units\Core\Providers\UnitServiceProvider::class,
         Orpha\Units\Auth\Providers\UnitServiceProvider::class
-        // App\Providers\AppServiceProvider::class,
-        // App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
-        // App\Providers\EventServiceProvider::class,
-        // App\Providers\RouteServiceProvider::class,
 
     ],
 
