@@ -2,7 +2,7 @@
 
 namespace Orpha\Units\Core\Providers;
 
-use Orpha\Units\Core\Routes\Api;
+use Orpha\Units\Core\Routes\Testing;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
 class RouteServiceProvider extends ServiceProvider
@@ -60,9 +60,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapApiRoutes()
     {
         (new Testing([
-            'middleware' => '',
             'namespace'  => $this->namespace,
-            'prefix'     => env('API_PREFIX', 'api'),
         ]))->register();
     }
 }
