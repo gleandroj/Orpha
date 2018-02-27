@@ -14,8 +14,8 @@ class Api extends RouteFile
     public function routes()
     {
         $this->router->group(['middleware' => ['auth:api']], function () {
-            $this->router->get('/users/restore/{user}', 'Controllers\UserController@restore');
-            $this->router->post('/users/checkEmail', 'Controllers\UserController@checkEmail');
+            $this->router->post('/users/check', 'Controllers\UserController@checkEmail');
+            $this->router->get('/users/{user}/restore', 'Controllers\UserController@restore');
             $this->router->resource('/users', 'Controllers\UserController', ['except' => ['create', 'edit']]);
         });
     }

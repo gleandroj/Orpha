@@ -16,6 +16,13 @@ use Orpha\Domains\User\Services\UserService;
 use Orpha\Infrastructure\Data\Repositories\UserRepository;
 use Orpha\Domains\User\Repositories\UserRepository as UserRepositoryContract;
 
+use Orpha\Domains\Crianca\Contracts\CriancaServiceContract;
+use Orpha\Domains\Crianca\Services\CriancaService;
+
+use Orpha\Infrastructure\Data\Repositories\CriancaRepository;
+use Orpha\Domains\Crianca\Repositories\CriancaRepository as CriancaRepositoryContract;
+
+
 use Orpha\Infrastructure\Data\Repositories\UnitOfWork;
 use Orpha\Support\Repositories\UnitOfWorkContract;
 
@@ -48,6 +55,7 @@ class ContainerServiceProvider extends ServiceProvider
         static::registerSupport($application, $provider);
         static::registerAuthDomain($application, $provider);
         static::registerUserDomain($application, $provider);
+        static::registerCriancaDomain($application, $provider);
         static::registerAgents($application, $provider);
         static::registerHelper($application, $provider);
         static::registerListeners();
@@ -89,6 +97,16 @@ class ContainerServiceProvider extends ServiceProvider
     {
         $application->bind(UserServiceContract::class, UserService::class);
         $application->bind(UserRepositoryContract::class, UserRepository::class);
+    }
+
+    /**
+     * @param Application $application
+     * @param ServiceProvider $provider
+    */
+    private static function registerCriancaDomain(Application $application, ServiceProvider $provider)
+    {
+        $application->bind(CriancaServiceContract::class, CriancaService::class);
+        $application->bind(CriancaRepositoryContract::class, CriancaRepository::class);
     }
 
     /**
