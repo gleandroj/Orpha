@@ -8,7 +8,19 @@ use Illuminate\Notifications\Events\NotificationSent;
 use Illuminate\Support\Facades\Event;
 
 use Orpha\Infrastructure\Data\Repositories\PasswordRepository;
-use Orpha\Domains\Auth\Repositories\PasswordRepository as PasswordRepositoryInterface;
+use Orpha\Domains\Auth\Repositories\PasswordRepository as PasswordRepositoryContract;
+
+use Orpha\Domains\User\Contracts\UserServiceContract;
+use Orpha\Domains\User\Services\UserService;
+
+use Orpha\Infrastructure\Data\Repositories\UserRepository;
+use Orpha\Domains\User\Repositories\UserRepository as UserRepositoryContract;
+
+use Orpha\Infrastructure\Data\Repositories\UnitOfWork;
+use Orpha\Support\Repositories\UnitOfWorkContract;
+
+use Orpha\Infrastructure\Data\Repositories\Repository;
+use Orpha\Support\Repositories\RepositoryContract;
 
 class ContainerServiceProvider extends ServiceProvider
 {
@@ -33,7 +45,9 @@ class ContainerServiceProvider extends ServiceProvider
      */
     public static function RegisterServices(Application $application, ServiceProvider $provider)
     {
+        static::registerSupport($application, $provider);
         static::registerAuthDomain($application, $provider);
+        static::registerUserDomain($application, $provider);
         static::registerAgents($application, $provider);
         static::registerHelper($application, $provider);
         static::registerListeners();
@@ -47,13 +61,34 @@ class ContainerServiceProvider extends ServiceProvider
     {
     }
 
+
+    /**
+     * @param Application $application
+     * @param ServiceProvider $provider
+    */
+    private static function registerSupport(Application $application, ServiceProvider $provider)
+    {
+        $application->bind(UnitOfWorkContract::class, UnitOfWork::class);
+        $application->bind(RepositoryContract::class, Repository::class);
+    }
+
     /**
      * @param Application $application
      * @param ServiceProvider $provider
      */
     private static function registerAuthDomain(Application $application, ServiceProvider $provider)
     {
-        $application->bind(PasswordRepositoryInterface::class, PasswordRepository::class);
+        $application->bind(PasswordRepositoryContract::class, PasswordRepository::class);
+    }
+
+    /**
+     * @param Application $application
+     * @param ServiceProvider $provider
+    */
+    private static function registerUserDomain(Application $application, ServiceProvider $provider)
+    {
+        $application->bind(UserServiceContract::class, UserService::class);
+        $application->bind(UserRepositoryContract::class, UserRepository::class);
     }
 
     /**

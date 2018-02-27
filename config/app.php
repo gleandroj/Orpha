@@ -173,7 +173,8 @@ return [
          */
         Orpha\Infrastructure\IoC\ContainerServiceProvider::class,
         Orpha\Units\Core\Providers\UnitServiceProvider::class,
-        Orpha\Units\Auth\Providers\UnitServiceProvider::class
+        Orpha\Units\Auth\Providers\UnitServiceProvider::class,
+        Orpha\Units\User\Providers\UnitServiceProvider::class
 
     ],
 
