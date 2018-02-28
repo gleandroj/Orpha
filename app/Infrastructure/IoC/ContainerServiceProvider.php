@@ -22,6 +22,26 @@ use Orpha\Domains\Crianca\Services\CriancaService;
 use Orpha\Infrastructure\Data\Repositories\CriancaRepository;
 use Orpha\Domains\Crianca\Repositories\CriancaRepository as CriancaRepositoryContract;
 
+use Orpha\Domains\Pia\Contracts\AtividadesSocioeducativasServiceContract;
+use Orpha\Domains\Pia\Services\AtividadesSocioeducativasService;
+
+use Orpha\Domains\Pia\Contracts\DadosNecessidadesServiceContract;
+use Orpha\Domains\Pia\Services\DadosNecessidadesService;
+
+use Orpha\Domains\Pia\Contracts\InformacoesFamiliaServiceContract;
+use Orpha\Domains\Pia\Services\InformacoesFamiliaService;
+
+use Orpha\Domains\Pia\Contracts\PiaServiceContract;
+use Orpha\Domains\Pia\Services\PiaService;
+
+use Orpha\Infrastructure\Data\Repositories\AtividadesSocioeducativasRepository;
+use Orpha\Domains\Pia\Repositories\AtividadesSocioeducativasRepository as AtividadesSocioeducativasRepositoryContract;
+
+use Orpha\Infrastructure\Data\Repositories\DadosNecessidadesRepository;
+use Orpha\Domains\Pia\Repositories\DadosNecessidadesRepository as DadosNecessidadesRepositoryContract;
+
+use Orpha\Infrastructure\Data\Repositories\InformacoesFamiliaRepository;
+use Orpha\Domains\Pia\Repositories\InformacoesFamiliaRepository as InformacoesFamiliaRepositoryContract;
 
 use Orpha\Infrastructure\Data\Repositories\UnitOfWork;
 use Orpha\Support\Repositories\UnitOfWorkContract;
@@ -56,6 +76,7 @@ class ContainerServiceProvider extends ServiceProvider
         static::registerAuthDomain($application, $provider);
         static::registerUserDomain($application, $provider);
         static::registerCriancaDomain($application, $provider);
+        static::registerPiaDomain($application, $provider);
         static::registerAgents($application, $provider);
         static::registerHelper($application, $provider);
         static::registerListeners();
@@ -107,6 +128,22 @@ class ContainerServiceProvider extends ServiceProvider
     {
         $application->bind(CriancaServiceContract::class, CriancaService::class);
         $application->bind(CriancaRepositoryContract::class, CriancaRepository::class);
+    }
+
+    /**
+     * @param Application $application
+     * @param ServiceProvider $provider
+    */
+    private static function registerPiaDomain(Application $application, ServiceProvider $provider)
+    {
+        $application->bind(AtividadesSocioeducativasServiceContract::class, AtividadesSocioeducativasService::class);
+        $application->bind(DadosNecessidadesServiceContract::class, DadosNecessidadesService::class);
+        $application->bind(InformacoesFamiliaServiceContract::class, InformacoesFamiliaService::class);
+        $application->bind(PiaServiceContract::class, PiaService::class);
+
+        $application->bind(AtividadesSocioeducativasRepositoryContract::class, AtividadesSocioeducativasRepository::class);
+        $application->bind(DadosNecessidadesRepositoryContract::class, DadosNecessidadesRepository::class);
+        $application->bind(InformacoesFamiliaRepositoryContract::class, InformacoesFamiliaRepository::class);
     }
 
     /**

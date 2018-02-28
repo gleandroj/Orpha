@@ -175,7 +175,8 @@ return [
         Orpha\Units\Core\Providers\UnitServiceProvider::class,
         Orpha\Units\Auth\Providers\UnitServiceProvider::class,
         Orpha\Units\User\Providers\UnitServiceProvider::class,
-        Orpha\Units\Crianca\Providers\UnitServiceProvider::class
+        Orpha\Units\Crianca\Providers\UnitServiceProvider::class,
+        Orpha\Units\Pia\Providers\UnitServiceProvider::class
     ],
 
     /*

@@ -1,6 +1,6 @@
 <?php
 
-namespace Orpha\Units\Pia\Controllers;
+namespace Orpha\Units\Pia\Http\Controllers;
 
 use Orpha\Domains\Crianca\Models\Crianca;
 use Illuminate\Http\Request;

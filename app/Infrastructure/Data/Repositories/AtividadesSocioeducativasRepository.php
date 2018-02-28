@@ -11,9 +11,9 @@ class AtividadesSocioeducativasRepository extends AbstractRepository implements 
     /**
      * AtividadesSocioeducativasRepository constructor.
      * @param AtividadesSocioeducativas $model
-     * @param UnitOfWorkInterface $uow
+     * @param UnitOfWorkContract $uow
      */
-    public function __construct(AtividadesSocioeducativas $model, UnitOfWorkInterface $uow)
+    public function __construct(AtividadesSocioeducativas $model, UnitOfWorkContract $uow)
     {
         parent::__construct($model, $uow);
     }

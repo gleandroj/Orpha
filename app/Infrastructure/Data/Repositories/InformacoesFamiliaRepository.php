@@ -11,9 +11,9 @@ class InformacoesFamiliaRepository extends AbstractRepository implements Informa
     /**
      * InformacoesFamiliaRepository constructor.
      * @param InformacoesFamilia $model
-     * @param UnitOfWorkInterface $uow
+     * @param UnitOfWorkContract $uow
      */
-    public function __construct(InformacoesFamilia $model, UnitOfWorkInterface $uow)
+    public function __construct(InformacoesFamilia $model, UnitOfWorkContract $uow)
     {
         parent::__construct($model, $uow);
     }

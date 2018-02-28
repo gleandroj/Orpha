@@ -11,9 +11,9 @@ class DadosNecessidadesRepository extends AbstractRepository implements DadosNec
     /**
      * DadosNecessidadesRepository constructor.
      * @param DadosNecessidades $model
-     * @param UnitOfWorkInterface $uow
+     * @param UnitOfWorkContract $uow
      */
-    public function __construct(DadosNecessidades $model, UnitOfWorkInterface $uow)
+    public function __construct(DadosNecessidades $model, UnitOfWorkContract $uow)
     {
         parent::__construct($model, $uow);
     }
