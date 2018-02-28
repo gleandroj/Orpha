@@ -1,0 +1,163 @@
+<ng-form name="form" ng-init="$controller.pushScope(this)">
+    <md-content layout="column" layout-padding>
+
+        <div class="orpha-radio-group" layout="row" layout-align="start center" >
+            <span class="md-subhead orpha-radio-label">Enfermagem</span>
+            <md-radio-group
+                    ng-init="$controller.dadosenecessidades.necessidades_enfermagem = $controller.dadosenecessidades.necessidades_enfermagem || false"
+                    ng-model="$controller.dadosenecessidades.necessidades_enfermagem"
+                    ng-required="true"
+                    ng-disabled="$controller.isReadOnly"
+                    layout="row">
+                <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
+                <md-radio-button ng-value="false">Não</md-radio-button>
+            </md-radio-group>
+        </div>
+
+        <div class="orpha-radio-group" layout="row" layout-align="start center">
+            <span class="md-subhead orpha-radio-label">Médico</span>
+            <md-radio-group
+                    ng-init="$controller.dadosenecessidades.necessidades_medico = $controller.dadosenecessidades.necessidades_medico || false"
+                    ng-model="$controller.dadosenecessidades.necessidades_medico"
+                    ng-required="true"
+                    ng-disabled="$controller.isReadOnly"
+                    layout="row">
+                <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
+                <md-radio-button ng-value="false">Não</md-radio-button>
+            </md-radio-group>
+        </div>
+
+        <div class="orpha-radio-group" layout="row" layout-align="start center">
+            <span class="md-subhead orpha-radio-label">Nutrição</span>
+            <md-radio-group
+                    ng-init="$controller.dadosenecessidades.necessidades_nutricao = $controller.dadosenecessidades.necessidades_nutricao || false"
+                    ng-model="$controller.dadosenecessidades.necessidades_nutricao"
+                    ng-required="true"
+                    ng-disabled="$controller.isReadOnly"
+                    layout="row">
+                <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
+                <md-radio-button ng-value="false">Não</md-radio-button>
+            </md-radio-group>
+        </div>
+
+        <div class="orpha-radio-group" layout="row" layout-align="start center">
+            <span class="md-subhead orpha-radio-label">Odontologia</span>
+            <md-radio-group
+                    ng-init="$controller.dadosenecessidades.necessidades_odontologia = $controller.dadosenecessidades.necessidades_odontologia || false"
+                    ng-model="$controller.dadosenecessidades.necessidades_odontologia"
+                    ng-required="true"
+                    ng-disabled="$controller.isReadOnly"
+                    layout="row">
+                <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
+                <md-radio-button ng-value="false">Não</md-radio-button>
+            </md-radio-group>
+        </div>
+
+        <div class="orpha-radio-group" layout="row" layout-align="start center">
+            <span class="md-subhead orpha-radio-label">Oftalmologia</span>
+            <md-radio-group
+                    ng-init="$controller.dadosenecessidades.necessidades_oftalmologia = $controller.dadosenecessidades.necessidades_oftalmologia || false"
+                    ng-model="$controller.dadosenecessidades.necessidades_oftalmologia"
+                    ng-required="true"
+                    ng-disabled="$controller.isReadOnly"
+                    layout="row">
+                <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
+                <md-radio-button ng-value="false">Não</md-radio-button>
+            </md-radio-group>
+        </div>
+
+        <div class="orpha-radio-group" layout="row" layout-align="start center">
+            <span class="md-subhead orpha-radio-label">Psicologia</span>
+            <md-radio-group
+                    ng-init="$controller.dadosenecessidades.necessidades_psicologia = $controller.dadosenecessidades.necessidades_psicologia || false"
+                    ng-model="$controller.dadosenecessidades.necessidades_psicologia"
+                    ng-required="true"
+                    ng-disabled="$controller.isReadOnly"
+                    layout="row">
+                <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
+                <md-radio-button ng-value="false">Não</md-radio-button>
+            </md-radio-group>
+        </div>
+
+        <div class="orpha-radio-group" layout="row" layout-align="start center">
+            <span class="md-subhead orpha-radio-label">Psiquiatria</span>
+            <md-radio-group
+                    ng-init="$controller.dadosenecessidades.necessidades_psiquiatria = $controller.dadosenecessidades.necessidades_psiquiatria || false"
+                    ng-model="$controller.dadosenecessidades.necessidades_psiquiatria"
+                    ng-required="true"
+                    ng-disabled="$controller.isReadOnly"
+                    layout="row">
+                <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
+                <md-radio-button ng-value="false">Não</md-radio-button>
+            </md-radio-group>
+        </div>
+
+        <div class="orpha-radio-group" layout="row" layout-align="start center">
+            <span class="md-subhead orpha-radio-label">Serviço Social</span>
+            <md-radio-group
+                    ng-init="$controller.dadosenecessidades.necessidades_servico_social = $controller.dadosenecessidades.necessidades_servico_social || false"
+                    ng-model="$controller.dadosenecessidades.necessidades_servico_social"
+                    ng-required="true"
+                    ng-disabled="$controller.isReadOnly"
+                    layout="row">
+                <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
+                <md-radio-button ng-value="false">Não</md-radio-button>
+            </md-radio-group>
+        </div>
+
+        <div class="orpha-radio-group" layout="row" layout-align="start center">
+            <span class="md-subhead orpha-radio-label">Tratam.uso/Abuso de drogas</span>
+            <md-radio-group
+                    ng-init="$controller.dadosenecessidades.necessidades_tratamento_drogas = $controller.dadosenecessidades.necessidades_tratamento_drogas || false"
+                    ng-model="$controller.dadosenecessidades.necessidades_tratamento_drogas"
+                    ng-required="true"
+                    ng-disabled="$controller.isReadOnly"
+                    layout="row">
+                <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
+                <md-radio-button ng-value="false">Não</md-radio-button>
+            </md-radio-group>
+        </div>
+
+        <div class="orpha-radio-group" layout="row" layout-align="start center">
+            <span class="md-subhead orpha-radio-label">Musicoterapia</span>
+            <md-radio-group
+                    ng-init="$controller.dadosenecessidades.necessidades_musicoterapia = $controller.dadosenecessidades.necessidades_musicoterapia || false"
+                    ng-model="$controller.dadosenecessidades.necessidades_musicoterapia"
+                    ng-required="true"
+                    ng-disabled="$controller.isReadOnly"
+                    layout="row">
+                <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
+                <md-radio-button ng-value="false">Não</md-radio-button>
+            </md-radio-group>
+        </div>
+
+        <div class="orpha-radio-group" layout="row" layout-align="start center">
+            <span class="md-subhead orpha-radio-label">Ter. Ocupacional</span>
+            <md-radio-group
+                    ng-init="$controller.dadosenecessidades.necessidades_ter_ocupacional = $controller.dadosenecessidades.necessidades_ter_ocupacional || false"
+                    ng-model="$controller.dadosenecessidades.necessidades_ter_ocupacional"
+                    ng-required="true"
+                    ng-disabled="$controller.isReadOnly"
+                    layout="row">
+                <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
+                <md-radio-button ng-value="false">Não</md-radio-button>
+            </md-radio-group>
+        </div>
+
+        <div class="orpha-radio-group" layout="row" layout-align="start center">
+            <span class="md-subhead orpha-radio-label">Pedagogia</span>
+            <md-radio-group
+                    ng-init="$controller.dadosenecessidades.necessidades_pedagogia = $controller.dadosenecessidades.necessidades_pedagogia || false"
+                    ng-model="$controller.dadosenecessidades.necessidades_pedagogia"
+                    ng-required="true"
+                    ng-disabled="$controller.isReadOnly"
+                    layout="row">
+                <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
+                <md-radio-button ng-value="false">Não</md-radio-button>
+            </md-radio-group>
+        </div>
+
+        <text-area-input name="outros" label="Outros" is-disabled="$controller.isReadOnly" ng-model="$controller.dadosenecessidades.necessidades_outros"></text-area-input>
+
+    </md-content>
+</ng-form>

@@ -1,0 +1,22 @@
+<!--<div class="breadcrumb">
+	Orpha
+	<div >&lt;!&ndash; &nbsp;>&ndash;&gt;
+		<md-button >{{step.ncyBreadcrumbLabel}}</md-button>
+		<span ng-if="($last || !!step.abstract)">{{step.ncyBreadcrumbLabel}}</span>
+	</div>
+</div>-->
+<div layout="row" class="hide show-gt-xs" layout-align="start center" flex>
+	<a
+			md-truncate
+			class="breadcrumb"
+			aria-label="Orpha">Orpha</a>
+
+	<a		md-truncate
+			ng-repeat="step in steps"
+			ng-class="{active: $last}"
+			href="{{step.ncyBreadcrumbLink}}"
+			class="breadcrumb"
+			aria-label="{{step.ncyBreadcrumbLabel}}">
+		{{step.ncyBreadcrumbLabel}}
+	</a>
+</div>

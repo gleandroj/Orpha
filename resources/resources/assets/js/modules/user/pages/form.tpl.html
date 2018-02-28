@@ -1,0 +1,87 @@
+<md-card aria-label="User Form" md-whiteframe="7" ng-cloak layout="column">
+
+    <md-toolbar>
+        <div class="md-toolbar-tools" layout="row">
+
+            <md-button class="md-icon-button" ng-disabled="$controller.loading" ng-click="$controller.goBack()">
+                <md-icon class="material-icons">arrow_back</md-icon>
+                <md-tooltip md-direction="top">
+                    Voltar
+                </md-tooltip>
+            </md-button>
+
+            <h2 md-truncate>
+                <md-icon class="material-icons">person</md-icon>
+                <span>{{$controller.title}} {{ $controller.user.deleted_at ? '(Inativo)' : ''}}</span>
+            </h2>
+
+            <span flex></span>
+
+            <md-menu ng-if="$controller.readOnly" >
+                <md-button class="md-icon-button" ng-disabled="$controller.loading" ng-click="$mdMenu.open($event)" ng-auth="['disable-user', 'active-user']">
+                    <md-icon md-menu-origin class="material-icons">more_vert</md-icon>
+                    <md-tooltip md-direction="top">
+                        Mais
+                    </md-tooltip>
+                </md-button>
+                <md-menu-content width="2">
+                    <md-menu-item ng-show="$controller.user.deleted_at == null" ng-auth="'disable-user'" ng-click="$controller.disableUser()">
+                        <md-button ng-disabled="$controller.authService.getCurrentUser().id == $controller.user.id"><span md-menu-align-target>Desativar</span></md-button>
+                    </md-menu-item>
+                    <md-menu-item ng-show="$controller.user.deleted_at != null" ng-auth="'active-user'" ng-click="$controller.enableUser()">
+                        <md-button ><span md-menu-align-target>Ativar</span></md-button>
+                    </md-menu-item>
+                </md-menu-content>
+            </md-menu>
+            <!--
+            <md-button class="md-icon-button" ng-disabled="$controller.loading || userForm.$invalid || userForm.$pending" ng-if="!$controller.readOnly" ng-click="$controller.save()">
+                <md-icon class="material-icons">done</md-icon>
+                <md-tooltip md-direction="top">
+                    Salvar
+                </md-tooltip>
+            </md-button>
+            -->
+        </div>
+    </md-toolbar>
+
+    <md-progress-linear md-mode="indeterminate" class="md-accent" ng-show="$controller.loading || userForm.$pending"></md-progress-linear>
+
+    <md-content>
+        <form name="userForm" ng-submit="$controller.save()" novalidate>
+
+            <div  layout-margin layout-padding>
+                <user-form user="$controller.user" read-only="$controller.readOnly" is-disabled="$controller.readOnly || $controller.loading" is-password-field-required="$controller.user.id == null || $controller.user.id == ''"></user-form>
+            </div>
+
+            <span flex-gt-sm></span>
+            <md-divider></md-divider>
+
+            <div ng-if="!$controller.readOnly"  layout="row" layout-align="end center">
+
+                <md-button type="submit" class="md-accent md-raised" ng-disabled="$controller.loading || userForm.$invalid || userForm.$pending">
+                    Salvar
+                </md-button>
+                <md-button class="md-warn" ng-click="$controller.cancel()" ng-disabled="$controller.loading">
+                    Cancelar
+                </md-button>
+
+            </div>
+
+            <div ng-if="$controller.readOnly" layout="row" layout-align="end center">
+
+                <md-button  ng-click="$controller.changeToEditMode()" class="md-primary md-raised" ng-auth="'edit-user'" ng-if="$controller.user.deleted_at == null" ng-disabled="$controller.loading">
+                    Alterar
+                </md-button>
+                <md-button class="md-primary md-raised" ng-click="$controller.enableUser()" ng-auth="'active-user'" ng-if="$controller.user.deleted_at != null" ng-disabled="$controller.loading">
+                    Ativar
+                </md-button>
+                <md-button ng-click="$controller.state.go('user.list')" ng-disabled="$controller.loading">
+                    Voltar
+                </md-button>
+
+            </div>
+
+        </form>
+    </md-content>
+
+</md-card>

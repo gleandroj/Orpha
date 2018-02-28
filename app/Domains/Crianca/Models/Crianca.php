@@ -2,7 +2,6 @@
 
 namespace Orpha\Domains\Crianca\Models;
 
-use Orpha\Domains\User\Models\User;
 use Orpha\Support\Models\Model;
 use Orpha\Infrastructure\Data\Traits\OrfanatoQuery;
 use Carbon\Carbon;

@@ -1,0 +1,112 @@
+<ng-form name="form" ng-init="$controller.pushScope(this)">
+    <md-content layout="column" layout-padding>
+
+        <div class="orpha-radio-group" layout="row" layout-align="start center" >
+            <span class="md-subhead orpha-radio-label">Equipamentos (CRAS/CREAS)</span>
+            <md-radio-group
+                    ng-init="$controller.informacoesdafamilia.rededeapoio2_equipamentos = $controller.informacoesdafamilia.rededeapoio2_equipamentos || false"
+                    ng-model="$controller.informacoesdafamilia.rededeapoio2_equipamentos"
+                    ng-required="true"
+                    ng-disabled="$controller.isReadOnly"
+                    layout="row">
+                <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
+                <md-radio-button ng-value="false">Não</md-radio-button>
+            </md-radio-group>
+        </div>
+
+        <div class="orpha-radio-group" layout="row" layout-align="start center">
+            <span class="md-subhead orpha-radio-label">Programas Sociais/ Promoção à Família</span>
+            <md-radio-group
+                    ng-init="$controller.informacoesdafamilia.rededeapoio2_programas_sociais = $controller.informacoesdafamilia.rededeapoio2_programas_sociais || false"
+                    ng-model="$controller.informacoesdafamilia.rededeapoio2_programas_sociais"
+                    ng-required="true"
+                    ng-disabled="$controller.isReadOnly"
+                    layout="row">
+                <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
+                <md-radio-button ng-value="false">Não</md-radio-button>
+            </md-radio-group>
+        </div>
+
+        <div class="orpha-radio-group" layout="row" layout-align="start center">
+            <span class="md-subhead orpha-radio-label">Atendimento Social</span>
+            <md-radio-group
+                    ng-init="$controller.informacoesdafamilia.rededeapoio2_atendimento_social = $controller.informacoesdafamilia.rededeapoio2_atendimento_social || false"
+                    ng-model="$controller.informacoesdafamilia.rededeapoio2_atendimento_social"
+                    ng-required="true"
+                    ng-disabled="$controller.isReadOnly"
+                    layout="row">
+                <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
+                <md-radio-button ng-value="false">Não</md-radio-button>
+            </md-radio-group>
+        </div>
+
+        <div class="orpha-radio-group" layout="row" layout-align="start center">
+            <span class="md-subhead orpha-radio-label">Bolsa Família</span>
+            <md-radio-group
+                    ng-init="$controller.informacoesdafamilia.rededeapoio2_bolsa_familia = $controller.informacoesdafamilia.rededeapoio2_bolsa_familia || false"
+                    ng-model="$controller.informacoesdafamilia.rededeapoio2_bolsa_familia"
+                    ng-required="true"
+                    ng-disabled="$controller.isReadOnly"
+                    layout="row">
+                <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
+                <md-radio-button ng-value="false">Não</md-radio-button>
+            </md-radio-group>
+        </div>
+
+        <div class="orpha-radio-group" layout="row" layout-align="start center">
+            <span class="md-subhead orpha-radio-label">Cesta Básica</span>
+            <md-radio-group
+                    ng-init="$controller.informacoesdafamilia.rededeapoio2_cesta_basica = $controller.informacoesdafamilia.rededeapoio2_cesta_basica || false"
+                    ng-model="$controller.informacoesdafamilia.rededeapoio2_cesta_basica"
+                    ng-required="true"
+                    ng-disabled="$controller.isReadOnly"
+                    layout="row">
+                <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
+                <md-radio-button ng-value="false">Não</md-radio-button>
+            </md-radio-group>
+        </div>
+
+        <div class="orpha-radio-group" layout="row" layout-align="start center">
+            <span class="md-subhead orpha-radio-label">Custeio para transporte</span>
+            <md-radio-group
+                    ng-init="$controller.informacoesdafamilia.rededeapoio2_custeio_transporte = $controller.informacoesdafamilia.rededeapoio2_custeio_transporte || false"
+                    ng-model="$controller.informacoesdafamilia.rededeapoio2_custeio_transporte"
+                    ng-required="true"
+                    ng-disabled="$controller.isReadOnly"
+                    layout="row">
+                <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
+                <md-radio-button ng-value="false">Não</md-radio-button>
+            </md-radio-group>
+        </div>
+
+        <div class="orpha-radio-group" layout="row" layout-align="start center">
+            <span class="md-subhead orpha-radio-label">Geração Trabalho e Renda</span>
+            <md-radio-group
+                    ng-init="$controller.informacoesdafamilia.rededeapoio2_geracao_trabalho_renda = $controller.informacoesdafamilia.rededeapoio2_geracao_trabalho_renda || false"
+                    ng-model="$controller.informacoesdafamilia.rededeapoio2_geracao_trabalho_renda"
+                    ng-required="true"
+                    ng-disabled="$controller.isReadOnly"
+                    layout="row">
+                <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
+                <md-radio-button ng-value="false">Não</md-radio-button>
+            </md-radio-group>
+        </div>
+
+        <text-area-input name="outros" label="Outros" is-disabled="$controller.isReadOnly" ng-model="$controller.informacoesdafamilia.rededeapoio2_outros"></text-area-input>
+
+        <md-subheader>Visita do  familiar  ao adolescente</md-subheader>
+
+        <text-input name="local_residencia" is-required="true"  label="Local de Residência" is-disabled="$controller.isReadOnly" ng-model="$controller.informacoesdafamilia.rededeapoio2_local_residencia">
+            <error-message error="required" message="{{ 'MSG2' | message }}"></error-message>
+        </text-input>
+
+        <text-input name="numero_transporte" is-required="true"  label="Número de transportes coletivos utilizados para comparecer à Unidade" is-disabled="$controller.isReadOnly" ng-model="$controller.informacoesdafamilia.rededeapoio2_numero_transporte">
+            <error-message error="required" message="{{ 'MSG2' | message }}"></error-message>
+        </text-input>
+
+        <text-input name="custo" label="Custo" is-required="true" is-disabled="$controller.isReadOnly" ng-model="$controller.informacoesdafamilia.rededeapoio2_custo">
+            <error-message error="required" message="{{ 'MSG2' | message }}"></error-message>
+        </text-input>
+
+    </md-content>
+</ng-form>
