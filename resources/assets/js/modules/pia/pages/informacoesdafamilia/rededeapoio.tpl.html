@@ -1,0 +1,98 @@
+<ng-form name="form" ng-init="$controller.pushScope(this)">
+    <md-content layout="column" layout-padding>
+
+        <div class="orpha-radio-group" layout="row" layout-align="start center" >
+            <span class="md-subhead orpha-radio-label">Associação de Moradores</span>
+            <md-radio-group
+                    ng-init="$controller.informacoesdafamilia.rededeapoio_associacao_moradores = $controller.informacoesdafamilia.rededeapoio_associacao_moradores || false"
+                    ng-model="$controller.informacoesdafamilia.rededeapoio_associacao_moradores"
+                    ng-required="true"
+                    ng-disabled="$controller.isReadOnly"
+                    layout="row">
+                <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
+                <md-radio-button ng-value="false">Não</md-radio-button>
+            </md-radio-group>
+        </div>
+
+        <div class="orpha-radio-group" layout="row" layout-align="start center">
+            <span class="md-subhead orpha-radio-label">Atendimento Jurídico (DP, OS, Centro Defesa)</span>
+            <md-radio-group
+                    ng-init="$controller.informacoesdafamilia.rededeapoio_atendimento_juridico = $controller.informacoesdafamilia.rededeapoio_atendimento_juridico || false"
+                    ng-model="$controller.informacoesdafamilia.rededeapoio_atendimento_juridico"
+                    ng-required="true"
+                    ng-disabled="$controller.isReadOnly"
+                    layout="row">
+                <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
+                <md-radio-button ng-value="false">Não</md-radio-button>
+            </md-radio-group>
+        </div>
+
+        <div class="orpha-radio-group" layout="row" layout-align="start center">
+            <span class="md-subhead orpha-radio-label">Atendimento Médico / Prog.Saúde Família</span>
+            <md-radio-group
+                    ng-init="$controller.informacoesdafamilia.rededeapoio_atendimento_medico = $controller.informacoesdafamilia.rededeapoio_atendimento_medico || false"
+                    ng-model="$controller.informacoesdafamilia.rededeapoio_atendimento_medico"
+                    ng-required="true"
+                    ng-disabled="$controller.isReadOnly"
+                    layout="row">
+                <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
+                <md-radio-button ng-value="false">Não</md-radio-button>
+            </md-radio-group>
+        </div>
+
+        <div class="orpha-radio-group" layout="row" layout-align="start center">
+            <span class="md-subhead orpha-radio-label">Atendimento Saúde Mental - Transtorno - (CAPS-CAPSi)</span>
+            <md-radio-group
+                    ng-init="$controller.informacoesdafamilia.rededeapoio_atendimento_saude_mental_transtorno = $controller.informacoesdafamilia.rededeapoio_atendimento_saude_mental_transtorno || false"
+                    ng-model="$controller.informacoesdafamilia.rededeapoio_atendimento_saude_mental_transtorno"
+                    ng-required="true"
+                    ng-disabled="$controller.isReadOnly"
+                    layout="row">
+                <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
+                <md-radio-button ng-value="false">Não</md-radio-button>
+            </md-radio-group>
+        </div>
+
+        <div class="orpha-radio-group" layout="row" layout-align="start center">
+            <span class="md-subhead orpha-radio-label">Atendimento Saúde Mental - Drogas - (CAPSAD)</span>
+            <md-radio-group
+                    ng-init="$controller.informacoesdafamilia.rededeapoio_atendimento_saude_mental_drogas = $controller.informacoesdafamilia.rededeapoio_atendimento_saude_mental_drogas || false"
+                    ng-model="$controller.informacoesdafamilia.rededeapoio_atendimento_saude_mental_drogas"
+                    ng-required="true"
+                    ng-disabled="$controller.isReadOnly"
+                    layout="row">
+                <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
+                <md-radio-button ng-value="false">Não</md-radio-button>
+            </md-radio-group>
+        </div>
+
+        <div class="orpha-radio-group" layout="row" layout-align="start center">
+            <span class="md-subhead orpha-radio-label">Conselho Tutelar</span>
+            <md-radio-group
+                    ng-init="$controller.informacoesdafamilia.rededeapoio_conselho_tutelar = $controller.informacoesdafamilia.rededeapoio_conselho_tutelar || false"
+                    ng-model="$controller.informacoesdafamilia.rededeapoio_conselho_tutelar"
+                    ng-required="true"
+                    ng-disabled="$controller.isReadOnly"
+                    layout="row">
+                <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
+                <md-radio-button ng-value="false">Não</md-radio-button>
+            </md-radio-group>
+        </div>
+
+        <div class="orpha-radio-group" layout="row" layout-align="start center">
+            <span class="md-subhead orpha-radio-label">Programa de Proteção</span>
+            <md-radio-group
+                    ng-init="$controller.informacoesdafamilia.rededeapoio_programa_protecao = $controller.informacoesdafamilia.rededeapoio_programa_protecao || false"
+                    ng-model="$controller.informacoesdafamilia.rededeapoio_programa_protecao"
+                    ng-required="true"
+                    ng-disabled="$controller.isReadOnly"
+                    layout="row">
+                <md-radio-button ng-value="true" class="md-primary">Sim</md-radio-button>
+                <md-radio-button ng-value="false">Não</md-radio-button>
+            </md-radio-group>
+        </div>
+
+        <text-area-input name="outros" label="Outros" is-disabled="$controller.isReadOnly" ng-model="$controller.informacoesdafamilia.rededeapoio_outros"></text-area-input>
+
+    </md-content>
+</ng-form>

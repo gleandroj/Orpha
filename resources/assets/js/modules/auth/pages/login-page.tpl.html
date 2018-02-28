@@ -1,0 +1,35 @@
+<form name="loginForm" flex layout="row" layout-align="center center" novalidate ng-submit="$ctrl.tryLogin()">
+    <md-card class="md-padding login-card" flex-xs="100" flex-sm="90" flex-md="60" flex-lg="50" flex="30" md-whiteframe="10">
+
+        <img ng-src="{{ $ctrl.logoPath }}" class="md-card-image" style="max-width: 400px; align-self: center;" alt="Orpha - Sistema de Gestão de Orfanatos">
+        <md-card-title>
+            <md-card-title-media>
+            </md-card-title-media>
+            <md-card-title-text>
+                <span class="md-headline">
+                   <md-icon class="material-icons">lock</md-icon> Acessar
+                </span>
+            </md-card-title-text>
+        </md-card-title>
+        <md-progress-linear ng-show="$ctrl.loading"></md-progress-linear>
+        <md-card-content>
+
+            <!--E-mail-->
+            <text-input name="email" label="E-mail" ng-model="$ctrl.user.email" icon="person" type="email" is-required="true" is-disabled="$ctrl.loading">
+                <error-message error="required" message="{{ 'MSG2' | message }}"></error-message>
+                <error-message error="email" message="{{ 'MSG10' | message:{'attribute':'E-mail'} }}"></error-message>
+            </text-input>
+            <!--Senha-->
+            <text-input name="password" label="Senha" ng-model="$ctrl.user.password" icon="lock" type="password" is-required="true" is-disabled="$ctrl.loading">
+                <error-message error="required" message="{{ 'MSG2' | message }}"></error-message>
+            </text-input>
+            <!--Forget PW-->
+            <md-button class="md-primary" ui-sref="auth.password">Esqueci minha senha</md-button>
+
+        </md-card-content>
+        <md-divider></md-divider>
+        <md-card-actions layout="row" layout-align="start center">
+            <md-button type="submit" class="md-raised md-primary" ng-disabled="loginForm.$invalid || $ctrl.loading">Entrar</md-button>
+        </md-card-actions>
+    </md-card>
+</form>

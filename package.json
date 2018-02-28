@@ -12,6 +12,7 @@
         "laravel-mix": "^0.8.1"
     },
     "dependencies": {
+        "@uirouter/angularjs": "^1.0.3",
         "angular": "^1.6.0",
         "angular-animate": "^1.6.0",
         "angular-aria": "^1.6.0",
@@ -23,9 +24,9 @@
         "angular-material-simple-components": "^1.1.0",
         "angular-messages": "^1.6.1",
         "angular-resource": "^1.6.0",
-        "@uirouter/angularjs": "^1.0.3",
         "chart.js": "^2.5.0",
         "moment": "^2.15.1",
+        "ng-mask": "^3.1.1",
         "ngMask": "https://github.com/candreoliveira/ngMask.git"
     }
 }

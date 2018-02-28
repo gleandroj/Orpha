@@ -1,0 +1,61 @@
+<md-list  aria-disabled="true">
+
+    <md-subheader class="md-no-sticky" aria-disabled="true">{{ $component.title }}</md-subheader>
+
+    <!--List of criancas-->
+    <md-list-item ng-repeat-start="crianca in (filteredCriancas = ($component.criancas | filter:$component.search | orderBy: 'name' | filter:$component.filter)) | startFrom: (($component.filteredCriancasCurrentPage-1)*$component.filteredCriancasItemsPerPage) | limitTo: $component.filteredCriancasItemsPerPage"
+                  aria-label="crianca-{{ crianca.id }}"
+                  class="md-2-line md-with-secondary"
+                  md-colors="{{$component.backgroundColor ? {background: $component.backgroundColor} : null}}"
+                  ng-disabled="$component.isDisabled"
+                  ng-click="$component.onCriancaClick({crianca: crianca})">
+
+        <img hide-sm hide-xs ng-src="{{ $component.fallbackimg }}" class="md-user-avatar" style="margin: 0px 10px 0px 0px;" alt="{{crianca.avatar}}"/>
+
+        <div class="md-list-item-text" layout="column" layout-align="start start" md-truncate flex>
+            <h3 md-highlight-text="$component.search" md-highlight-flags="ig" >{{ crianca.nome }}</h3>
+            <!--<p>Texto 1</p>
+            <p>Texto 2</p>-->
+        </div>
+
+        <md-button ng-click="$component.onPiaBtnClick({crianca: crianca})" ng-if="$component.showPiaBtn" ng-disabled="$component.piaBtnDisabled || $component.isDisabled" class="md-icon-button md-secondary md-raised md-accent md-secondary" aria-label="pia-btn">
+            <md-icon class="material-icons">description</md-icon>
+            <md-tooltip md-direction="left">
+                PIA
+            </md-tooltip>
+        </md-button>
+
+        <md-button ng-click="$component.onPrimaryBtnClick({crianca: crianca})" ng-if="$component.showPrimaryBtn" ng-disabled="$component.primaryBtnDisabled || $component.isDisabled" class="md-icon-button md-secondary md-raised md-primary md-secondary" aria-label="primary-btn">
+            <md-icon class="material-icons">{{ $component.primaryBtnIcon }}</md-icon>
+            <md-tooltip md-direction="left">
+                {{ $component.primaryBtnText }}
+            </md-tooltip>
+        </md-button>
+
+
+        <md-button ng-click="$component.onSecondaryBtnClick({crianca: crianca})" ng-if="$component.showSecondaryBtn" ng-disabled="$component.secondaryBtnDisabled || $component.isDisabled" class="md-icon-button md-secondary md-raised md-warn md-hue-2 md-secondary" aria-label="secondary-btn">
+            <md-icon class="material-icons">{{ $component.secondaryBtnIcon }}</md-icon>
+            <md-tooltip md-direction="left">
+                {{ $component.secondaryBtnText }}
+            </md-tooltip>
+        </md-button>
+
+    </md-list-item>
+
+    <md-divider ng-if="($component.filteredCriancasCurrentPage === $component.ceil((filteredCriancas.length/$component.filteredCriancasItemsPerPage))) ?
+                        (($index+1) % ($component.filteredCriancasItemsPerPage - ((($component.ceil((filteredCriancas.length/$component.filteredCriancasItemsPerPage))) * $component.filteredCriancasItemsPerPage) - filteredCriancas.length)) != 0 ) :
+                            ((($index+1) % $component.filteredCriancasItemsPerPage)  != 0)" ng-repeat-end>
+    </md-divider>
+
+    <!--Messages-->
+    <div ng-if="filteredCriancas.length == 0 && ($component.search != '' && $component.search != null)" layout="column" layout-sm="column" layout-align="center center">
+        <h3 class="md-headline">{{ 'MSG8' | message }}</h3>
+    </div>
+    <div ng-if="filteredCriancas.length == 0 && ($component.search == '' || $component.search == null)" layout="column" layout-sm="column" layout-align="center center">
+        <h3 class="md-headline">{{ 'MSG1' | message }}</h3>
+    </div>
+    <br/>
+    <!--Pagination-->
+    <md-pagination is-disabled="$component.disablePagination" current-page="$component.filteredCriancasCurrentPage" items-per-page="$component.filteredCriancasItemsPerPage" n-items="filteredCriancas.length" ></md-pagination>
+
+</md-list>
