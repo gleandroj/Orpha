@@ -16,6 +16,3 @@ services:
       - .:/home/deploy/app:Z
     depends_on:
       - db
-    dns:
-      - 8.8.8.8
-      - 8.8.4.4
