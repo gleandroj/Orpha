@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateUsersTable extends Migration
 {
@@ -15,10 +15,17 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('email')->unique();
+            $table->string('name', 50);
+            $table->string('phone', 20);
+            $table->string('email', 50)->unique();
+            $table->string('avatar')->nullable()->unique();
             $table->string('password');
+
+            $table->integer('orfanato_id')->unsigned();
+            $table->foreign('orfanato_id')->references('id')->on('orfanatos');
+
             $table->rememberToken();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -30,6 +37,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        if(env('APP_ENV') === 'local' || env('APP_ENV') === 'testing') Schema::dropIfExists('users');
     }
 }
