@@ -1,6 +1,6 @@
 <?php
 
-use App\Modulos\Orpha\Models\Orfanato;
+use Orpha\Domains\Orfanato\Models\Orfanato;
 use Orpha\Support\Database\Seeder;
 use Illuminate\Support\Facades\App;
 

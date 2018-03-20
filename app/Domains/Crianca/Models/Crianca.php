@@ -4,6 +4,7 @@ namespace Orpha\Domains\Crianca\Models;
 
 use Orpha\Support\Models\Model;
 use Orpha\Infrastructure\Data\Traits\OrfanatoQuery;
+use Orpha\Domains\Pia\Models\Pia;
 use Carbon\Carbon;
 
 class Crianca extends Model

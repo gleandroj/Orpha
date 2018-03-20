@@ -11,10 +11,10 @@
 |
 */
 
-use App\Modulos\Auth\Models\Permission;
-use App\Modulos\Crianca\Models\Crianca;
-use App\Modulos\Orpha\Models\Orfanato;
-use App\Modulos\User\Models\User;
+use Orpha\Domains\Auth\Models\Permission;
+use Orpha\Domains\Crianca\Models\Crianca;
+use Orpha\Domains\Orfanato\Models\Orfanato;
+use Orpha\Domains\User\Models\User;
 
 $faker = Faker\Factory::create('pt_BR');
 

@@ -4,7 +4,6 @@ namespace Orpha\Support\Database;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
-use Kreait\Firebase\Util\JSON;
 
 abstract class Seeder extends \Illuminate\Database\Seeder
 {
@@ -64,9 +63,9 @@ abstract class Seeder extends \Illuminate\Database\Seeder
 
 
             $seed->ran_at = $now;
-            $env = JSON::decode($seed->environment);
+            $env = json_decode($seed->environment);
             array_push($env, $this->getAppEnv());
-            $seed->environment = JSON::encode($env);
+            $seed->environment = json_encode($env);
 
             return $this->table()->where('id', '=', $seed->id)->update((array)$seed);
 
@@ -74,8 +73,9 @@ abstract class Seeder extends \Illuminate\Database\Seeder
 
             return $this->table()->insert([
                 "seeder" => $seeder,
-                "environment" => JSON::encode([$this->getAppEnv()]),
-                "ran_at" => $now]);
+                "environment" => json_encode([$this->getAppEnv()]),
+                "ran_at" => $now
+            ]);
         }
 
     }

@@ -13,7 +13,7 @@ class CreateDadosenecessidadesTable extends Migration
      */
     public function up()
     {
-        Schema::create('dadosenecessidades', function (Blueprint $table) {
+        Schema::create('dados_necessidades', function (Blueprint $table) {
             $table->increments('id');
 
             $table->integer('pia_id')->unsigned();
@@ -45,14 +45,14 @@ class CreateDadosenecessidadesTable extends Migration
             $table->string("necessidades_outros")->nullable();
             $table->boolean("necessidades_completado")->default(0)->nullable();
 
-            $table->enum("rededeapoio_equipamentos", ['contato', 'encaminhar'])->default('encaminhar')->nullable();
-            $table->enum("rededeapoio_familia_extensa", ['contato', 'encaminhar'])->default('encaminhar')->nullable();
-            $table->enum("rededeapoio_pais_responsaveis", ['contato', 'encaminhar'])->default('encaminhar')->nullable();
-            $table->enum("rededeapoio_programas_apoio_comunitario", ['contato', 'encaminhar'])->default('encaminhar')->nullable();
-            $table->enum("rededeapoio_programas_protecao", ['contato', 'encaminhar'])->default('encaminhar')->nullable();
-            $table->enum("rededeapoio_servico_atendimento_vitimias_maus_tratos", ['contato', 'encaminhar'])->default('encaminhar')->nullable();
-            $table->string("rededeapoio_outros")->nullable();
-            $table->boolean("rededeapoio_completado")->default(0)->nullable();
+            $table->enum("rede_apoio_equipamentos", ['contato', 'encaminhar'])->default('encaminhar')->nullable();
+            $table->enum("rede_apoio_familia_extensa", ['contato', 'encaminhar'])->default('encaminhar')->nullable();
+            $table->enum("rede_apoio_pais_responsaveis", ['contato', 'encaminhar'])->default('encaminhar')->nullable();
+            $table->enum("rede_apoio_programas_apoio_comunitario", ['contato', 'encaminhar'])->default('encaminhar')->nullable();
+            $table->enum("rede_apoio_programas_protecao", ['contato', 'encaminhar'])->default('encaminhar')->nullable();
+            $table->enum("rede_apoio_servico_atendimento_vitimias_maus_tratos", ['contato', 'encaminhar'])->default('encaminhar')->nullable();
+            $table->string("rede_apoio_outros")->nullable();
+            $table->boolean("rede_apoio_completado")->default(0)->nullable();
 
             $table->boolean("religiosidade_atividade_religiosa")->default(0)->nullable();
             $table->boolean("religiosidade_assistencia_religiosa")->default(0)->nullable();
@@ -93,6 +93,6 @@ class CreateDadosenecessidadesTable extends Migration
      */
     public function down()
     {
-        if(env('APP_ENV') === 'local' || env('APP_ENV') === 'testing') Schema::dropIfExists('dadosenecessidades');
+        if (env('APP_ENV') === 'local' || env('APP_ENV') === 'testing') Schema::dropIfExists('dadosenecessidades');
     }
 }
