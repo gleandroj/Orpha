@@ -1,0 +1,23 @@
+version: '2.3'
+services:
+  db:
+    image: postgres:9.6
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: forge
+      POSTGRES_PASSWORD: forge
+  web:
+    image: 760180449062.dkr.ecr.us-east-1.amazonaws.com/docker_laravel:testing
+    environment:
+      GITHUB_TOKEN: "API_TOKEN"
+    ports:
+      - "80:80"
+    volumes:
+      - .:/home/deploy/app:Z
+    depends_on:
+      - db
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
