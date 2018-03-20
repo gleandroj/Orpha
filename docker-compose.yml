@@ -9,7 +9,7 @@ services:
       POSTGRES_USER: forge
       POSTGRES_PASSWORD: forge
   web:
-    image: laravel
+    image: gleandroj/laravel
     ports:
       - "80:80"
     volumes:
