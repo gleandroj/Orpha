@@ -74,6 +74,6 @@ class CreateInformacoesdafamiliaTable extends Migration
      */
     public function down()
     {
-        if(env('APP_ENV') === 'local' || env('APP_ENV') === 'testing') Schema::dropIfExists('informacoesdafamilia');
+        if(env('APP_ENV') === 'local' || env('APP_ENV') === 'testing') Schema::dropIfExists('informacoes_familia');
     }
 }

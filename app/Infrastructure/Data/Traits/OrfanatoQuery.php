@@ -2,7 +2,7 @@
 
 namespace Orpha\Infrastructure\Data\Traits;
 
-use Orpha\Domains\Crianca\Models\Orfanato;
+use Orpha\Domains\Orfanato\Models\Orfanato;
 use Orpha\Infrastructure\Data\Scopes\OrfanatoScope;
 
 trait OrfanatoQuery

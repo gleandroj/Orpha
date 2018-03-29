@@ -93,6 +93,6 @@ class CreateDadosenecessidadesTable extends Migration
      */
     public function down()
     {
-        if (env('APP_ENV') === 'local' || env('APP_ENV') === 'testing') Schema::dropIfExists('dadosenecessidades');
+        if (env('APP_ENV') === 'local' || env('APP_ENV') === 'testing') Schema::dropIfExists('dados_necessidades');
     }
 }

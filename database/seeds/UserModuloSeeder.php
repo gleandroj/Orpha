@@ -26,7 +26,7 @@ class UserModuloSeeder extends Seeder
     {
         $this->moduloPermissionSeed();
 
-        $adm = User::create(['name' => 'Admin', 'email' => 'admin@orpha.com.br', 'password' => Hash::make(env('DEFAULT_USER_PASSWORD')), 'phone' => '62994372288', 'orfanato_id' => 1]);
+        $adm = User::create(['name' => 'Admin', 'email' => 'admin@orpha.com.br', 'password' => Hash::make(env('DEFAULT_USER_PASSWORD', '123321')), 'phone' => '62994372288', 'orfanato_id' => 1]);
         $adm->permissions()->syncWithoutDetaching(Permission::all(['id'])->pluck('id'));
 
         if(App::environment('local', 'testing')){

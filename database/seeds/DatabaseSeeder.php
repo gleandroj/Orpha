@@ -24,5 +24,6 @@ class DatabaseSeeder extends Seeder
         $this->call(CriancaModuloSeeder::class);
         $this->call(PiaModuloSeeder::class);
         $this->call(UserModuloSeeder::class);
+        $this->call(AuthModuloSeeder::class);
     }
 }

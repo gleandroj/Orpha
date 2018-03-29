@@ -20,7 +20,7 @@ class PassportServiceProvider extends ServiceProvider
         Passport::refreshTokensExpireIn(Carbon::now()->addDays(30));
         Passport::routes(function (RouteRegistrar $registrar) {
             $registrar->forAccessTokens();
-        }, ['prefix' => env('API_PREFIX', 'api').'/oauth']);
+        }, ['prefix' => '/oauth']);
     }
 
 }

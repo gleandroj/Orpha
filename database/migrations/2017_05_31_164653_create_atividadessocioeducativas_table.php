@@ -64,6 +64,6 @@ class CreateAtividadessocioeducativasTable extends Migration
      */
     public function down()
     {
-        if(env('APP_ENV') === 'local' || env('APP_ENV') === 'testing') Schema::dropIfExists('atividadessocioeducativas');
+        if(env('APP_ENV') === 'local' || env('APP_ENV') === 'testing') Schema::dropIfExists('atividades_socio_educativas');
     }
 }
