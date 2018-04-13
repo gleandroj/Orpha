@@ -31,8 +31,7 @@ jobs:
           key: v1-dependencies-{{ checksum "composer.json" }}
       - run:
           name: Configura Passport
-          command: php /home/deploy/app/artisan passport:keys
-          working_directory: /home/deploy/app
+          command: php artisan passport:keys
       - run: phpunit
 
 # Fluxo do CircleCI 
