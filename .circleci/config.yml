@@ -33,3 +33,18 @@ jobs:
           command: php artisan passport:keys
           working_directory: /home/deploy/app
       - run: phpunit
+
+# Fluxo do CircleCI 
+workflows:
+  version: 2
+  build_release:
+    jobs:
+     - build
+     - fazer_deploy:
+         type: approval
+         requires:
+           - build
+         filters:
+           branches:
+             only:
+               - master
