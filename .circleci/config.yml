@@ -29,7 +29,7 @@ jobs:
             - ./vendor
           key: v1-dependencies-{{ checksum "composer.json" }}
       - run:
-          name: Configura passport
+          name: Configura Passport
           command: composer passport
           working_directory: /home/deploy/app
       - run: phpunit
