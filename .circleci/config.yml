@@ -3,6 +3,7 @@ jobs:
   build:
     docker:
       - image: gleandroj/laravel
+        working_directory: /home/deploy/app
         environment:
             APP_ENV: local
             DB_CONNECTION: pgsql
@@ -30,7 +31,7 @@ jobs:
           key: v1-dependencies-{{ checksum "composer.json" }}
       - run:
           name: Configura Passport
-          command: php artisan passport:keys
+          command: php /home/deploy/app/artisan passport:keys
           working_directory: /home/deploy/app
       - run: phpunit
 
