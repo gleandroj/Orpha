@@ -1,11 +1,13 @@
 version: 2
 jobs:
   build:
+    working_directory: /home/deploy/app
+    environment:
+      BASH_ENV: ~/.bashrc
     docker:
       - image: gleandroj/laravel
-        working_directory: /home/deploy/app
         environment:
-            APP_ENV: local
+            APP_ENV: testing
             DB_CONNECTION: pgsql
             DB_HOST: 127.0.0.1
             DB_PORT: 5432
