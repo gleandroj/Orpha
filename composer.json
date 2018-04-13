@@ -53,6 +53,9 @@
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover"
         ],
+        "passport": [
+            "@php artisan passport:keys"
+        ],
         "test": [
             "php artisan config:clear && vendor\\bin\\phpunit.bat"
         ]

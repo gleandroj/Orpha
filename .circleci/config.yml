@@ -30,7 +30,7 @@ jobs:
           key: v1-dependencies-{{ checksum "composer.json" }}
       - run:
           name: Configura passport
-          command: php artisan passport:keys
+          command: composer passport
           working_directory: /home/deploy/app
       - run: phpunit
 
