@@ -40,6 +40,9 @@ jobs:
           key: node-v1-{{ checksum "package.json" }}
           paths:
             - node_modules
+      - run: 
+          name: Build Frontend
+          command: npm run production
       - run:
           name: Configura Passport
           command: php artisan passport:keys
