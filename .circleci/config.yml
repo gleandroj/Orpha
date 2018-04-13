@@ -34,7 +34,9 @@ jobs:
       - run:
           name: Configura Passport
           command: php artisan passport:keys
-      - run: phpunit
+      - run: 
+          name: Test PhpUnit
+          command: php artisan config:clear && vendor\\bin\\phpunit
 
 # Fluxo do CircleCI 
 workflows:
