@@ -1,0 +1,35 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: gleandroj/laravel
+        environment:
+            APP_ENV: local
+            DB_CONNECTION: pgsql
+            DB_HOST: 127.0.0.1
+            DB_PORT: 5432
+            DB_DATABASE: teste_db
+            DB_USERNAME: teste_usuario
+            DB_PASSWORD: cG6uJNyPmvQ5AEs6Lx6X
+      - image: circleci/postgres:9.6
+        environment:
+          POSTGRES_DB: teste_db
+          POSTGRES_USER: teste_usuario
+          POSTGRES_PASSWORD: cG6uJNyPmvQ5AEs6Lx6X
+    steps:
+      - checkout
+      - add_ssh_keys
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "composer.json" }}
+          - v1-dependencies-
+      - run: composer install -n --prefer-dist
+      - save_cache:
+          paths:
+            - ./vendor
+          key: v1-dependencies-{{ checksum "composer.json" }}
+      - run:
+          name: Configura passport
+          command: php artisan passport:keys
+          working_directory: /home/deploy/app
+      - run: phpunit
