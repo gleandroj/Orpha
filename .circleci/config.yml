@@ -31,9 +31,21 @@ jobs:
           paths:
             - ./vendor
           key: v1-dependencies-{{ checksum "composer.json" }}
+      - restore_cache:
+          keys:
+            - node-v1-{{ checksum "package.json" }}
+            - node-v1-
+      - run: npm install
+      - save_cache:
+          key: node-v1-{{ checksum "package.json" }}
+          paths:
+            - node_modules
       - run:
           name: Configura Passport
           command: php artisan passport:keys
+      - run:
+          name: Configura permissões
+          command: chmod -R 777 *
       - run: 
           name: Test PhpUnit
           command: php artisan config:clear && vendor/bin/phpunit
