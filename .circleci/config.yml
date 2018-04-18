@@ -1,0 +1,80 @@
+version: 2
+jobs:
+  build:
+    working_directory: /home/deploy/app
+    environment:
+      BASH_ENV: ~/.bashrc
+    docker:
+      - image: gleandroj/laravel
+        environment:
+            APP_ENV: testing
+            DB_CONNECTION: pgsql
+            DB_HOST: 127.0.0.1
+            DB_PORT: 5432
+            DB_DATABASE: teste_db
+            DB_USERNAME: teste_usuario
+            DB_PASSWORD: cG6uJNyPmvQ5AEs6Lx6X
+      - image: circleci/postgres:9.6
+        environment:
+          POSTGRES_DB: teste_db
+          POSTGRES_USER: teste_usuario
+          POSTGRES_PASSWORD: cG6uJNyPmvQ5AEs6Lx6X
+    steps:
+      - checkout
+      - add_ssh_keys
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "composer.json" }}
+          - v1-dependencies-
+      - run: composer install -n --prefer-dist
+      - save_cache:
+          paths:
+            - ./vendor
+          key: v1-dependencies-{{ checksum "composer.json" }}
+      - restore_cache:
+          keys:
+            - node-v1-{{ checksum "package.json" }}
+            - node-v1-
+      - run: npm install
+      - save_cache:
+          key: node-v1-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+      - run: 
+          name: Build Frontend
+          command: npm run production
+      - run:
+          name: Configura Passport
+          command: php artisan passport:keys
+      - run:
+          name: Configura permissões
+          command: chmod -R 777 *
+      - run: 
+          name: Test PhpUnit
+          command: php artisan config:clear && vendor/bin/phpunit
+  deployment:
+    staging:
+      branch: master
+      heroku:
+        appname: orpha-br
+
+# Fluxo do CircleCI 
+workflows:
+  version: 2
+  build_release:
+    jobs:
+     - build
+     - can-deploy:
+         type: approval
+         requires:
+           - build
+         filters:
+           branches:
+             only:
+               - develop
+     - deployment:
+        requires:
+          can-deploy
+        filters:
+            branches:
+              only: develop
