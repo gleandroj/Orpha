@@ -55,9 +55,6 @@ jobs:
   deployment:
     machine:
         enabled: true
-    docker:
-      - image: gleandroj/laravel
-    working_directory: /home/deploy/app
     environment:
       HEROKU_APP: "orpha-br"
     steps:
