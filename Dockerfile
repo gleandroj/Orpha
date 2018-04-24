@@ -29,6 +29,10 @@ COPY ./scripts/php.sh /tmp/php.sh
 RUN chmod +x /tmp/php.sh && \
 /tmp/php.sh
 
+COPY ./scripts/heroku.sh /tmp/heroku.sh
+RUN chmod +x /tmp/heroku.sh && \
+/tmp/heroku.sh
+
 RUN useradd ${DEPLOY_USER}
 
 COPY ./scripts/setup.sh /tmp/setup.sh
