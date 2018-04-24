@@ -53,9 +53,11 @@ jobs:
           name: Test PhpUnit
           command: php artisan config:clear && vendor/bin/phpunit
   deployment:
+    working_directory: /home/deploy/app
+    environment:
+      BASH_ENV: ~/.bashrc
     docker:
       - image: gleandroj/laravel
-    working_directory: /home/deploy/app
     steps:
       - checkout
       - run:
