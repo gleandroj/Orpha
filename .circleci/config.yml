@@ -53,17 +53,24 @@ jobs:
           name: Test PhpUnit
           command: php artisan config:clear && vendor/bin/phpunit
   deployment:
+    machine:
+        enabled: true
     working_directory: /home/deploy/app
     environment:
-      BASH_ENV: ~/.bashrc
-    docker:
-      - image: gleandroj/laravel
+      HEROKU_APP: "orpha-br"
     steps:
       - checkout
+      - run:
+          name: Setup Heroku
+          command: bash .circleci/setup-heroku.sh
       - run:
           name: Deploy Master to Heroku
           command: |  # this command is framework-dependent and may vary
             git push --force https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git HEAD:refs/heads/master
+            heroku run php artisan migrate
+            heroku run php artisan passport:keys
+            sleep 5  # sleep for 5 seconds to wait for dynos
+            heroku restart
 # Fluxo do CircleCI 
 workflows:
   version: 2
