@@ -56,7 +56,8 @@ jobs:
     machine:
         enabled: true
     environment:
-      HEROKU_APP: "orpha-br"
+      BASH_ENV: ~/.bashrc
+      HEROKU_APP_NAME: "orpha-br"
     steps:
       - checkout
       - run:
