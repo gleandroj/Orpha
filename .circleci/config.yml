@@ -64,17 +64,3 @@ workflows:
   build_release:
     jobs:
      - build
-     - can_deploy:
-         type: approval
-         requires:
-           - build
-         filters:
-           branches:
-             only:
-               - develop
-     - deployment:
-        requires:
-          can_deploy
-        filters:
-            branches:
-              only: develop
