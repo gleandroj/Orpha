@@ -56,6 +56,8 @@ jobs:
     docker:
       - image: gleandroj/laravel
     working_directory: /home/deploy/app
+    environment:
+      HEROKU_APP_NAME: orpha-br
     steps:
       - checkout
       - run:
