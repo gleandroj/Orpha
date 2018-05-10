@@ -62,6 +62,7 @@ jobs:
       heroku:
         appname: orpha-br
     steps:
+      - checkout
 # Fluxo do CircleCI 
 workflows:
   version: 2
