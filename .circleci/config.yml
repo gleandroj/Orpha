@@ -52,12 +52,6 @@ jobs:
       - run: 
           name: Test PhpUnit
           command: php artisan config:clear && vendor/bin/phpunit
-  deployment:
-    staging:
-      branch: master
-      heroku:
-        appname: orpha-br
-
 # Fluxo do CircleCI 
 workflows:
   version: 2
