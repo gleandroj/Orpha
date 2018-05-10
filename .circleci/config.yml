@@ -83,3 +83,12 @@ workflows:
                   - master
                   - develop
                   - add_ci
+     - deployment:
+          requires:
+           - hold
+          filters:
+              branches:
+                only:
+                  - master
+                  - develop
+                  - add_ci
