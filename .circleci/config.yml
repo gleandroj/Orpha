@@ -53,16 +53,18 @@ jobs:
           name: Test PhpUnit
           command: php artisan config:clear && vendor/bin/phpunit
   deployment:
-    prod:
-      branch: master
-      heroku:
-        appname: orpha-br
-    staging:
-      branch: develop
-      heroku:
-        appname: orpha-br
+    docker:
+      - image: gleandroj/laravel
+    working_directory: /home/deploy/app
     steps:
       - checkout
+      - run:
+          name: Deploy Master to Heroku
+          command: |  # this command is framework-dependent and may vary
+            heroku git:remote -a HEROKU_APP_NAME
+            git push --force https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git HEAD:refs/heads/master
+            sleep 5  # sleep for 5 seconds to wait for dynos
+            heroku restart
 # Fluxo do CircleCI 
 workflows:
   version: 2
