@@ -67,3 +67,4 @@ workflows:
                 only:
                   - master
                   - develop
+                  - add_ci
