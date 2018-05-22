@@ -53,8 +53,10 @@ jobs:
           name: Test PhpUnit
           command: php artisan config:clear && vendor/bin/phpunit
   deployment:
-    machine:
-        enabled: true
+    build:
+      working_directory: /home/deploy/app
+      docker:
+        - image: gleandroj/laravel
     environment:
       BASH_ENV: ~/.bashrc
       HEROKU_APP_NAME: "orpha-br"
@@ -62,7 +64,7 @@ jobs:
       - checkout
       - run:
           name: Setup Heroku
-          command: bash .circleci/setup-heroku.sh
+          command: bash /home/deploy/app/.circleci/setup-heroku.sh
       - run:
           name: Deploy Master to Heroku
           command: |  # this command is framework-dependent and may vary
