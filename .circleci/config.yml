@@ -65,6 +65,9 @@ jobs:
           name: Setup Heroku
           command: bash /home/deploy/app/.circleci/setup-heroku.sh
       - run:
+          name: Add Heroku to known_hosts
+          command: ssh-keyscan -H heroku.com >> ~/.ssh/known_hosts
+      - run:
           name: Deploy Master to Heroku
           command: |  # this command is framework-dependent and may vary
             heroku git:remote -a $HEROKU_APP_NAME
