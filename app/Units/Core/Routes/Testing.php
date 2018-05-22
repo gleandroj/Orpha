@@ -13,8 +13,8 @@ class Testing extends RouteFile
      */
     public function routes()
     {
-        $this->router->get('version', function () {
-            return app()->version();
+        $this->router->get('ping', function () {
+            return 'pong';
         });
     }
 }

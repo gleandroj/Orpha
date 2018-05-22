@@ -67,6 +67,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         (new Testing([
             'namespace'  => $this->namespace,
+            'prefix' => env('API_PREFIX', 'api')
         ]))->register();
 
         (new Api([
