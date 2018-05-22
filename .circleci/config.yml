@@ -53,10 +53,9 @@ jobs:
           name: Test PhpUnit
           command: php artisan config:clear && vendor/bin/phpunit
   deployment:
-    build:
-      working_directory: /home/deploy/app
-      docker:
-        - image: gleandroj/laravel
+    working_directory: /home/deploy/app
+    docker:
+      - image: gleandroj/laravel
     environment:
       BASH_ENV: ~/.bashrc
       HEROKU_APP_NAME: "orpha-br"
