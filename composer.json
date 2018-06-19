@@ -53,6 +53,10 @@
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover"
         ],
+        "post-install-cmd": [
+            "echo \"$OAUTH_PUBLIC_KEY\" > storage/oauth-public.key",
+            "echo \"$OAUTH_PRIVATE_KEY\" > storage/oauth-private.key"
+        ],
         "test": [
             "php artisan config:clear && vendor\\bin\\phpunit"
         ]
