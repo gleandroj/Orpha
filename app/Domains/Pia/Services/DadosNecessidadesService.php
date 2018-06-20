@@ -18,6 +18,7 @@ class DadosNecessidadesService implements DadosNecessidadesServiceContract
      * @var DadosNecessidadesRepository
      */
     private $dadosNecessidadesRepository;
+
     /**
      * @var CriancaServiceContract
      */
@@ -48,7 +49,8 @@ class DadosNecessidadesService implements DadosNecessidadesServiceContract
      */
     public function getByCriancaId($criancaId)
     {
-        if(!$crianca = $this->criancaService->getById($criancaId)) throw (new ModelNotFoundException())->setModel(Crianca::class);
+        if(!$crianca = $this->criancaService->getById($criancaId)) 
+            throw (new ModelNotFoundException())->setModel(Crianca::class);
 
         if($crianca->pia->dadosNecessidades == null)
             return $crianca->pia->dadosNecessidades()->create([]);

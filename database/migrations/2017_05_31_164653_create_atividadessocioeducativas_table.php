@@ -31,10 +31,10 @@ class CreateAtividadessocioeducativasTable extends Migration
             $table->string('educacao_cidadania_outros')->nullable();
             $table->boolean('educacao_cidadania_completado')->default(0)->nullable();
 
-            $table->boolean('educacao_meioambiente_material_reciclavel')->default(0)->nullable();
-            $table->boolean('educacao_meioambiente_poluicao_cuidados')->default(0)->nullable();
-            $table->boolean('educacao_meioambiente_sustentabilidade')->default(0)->nullable();
-            $table->boolean('educacao_meioambiente_completado')->default(0)->nullable();
+            $table->boolean('educacao_meio_ambiente_material_reciclavel')->default(0)->nullable();
+            $table->boolean('educacao_meio_ambiente_poluicao_cuidados')->default(0)->nullable();
+            $table->boolean('educacao_meio_ambiente_sustentabilidade')->default(0)->nullable();
+            $table->boolean('educacao_meio_ambiente_completado')->default(0)->nullable();
 
             $table->boolean('educacao_saude_alimentacao')->default(0)->nullable();
             $table->boolean('educacao_saude_cuidado_higiene_pessoal')->default(0)->nullable();

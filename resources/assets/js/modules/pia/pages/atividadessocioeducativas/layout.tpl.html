@@ -23,23 +23,23 @@
         <md-tabs class="stepper" flex md-dynamic-height md-border-bottom md-selected="$controller.selected">
             <md-tab>
                 <md-tab-label>
-                    <md-step ng-class="{'md-linear':$controller.readOnly ,'md-complete':$controller.atividadessocioeducativas.educacaoecidadania_completado}"> Educação e Cidadania </md-step>
+                    <md-step ng-class="{'md-linear':$controller.readOnly ,'md-complete':$controller.atividadessocioeducativas.educacao_cidadania_completado}"> Educação e Cidadania </md-step>
                 </md-tab-label>
                 <md-tab-body>
                     <md-divider></md-divider>
                     <md-content layout="column" ui-view="educacaoecidadania"></md-content>
                 </md-tab-body>
             </md-tab>
-            <md-tab ng-disabled="!$controller.atividadessocioeducativas.educacaoecidadania_completado">
+            <md-tab ng-disabled="!$controller.atividadessocioeducativas.educacao_cidadania_completado">
                 <md-tab-label>
-                    <md-step ng-class="{'md-linear':$controller.readOnly ,'md-complete':$controller.atividadessocioeducativas.educacaoemeioambiente_completado}"> Educação e Meio Ambiente </md-step>
+                    <md-step ng-class="{'md-linear':$controller.readOnly ,'md-complete':$controller.atividadessocioeducativas.educacao_meio_ambiente_completado}"> Educação e Meio Ambiente </md-step>
                 </md-tab-label>
                 <md-tab-body>
                     <md-divider></md-divider>
                     <md-content layout="column" ui-view="educacaoemeioambiente"></md-content>
                 </md-tab-body>
             </md-tab>
-            <md-tab ng-disabled="!$controller.atividadessocioeducativas.educacaoemeioambiente_completado">
+            <md-tab ng-disabled="!$controller.atividadessocioeducativas.educacao_meio_ambiente_completado">
                 <md-tab-label>
                     <md-step ng-class="{'md-linear':$controller.readOnly ,'md-complete':$controller.atividadessocioeducativas.educacaoesaude_completado}"> Educação e Saúde </md-step>
                 </md-tab-label>

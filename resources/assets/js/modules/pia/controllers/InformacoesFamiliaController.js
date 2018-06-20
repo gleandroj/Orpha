@@ -29,16 +29,16 @@ export default class InformacoesFamiliaController{
     get tabKey(){
         switch (this.selected){
             case 0:
-                return 'atendimentorealizado';
+                return 'atendimento_realizado';
                 break;
             case 1:
-                return 'rededeapoio';
+                return 'rede_apoio';
                 break;
             case 2:
-                return 'orientacaorealizada';
+                return 'orientacao_realizada';
                 break;
             case 3:
-                return 'rededeapoio2';
+                return 'rede_apoio2';
                 break;
             default:
                 return null;
@@ -69,7 +69,7 @@ export default class InformacoesFamiliaController{
                 this.util.extend(this.informacoesdafamilia, informacoesFamilia);
                 this.toastService.showSuccess(this.messageService.get(this.editMode ? 'MSG7' : 'MSG5'));
 
-                if(this.tabKey !== 'rededeapoio2'){
+                if(this.tabKey !== 'rede_apoio2'){
                     this.selected++;
                     this.loading = false;
                 }

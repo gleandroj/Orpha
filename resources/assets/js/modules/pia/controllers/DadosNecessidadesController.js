@@ -35,7 +35,7 @@ export default class DadosNecessidadesController{
                 return 'necessidades';
                 break;
             case 2:
-                return 'rededeapoio';
+                return 'rede_apoio';
                 break;
             case 3:
                 return 'atividades';

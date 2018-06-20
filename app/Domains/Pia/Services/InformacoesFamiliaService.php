@@ -74,7 +74,7 @@ class InformacoesFamiliaService implements InformacoesFamiliaServiceContract
         $informacoesFamilia = $this->getByCriancaId($criancaId);
         $update_data->put($update_key.'_completado', true);
 
-        if($update_key == 'religiosidade') $update_data->put('completado', true);
+        if($update_key == 'rede_apoio2') $update_data->put('completado', true);
 
         if(!$informacoesFamilia = $this->informacoesFamiliaRepository->update($informacoesFamilia->id, $update_data->all())) throw new Exception(trans('messages.MSG4'));
         return $informacoesFamilia->fresh();

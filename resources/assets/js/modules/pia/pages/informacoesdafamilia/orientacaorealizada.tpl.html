@@ -4,8 +4,8 @@
         <div class="orpha-radio-group" layout="row" layout-align="start center" >
             <span class="md-subhead orpha-radio-label">Direitos Legais</span>
             <md-radio-group
-                    ng-init="$controller.informacoesdafamilia.orientacaorealizada_direitos_legais = $controller.informacoesdafamilia.orientacaorealizada_direitos_legais || false"
-                    ng-model="$controller.informacoesdafamilia.orientacaorealizada_direitos_legais"
+                    ng-init="$controller.informacoesdafamilia.orientacao_realizada_direitos_legais = $controller.informacoesdafamilia.orientacao_realizada_direitos_legais || false"
+                    ng-model="$controller.informacoesdafamilia.orientacao_realizada_direitos_legais"
                     ng-required="true"
                     ng-disabled="$controller.isReadOnly"
                     layout="row">
@@ -17,8 +17,8 @@
         <div class="orpha-radio-group" layout="row" layout-align="start center" >
             <span class="md-subhead orpha-radio-label">Direitos Sociais</span>
             <md-radio-group
-                    ng-init="$controller.informacoesdafamilia.orientacaorealizada_direitos_sociais = $controller.informacoesdafamilia.orientacaorealizada_direitos_sociais || false"
-                    ng-model="$controller.informacoesdafamilia.orientacaorealizada_direitos_sociais"
+                    ng-init="$controller.informacoesdafamilia.orientacao_realizada_direitos_sociais = $controller.informacoesdafamilia.orientacao_realizada_direitos_sociais || false"
+                    ng-model="$controller.informacoesdafamilia.orientacao_realizada_direitos_sociais"
                     ng-required="true"
                     ng-disabled="$controller.isReadOnly"
                     layout="row">
@@ -30,8 +30,8 @@
         <div class="orpha-radio-group" layout="row" layout-align="start center" >
             <span class="md-subhead orpha-radio-label">Direito Previdenciário</span>
             <md-radio-group
-                    ng-init="$controller.informacoesdafamilia.orientacaorealizada_direitos_providenciario = $controller.informacoesdafamilia.orientacaorealizada_direitos_providenciario || false"
-                    ng-model="$controller.informacoesdafamilia.orientacaorealizada_direitos_providenciario"
+                    ng-init="$controller.informacoesdafamilia.orientacao_realizada_direitos_providenciario = $controller.informacoesdafamilia.orientacao_realizada_direitos_providenciario || false"
+                    ng-model="$controller.informacoesdafamilia.orientacao_realizada_direitos_providenciario"
                     ng-required="true"
                     ng-disabled="$controller.isReadOnly"
                     layout="row">
@@ -43,8 +43,8 @@
         <div class="orpha-radio-group" layout="row" layout-align="start center">
             <span class="md-subhead orpha-radio-label">Planejamento Familiar</span>
             <md-radio-group
-                    ng-init="$controller.informacoesdafamilia.orientacaorealizada_planejamento_familiar = $controller.informacoesdafamilia.orientacaorealizada_planejamento_familiar || false"
-                    ng-model="$controller.informacoesdafamilia.orientacaorealizada_planejamento_familiar"
+                    ng-init="$controller.informacoesdafamilia.orientacao_realizada_planejamento_familiar = $controller.informacoesdafamilia.orientacao_realizada_planejamento_familiar || false"
+                    ng-model="$controller.informacoesdafamilia.orientacao_realizada_planejamento_familiar"
                     ng-required="true"
                     ng-disabled="$controller.isReadOnly"
                     layout="row">
@@ -56,8 +56,8 @@
         <div class="orpha-radio-group" layout="row" layout-align="start center">
             <span class="md-subhead orpha-radio-label">Planejamento Orçamentário</span>
             <md-radio-group
-                    ng-init="$controller.informacoesdafamilia.orientacaorealizada_planejamento_orcamentario = $controller.informacoesdafamilia.orientacaorealizada_planejamento_orcamentario || false"
-                    ng-model="$controller.informacoesdafamilia.orientacaorealizada_planejamento_orcamentario"
+                    ng-init="$controller.informacoesdafamilia.orientacao_realizada_planejamento_orcamentario = $controller.informacoesdafamilia.orientacao_realizada_planejamento_orcamentario || false"
+                    ng-model="$controller.informacoesdafamilia.orientacao_realizada_planejamento_orcamentario"
                     ng-required="true"
                     ng-disabled="$controller.isReadOnly"
                     layout="row">
@@ -69,8 +69,8 @@
         <div class="orpha-radio-group" layout="row" layout-align="start center">
             <span class="md-subhead orpha-radio-label">Educação Formal</span>
             <md-radio-group
-                    ng-init="$controller.informacoesdafamilia.orientacaorealizada_educacao_formal = $controller.informacoesdafamilia.orientacaorealizada_educacao_formal || false"
-                    ng-model="$controller.informacoesdafamilia.orientacaorealizada_educacao_formal"
+                    ng-init="$controller.informacoesdafamilia.orientacao_realizada_educacao_formal = $controller.informacoesdafamilia.orientacao_realizada_educacao_formal || false"
+                    ng-model="$controller.informacoesdafamilia.orientacao_realizada_educacao_formal"
                     ng-required="true"
                     ng-disabled="$controller.isReadOnly"
                     layout="row">
@@ -82,8 +82,8 @@
         <div class="orpha-radio-group" layout="row" layout-align="start center">
             <span class="md-subhead orpha-radio-label">Educação Profissional</span>
             <md-radio-group
-                    ng-init="$controller.informacoesdafamilia.orientacaorealizada_educacao_profissional = $controller.informacoesdafamilia.orientacaorealizada_educacao_profissional || false"
-                    ng-model="$controller.informacoesdafamilia.orientacaorealizada_educacao_profissional"
+                    ng-init="$controller.informacoesdafamilia.orientacao_realizada_educacao_profissional = $controller.informacoesdafamilia.orientacao_realizada_educacao_profissional || false"
+                    ng-model="$controller.informacoesdafamilia.orientacao_realizada_educacao_profissional"
                     ng-required="true"
                     ng-disabled="$controller.isReadOnly"
                     layout="row">
@@ -92,7 +92,7 @@
             </md-radio-group>
         </div>
 
-        <text-area-input name="outros" label="Outros" is-disabled="$controller.isReadOnly" ng-model="$controller.informacoesdafamilia.orientacaorealizada_outros"></text-area-input>
+        <text-area-input name="outros" label="Outros" is-disabled="$controller.isReadOnly" ng-model="$controller.informacoesdafamilia.orientacao_realizada_outros"></text-area-input>
 
     </md-content>
 </ng-form>

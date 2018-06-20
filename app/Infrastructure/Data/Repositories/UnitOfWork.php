@@ -14,12 +14,12 @@ class UnitOfWork implements UnitOfWorkContract
      */
     public function begin()
     {
-        if($this->$runningTransactions > 0){
+        if($this->runningTransactions > 0){
             return $this;
         }
         // nothing to do, will not start nested transaction
         $this->inTransaction = true;
-        $this->$runningTransactions++;
+        $this->runningTransactions++;
         \DB::beginTransaction();
         return $this;
     }
@@ -34,7 +34,7 @@ class UnitOfWork implements UnitOfWorkContract
         }
         \DB::commit();
         $this->inTransaction = false;
-        $this->$runningTransactions--;
+        $this->runningTransactions--;
         return $this;
     }
 
@@ -48,7 +48,7 @@ class UnitOfWork implements UnitOfWorkContract
         }
         \DB::rollBack();
         $this->inTransaction = false;
-        $this->$runningTransactions--;
+        $this->runningTransactions--;
         return $this;
     }
     

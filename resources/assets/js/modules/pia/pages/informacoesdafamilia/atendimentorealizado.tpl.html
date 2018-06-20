@@ -4,8 +4,8 @@
         <div class="orpha-radio-group" layout="row" layout-align="start center" >
             <span class="md-subhead orpha-radio-label">Acolhimento</span>
             <md-radio-group
-                    ng-init="$controller.informacoesdafamilia.atendimentorealizado_acolhimento = $controller.informacoesdafamilia.atendimentorealizado_acolhimento || false"
-                    ng-model="$controller.informacoesdafamilia.atendimentorealizado_acolhimento"
+                    ng-init="$controller.informacoesdafamilia.atendimento_realizado_acolhimento = $controller.informacoesdafamilia.atendimento_realizado_acolhimento || false"
+                    ng-model="$controller.informacoesdafamilia.atendimento_realizado_acolhimento"
                     ng-required="true"
                     ng-disabled="$controller.isReadOnly"
                     layout="row">
@@ -17,8 +17,8 @@
         <div class="orpha-radio-group" layout="row" layout-align="start center">
             <span class="md-subhead orpha-radio-label">Esclarecimento sobre fluxo do processo/ JIJ</span>
             <md-radio-group
-                    ng-init="$controller.informacoesdafamilia.atendimentorealizado_esclarecimento_fluxo_processo = $controller.informacoesdafamilia.atendimentorealizado_esclarecimento_fluxo_processo || false"
-                    ng-model="$controller.informacoesdafamilia.atendimentorealizado_esclarecimento_fluxo_processo"
+                    ng-init="$controller.informacoesdafamilia.atendimento_realizado_esclarecimento_fluxo_processo = $controller.informacoesdafamilia.atendimento_realizado_esclarecimento_fluxo_processo || false"
+                    ng-model="$controller.informacoesdafamilia.atendimento_realizado_esclarecimento_fluxo_processo"
                     ng-required="true"
                     ng-disabled="$controller.isReadOnly"
                     layout="row">
@@ -30,8 +30,8 @@
         <div class="orpha-radio-group" layout="row" layout-align="start center">
             <span class="md-subhead orpha-radio-label">Orientação sobre Medidas Socioeducativas</span>
             <md-radio-group
-                    ng-init="$controller.informacoesdafamilia.atendimentorealizado_orientacao_sobre_medidas_socioeducativas = $controller.informacoesdafamilia.atendimentorealizado_orientacao_sobre_medidas_socioeducativas || false"
-                    ng-model="$controller.informacoesdafamilia.atendimentorealizado_orientacao_sobre_medidas_socioeducativas"
+                    ng-init="$controller.informacoesdafamilia.atendimento_realizado_orientacao_sobre_medidas_socioeducativas = $controller.informacoesdafamilia.atendimento_realizado_orientacao_sobre_medidas_socioeducativas || false"
+                    ng-model="$controller.informacoesdafamilia.atendimento_realizado_orientacao_sobre_medidas_socioeducativas"
                     ng-required="true"
                     ng-disabled="$controller.isReadOnly"
                     layout="row">
@@ -43,8 +43,8 @@
         <div class="orpha-radio-group" layout="row" layout-align="start center">
             <span class="md-subhead orpha-radio-label">Encaminhado a Grupo de Pais / Responsáveis</span>
             <md-radio-group
-                    ng-init="$controller.informacoesdafamilia.atendimentorealizado_encaminhado_grupo_pais_responsaveis = $controller.informacoesdafamilia.atendimentorealizado_encaminhado_grupo_pais_responsaveis || false"
-                    ng-model="$controller.informacoesdafamilia.atendimentorealizado_encaminhado_grupo_pais_responsaveis"
+                    ng-init="$controller.informacoesdafamilia.atendimento_realizado_encaminhado_grupo_pais_responsaveis = $controller.informacoesdafamilia.atendimento_realizado_encaminhado_grupo_pais_responsaveis || false"
+                    ng-model="$controller.informacoesdafamilia.atendimento_realizado_encaminhado_grupo_pais_responsaveis"
                     ng-required="true"
                     ng-disabled="$controller.isReadOnly"
                     layout="row">
@@ -53,7 +53,7 @@
             </md-radio-group>
         </div>
 
-        <text-area-input name="outros" label="Outros" is-disabled="$controller.isReadOnly" ng-model="$controller.informacoesdafamilia.atendimentorealizado_outros"></text-area-input>
+        <text-area-input name="outros" label="Outros" is-disabled="$controller.isReadOnly" ng-model="$controller.informacoesdafamilia.atendimento_realizado_outros"></text-area-input>
 
     </md-content>
 </ng-form>

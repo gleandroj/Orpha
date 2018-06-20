@@ -41,14 +41,14 @@
             </md-tab>
             <md-tab ng-disabled="!$controller.dadosenecessidades.necessidades_completado">
                 <md-tab-label>
-                    <md-step ng-class="{'md-linear':$controller.readOnly ,'md-complete':$controller.dadosenecessidades.rededeapoio_completado}"> Rede de Apoio </md-step>
+                    <md-step ng-class="{'md-linear':$controller.readOnly ,'md-complete':$controller.dadosenecessidades.rede_apoio_completado}"> Rede de Apoio </md-step>
                 </md-tab-label>
                 <md-tab-body>
                     <md-divider></md-divider>
                     <md-content layout="column" ui-view="rededeapoio"></md-content>
                 </md-tab-body>
             </md-tab>
-            <md-tab ng-disabled="!$controller.dadosenecessidades.rededeapoio_completado">
+            <md-tab ng-disabled="!$controller.dadosenecessidades.rede_apoio_completado">
                 <md-tab-label>
                     <md-step ng-class="{'md-linear':$controller.readOnly ,'md-complete':$controller.dadosenecessidades.atividades_completado}"> Ativ. que Realizava </md-step>
                 </md-tab-label>

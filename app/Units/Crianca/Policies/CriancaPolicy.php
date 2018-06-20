@@ -1,6 +1,6 @@
 <?php
 
-namespace Orpha\Units\User\Policies;
+namespace Orpha\Units\Crianca\Policies;
 
 use Orpha\Domains\User\Models\User;
 use Orpha\Domains\Crianca\Models\Crianca;

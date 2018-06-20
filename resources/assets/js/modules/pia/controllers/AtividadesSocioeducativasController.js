@@ -29,13 +29,13 @@ export default class AtividadesSocioeducativasController{
     get tabKey(){
         switch (this.selected){
             case 0:
-                return 'educacaoecidadania';
+                return 'educacao_cidadania';
                 break;
             case 1:
-                return 'educacaoemeioambiente';
+                return 'educacao_meio_ambiente';
                 break;
             case 2:
-                return 'educacaoesaude';
+                return 'educacao_saude';
                 break;
             default:
                 return null;
