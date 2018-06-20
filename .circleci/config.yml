@@ -72,7 +72,7 @@ jobs:
           command: |  # this command is framework-dependent and may vary
             heroku git:remote -a $HEROKU_APP_NAME
             git push --force git@heroku.com:$HEROKU_APP_NAME.git HEAD:refs/heads/master
-            heroku run php artisan migrate
+            heroku run php artisan migrate --force
             heroku run php artisan passport:keys
             sleep 5  # sleep for 5 seconds to wait for dynos
             heroku restart
