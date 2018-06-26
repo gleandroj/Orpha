@@ -23,7 +23,7 @@ class AuthModuloSeeder extends Seeder
     {
         $this->moduloPermissionSeed();
 
-        if(App::environment('local', 'testing')){
+        if(App::environment('local', 'testing', 'production')){
             $this->testDataSeed();
         }
     }
